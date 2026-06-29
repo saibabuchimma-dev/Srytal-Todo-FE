@@ -1,18 +1,12 @@
-import { MantineProvider } from './providers/MantineProvider';
-import { NotificationProvider } from './providers/NotificationsProvider';
-import { ThemeProvider } from './providers/ThemeProvider';
-import { AppRouter } from './router';
+import { RouterProvider } from 'react-router-dom';
 
-function App() {
+import AppProviders from './providers/AppProviders';
+import { router } from './router';
+
+export default function App() {
   return (
-    <MantineProvider>
-      <ThemeProvider>
-        <NotificationProvider>
-          <AppRouter />
-        </NotificationProvider>
-      </ThemeProvider>
-    </MantineProvider>
+    <AppProviders>
+      <RouterProvider router={router} />
+    </AppProviders>
   );
 }
-
-export default App;

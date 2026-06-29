@@ -1,17 +1,22 @@
+import { AppShell } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
-import { Header } from './Header';
-import { Sidebar } from './Sidebar';
+import Header from './Header';
+import Sidebar from './Sidebar';
 
-export function MainLayout() {
+export default function MainLayout() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <div className="flex">
+    <AppShell header={{ height: 70 }} navbar={{ width: 300, breakpoint: 'md' }} padding="md">
+      <AppShell.Header>
+        <Header />
+      </AppShell.Header>
+
+      <AppShell.Navbar>
         <Sidebar />
-        <main className="flex-1 p-6">
-          <Outlet />
-        </main>
-      </div>
-    </div>
+      </AppShell.Navbar>
+
+      <AppShell.Main className="bg-slate-100">
+        <Outlet />
+      </AppShell.Main>
+    </AppShell>
   );
 }
