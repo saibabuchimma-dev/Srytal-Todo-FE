@@ -1,25 +1,39 @@
 {
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "es2023",
-    "lib": ["ES2023", "DOM"],
-    "module": "esnext",
-    "types": ["vite/client"],
-    "skipLibCheck": true,
 
-    /* Bundler mode */
+    /* Language */
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM"],
+
+    /* Module */
+    "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true,
+
+    /* React */
     "jsx": "react-jsx",
 
-    /* Linting */
+    /* Vite */
+    "types": ["vite/client"],
+
+    /* Paths */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    /* Output */
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+
+    /* Type Checking */
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "skipLibCheck": true
   },
   "include": ["src"]
 }
