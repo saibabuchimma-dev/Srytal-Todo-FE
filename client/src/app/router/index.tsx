@@ -4,18 +4,25 @@ import LoginScreen from '@/features/auth/screens/LoginScreen';
 import DashboardScreen from '@/features/dashboard/screens/DashboardScreen';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 
+import ProtectedRoute from './ProtectedRoute';
+
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <LoginScreen />,
   },
   {
-    path: '/dashboard',
-    element: <MainLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <DashboardScreen />,
+        path: '/dashboard',
+        element: <MainLayout />,
+        children: [
+          {
+            index: true,
+            element: <DashboardScreen />,
+          },
+        ],
       },
     ],
   },

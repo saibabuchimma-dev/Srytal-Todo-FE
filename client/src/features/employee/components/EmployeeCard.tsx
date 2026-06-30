@@ -1,20 +1,30 @@
 import { Avatar, Badge, Card, Group, Stack, Text } from '@mantine/core';
 
+import { useEmployeeStore } from '../store/employee.store';
 import type { Employee } from '../types/employee';
 
 interface EmployeeCardProps {
   employee: Employee;
-  onClick: () => void;
 }
 
-export default function EmployeeCard({ employee, onClick }: EmployeeCardProps) {
+export default function EmployeeCard({ employee }: EmployeeCardProps) {
+  const { selectedEmployee, setSelectedEmployee } = useEmployeeStore();
+  const isSelected = selectedEmployee?.id === employee.id;
+
   return (
     <Card
       withBorder
       radius="lg"
-      p="sm"
-      className="cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-      onClick={onClick}
+      p="md"
+      onClick={() => setSelectedEmployee(employee)}
+      className={`
+        cursor-pointer
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:shadow-lg
+        ${isSelected ? 'border-blue-500 bg-blue-50' : 'border-slate-200'}
+      `}
     >
       <Group justify="space-between">
         <Group>

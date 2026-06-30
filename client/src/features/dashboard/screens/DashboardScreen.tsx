@@ -1,11 +1,10 @@
-import { Card, Text, Title } from '@mantine/core';
+import { Paper } from '@mantine/core';
+import EmployeeHeader from '@/features/employee/components/EmployeeHeader';
 
 export default function DashboardScreen() {
   return (
-    <Card shadow="sm" radius="lg" withBorder>
-      <Title order={3}>Welcome 👋</Title>
-
-      <Text mt="sm">Select an employee from the sidebar to view tasks.</Text>
-    </Card>
+    <Paper radius="lg" p="xl">
+      <EmployeeHeader />
+    </Paper>
   );
 }
