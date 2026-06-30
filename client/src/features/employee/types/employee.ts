@@ -1,8 +1,8 @@
 export interface Employee {
   id: number;
   name: string;
-  designation: string;
   email: string;
-  status: string;
+  designation: string;
   avatar: string;
+  status: 'Online' | 'Offline';
 }
