@@ -1,5 +1,4 @@
 import { Stack } from '@mantine/core';
-
 import EmployeeCard from './EmployeeCard';
 import type { Employee } from '../types/employee';
 
@@ -11,11 +10,7 @@ export default function EmployeeList({ employees }: EmployeeListProps) {
   return (
     <Stack gap="sm">
       {employees.map((employee) => (
-        <EmployeeCard
-          key={employee.id}
-          employee={employee}
-          onClick={() => console.log(employee.id)}
-        />
+        <EmployeeCard key={employee.id} employee={employee} />
       ))}
     </Stack>
   );

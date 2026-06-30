@@ -2,17 +2,35 @@ import { Button, PasswordInput, Stack, Text, TextInput, Title } from '@mantine/c
 import { useForm } from 'react-hook-form';
 import { HiOutlineEnvelope, HiOutlineLockClosed } from 'react-icons/hi2';
 import logo from '@/assets/logo/logo.png';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../services/auth.service';
+import { useAuthStore } from '../store/auth.store';
+import { toast } from '@/shared/utils/toast';
 
 interface LoginFormData {
-  username: string;
+  email: string;
   password: string;
 }
 
 export default function LoginForm() {
   const { register, handleSubmit } = useForm<LoginFormData>();
+  const navigate = useNavigate();
+  const loginStore = useAuthStore((state) => state.login);
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data);
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const user = await login(data);
+      loginStore(user);
+      toast.success('Success', 'Login successful');
+      navigate('/dashboard');
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message !== 'Invalid email or password'
+          ? error.message
+          : 'Invalid email or password';
+
+      toast.error('Login Failed', message);
+    }
   };
 
   return (
@@ -33,12 +51,12 @@ export default function LoginForm() {
 
         {/* Username */}
         <TextInput
-          label="Username"
-          placeholder="Enter your username"
+          label="Email"
+          placeholder="Enter your Email"
           radius="md"
           size="md"
           leftSection={<HiOutlineEnvelope size={18} />}
-          {...register('username')}
+          {...register('email')}
         />
 
         {/* Password */}

@@ -1,24 +1,22 @@
-import { Group, Title, ActionIcon, Avatar } from '@mantine/core';
-import { HiOutlineBell, HiOutlineMoon } from 'react-icons/hi2';
+import { Button, Group } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuthStore } from '@/features/auth/store/auth.store';
 
 export default function Header() {
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
-    <header className="flex h-full items-center justify-between px-6 bg-white border-b border-slate-200">
-      <Title order={3}>SRYTAL Task Manager</Title>
-
-      <Group>
-        <ActionIcon variant="light" size="lg">
-          <HiOutlineBell size={20} />
-        </ActionIcon>
-
-        <ActionIcon variant="light" size="lg">
-          <HiOutlineMoon size={20} />
-        </ActionIcon>
-
-        <Avatar color="blue" radius="xl">
-          S
-        </Avatar>
-      </Group>
-    </header>
+    <Group justify="flex-end" p="md">
+      <Button color="red" onClick={handleLogout}>
+        Logout
+      </Button>
+    </Group>
   );
 }

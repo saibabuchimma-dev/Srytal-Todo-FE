@@ -1,4 +1,11 @@
 {
+  "auth": {
+    "email": "admin@srytal.com",
+    "password": "password123",
+    "name": "Administrator",
+    "role": "Admin"
+  },
+
   "employees": [
     {
       "id": 1,
@@ -6,7 +13,7 @@
       "designation": "Frontend Developer",
       "email": "saibabu@srytal.com",
       "status": "Online",
-      "avatar": "/avatars/avatar1.png"
+      "avatar": "https://i.pravatar.cc/150?img=1"
     },
     {
       "id": 2,
@@ -14,27 +21,17 @@
       "designation": "Backend Developer",
       "email": "rahul@srytal.com",
       "status": "Offline",
-      "avatar": "/avatars/avatar2.png"
+      "avatar": "https://i.pravatar.cc/150?img=2"
     }
   ],
+
   "tasks": [
     {
       "id": 1,
       "employeeId": 1,
       "title": "Design Login UI",
-      "description": "Create responsive login screen",
-      "priority": "High",
       "status": "Pending",
-      "dueDate": "2026-06-30"
-    },
-    {
-      "id": 2,
-      "employeeId": 1,
-      "title": "Setup Dashboard",
-      "description": "Create dashboard layout",
-      "priority": "Medium",
-      "status": "In Progress",
-      "dueDate": "2026-07-01"
+      "priority": "High"
     }
   ]
 }
