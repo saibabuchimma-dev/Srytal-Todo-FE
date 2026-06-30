@@ -1,12 +1,8 @@
 import api from '@/shared/services/api';
+import mockDb from '@/mocks/db.json';
 import type { AuthUser, LoginRequest } from '../types/auth';
 
-const localAuthUser: AuthUser = {
-  email: 'admin@srytal.com',
-  password: 'password123',
-  name: 'Administrator',
-  role: 'Admin',
-};
+const localAuthUser = mockDb.auth as AuthUser;
 
 export const login = async (payload: LoginRequest) => {
   try {
@@ -26,7 +22,6 @@ export const login = async (payload: LoginRequest) => {
       if (localAuthUser.email === payload.email && localAuthUser.password === payload.password) {
         return localAuthUser;
       }
-      // throw new Error('Invalid email or password');
     }
 
     throw error instanceof Error ? error : new Error('Invalid email or password');
