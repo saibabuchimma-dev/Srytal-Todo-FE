@@ -4,13 +4,18 @@ import type { Employee } from '../types/employee';
 
 interface EmployeeListProps {
   employees: Employee[];
+  taskCounts: Record<number, number>;
 }
 
-export default function EmployeeList({ employees }: EmployeeListProps) {
+export default function EmployeeList({ employees, taskCounts }: EmployeeListProps) {
   return (
     <Stack gap="sm">
       {employees.map((employee) => (
-        <EmployeeCard key={employee.id} employee={employee} />
+        <EmployeeCard
+          key={employee.id}
+          employee={employee}
+          taskCount={taskCounts[employee.id] ?? 0}
+        />
       ))}
     </Stack>
   );

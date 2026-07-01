@@ -1,9 +1,1 @@
-export interface Task {
-  id: number;
-  employeeId: number;
-  title: string;
-  description: string;
-  priority: 'Low' | 'Medium' | 'High';
-  status: 'Pending' | 'In Progress' | 'Completed';
-  dueDate: string;
-}
+export type { Task, TaskPriority, TaskStatus } from '@/features/task/types/task';
