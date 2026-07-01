@@ -14,7 +14,6 @@ import { useMediaQuery } from '@mantine/hooks';
 import { IconAlertCircle, IconSearch } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMemo, useState } from 'react';
-
 import { useEmployeeStore } from '@/features/employee/store/employee.store';
 import {
   TASK_PAGE_SIZE,
@@ -25,7 +24,6 @@ import {
 import { useDeleteTask, useTasks, useUpdateTask } from '@/features/task/hooks/useTasks';
 import type { Task, TaskPriority, TaskSortOption, TaskStatus } from '@/features/task/types/task';
 import { filterTasks, getPaginatedTasks } from '@/features/task/utils/task.utils';
-
 import TaskCard from './TaskCard';
 import TaskDrawer from './TaskDrawer';
 import TaskTable from './TaskTable';

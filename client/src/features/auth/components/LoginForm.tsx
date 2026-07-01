@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../services/auth.service';
 import { useAuthStore } from '../store/auth.store';
 import { toast } from '@/shared/utils/toast';
+import Loader from '@/styles/loader';
 
 interface LoginFormData {
   email: string;
@@ -13,7 +14,11 @@ interface LoginFormData {
 }
 
 export default function LoginForm() {
-  const { register, handleSubmit } = useForm<LoginFormData>();
+  const {
+    formState: { isSubmitting },
+    handleSubmit,
+    register,
+  } = useForm<LoginFormData>();
   const navigate = useNavigate();
   const loginStore = useAuthStore((state) => state.login);
 
@@ -56,6 +61,7 @@ export default function LoginForm() {
           radius="md"
           size="md"
           leftSection={<HiOutlineEnvelope size={18} />}
+          disabled={isSubmitting}
           {...register('email')}
         />
 
@@ -66,21 +72,28 @@ export default function LoginForm() {
           radius="md"
           size="md"
           leftSection={<HiOutlineLockClosed size={18} />}
+          disabled={isSubmitting}
           {...register('password')}
         />
 
         {/* Login Button */}
-        <Button
-          type="submit"
-          size="md"
-          radius="md"
-          fullWidth
-          variant="gradient"
-          gradient={{ from: 'indigo', to: 'cyan', deg: 90 }}
-          className="h-12"
-        >
-          Sign In
-        </Button>
+        {isSubmitting ? (
+          <div className="flex h-12 items-center justify-center rounded-md bg-slate-50">
+            <Loader label="Signing in" size={28} />
+          </div>
+        ) : (
+          <Button
+            type="submit"
+            size="md"
+            radius="md"
+            fullWidth
+            variant="gradient"
+            gradient={{ from: 'indigo', to: 'cyan', deg: 90 }}
+            className="h-12"
+          >
+            Sign In
+          </Button>
+        )}
 
         <Text ta="center" size="xs" c="dimmed">
           © 2026 SRYTAL Employee Task Management System

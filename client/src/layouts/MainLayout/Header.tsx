@@ -1,18 +1,20 @@
 import { ActionIcon, Avatar, Group, Menu, Text, TextInput } from '@mantine/core';
-import { IconBell, IconLogout, IconSearch, IconUserCircle } from '@tabler/icons-react';
+import { IconLogout, IconSearch, IconUserCircle } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '@/features/auth/store/auth.store';
+import NotificationMenu from '@/features/notification/components/NotificationMenu';
+import { useProfile } from '@/features/profile/hooks/useProfile';
 import logo from '@/assets/logo/logo.png';
-
+import { ROUTES } from '@/shared/config/routes';
 export default function Header() {
-  const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const { data: profile } = useProfile();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate(ROUTES.LOGIN);
   };
 
   return (
@@ -37,27 +39,28 @@ export default function Header() {
       />
 
       <Group gap="sm" wrap="nowrap">
-        <ActionIcon variant="light" color="indigo" radius="md" aria-label="Notifications">
-          <IconBell size={18} />
-        </ActionIcon>
+        <NotificationMenu />
 
         <Menu position="bottom-end" shadow="md" width={220}>
           <Menu.Target>
             <ActionIcon variant="subtle" size={42} radius="xl" aria-label="Admin profile">
-              <Avatar radius="xl" color="blue">
-                {user?.name?.charAt(0) ?? 'A'}
+              <Avatar src={profile?.avatar} radius="xl" color="blue">
+                {profile?.name.charAt(0) ?? 'A'}
               </Avatar>
             </ActionIcon>
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Label>Profile</Menu.Label>
-            <Menu.Item leftSection={<IconUserCircle size={16} />}>
+            <Menu.Item
+              leftSection={<IconUserCircle size={16} />}
+              onClick={() => void navigate(ROUTES.PROFILE)}
+            >
               <div>
                 <Text size="sm" fw={600}>
-                  {user?.name ?? 'Administrator'}
+                  {profile?.name ?? 'Administrator'}
                 </Text>
                 <Text size="xs" c="dimmed">
-                  {user?.role ?? 'Admin'}
+                  {profile?.role ?? 'Admin'}
                 </Text>
               </div>
             </Menu.Item>

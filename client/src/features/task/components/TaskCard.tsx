@@ -2,7 +2,6 @@ import { ActionIcon, Badge, Button, Card, Group, Stack, Text, Tooltip } from '@m
 import { IconCheck, IconPencil, IconTrash } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
-
 import { TASK_PRIORITY_COLORS, TASK_STATUS_COLORS } from '@/features/task/constants/task.constants';
 import type { Task } from '@/features/task/types/task';
 

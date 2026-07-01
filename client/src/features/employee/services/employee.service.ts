@@ -19,3 +19,9 @@ export const getEmployees = async (): Promise<Employee[]> => {
     throw error;
   }
 };
+
+export const getEmployee = async (employeeId: number): Promise<Employee> => {
+  const response = await api.get<Employee>(`/employees/${employeeId}`);
+
+  return response.data;
+};

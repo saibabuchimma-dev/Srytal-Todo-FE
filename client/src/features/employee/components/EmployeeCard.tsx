@@ -1,6 +1,7 @@
 import { Avatar, Badge, Card, Group, Stack, Text } from '@mantine/core';
 import { motion } from 'framer-motion';
-
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/shared/config/routes';
 import { useEmployeeStore } from '../store/employee.store';
 import type { Employee } from '../types/employee';
 
@@ -11,7 +12,13 @@ interface EmployeeCardProps {
 
 export default function EmployeeCard({ employee, taskCount }: EmployeeCardProps) {
   const { selectedEmployee, setSelectedEmployee } = useEmployeeStore();
+  const navigate = useNavigate();
   const isSelected = selectedEmployee?.id === employee.id;
+
+  const handleSelectEmployee = () => {
+    setSelectedEmployee(employee);
+    void navigate(ROUTES.EMPLOYEE_DETAILS(employee.id));
+  };
 
   return (
     <motion.div whileHover={{ x: 3 }} transition={{ duration: 0.2 }}>
@@ -19,7 +26,7 @@ export default function EmployeeCard({ employee, taskCount }: EmployeeCardProps)
         withBorder
         radius="md"
         p="md"
-        onClick={() => setSelectedEmployee(employee)}
+        onClick={handleSelectEmployee}
         className={`
           cursor-pointer
           transition-all
