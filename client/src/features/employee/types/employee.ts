@@ -4,5 +4,4 @@ export interface Employee {
   email: string;
   designation: string;
   avatar: string;
-  status: 'Online' | 'Offline';
 }

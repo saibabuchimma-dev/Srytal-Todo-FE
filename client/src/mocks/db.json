@@ -12,7 +12,6 @@
       "name": "Sai Babu",
       "designation": "Frontend Developer",
       "email": "saibabu@srytal.com",
-      "status": "Online",
       "avatar": "https://i.pravatar.cc/150?img=1"
     },
     {
@@ -20,8 +19,21 @@
       "name": "Rahul",
       "designation": "Backend Developer",
       "email": "rahul@srytal.com",
-      "status": "Offline",
       "avatar": "https://i.pravatar.cc/150?img=2"
+    },
+    {
+      "id": 3,
+      "name": "Aarohi Mehta",
+      "designation": "Product Designer",
+      "email": "aarohi@srytal.com",
+      "avatar": "https://i.pravatar.cc/150?img=5"
+    },
+    {
+      "id": 4,
+      "name": "Neeraj Kumar",
+      "designation": "QA Engineer",
+      "email": "neeraj@srytal.com",
+      "avatar": "https://i.pravatar.cc/150?img=8"
     }
   ],
 
@@ -30,8 +42,45 @@
       "id": 1,
       "employeeId": 1,
       "title": "Design Login UI",
+      "description": "Refine the login form spacing, validation states, and responsive composition.",
       "status": "Pending",
-      "priority": "High"
+      "priority": "High",
+      "dueDate": "2026-07-04",
+      "createdAt": "2026-06-29T09:30:00.000Z",
+      "updatedAt": "2026-06-29T09:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "employeeId": 1,
+      "title": "Implement task filters",
+      "description": "Build task filtering by status, priority, and due date sorting for the dashboard.",
+      "status": "In Progress",
+      "priority": "Medium",
+      "dueDate": "2026-07-06",
+      "createdAt": "2026-06-30T10:15:00.000Z",
+      "updatedAt": "2026-07-01T05:40:00.000Z"
+    },
+    {
+      "id": 3,
+      "employeeId": 2,
+      "title": "Create task API contracts",
+      "description": "Document JSON Server task routes and response shapes for frontend integration.",
+      "status": "Completed",
+      "priority": "Low",
+      "dueDate": "2026-07-02",
+      "createdAt": "2026-06-28T08:00:00.000Z",
+      "updatedAt": "2026-06-30T11:20:00.000Z"
+    },
+    {
+      "id": 4,
+      "employeeId": 3,
+      "title": "Review dashboard empty states",
+      "description": "Create concise empty states for employees without assigned tasks or matching filters.",
+      "status": "Pending",
+      "priority": "Medium",
+      "dueDate": "2026-07-08",
+      "createdAt": "2026-06-30T13:00:00.000Z",
+      "updatedAt": "2026-06-30T13:00:00.000Z"
     }
   ]
 }
