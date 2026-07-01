@@ -3,7 +3,6 @@ import { Button, Drawer, Group, Select, Stack, TextInput, Textarea } from '@mant
 import { DateInput } from '@mantine/dates';
 import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
-
 import {
   TASK_PRIORITY_OPTIONS,
   TASK_STATUS_OPTIONS,

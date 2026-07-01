@@ -1,7 +1,6 @@
 import { ActionIcon, Badge, Button, Group, Table, Text, Tooltip } from '@mantine/core';
 import { IconCheck, IconPencil, IconTrash } from '@tabler/icons-react';
 import dayjs from 'dayjs';
-
 import { TASK_PRIORITY_COLORS, TASK_STATUS_COLORS } from '@/features/task/constants/task.constants';
 import type { Task } from '@/features/task/types/task';
 

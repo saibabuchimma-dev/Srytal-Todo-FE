@@ -5,6 +5,16 @@
     "name": "Administrator",
     "role": "Admin"
   },
+  "profile": {
+    "id": 1,
+    "name": "Administrator",
+    "email": "admin@srytal.com",
+    "role": "Admin",
+    "designation": "Operations Lead",
+    "avatar": "https://i.pravatar.cc/150?img=12",
+    "phone": "+91 98765 43210",
+    "location": "Hyderabad, India"
+  },
 
   "employees": [
     {
@@ -81,6 +91,32 @@
       "dueDate": "2026-07-08",
       "createdAt": "2026-06-30T13:00:00.000Z",
       "updatedAt": "2026-06-30T13:00:00.000Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "title": "Task due soon",
+      "message": "Design Login UI is due on 04 Jul 2026.",
+      "tone": "warning",
+      "read": false,
+      "createdAt": "2026-07-01T08:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "title": "Task completed",
+      "message": "Create task API contracts was marked completed.",
+      "tone": "success",
+      "read": true,
+      "createdAt": "2026-06-30T11:25:00.000Z"
+    },
+    {
+      "id": 3,
+      "title": "New task assigned",
+      "message": "Review dashboard empty states was assigned to Aarohi Mehta.",
+      "tone": "info",
+      "read": false,
+      "createdAt": "2026-06-30T13:05:00.000Z"
     }
   ]
 }

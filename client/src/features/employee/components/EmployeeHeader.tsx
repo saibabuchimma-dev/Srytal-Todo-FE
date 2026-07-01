@@ -3,7 +3,6 @@ import { useEmployeeStore } from '@/features/employee/store/employee.store';
 
 export default function EmployeeHeader() {
   const { selectedEmployee } = useEmployeeStore();
-
   if (!selectedEmployee) {
     return <Text c="dimmed">Select an employee</Text>;
   }

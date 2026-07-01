@@ -1,7 +1,5 @@
 import { SimpleGrid, Skeleton } from '@mantine/core';
-
 import StatsCard from './StatsCard';
-
 import { useEmployeeStore } from '@/features/employee/store/employee.store';
 import { useTasks } from '@/features/task/hooks/useTasks';
 import { getTaskStats } from '@/features/task/utils/task.utils';
