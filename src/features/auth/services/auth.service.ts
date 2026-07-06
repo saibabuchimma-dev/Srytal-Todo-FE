@@ -1,29 +1,25 @@
 import api from '@/shared/services/api';
-import mockDb from '@/mocks/db.json';
-import type { AuthUser, LoginRequest } from '../types/auth';
+import type { AuthUser, LoginRequest, LoginResponse } from '../types/auth';
 
-const localAuthUser = mockDb.auth as AuthUser;
+const normalizeAuthUser = (user: Partial<AuthUser> | null | undefined): AuthUser => ({
+  id: user?.id ?? '',
+  fullName: user?.fullName ?? user?.name ?? '',
+  name: user?.name ?? user?.fullName ?? '',
+  email: user?.email ?? '',
+  role: user?.role ?? 'Employee',
+  avatar: user?.avatar,
+});
 
-export const login = async (payload: LoginRequest) => {
-  try {
-    const response = await api.get<AuthUser>('/auth');
-    const authUser = response.data;
+export const login = async (payload: LoginRequest): Promise<AuthUser> => {
+  const response = await api.post<LoginResponse>('/auth/login', payload);
+  const loginData = response.data?.data;
 
-    if (authUser.email === payload.email && authUser.password === payload.password) {
-      return authUser;
-    }
-
-    throw new Error('Invalid email or password');
-  } catch (error) {
-    if (
-      error instanceof Error &&
-      /ECONNREFUSED|Network Error|ENOTFOUND|connect/i.test(error.message)
-    ) {
-      if (localAuthUser.email === payload.email && localAuthUser.password === payload.password) {
-        return localAuthUser;
-      }
-    }
-
-    throw error instanceof Error ? error : new Error('Invalid email or password');
+  if (!loginData?.token || !loginData?.user) {
+    throw new Error('Invalid login response');
   }
+
+  return {
+    ...normalizeAuthUser(loginData.user),
+    token: loginData.token,
+  };
 };

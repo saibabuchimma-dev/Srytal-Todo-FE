@@ -21,7 +21,7 @@ import {
   TASK_SORT_OPTIONS,
   TASK_STATUS_OPTIONS,
 } from '@/features/task/constants/task.constants';
-import { useDeleteTask, useTasks, useUpdateTask } from '@/features/task/hooks/useTasks';
+import { useDeleteTask, useTasks, useUpdateTaskStatus } from '@/features/task/hooks/useTasks';
 import type { Task, TaskPriority, TaskSortOption, TaskStatus } from '@/features/task/types/task';
 import { filterTasks, getPaginatedTasks } from '@/features/task/utils/task.utils';
 import TaskCard from './TaskCard';
@@ -43,8 +43,8 @@ export default function TaskList() {
     data = [],
     isError,
     isLoading,
-  } = useTasks(selectedEmployee ? { employeeId: selectedEmployee.id } : {});
-  const updateTaskMutation = useUpdateTask();
+  } = useTasks(selectedEmployee ? { assignedTo: selectedEmployee.id } : {});
+  const updateTaskStatusMutation = useUpdateTaskStatus();
   const deleteTaskMutation = useDeleteTask();
 
   const filteredTasks = useMemo(
@@ -70,12 +70,9 @@ export default function TaskList() {
   };
 
   const handleComplete = (task: Task) => {
-    updateTaskMutation.mutate({
+    updateTaskStatusMutation.mutate({
       taskId: task.id,
-      payload: {
-        status: 'Completed',
-        updatedAt: new Date().toISOString(),
-      },
+      status: 'Completed',
     });
   };
 

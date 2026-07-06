@@ -11,9 +11,8 @@ import Loader from '@/styles/loader';
 
 export default function EmployeeDetailsPage() {
   const { employeeId } = useParams();
-  const parsedEmployeeId = Number(employeeId);
   const setSelectedEmployee = useEmployeeStore((state) => state.setSelectedEmployee);
-  const { data: employee, isError, isLoading } = useEmployee(parsedEmployeeId);
+  const { data: employee, isError, isLoading } = useEmployee(employeeId ?? '');
 
   useEffect(() => {
     if (employee) {
@@ -21,7 +20,7 @@ export default function EmployeeDetailsPage() {
     }
   }, [employee, setSelectedEmployee]);
 
-  if (!Number.isFinite(parsedEmployeeId)) {
+  if (!employeeId) {
     return <Navigate to="/dashboard" replace />;
   }
 

@@ -4,7 +4,7 @@ import type { Employee } from '../types/employee';
 
 interface EmployeeListProps {
   employees: Employee[];
-  taskCounts: Record<number, number>;
+  taskCounts: Record<string, number>;
 }
 
 export default function EmployeeList({ employees, taskCounts }: EmployeeListProps) {

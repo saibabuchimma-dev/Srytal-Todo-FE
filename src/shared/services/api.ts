@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useAuthStore } from '@/features/auth/store/auth.store';
 import { toast } from '@/shared/utils/toast';
 
 interface ApiErrorResponse {
@@ -6,11 +7,28 @@ interface ApiErrorResponse {
 }
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001',
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5000/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+api.interceptors.request.use(
+  (config) => {
+    const token = useAuthStore.getState().token;
+
+    if (token) {
+      const headers = config.headers ?? {};
+      config.headers = axios.AxiosHeaders.from({
+        ...headers,
+        Authorization: `Bearer ${token}`,
+      });
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 
 api.interceptors.response.use(
   (response) => response,

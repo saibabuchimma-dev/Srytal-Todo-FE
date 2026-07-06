@@ -12,7 +12,7 @@ import type { Task, TaskFormValues } from '@/features/task/types/task';
 import { taskSchema } from '@/features/task/validation/task.schema';
 
 interface TaskDrawerProps {
-  employeeId: number | null;
+  employeeId: string | null;
   task: Task | null;
   opened: boolean;
   onClose: () => void;
@@ -48,15 +48,17 @@ export default function TaskDrawer({ employeeId, task, opened, onClose }: TaskDr
   };
 
   const onSubmit = (values: TaskFormValues) => {
-    const timestamp = new Date().toISOString();
-
     if (isEditMode) {
       updateTaskMutation.mutate(
         {
           taskId: task.id,
           payload: {
-            ...values,
-            updatedAt: timestamp,
+            assignedTo: task.assignedTo,
+            title: values.title,
+            description: values.description,
+            status: values.status,
+            priority: values.priority,
+            dueDate: values.dueDate,
           },
         },
         {
@@ -73,10 +75,12 @@ export default function TaskDrawer({ employeeId, task, opened, onClose }: TaskDr
 
     createTaskMutation.mutate(
       {
-        ...values,
-        employeeId,
-        createdAt: timestamp,
-        updatedAt: timestamp,
+        assignedTo: employeeId,
+        title: values.title,
+        description: values.description,
+        status: values.status,
+        priority: values.priority,
+        dueDate: values.dueDate,
       },
       {
         onSuccess: handleClose,

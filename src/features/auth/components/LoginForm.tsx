@@ -25,7 +25,7 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginFormData) => {
     try {
       const user = await login(data);
-      loginStore(user);
+      loginStore(user, user.token);
       toast.success('Success', 'Login successful');
       navigate('/dashboard');
     } catch (error) {

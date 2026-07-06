@@ -9,10 +9,10 @@ export function useEmployees() {
   });
 }
 
-export function useEmployee(employeeId: number) {
+export function useEmployee(employeeId: string) {
   return useQuery({
     queryKey: [...QUERY_KEYS.EMPLOYEES, employeeId],
     queryFn: () => getEmployee(employeeId),
-    enabled: Number.isFinite(employeeId),
+    enabled: Boolean(employeeId),
   });
 }

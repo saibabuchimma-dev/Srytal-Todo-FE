@@ -1,15 +1,18 @@
-import { Alert, ScrollArea, Text } from '@mantine/core';
+import { Alert, Button, ScrollArea, Text } from '@mantine/core';
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useEmployees } from '@/features/employee/hooks/useEmployees';
 import EmployeeSearch from '@/features/employee/components/EmployeeSearch';
 import EmployeeList from '@/features/employee/components/EmployeeList';
 import { useEmployeeStore } from '@/features/employee/store/employee.store';
 import { useTasks } from '@/features/task/hooks/useTasks';
+import { ROUTES } from '@/shared/config/routes';
 import Loader from '@/styles/loader';
 
 export default function Sidebar() {
   const [search, setSearch] = useState('');
+  const navigate = useNavigate();
   const { data = [], isLoading } = useEmployees();
   const { data: tasks = [] } = useTasks();
   const { selectedEmployee, setSelectedEmployee } = useEmployeeStore();
@@ -26,8 +29,10 @@ export default function Sidebar() {
 
   const taskCounts = useMemo(
     () =>
-      tasks.reduce<Record<number, number>>((counts, task) => {
-        counts[task.employeeId] = (counts[task.employeeId] ?? 0) + 1;
+      tasks.reduce<Record<string, number>>((counts, task) => {
+        if (task.assignedTo) {
+          counts[task.assignedTo] = (counts[task.assignedTo] ?? 0) + 1;
+        }
 
         return counts;
       }, {}),
@@ -46,6 +51,10 @@ export default function Sidebar() {
         <Text fw={700} size="lg" mb="md">
           Employees
         </Text>
+
+        <Button variant="light" fullWidth mb="md" onClick={() => navigate(ROUTES.PROJECTS)}>
+          View Projects
+        </Button>
 
         <EmployeeSearch value={search} onChange={setSearch} />
 
