@@ -7,8 +7,10 @@ export type TaskPriority = (typeof TASK_PRIORITIES)[number];
 export type TaskSortOption = (typeof TASK_SORT_OPTIONS)[number];
 
 export interface Task {
-  id: number;
-  employeeId: number;
+  id: string;
+  _id?: string;
+  assignedTo: string | null;
+  createdBy?: string | null;
   title: string;
   description: string;
   priority: TaskPriority;
@@ -27,15 +29,17 @@ export type TaskFormValues = {
 };
 
 export type CreateTaskPayload = TaskFormValues & {
-  employeeId: number;
-  createdAt: string;
-  updatedAt: string;
+  assignedTo?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export type UpdateTaskPayload = Partial<TaskFormValues> & {
-  updatedAt: string;
+  assignedTo?: string | null;
+  updatedAt?: string;
 };
 
 export interface TaskQueryParams {
-  employeeId?: number;
+  assignedTo?: string;
+  scope?: 'my' | 'all';
 }

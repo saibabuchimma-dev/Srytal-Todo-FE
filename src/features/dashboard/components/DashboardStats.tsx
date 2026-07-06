@@ -7,7 +7,7 @@ import { getTaskStats } from '@/features/task/utils/task.utils';
 export default function DashboardStats() {
   const selectedEmployee = useEmployeeStore((state) => state.selectedEmployee);
   const { data = [], isLoading } = useTasks(
-    selectedEmployee ? { employeeId: selectedEmployee.id } : {},
+    selectedEmployee ? { assignedTo: selectedEmployee.id } : {},
   );
   const stats = getTaskStats(selectedEmployee ? data : []);
 
