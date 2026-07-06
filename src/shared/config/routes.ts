@@ -5,6 +5,7 @@ export const ROUTES = {
   ADMIN_DASHBOARD: '/admin/dashboard',
   CHANGE_PASSWORD: '/change-password',
   EMPLOYEES: '/admin/dashboard/employees',
+  TASKS: '/admin/dashboard/tasks',
   EMPLOYEE_DETAILS: (employeeId: string) => `/admin/dashboard/employees/${employeeId}`,
   PROJECTS: '/admin/dashboard/projects',
   PROFILE: '/admin/dashboard/profile',
