@@ -1,7 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/config';
-import { getProject, getProjects } from '../services/project.service';
-import type { ProjectQueryParams } from '../types/project';
+import { createProject, getProject, getProjects } from '../services/project.service';
+import type { CreateProjectPayload, ProjectQueryParams } from '../types/project';
 
 export const useProjects = (params: ProjectQueryParams = {}) =>
   useQuery({
@@ -14,3 +14,14 @@ export const useProject = (projectId: string) =>
     queryKey: [...QUERY_KEYS.PROJECTS, projectId],
     queryFn: () => getProject(projectId),
   });
+
+export const useCreateProject = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: CreateProjectPayload) => createProject(payload),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PROJECTS });
+    },
+  });
+};

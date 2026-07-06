@@ -8,3 +8,11 @@ export interface Employee {
   role?: string;
   isActive?: boolean;
 }
+
+export interface CreateEmployeePayload {
+  fullName: string;
+  email: string;
+  role: 'Admin' | 'Employee';
+  password: string;
+  isActive?: boolean;
+}

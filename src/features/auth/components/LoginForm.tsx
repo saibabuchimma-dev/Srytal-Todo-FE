@@ -13,7 +13,11 @@ interface LoginFormData {
   password: string;
 }
 
-export default function LoginForm() {
+interface LoginFormProps {
+  portal: 'admin' | 'employee';
+}
+
+export default function LoginForm({ portal }: LoginFormProps) {
   const {
     formState: { isSubmitting },
     handleSubmit,
@@ -21,13 +25,26 @@ export default function LoginForm() {
   } = useForm<LoginFormData>();
   const navigate = useNavigate();
   const loginStore = useAuthStore((state) => state.login);
+  const expectedRole = portal === 'admin' ? 'Admin' : 'Employee';
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       const user = await login(data);
+
+      if (user.role !== expectedRole) {
+        toast.error('Wrong Portal', 'You are trying to login from the wrong portal.');
+        return;
+      }
+
       loginStore(user, user.token);
+
+      if (user.mustChangePassword) {
+        navigate('/change-password', { replace: true });
+        return;
+      }
+
       toast.success('Success', 'Login successful');
-      navigate('/dashboard');
+      navigate(portal === 'admin' ? '/admin/dashboard' : '/dashboard', { replace: true });
     } catch (error) {
       const message =
         error instanceof Error && error.message !== 'Invalid email or password'
@@ -50,7 +67,9 @@ export default function LoginForm() {
           </Title>
 
           <Text ta="center" c="dimmed" size="sm" mt={5}>
-            Sign in to your Employee Management Portal
+            {portal === 'admin'
+              ? 'Sign in to the Admin Management Portal'
+              : 'Sign in to the Employee Management Portal'}
           </Text>
         </div>
 

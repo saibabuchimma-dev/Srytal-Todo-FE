@@ -2,7 +2,11 @@ import { Paper } from '@mantine/core';
 import LoginForm from '../components/LoginForm';
 import LoginVideo from '@/assets/images/vdo.mp4';
 
-export default function LoginScreen() {
+interface LoginScreenProps {
+  portal?: 'admin' | 'employee';
+}
+
+export default function LoginScreen({ portal = 'employee' }: LoginScreenProps) {
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Background Video */}
@@ -30,7 +34,7 @@ export default function LoginScreen() {
             shadow="xl"
             className="w-full max-w-md rounded-3xl border border-white/20 bg-white/90 p-12 backdrop-blur-xl"
           >
-            <LoginForm />
+            <LoginForm portal={portal} />
           </Paper>
         </div>
       </div>

@@ -6,6 +6,7 @@ import DashboardStats from '@/features/dashboard/components/DashboardStats';
 import EmployeeHeader from '@/features/employee/components/EmployeeHeader';
 import { useEmployee } from '@/features/employee/hooks/useEmployees';
 import { useEmployeeStore } from '@/features/employee/store/employee.store';
+import { useTasks } from '@/features/task/hooks/useTasks';
 import TaskList from '@/features/task/components/TaskList';
 import Loader from '@/styles/loader';
 
@@ -13,6 +14,9 @@ export default function EmployeeDetailsPage() {
   const { employeeId } = useParams();
   const setSelectedEmployee = useEmployeeStore((state) => state.setSelectedEmployee);
   const { data: employee, isError, isLoading } = useEmployee(employeeId ?? '');
+  const { data: tasks = [], isLoading: isTasksLoading } = useTasks({
+    assignedTo: employeeId ?? '',
+  });
 
   useEffect(() => {
     if (employee) {
@@ -24,7 +28,7 @@ export default function EmployeeDetailsPage() {
     return <Navigate to="/dashboard" replace />;
   }
 
-  if (isLoading) {
+  if (isLoading || isTasksLoading) {
     return <Loader label="Loading employee details" size={44} />;
   }
 
@@ -40,7 +44,14 @@ export default function EmployeeDetailsPage() {
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
       <EmployeeHeader />
       <DashboardStats />
-      <TaskList />
+      <TaskList
+        tasks={tasks}
+        isLoading={isTasksLoading}
+        title="Employee Tasks"
+        subtitle={`${tasks.length} task${tasks.length === 1 ? '' : 's'} for ${employee.name}`}
+        canCreate={false}
+        employeeId={employee.id}
+      />
     </div>
   );
 }

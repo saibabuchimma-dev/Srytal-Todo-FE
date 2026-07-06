@@ -1,13 +1,20 @@
 import api from '@/shared/services/api';
-import type { AuthUser, LoginRequest, LoginResponse } from '../types/auth';
+import type {
+  AuthUser,
+  ChangePasswordRequest,
+  LoginRequest,
+  LoginResponse,
+  UserRole,
+} from '../types/auth';
 
 const normalizeAuthUser = (user: Partial<AuthUser> | null | undefined): AuthUser => ({
   id: user?.id ?? '',
   fullName: user?.fullName ?? user?.name ?? '',
   name: user?.name ?? user?.fullName ?? '',
   email: user?.email ?? '',
-  role: user?.role ?? 'Employee',
+  role: (user?.role ?? 'Employee') as UserRole,
   avatar: user?.avatar,
+  mustChangePassword: Boolean(user?.mustChangePassword),
 });
 
 export const login = async (payload: LoginRequest): Promise<AuthUser> => {
@@ -22,4 +29,9 @@ export const login = async (payload: LoginRequest): Promise<AuthUser> => {
     ...normalizeAuthUser(loginData.user),
     token: loginData.token,
   };
+};
+
+export const changePassword = async (payload: ChangePasswordRequest) => {
+  const response = await api.patch('/employees/change-password', payload);
+  return response.data;
 };

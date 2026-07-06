@@ -1,6 +1,14 @@
+export type UserRole = 'Admin' | 'Employee';
+
 export interface LoginRequest {
   email: string;
   password: string;
+}
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 }
 
 export interface AuthUser {
@@ -8,9 +16,10 @@ export interface AuthUser {
   fullName: string;
   name: string;
   email: string;
-  role: string;
+  role: UserRole;
   avatar?: string;
   token?: string;
+  mustChangePassword?: boolean;
 }
 
 export interface LoginResponse {
