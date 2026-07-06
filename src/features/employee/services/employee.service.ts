@@ -1,5 +1,5 @@
 import api from '@/shared/services/api';
-import type { Employee } from '../types/employee';
+import type { CreateEmployeePayload, Employee } from '../types/employee';
 
 const normalizeEmployee = (item: Record<string, unknown>): Employee => ({
   id: String(item._id ?? item.id ?? ''),
@@ -43,4 +43,14 @@ export const getEmployee = async (employeeId: string): Promise<Employee> => {
       : response.data;
 
   return normalizeEmployee((payload ?? {}) as Record<string, unknown>);
+};
+
+export const createEmployee = async (payload: CreateEmployeePayload): Promise<Employee> => {
+  const response = await api.post<unknown>('/employees', payload);
+  const data =
+    response.data && typeof response.data === 'object' && 'data' in response.data
+      ? (response.data as { data?: Record<string, unknown> }).data
+      : response.data;
+
+  return normalizeEmployee((data ?? {}) as Record<string, unknown>);
 };

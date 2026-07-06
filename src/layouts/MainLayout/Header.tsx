@@ -7,14 +7,16 @@ import NotificationMenu from '@/features/notification/components/NotificationMen
 import { useProfile } from '@/features/profile/hooks/useProfile';
 import logo from '@/assets/logo/logo.png';
 import { ROUTES } from '@/shared/config/routes';
+
 export default function Header() {
   const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
   const { data: profile } = useProfile();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate(ROUTES.LOGIN);
+    navigate(user?.role === 'Admin' ? ROUTES.ADMIN_LOGIN : ROUTES.LOGIN);
   };
 
   return (

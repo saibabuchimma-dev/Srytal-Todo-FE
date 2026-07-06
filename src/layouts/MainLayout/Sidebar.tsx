@@ -1,76 +1,63 @@
-import { Alert, Button, ScrollArea, Text } from '@mantine/core';
-import { useEffect, useMemo, useState } from 'react';
+import { Button, Card, Group, ScrollArea, Stack, Text, Title } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 
-import { useEmployees } from '@/features/employee/hooks/useEmployees';
-import EmployeeSearch from '@/features/employee/components/EmployeeSearch';
-import EmployeeList from '@/features/employee/components/EmployeeList';
-import { useEmployeeStore } from '@/features/employee/store/employee.store';
-import { useTasks } from '@/features/task/hooks/useTasks';
+import { useAuthStore } from '@/features/auth/store/auth.store';
 import { ROUTES } from '@/shared/config/routes';
-import Loader from '@/styles/loader';
 
 export default function Sidebar() {
-  const [search, setSearch] = useState('');
   const navigate = useNavigate();
-  const { data = [], isLoading } = useEmployees();
-  const { data: tasks = [] } = useTasks();
-  const { selectedEmployee, setSelectedEmployee } = useEmployeeStore();
+  const user = useAuthStore((state) => state.user);
+  const isAdmin = user?.role === 'Admin';
 
-  const filteredEmployees = useMemo(() => {
-    const normalizedSearch = search.trim().toLowerCase();
-
-    return data.filter(
-      (employee) =>
-        employee.name.toLowerCase().includes(normalizedSearch) ||
-        employee.designation.toLowerCase().includes(normalizedSearch),
-    );
-  }, [data, search]);
-
-  const taskCounts = useMemo(
-    () =>
-      tasks.reduce<Record<string, number>>((counts, task) => {
-        if (task.assignedTo) {
-          counts[task.assignedTo] = (counts[task.assignedTo] ?? 0) + 1;
-        }
-
-        return counts;
-      }, {}),
-    [tasks],
-  );
-
-  useEffect(() => {
-    if (selectedEmployee === null && data.length > 0) {
-      setSelectedEmployee(data[0]);
-    }
-  }, [data, selectedEmployee, setSelectedEmployee]);
+  const items = isAdmin
+    ? [
+        { label: 'Dashboard', path: ROUTES.ADMIN_DASHBOARD },
+        { label: 'Projects', path: ROUTES.PROJECTS },
+        { label: 'Profile', path: ROUTES.PROFILE },
+      ]
+    : [
+        { label: 'Dashboard', path: ROUTES.DASHBOARD },
+        { label: 'Projects', path: ROUTES.PROJECTS },
+        { label: 'Profile', path: ROUTES.PROFILE },
+        { label: 'Change Password', path: ROUTES.CHANGE_PASSWORD },
+      ];
 
   return (
     <ScrollArea className="h-full bg-slate-50">
       <div className="p-4">
-        <Text fw={700} size="lg" mb="md">
-          Employees
-        </Text>
+        <Card withBorder radius="md" p="md" mb="md">
+          <Title order={4}>Workspace</Title>
+          <Text c="dimmed" size="sm" mt="xs">
+            {isAdmin ? 'Administrative overview' : 'Personal task workspace'}
+          </Text>
+        </Card>
 
-        <Button variant="light" fullWidth mb="md" onClick={() => navigate(ROUTES.PROJECTS)}>
-          View Projects
-        </Button>
+        <Stack gap="xs">
+          {items.map((item) => (
+            <Button
+              key={item.path}
+              variant="subtle"
+              justify="flex-start"
+              onClick={() => navigate(item.path)}
+            >
+              {item.label}
+            </Button>
+          ))}
+        </Stack>
 
-        <EmployeeSearch value={search} onChange={setSearch} />
-
-        <div className="mt-4">
-          {isLoading ? (
-            <div className="h-32">
-              <Loader label="Loading employees" size={34} />
-            </div>
-          ) : filteredEmployees.length === 0 ? (
-            <Alert color="gray" radius="md">
-              No employees match your search.
-            </Alert>
-          ) : (
-            <EmployeeList employees={filteredEmployees} taskCounts={taskCounts} />
-          )}
-        </div>
+        <Card withBorder radius="md" p="md" mt="md">
+          <Group justify="space-between" align="center">
+            <Text fw={600}>Portal</Text>
+            <Text size="sm" c="blue">
+              {isAdmin ? 'Admin' : 'Employee'}
+            </Text>
+          </Group>
+          <Text c="dimmed" size="sm" mt="xs">
+            {isAdmin
+              ? 'Manage employees, tasks, and projects from one place.'
+              : 'Track your assigned work and keep your profile up to date.'}
+          </Text>
+        </Card>
       </div>
     </ScrollArea>
   );

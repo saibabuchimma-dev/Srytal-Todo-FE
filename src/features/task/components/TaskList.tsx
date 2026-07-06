@@ -14,22 +14,38 @@ import { useMediaQuery } from '@mantine/hooks';
 import { IconAlertCircle, IconSearch } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMemo, useState } from 'react';
-import { useEmployeeStore } from '@/features/employee/store/employee.store';
 import {
   TASK_PAGE_SIZE,
   TASK_PRIORITY_OPTIONS,
   TASK_SORT_OPTIONS,
   TASK_STATUS_OPTIONS,
 } from '@/features/task/constants/task.constants';
-import { useDeleteTask, useTasks, useUpdateTaskStatus } from '@/features/task/hooks/useTasks';
+import { useDeleteTask, useUpdateTaskStatus } from '@/features/task/hooks/useTasks';
 import type { Task, TaskPriority, TaskSortOption, TaskStatus } from '@/features/task/types/task';
 import { filterTasks, getPaginatedTasks } from '@/features/task/utils/task.utils';
 import TaskCard from './TaskCard';
 import TaskDrawer from './TaskDrawer';
 import TaskTable from './TaskTable';
 
-export default function TaskList() {
-  const selectedEmployee = useEmployeeStore((state) => state.selectedEmployee);
+interface TaskListProps {
+  tasks: Task[];
+  isLoading?: boolean;
+  isError?: boolean;
+  title?: string;
+  subtitle?: string;
+  canCreate?: boolean;
+  employeeId?: string | null;
+}
+
+export default function TaskList({
+  tasks,
+  isLoading = false,
+  isError = false,
+  title = 'Tasks',
+  subtitle,
+  canCreate = true,
+  employeeId = null,
+}: TaskListProps) {
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState<TaskStatus | 'All'>('All');
   const [priority, setPriority] = useState<TaskPriority | 'All'>('All');
@@ -39,17 +55,12 @@ export default function TaskList() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const {
-    data = [],
-    isError,
-    isLoading,
-  } = useTasks(selectedEmployee ? { assignedTo: selectedEmployee.id } : {});
   const updateTaskStatusMutation = useUpdateTaskStatus();
   const deleteTaskMutation = useDeleteTask();
 
   const filteredTasks = useMemo(
-    () => filterTasks({ tasks: data, search, status, priority, sort }),
-    [data, priority, search, sort, status],
+    () => filterTasks({ tasks, search, status, priority, sort }),
+    [priority, search, sort, status, tasks],
   );
 
   const paginatedTasks = useMemo(
@@ -91,28 +102,19 @@ export default function TaskList() {
 
   const resetPage = () => setPage(1);
 
-  if (!selectedEmployee) {
-    return (
-      <Alert color="blue" icon={<IconAlertCircle size={18} />} radius="md">
-        Select an employee from the sidebar to view and manage assigned tasks.
-      </Alert>
-    );
-  }
-
   return (
     <Stack gap="lg">
       <Group justify="space-between" align="flex-start">
         <Stack gap={2}>
           <Text fw={800} size="xl">
-            Tasks
+            {title}
           </Text>
           <Text size="sm" c="dimmed">
-            {filteredTasks.length} task{filteredTasks.length === 1 ? '' : 's'} for{' '}
-            {selectedEmployee.name}
+            {subtitle ?? `${filteredTasks.length} task${filteredTasks.length === 1 ? '' : 's'}`}
           </Text>
         </Stack>
 
-        <Button onClick={handleCreate}>Add Task</Button>
+        {canCreate ? <Button onClick={handleCreate}>Add Task</Button> : null}
       </Group>
 
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing="sm">
@@ -211,7 +213,7 @@ export default function TaskList() {
       ) : null}
 
       <TaskDrawer
-        employeeId={selectedEmployee.id}
+        employeeId={employeeId}
         task={editingTask}
         opened={isDrawerOpen}
         onClose={handleCloseDrawer}

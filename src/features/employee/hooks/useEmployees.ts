@@ -1,6 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/config';
-import { getEmployee, getEmployees } from '../services/employee.service';
+import { createEmployee, getEmployee, getEmployees } from '../services/employee.service';
+import type { CreateEmployeePayload } from '../types/employee';
 
 export function useEmployees() {
   return useQuery({
@@ -14,5 +15,16 @@ export function useEmployee(employeeId: string) {
     queryKey: [...QUERY_KEYS.EMPLOYEES, employeeId],
     queryFn: () => getEmployee(employeeId),
     enabled: Boolean(employeeId),
+  });
+}
+
+export function useCreateEmployee() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: CreateEmployeePayload) => createEmployee(payload),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: QUERY_KEYS.EMPLOYEES });
+    },
   });
 }

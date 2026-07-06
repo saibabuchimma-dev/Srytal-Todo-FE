@@ -1,7 +1,11 @@
 export const ROUTES = {
-  LOGIN: '/',
+  LOGIN: '/login',
+  ADMIN_LOGIN: '/admin/login',
   DASHBOARD: '/dashboard',
-  EMPLOYEE_DETAILS: (employeeId: string) => `/dashboard/employees/${employeeId}`,
-  PROJECTS: '/dashboard/projects',
-  PROFILE: '/dashboard/profile',
+  ADMIN_DASHBOARD: '/admin/dashboard',
+  CHANGE_PASSWORD: '/change-password',
+  EMPLOYEES: '/admin/dashboard/employees',
+  EMPLOYEE_DETAILS: (employeeId: string) => `/admin/dashboard/employees/${employeeId}`,
+  PROJECTS: '/admin/dashboard/projects',
+  PROFILE: '/admin/dashboard/profile',
 } as const;
