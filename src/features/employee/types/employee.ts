@@ -1,18 +1,26 @@
 export interface Employee {
   id: string;
-  name: string;
-  fullName?: string;
+  fullName: string;
   email: string;
-  designation: string;
+  role: 'Admin' | 'Employee';
   avatar: string;
-  role?: string;
-  isActive?: boolean;
+  isActive: boolean;
+  mustChangePassword: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CreateEmployeePayload {
   fullName: string;
   email: string;
   role: 'Admin' | 'Employee';
-  password: string;
   isActive?: boolean;
+}
+
+export interface UpdateEmployeePayload {
+  fullName: string;
+  email: string;
+  role: 'Admin' | 'Employee';
+  avatar?: string;
+  isActive: boolean;
 }

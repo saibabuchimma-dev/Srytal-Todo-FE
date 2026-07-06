@@ -1,9 +1,12 @@
+import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Select, TextInput } from '@mantine/core';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
+
 import FormModal from '@/components/common/FormModal';
-import { useCreateEmployee } from '../hooks/useEmployees';
+import { useUpdateEmployee } from '../hooks/useEmployees';
+import type { Employee } from '../types/employee';
 
 const employeeSchema = z.object({
   fullName: z.string().trim().min(2, 'Full name is required'),
@@ -14,13 +17,15 @@ const employeeSchema = z.object({
 
 type EmployeeFormValues = z.infer<typeof employeeSchema>;
 
-interface CreateEmployeeModalProps {
+interface EditEmployeeModalProps {
   opened: boolean;
+  employee: Employee | null;
   onClose: () => void;
 }
 
-export default function CreateEmployeeModal({ opened, onClose }: CreateEmployeeModalProps) {
-  const createEmployeeMutation = useCreateEmployee();
+export default function EditEmployeeModal({ opened, employee, onClose }: EditEmployeeModalProps) {
+  const updateEmployeeMutation = useUpdateEmployee();
+
   const { control, register, handleSubmit, reset } = useForm<EmployeeFormValues>({
     resolver: zodResolver(employeeSchema),
     defaultValues: {
@@ -31,24 +36,43 @@ export default function CreateEmployeeModal({ opened, onClose }: CreateEmployeeM
     },
   });
 
+  useEffect(() => {
+    if (employee) {
+      reset({
+        fullName: employee.fullName,
+        email: employee.email,
+        role: employee.role,
+        isActive: employee.isActive,
+      });
+    }
+  }, [employee, reset]);
+
   const close = () => {
     reset();
     onClose();
   };
 
   const onSubmit = (values: EmployeeFormValues) => {
-    createEmployeeMutation.mutate(values, {
-      onSuccess: close,
-    });
+    if (!employee) return;
+
+    updateEmployeeMutation.mutate(
+      {
+        id: employee.id,
+        payload: values,
+      },
+      {
+        onSuccess: close,
+      },
+    );
   };
 
   return (
     <FormModal
       opened={opened}
       onClose={close}
-      title="Create Employee"
-      loading={createEmployeeMutation.isPending}
-      submitLabel="Create"
+      title="Edit Employee"
+      loading={updateEmployeeMutation.isPending}
+      submitLabel="Update"
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput label="Full Name" placeholder="Enter full name" {...register('fullName')} />

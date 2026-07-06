@@ -14,6 +14,8 @@ export default function Sidebar() {
         { label: 'Dashboard', path: ROUTES.ADMIN_DASHBOARD },
         { label: 'Projects', path: ROUTES.PROJECTS },
         { label: 'Profile', path: ROUTES.PROFILE },
+        { label: 'Employees', path: ROUTES.EMPLOYEES },
+        { label: 'Tasks', path: ROUTES.TASKS },
       ]
     : [
         { label: 'Dashboard', path: ROUTES.DASHBOARD },
