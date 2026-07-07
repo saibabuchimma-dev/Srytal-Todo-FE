@@ -1,75 +1,59 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useAuthStore } from '@/features/auth/store/auth.store';
 import { QUERY_KEYS } from '@/shared/config';
-import {
-  createTask,
-  deleteTask,
-  getTask,
-  getTasks,
-  updateTask,
-  updateTaskStatus,
-} from '../services/task.service';
-import type { CreateTaskPayload, Task, TaskQueryParams, UpdateTaskPayload } from '../types/task';
+import { getTasks, getTask, createTask, updateTask, deleteTask } from '../services/task.service';
+import type { CreateTaskPayload, UpdateTaskPayload } from '../types/task';
 
-export const useTasks = (params: TaskQueryParams = {}) => {
-  const currentUser = useAuthStore((state) => state.user);
-  const resolvedParams =
-    currentUser?.role?.toLowerCase() === 'employee' ? { ...params, scope: 'my' as const } : params;
-
+export function useTasks() {
   return useQuery({
-    queryKey: [...QUERY_KEYS.TASKS, resolvedParams],
-    queryFn: () => getTasks(resolvedParams),
+    queryKey: QUERY_KEYS.TASKS,
+    queryFn: getTasks,
   });
-};
+}
 
-export const useTask = (taskId: string) =>
-  useQuery({
-    queryKey: [...QUERY_KEYS.TASKS, taskId],
-    queryFn: () => getTask(taskId),
+export function useTask(id: string) {
+  return useQuery({
+    queryKey: [...QUERY_KEYS.TASKS, id],
+    queryFn: () => getTask(id),
+    enabled: !!id,
   });
+}
 
-export const useCreateTask = () => {
+export function useCreateTask() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (payload: CreateTaskPayload) => createTask(payload),
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: QUERY_KEYS.TASKS });
+      void queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.TASKS,
+      });
     },
   });
-};
+}
 
-export const useUpdateTask = () => {
+export function useUpdateTask() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ taskId, payload }: { taskId: string; payload: UpdateTaskPayload }) =>
-      updateTask({ taskId, payload }),
+    mutationFn: ({ id, payload }: { id: string; payload: UpdateTaskPayload }) =>
+      updateTask(id, payload),
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: QUERY_KEYS.TASKS });
+      void queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.TASKS,
+      });
     },
   });
-};
+}
 
-export const useUpdateTaskStatus = () => {
+export function useDeleteTask() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ taskId, status }: { taskId: string; status: string }) =>
-      updateTaskStatus({ taskId, status: status as Task['status'] }),
+    mutationFn: deleteTask,
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: QUERY_KEYS.TASKS });
+      void queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.TASKS,
+      });
     },
   });
-};
-
-export const useDeleteTask = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (taskId: string) => deleteTask(taskId),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: QUERY_KEYS.TASKS });
-    },
-  });
-};
+}

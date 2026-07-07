@@ -6,9 +6,10 @@ import EmployeeDetailsPage from '@/features/employee/screens/EmployeeDetailsPage
 import { EmployeesPage } from '@/features/employee/screens/EmployeesPage';
 import ProfilePage from '@/features/profile/screens/ProfilePage';
 import ProjectsPage from '@/features/project/screens/ProjectsPage';
-import TasksPage from '@/features/task/screens/TasksPage';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
+import TaskDetailsPage from '@/features/task/screens/TaskDetailsPage';
+import TasksPage from '@/features/task/screens/TasksPage';
 
 export const router = createBrowserRouter([
   {
@@ -39,8 +40,8 @@ export const router = createBrowserRouter([
             element: <DashboardScreen />,
           },
           {
-            path: 'tasks',
-            element: <TasksPage />,
+            path: 'tasks/:taskId',
+            element: <TaskDetailsPage />,
           },
           {
             path: 'projects',
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
           {
             path: 'tasks',
             element: <TasksPage />,
+          },
+          {
+            path: 'tasks/:taskId',
+            element: <TaskDetailsPage />,
           },
           {
             path: 'projects',
