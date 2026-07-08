@@ -33,6 +33,12 @@ export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
               {task.description}
             </Text>
 
+            {task.projectDetails && (
+              <Text size="xs" c="blue">
+                📁 {task.projectDetails.name}
+              </Text>
+            )}
+
             <Group mt="xs">
               <Badge color="blue" variant="light">
                 {task.status}

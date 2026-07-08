@@ -23,6 +23,16 @@ const normalizeTask = (item: TaskApiResponse): Task => ({
         }
       : undefined,
 
+  project: typeof item.project === 'string' ? item.project : (item.project?._id ?? ''),
+
+  projectDetails:
+    item.project && typeof item.project === 'object'
+      ? {
+          id: item.project._id,
+          name: item.project.name,
+        }
+      : undefined,
+
   createdAt: item.createdAt,
   updatedAt: item.updatedAt,
 });
