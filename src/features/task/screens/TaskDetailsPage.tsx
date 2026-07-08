@@ -52,6 +52,10 @@ export default function TaskDetailsPage() {
                 <Text>{task.assignedEmployee?.fullName ?? 'Not Assigned'}</Text>
               </Group>
               <Group justify="space-between">
+                <Text fw={600}>Project</Text>
+                <Text>{task.projectDetails?.name ?? 'No Project'}</Text>
+              </Group>
+              <Group justify="space-between">
                 <Text fw={600}>Status</Text>
                 <Badge>{task.status}</Badge>
               </Group>

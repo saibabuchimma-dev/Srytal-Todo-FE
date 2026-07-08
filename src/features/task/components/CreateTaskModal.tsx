@@ -5,13 +5,16 @@ import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import FormModal from '@/components/common/FormModal';
 import { useCreateTask } from '../hooks/useTasks';
+import { useEmployees } from '@/features/employee/hooks/useEmployees';
+import { useProjects } from '@/features/project';
 
 const schema = z.object({
   title: z.string().min(2),
   description: z.string().min(5),
-  assignedTo: z.string().min(1, 'Employee is required'),
+  assignedTo: z.string().optional(),
   priority: z.enum(['Low', 'Medium', 'High']),
   status: z.enum(['Pending', 'In Progress', 'Completed']),
+  project: z.string().optional(),
   dueDate: z.date(),
 });
 
@@ -24,6 +27,8 @@ interface Props {
 
 export default function CreateTaskModal({ opened, onClose }: Props) {
   const createTask = useCreateTask();
+  const { data: employees = [], isLoading: employeesLoading } = useEmployees();
+  const { data: projects = [], isLoading: projectsLoading } = useProjects();
 
   const { register, control, handleSubmit, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -31,9 +36,10 @@ export default function CreateTaskModal({ opened, onClose }: Props) {
     defaultValues: {
       title: '',
       description: '',
-      assignedTo: '',
+      assignedTo: undefined,
       priority: 'Medium',
       status: 'Pending',
+      project: undefined,
       dueDate: new Date(),
     },
   });
@@ -74,7 +80,45 @@ export default function CreateTaskModal({ opened, onClose }: Props) {
         {...register('description')}
       />
 
-      <TextInput label="Employee Id" placeholder="Enter employee id" {...register('assignedTo')} />
+      <Controller
+        control={control}
+        name="project"
+        render={({ field }) => (
+          <Select
+            label="Project"
+            placeholder="Select project"
+            searchable
+            clearable
+            disabled={projectsLoading}
+            data={projects.map((project) => ({
+              value: project.id,
+              label: project.name,
+            }))}
+            value={field.value}
+            onChange={(value) => field.onChange(value ?? undefined)}
+          />
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="assignedTo"
+        render={({ field }) => (
+          <Select
+            label="Assign Employee"
+            placeholder="Select employee"
+            searchable
+            clearable
+            disabled={employeesLoading}
+            data={employees.map((employee) => ({
+              value: employee.id,
+              label: employee.fullName,
+            }))}
+            value={field.value}
+            onChange={(value) => field.onChange(value ?? undefined)}
+          />
+        )}
+      />
 
       <Controller
         control={control}

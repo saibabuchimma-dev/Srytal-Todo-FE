@@ -7,11 +7,14 @@ import { Select, Textarea, TextInput } from '@mantine/core';
 import FormModal from '@/components/common/FormModal';
 import { useUpdateTask } from '../hooks/useTasks';
 import type { Task } from '../types/task';
+import { useEmployees } from '@/features/employee/hooks/useEmployees';
+import { useProjects } from '@/features/project';
 
 const schema = z.object({
   title: z.string().min(2),
   description: z.string().min(5),
   assignedTo: z.string().optional(),
+  project: z.string().optional(),
   status: z.enum(['Pending', 'In Progress', 'Completed']),
   priority: z.enum(['Low', 'Medium', 'High']),
   dueDate: z.date(),
@@ -27,6 +30,8 @@ interface Props {
 
 export default function EditTaskModal({ opened, task, onClose }: Props) {
   const updateTask = useUpdateTask();
+  const { data: employees = [], isLoading: employeesLoading } = useEmployees();
+  const { data: projects = [], isLoading: projectsLoading } = useProjects();
 
   const { control, register, reset, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -34,7 +39,8 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
     defaultValues: {
       title: '',
       description: '',
-      assignedTo: '',
+      assignedTo: undefined,
+      project: undefined,
       priority: 'Medium',
       status: 'Pending',
       dueDate: new Date(),
@@ -48,6 +54,7 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
       title: task.title,
       description: task.description,
       assignedTo: task.assignedTo,
+      project: task.project,
       priority: task.priority,
       status: task.status,
       dueDate: task.dueDate ? new Date(task.dueDate) : new Date(),
@@ -89,7 +96,45 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
 
       <Textarea label="Description" autosize minRows={4} {...register('description')} />
 
-      <TextInput label="Employee Id" {...register('assignedTo')} />
+      <Controller
+        control={control}
+        name="project"
+        render={({ field }) => (
+          <Select
+            label="Project"
+            placeholder="Select project"
+            searchable
+            clearable
+            disabled={projectsLoading}
+            data={projects.map((project) => ({
+              value: project.id,
+              label: project.name,
+            }))}
+            value={field.value}
+            onChange={(value) => field.onChange(value ?? undefined)}
+          />
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="assignedTo"
+        render={({ field }) => (
+          <Select
+            label="Assign Employee"
+            placeholder="Select employee"
+            searchable
+            clearable
+            disabled={employeesLoading}
+            data={employees.map((employee) => ({
+              value: employee.id,
+              label: employee.fullName,
+            }))}
+            value={field.value}
+            onChange={(value) => field.onChange(value ?? undefined)}
+          />
+        )}
+      />
 
       <Controller
         control={control}
