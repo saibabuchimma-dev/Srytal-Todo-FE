@@ -23,10 +23,20 @@ export function useCreateTask() {
 
   return useMutation({
     mutationFn: (payload: CreateTaskPayload) => createTask(payload),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       void queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.TASKS,
       });
+
+      void queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.PROJECTS,
+      });
+
+      if (variables.project) {
+        void queryClient.invalidateQueries({
+          queryKey: [...QUERY_KEYS.PROJECTS, variables.project, 'details'],
+        });
+      }
     },
   });
 }

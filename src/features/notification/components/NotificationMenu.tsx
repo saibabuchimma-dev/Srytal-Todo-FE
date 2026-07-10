@@ -1,18 +1,18 @@
-import { ActionIcon, Badge, Group, Menu, Stack, Text } from '@mantine/core';
+import { ActionIcon, Group, Menu, Text } from '@mantine/core';
 import { IconBell } from '@tabler/icons-react';
-import dayjs from 'dayjs';
-import { useNotifications } from '../hooks/useNotifications';
-import type { NotificationTone } from '../types/notification';
+// import dayjs from 'dayjs';
+// import { useNotifications } from '../hooks/useNotifications';
+// import type { NotificationTone } from '../types/notification';
 
-const toneColors: Record<NotificationTone, string> = {
-  info: 'blue',
-  warning: 'yellow',
-  success: 'green',
-};
+// const toneColors: Record<NotificationTone, string> = {
+//   info: 'blue',
+//   warning: 'yellow',
+//   success: 'green',
+// };
 
 export default function NotificationMenu() {
-  const { data: notifications = [] } = useNotifications();
-  const unreadCount = notifications.filter((notification) => !notification.read).length;
+  // const { data: notifications = [] } = useNotifications();
+  // const unreadCount = notifications.filter((notification) => !notification.read).length;
 
   return (
     <Menu position="bottom-end" shadow="md" width={340}>
@@ -27,15 +27,15 @@ export default function NotificationMenu() {
             <Text size="xs" fw={700}>
               Notifications
             </Text>
-            {unreadCount > 0 ? (
+            {/* {unreadCount > 0 ? (
               <Badge size="xs" color="indigo">
                 {unreadCount} new
               </Badge>
-            ) : null}
+            ) : null} */}
           </Group>
         </Menu.Label>
 
-        {notifications.length === 0 ? (
+        {/* {notifications.length === 0 ? (
           <Menu.Item>
             <Text size="sm" c="dimmed">
               No notifications yet.
@@ -62,7 +62,7 @@ export default function NotificationMenu() {
               </Stack>
             </Menu.Item>
           ))
-        )}
+        )} */}
       </Menu.Dropdown>
     </Menu>
   );

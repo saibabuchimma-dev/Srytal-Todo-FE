@@ -6,4 +6,5 @@ export const useNotifications = () =>
   useQuery({
     queryKey: QUERY_KEYS.NOTIFICATIONS,
     queryFn: getNotifications,
+    enabled: false,
   });

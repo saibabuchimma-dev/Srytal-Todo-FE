@@ -1,5 +1,5 @@
 import { Modal, Stack, Group, Button } from '@mantine/core';
-import type { ReactNode } from 'react';
+import type { ReactNode, FormEventHandler } from 'react';
 
 interface FormModalProps {
   opened: boolean;
@@ -8,7 +8,7 @@ interface FormModalProps {
   children: ReactNode;
   loading?: boolean;
   submitLabel?: string;
-  onSubmit: () => void;
+  onSubmit: FormEventHandler<HTMLFormElement>;
 }
 
 export default function FormModal({
@@ -22,19 +22,21 @@ export default function FormModal({
 }: FormModalProps) {
   return (
     <Modal opened={opened} onClose={onClose} centered title={title} size="md" radius="md">
-      <Stack>
-        {children}
+      <form onSubmit={onSubmit}>
+        <Stack>
+          {children}
 
-        <Group justify="flex-end">
-          <Button variant="default" onClick={onClose}>
-            Cancel
-          </Button>
+          <Group justify="flex-end">
+            <Button variant="default" onClick={onClose}>
+              Cancel
+            </Button>
 
-          <Button loading={loading} onClick={onSubmit}>
-            {submitLabel}
-          </Button>
-        </Group>
-      </Stack>
+            <Button type="submit" loading={loading}>
+              {submitLabel}
+            </Button>
+          </Group>
+        </Stack>
+      </form>
     </Modal>
   );
 }

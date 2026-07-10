@@ -1,15 +1,58 @@
-import { Alert, Button, Card, Group, Paper, SimpleGrid, Stack, Text, Title } from '@mantine/core';
-import { IconAlertCircle, IconFolders } from '@tabler/icons-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Alert, Button, Card, Group, Paper, SimpleGrid, Stack, Text, Title } from '@mantine/core';
+import {
+  IconAlertCircle,
+  IconArrowRight,
+  IconEdit,
+  IconFolders,
+  IconTrash,
+} from '@tabler/icons-react';
+import { modals } from '@mantine/modals';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import ProjectModal from '../components/ProjectModal';
-import { useProjects } from '../hooks/useProjects';
+import { useDeleteProject, useProjects } from '../hooks/useProjects';
+import type { Project } from '../types/project';
 
 export default function ProjectsPage() {
+  const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const isAdmin = user?.role === 'Admin';
   const [opened, setOpened] = useState(false);
-  const { data = [], isError, isLoading } = useProjects();
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const { data = [], isLoading, isError } = useProjects();
+  const deleteProjectMutation = useDeleteProject();
+  const closeModal = () => {
+    setOpened(false);
+    setEditingProject(null);
+  };
+  const projectDetailsPath = (projectId: string) =>
+    isAdmin
+      ? `/admin/dashboard/projects/${projectId}/details`
+      : `/dashboard/projects/${projectId}/details`;
+
+  const handleDelete = (project: Project) => {
+    modals.openConfirmModal({
+      title: 'Delete Project',
+      centered: true,
+      children: (
+        <Text size="sm">
+          Are you sure you want to delete <strong>{project.name}</strong>?
+        </Text>
+      ),
+
+      labels: {
+        confirm: 'Delete',
+        cancel: 'Cancel',
+      },
+
+      confirmProps: {
+        color: 'red',
+      },
+
+      onConfirm: () => deleteProjectMutation.mutate(project.id),
+    });
+  };
 
   if (isLoading) {
     return <Text c="dimmed">Loading projects...</Text>;
@@ -17,7 +60,7 @@ export default function ProjectsPage() {
 
   if (isError) {
     return (
-      <Alert color="red" icon={<IconAlertCircle size={18} />} radius="md">
+      <Alert color="red" radius="md" icon={<IconAlertCircle size={18} />}>
         Projects could not be loaded.
       </Alert>
     );
@@ -25,14 +68,12 @@ export default function ProjectsPage() {
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
-      <Paper radius="lg" p="lg" withBorder>
-        <Group justify="space-between" align="flex-start">
+      <Paper withBorder radius="lg" p="lg">
+        <Group justify="space-between">
           <div>
             <Title order={2}>{isAdmin ? 'Project Management' : 'My Projects'}</Title>
             <Text c="dimmed" mt="xs">
-              {isAdmin
-                ? 'Create and review projects across the organization.'
-                : 'Review the projects assigned to you.'}
+              {isAdmin ? 'Create, manage and assign projects.' : 'Projects assigned to you.'}
             </Text>
           </div>
           <div className="rounded-full bg-violet-50 p-3 text-violet-600">
@@ -41,23 +82,28 @@ export default function ProjectsPage() {
         </Group>
       </Paper>
 
-      {isAdmin ? (
+      {isAdmin && (
         <Group justify="flex-end">
-          <Button onClick={() => setOpened(true)}>Create Project</Button>
+          <Button
+            onClick={() => {
+              setEditingProject(null);
+              setOpened(true);
+            }}
+          >
+            Create Project
+          </Button>
         </Group>
-      ) : null}
+      )}
 
       {data.length === 0 ? (
-        <Alert color="gray" radius="md">
-          No projects found yet.
-        </Alert>
+        <Alert color="gray">No projects found.</Alert>
       ) : (
-        <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+        <SimpleGrid cols={{ base: 1, md: 2 }}>
           {data.map((project) => (
             <Card key={project.id} withBorder radius="md" shadow="sm">
-              <Stack gap={6}>
+              <Stack>
                 <Group justify="space-between">
-                  <Text fw={700}>{project.name}</Text>
+                  <Title order={5}>{project.name}</Title>
                   <Text size="sm" c="dimmed">
                     {project.status}
                   </Text>
@@ -66,15 +112,56 @@ export default function ProjectsPage() {
                   {project.description}
                 </Text>
                 <Text size="xs" c="dimmed">
-                  {project.startDate} → {project.endDate}
+                  {new Date(project.startDate).toLocaleDateString()} -{' '}
+                  {new Date(project.endDate).toLocaleDateString()}
                 </Text>
+
+                <Group justify="space-between" mt="md">
+                  <Button
+                    variant="light"
+                    rightSection={<IconArrowRight size={16} />}
+                    onClick={() => navigate(projectDetailsPath(project.id))}
+                  >
+                    Open
+                  </Button>
+                  {isAdmin && (
+                    <Group>
+                      <Button
+                        variant="light"
+                        color="blue"
+                        leftSection={<IconEdit size={16} />}
+                        onClick={() => {
+                          setEditingProject(project);
+                          setOpened(true);
+                        }}
+                      >
+                        Edit
+                      </Button>
+
+                      <Button
+                        color="red"
+                        variant="light"
+                        leftSection={<IconTrash size={16} />}
+                        loading={deleteProjectMutation.isPending}
+                        onClick={() => handleDelete(project)}
+                      >
+                        Delete
+                      </Button>
+                    </Group>
+                  )}
+                </Group>
               </Stack>
             </Card>
           ))}
         </SimpleGrid>
       )}
 
-      <ProjectModal opened={opened} onClose={() => setOpened(false)} />
+      <ProjectModal
+        opened={opened}
+        onClose={closeModal}
+        mode={editingProject ? 'edit' : 'create'}
+        project={editingProject ?? undefined}
+      />
     </div>
   );
 }
