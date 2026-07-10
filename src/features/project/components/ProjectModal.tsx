@@ -3,7 +3,9 @@ import { DateInput } from '@mantine/dates';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useCreateProject } from '../hooks/useProjects';
+import { useCreateProject, useUpdateProject } from '../hooks/useProjects';
+import type { Project } from '../types/project';
+import { useEffect } from 'react';
 
 const toDateValue = (value: string) => (value ? new Date(value) : null);
 const toInputValue = (value: Date | string | null) => {
@@ -31,10 +33,18 @@ type ProjectFormValues = z.infer<typeof projectSchema>;
 interface ProjectModalProps {
   opened: boolean;
   onClose: () => void;
+  mode?: 'create' | 'edit';
+  project?: Project;
 }
 
-export default function ProjectModal({ opened, onClose }: ProjectModalProps) {
+export default function ProjectModal({
+  opened,
+  onClose,
+  mode = 'create',
+  project,
+}: ProjectModalProps) {
   const createProjectMutation = useCreateProject();
+  const updateProjectMutation = useUpdateProject();
   const { control, handleSubmit, register, reset } = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
@@ -47,16 +57,62 @@ export default function ProjectModal({ opened, onClose }: ProjectModalProps) {
   });
 
   const close = () => {
-    reset();
+    reset({
+      name: '',
+      description: '',
+      status: 'Planning',
+      startDate: '',
+      endDate: '',
+    });
     onClose();
   };
 
   const onSubmit = (values: ProjectFormValues) => {
-    createProjectMutation.mutate(values, { onSuccess: close });
+    if (mode === 'edit' && project) {
+      updateProjectMutation.mutate(
+        {
+          projectId: project.id,
+          payload: values,
+        },
+        {
+          onSuccess: close,
+        },
+      );
+      return;
+    }
+    createProjectMutation.mutate(values, {
+      onSuccess: close,
+    });
   };
 
+  useEffect(() => {
+    if (!opened) return;
+    if (mode === 'edit' && project) {
+      reset({
+        name: project.name,
+        description: project.description,
+        status: project.status,
+        startDate: project.startDate,
+        endDate: project.endDate,
+      });
+    } else {
+      reset({
+        name: '',
+        description: '',
+        status: 'Planning',
+        startDate: '',
+        endDate: '',
+      });
+    }
+  }, [opened, mode, project, reset]);
+
   return (
-    <Modal opened={opened} onClose={close} title="Create Project" centered>
+    <Modal
+      opened={opened}
+      onClose={close}
+      title={mode === 'create' ? 'Create Project' : 'Edit Project'}
+      centered
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="md">
           <TextInput label="Project Name" {...register('name')} />
@@ -101,8 +157,15 @@ export default function ProjectModal({ opened, onClose }: ProjectModalProps) {
             <Button variant="default" onClick={close}>
               Cancel
             </Button>
-            <Button type="submit" loading={createProjectMutation.isPending}>
-              Save
+            <Button
+              type="submit"
+              loading={
+                mode === 'create'
+                  ? createProjectMutation.isPending
+                  : updateProjectMutation.isPending
+              }
+            >
+              {mode === 'create' ? 'Create Project' : 'Update Project'}
             </Button>
           </Group>
         </Stack>

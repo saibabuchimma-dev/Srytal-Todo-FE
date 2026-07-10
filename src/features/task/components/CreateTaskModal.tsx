@@ -7,6 +7,7 @@ import FormModal from '@/components/common/FormModal';
 import { useCreateTask } from '../hooks/useTasks';
 import { useEmployees } from '@/features/employee/hooks/useEmployees';
 import { useProjects } from '@/features/project';
+import { useEffect } from 'react';
 
 const schema = z.object({
   title: z.string().min(2),
@@ -23,23 +24,30 @@ type FormValues = z.infer<typeof schema>;
 interface Props {
   opened: boolean;
   onClose: () => void;
+  projectId?: string;
+  onSuccess?: () => void;
 }
 
-export default function CreateTaskModal({ opened, onClose }: Props) {
+export default function CreateTaskModal({ opened, onClose, projectId, onSuccess }: Props) {
   const createTask = useCreateTask();
   const { data: employees = [], isLoading: employeesLoading } = useEmployees();
   const { data: projects = [], isLoading: projectsLoading } = useProjects();
 
-  const { register, control, handleSubmit, reset } = useForm<FormValues>({
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>({
     resolver: zodResolver(schema),
-
     defaultValues: {
       title: '',
       description: '',
       assignedTo: undefined,
       priority: 'Medium',
       status: 'Pending',
-      project: undefined,
+      project: projectId,
       dueDate: new Date(),
     },
   });
@@ -56,10 +64,27 @@ export default function CreateTaskModal({ opened, onClose }: Props) {
         dueDate: values.dueDate.toISOString(),
       },
       {
-        onSuccess: close,
+        onSuccess: () => {
+          onSuccess?.();
+          close();
+        },
       },
     );
   };
+
+  useEffect(() => {
+    if (!opened) return;
+
+    reset({
+      title: '',
+      description: '',
+      assignedTo: undefined,
+      priority: 'Medium',
+      status: 'Pending',
+      project: projectId,
+      dueDate: new Date(),
+    });
+  }, [opened, projectId, reset]);
 
   return (
     <FormModal
@@ -70,35 +95,44 @@ export default function CreateTaskModal({ opened, onClose }: Props) {
       loading={createTask.isPending}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <TextInput label="Task Title" placeholder="Enter task title" {...register('title')} />
+      <TextInput
+        label="Task Title"
+        error={errors.title?.message}
+        placeholder="Enter task title"
+        {...register('title')}
+      />
 
       <Textarea
         label="Description"
+        error={errors.description?.message}
         autosize
         minRows={4}
         placeholder="Enter task description"
         {...register('description')}
       />
 
-      <Controller
-        control={control}
-        name="project"
-        render={({ field }) => (
-          <Select
-            label="Project"
-            placeholder="Select project"
-            searchable
-            clearable
-            disabled={projectsLoading}
-            data={projects.map((project) => ({
-              value: project.id,
-              label: project.name,
-            }))}
-            value={field.value}
-            onChange={(value) => field.onChange(value ?? undefined)}
-          />
-        )}
-      />
+      {!projectId && (
+        <Controller
+          control={control}
+          name="project"
+          render={({ field }) => (
+            <Select
+              label="Project"
+              placeholder="Select project"
+              error={errors.project?.message}
+              searchable
+              clearable
+              disabled={projectsLoading}
+              data={projects.map((project) => ({
+                value: project.id,
+                label: project.name,
+              }))}
+              value={field.value}
+              onChange={(value) => field.onChange(value ?? undefined)}
+            />
+          )}
+        />
+      )}
 
       <Controller
         control={control}
@@ -107,6 +141,7 @@ export default function CreateTaskModal({ opened, onClose }: Props) {
           <Select
             label="Assign Employee"
             placeholder="Select employee"
+            error={errors.assignedTo?.message}
             searchable
             clearable
             disabled={employeesLoading}
@@ -126,6 +161,7 @@ export default function CreateTaskModal({ opened, onClose }: Props) {
         render={({ field }) => (
           <Select
             label="Priority"
+            error={errors.priority?.message}
             data={['Low', 'Medium', 'High']}
             value={field.value}
             onChange={field.onChange}
@@ -139,6 +175,7 @@ export default function CreateTaskModal({ opened, onClose }: Props) {
         render={({ field }) => (
           <Select
             label="Status"
+            error={errors.status?.message}
             data={['Pending', 'In Progress', 'Completed']}
             value={field.value}
             onChange={field.onChange}
@@ -150,7 +187,12 @@ export default function CreateTaskModal({ opened, onClose }: Props) {
         control={control}
         name="dueDate"
         render={({ field }) => (
-          <DateInput label="Due Date" value={field.value} onChange={field.onChange} />
+          <DateInput
+            label="Due Date"
+            error={errors.dueDate?.message}
+            value={field.value}
+            onChange={field.onChange}
+          />
         )}
       />
     </FormModal>

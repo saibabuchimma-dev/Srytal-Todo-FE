@@ -10,6 +10,7 @@ import MainLayout from '@/layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
 import TaskDetailsPage from '@/features/task/screens/TaskDetailsPage';
 import TasksPage from '@/features/task/screens/TasksPage';
+import ProjectDetailsPage from '@/features/project/screens/ProjectDetailsPage';
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
           {
             path: 'projects',
             element: <ProjectsPage />,
+          },
+          {
+            path: 'projects/:projectId/details',
+            element: <ProjectDetailsPage />,
           },
           {
             path: 'profile',
@@ -85,6 +90,10 @@ export const router = createBrowserRouter([
           {
             path: 'projects',
             element: <ProjectsPage />,
+          },
+          {
+            path: 'projects/:projectId/details',
+            element: <ProjectDetailsPage />,
           },
           {
             path: 'profile',
