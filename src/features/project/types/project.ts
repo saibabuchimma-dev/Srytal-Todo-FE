@@ -45,6 +45,11 @@ export interface ProjectTask {
   priority: 'Low' | 'Medium' | 'High';
   dueDate: string;
   createdAt: string;
+  assignedTo?: {
+    _id: string;
+    fullName: string;
+    avatar?: string;
+  };
 }
 
 export interface EmployeeTaskGroup {
@@ -64,4 +69,5 @@ export interface ProjectDetailsResponse {
   };
 
   employees: EmployeeTaskGroup[];
+  tasks: ProjectTask[];
 }

@@ -64,6 +64,10 @@ export function useDeleteTask() {
       void queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.TASKS,
       });
+
+      void queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.PROJECTS,
+      });
     },
   });
 }

@@ -16,6 +16,17 @@ const normalizeTask = (item: Record<string, unknown>): ProjectTask => ({
   priority: (item.priority as ProjectTask['priority']) ?? 'Medium',
   dueDate: String(item.dueDate ?? ''),
   createdAt: String(item.createdAt ?? ''),
+  assignedTo:
+    item.assignedTo && typeof item.assignedTo === 'object'
+      ? {
+          _id: String((item.assignedTo as Record<string, unknown>)._id ?? ''),
+          fullName: String((item.assignedTo as Record<string, unknown>).fullName ?? ''),
+          avatar:
+            typeof (item.assignedTo as Record<string, unknown>).avatar === 'string'
+              ? ((item.assignedTo as Record<string, unknown>).avatar as string)
+              : undefined,
+        }
+      : undefined,
 });
 
 const normalizeEmployeeTaskGroup = (item: Record<string, unknown>): EmployeeTaskGroup => ({
@@ -113,6 +124,10 @@ export const getProjectDetails = async (projectId: string): Promise<ProjectDetai
       ? data.employees.map((employee) =>
           normalizeEmployeeTaskGroup(employee as Record<string, unknown>),
         )
+      : [],
+
+    tasks: Array.isArray(data.tasks)
+      ? data.tasks.map((task) => normalizeTask(task as Record<string, unknown>))
       : [],
   };
 };

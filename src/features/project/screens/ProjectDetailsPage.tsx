@@ -28,18 +28,55 @@ import {
 } from '@tabler/icons-react';
 import { useEmployeeProjectTasks, useProjectDetails } from '../hooks/useProjects';
 import ProjectModal from '../components/ProjectModal';
+import ProjectTasksTable from '../components/ProjectTasksTable';
 import TaskModal from '@/features/task/components/CreateTaskModal';
+import TaskDetailsModal from '@/features/task/components/TaskDetailsModal';
+import type { ProjectTask } from '../types/project';
+import { useDeleteTask } from '@/features/task/hooks/useTasks';
+import type { Task } from '@/features/task/types/task';
+import ConfirmDeleteModal from '@/components/common/ConfirmDeleteModal';
 
 export default function ProjectDetailsPage() {
   const { projectId = '' } = useParams();
   const [taskOpened, setTaskOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState('');
+  const [selectedTask, setSelectedTask] = useState<ProjectTask | null>(null);
+  const [viewOpened, setViewOpened] = useState(false);
+  const [editTaskOpened, setEditTaskOpened] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
   const { data, isLoading, isError, refetch } = useProjectDetails(projectId);
   const { data: employeeTasks = [], refetch: refetchEmployeeTasks } = useEmployeeProjectTasks(
     projectId,
     selectedEmployeeId,
   );
+  const deleteTaskMutation = useDeleteTask();
+  const [deleteOpened, setDeleteOpened] = useState(false);
+  const [deletingTask, setDeletingTask] = useState<Task | null>(null);
+  const mapProjectTaskToTask = (task: ProjectTask): Task => ({
+    id: task._id,
+    title: task.title,
+    description: task.description,
+    status: task.status,
+    priority: task.priority,
+    dueDate: task.dueDate,
+    assignedTo: task.assignedTo?._id ?? '',
+    assignedEmployee: task.assignedTo
+      ? {
+          id: task.assignedTo._id,
+          fullName: task.assignedTo.fullName,
+        }
+      : undefined,
+    project: projectId,
+    projectDetails: data
+      ? {
+          id: projectId,
+          name: data.project.name,
+        }
+      : undefined,
+    createdAt: task.createdAt,
+    updatedAt: task.createdAt,
+  });
 
   if (isLoading) {
     return (
@@ -143,6 +180,22 @@ export default function ProjectDetailsPage() {
           </Card>
         </SimpleGrid>
 
+        <ProjectTasksTable
+          tasks={data.tasks}
+          onView={(task) => {
+            setSelectedTask(task);
+            setViewOpened(true);
+          }}
+          onEdit={(task) => {
+            setEditingTask(mapProjectTaskToTask(task));
+            setEditTaskOpened(true);
+          }}
+          onDelete={(task) => {
+            setDeletingTask(mapProjectTaskToTask(task));
+            setDeleteOpened(true);
+          }}
+        />
+
         <Grid>
           <Grid.Col span={{ base: 12, md: 4 }}>
             <Card withBorder h={600}>
@@ -225,6 +278,7 @@ export default function ProjectDetailsPage() {
           </Grid.Col>
         </Grid>
       </Stack>
+
       <ProjectModal
         opened={editOpened}
         onClose={() => setEditOpened(false)}
@@ -232,15 +286,78 @@ export default function ProjectDetailsPage() {
         project={data.project}
       />
 
+      {/* Create Task */}
       <TaskModal
         opened={taskOpened}
         onClose={() => setTaskOpened(false)}
         projectId={projectId}
         onSuccess={() => {
           refetch();
+
           if (selectedEmployeeId) {
             refetchEmployeeTasks();
           }
+
+          setTaskOpened(false);
+        }}
+      />
+
+      {/* Edit Task */}
+      <TaskModal
+        opened={editTaskOpened}
+        onClose={() => {
+          setEditTaskOpened(false);
+          setEditingTask(null);
+        }}
+        mode="edit"
+        task={editingTask ?? undefined}
+        projectId={projectId}
+        onSuccess={() => {
+          refetch();
+
+          if (selectedEmployeeId) {
+            refetchEmployeeTasks();
+          }
+
+          setEditTaskOpened(false);
+          setEditingTask(null);
+        }}
+      />
+
+      {/* View Task */}
+      <TaskDetailsModal
+        opened={viewOpened}
+        onClose={() => {
+          setViewOpened(false);
+          setSelectedTask(null);
+        }}
+        task={selectedTask}
+      />
+
+      <ConfirmDeleteModal
+        opened={deleteOpened}
+        onClose={() => {
+          setDeleteOpened(false);
+          setDeletingTask(null);
+        }}
+        loading={deleteTaskMutation.isPending}
+        title="Delete Task"
+        message={`Are you sure you want to delete "${deletingTask?.title ?? ''}"?`}
+        onConfirm={() => {
+          if (!deletingTask) return;
+
+          deleteTaskMutation.mutate(deletingTask.id, {
+            onSuccess: () => {
+              setDeleteOpened(false);
+              setDeletingTask(null);
+
+              refetch();
+
+              if (selectedEmployeeId) {
+                refetchEmployeeTasks();
+              }
+            },
+          });
         }}
       />
     </>
