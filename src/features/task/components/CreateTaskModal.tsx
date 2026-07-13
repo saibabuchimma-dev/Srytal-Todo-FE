@@ -4,10 +4,11 @@ import { DateInput } from '@mantine/dates';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import FormModal from '@/components/common/FormModal';
-import { useCreateTask } from '../hooks/useTasks';
+import { useCreateTask, useUpdateTask } from '../hooks/useTasks';
 import { useEmployees } from '@/features/employee/hooks/useEmployees';
 import { useProjects } from '@/features/project';
 import { useEffect } from 'react';
+import type { Task } from '../types/task';
 
 const schema = z.object({
   title: z.string().min(2),
@@ -26,10 +27,20 @@ interface Props {
   onClose: () => void;
   projectId?: string;
   onSuccess?: () => void;
+  mode?: 'create' | 'edit';
+  task?: Task;
 }
 
-export default function CreateTaskModal({ opened, onClose, projectId, onSuccess }: Props) {
+export default function CreateTaskModal({
+  opened,
+  onClose,
+  projectId,
+  onSuccess,
+  mode = 'create',
+  task,
+}: Props) {
   const createTask = useCreateTask();
+  const updateTask = useUpdateTask();
   const { data: employees = [], isLoading: employeesLoading } = useEmployees();
   const { data: projects = [], isLoading: projectsLoading } = useProjects();
 
@@ -58,22 +69,52 @@ export default function CreateTaskModal({ opened, onClose, projectId, onSuccess 
   };
 
   const onSubmit = (values: FormValues) => {
-    createTask.mutate(
-      {
-        ...values,
-        dueDate: values.dueDate.toISOString(),
-      },
-      {
-        onSuccess: () => {
-          onSuccess?.();
-          close();
+    const payload = {
+      ...values,
+      dueDate: values.dueDate.toISOString(),
+    };
+
+    if (mode === 'edit' && task) {
+      updateTask.mutate(
+        {
+          id: task.id,
+          payload,
         },
+        {
+          onSuccess: () => {
+            onSuccess?.();
+            close();
+          },
+        },
+      );
+
+      return;
+    }
+
+    createTask.mutate(payload, {
+      onSuccess: () => {
+        onSuccess?.();
+        close();
       },
-    );
+    });
   };
 
   useEffect(() => {
     if (!opened) return;
+
+    if (mode === 'edit' && task) {
+      reset({
+        title: task.title,
+        description: task.description,
+        assignedTo: task.assignedTo,
+        priority: task.priority,
+        status: task.status,
+        project: task.project,
+        dueDate: new Date(task.dueDate),
+      });
+
+      return;
+    }
 
     reset({
       title: '',
@@ -84,15 +125,15 @@ export default function CreateTaskModal({ opened, onClose, projectId, onSuccess 
       project: projectId,
       dueDate: new Date(),
     });
-  }, [opened, projectId, reset]);
+  }, [opened, task, mode, projectId, reset]);
 
   return (
     <FormModal
       opened={opened}
       onClose={close}
-      title="Create Task"
-      submitLabel="Create"
-      loading={createTask.isPending}
+      title={mode === 'create' ? 'Create Task' : 'Edit Task'}
+      submitLabel={mode === 'create' ? 'Create' : 'Update'}
+      loading={mode === 'create' ? createTask.isPending : updateTask.isPending}
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput
