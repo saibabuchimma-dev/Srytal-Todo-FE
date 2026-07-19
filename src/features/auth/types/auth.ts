@@ -19,7 +19,7 @@ export interface AuthUser {
   role: UserRole;
   avatar?: string;
   token?: string;
-  mustChangePassword?: boolean;
+  mustChangePassword: boolean;
 }
 
 export interface LoginResponse {
@@ -27,6 +27,13 @@ export interface LoginResponse {
   message: string;
   data: {
     token: string;
-    user: AuthUser;
+    user: {
+      id: string;
+      fullName: string;
+      email: string;
+      role: UserRole;
+      avatar?: string;
+      mustChangePassword: boolean;
+    };
   };
 }
