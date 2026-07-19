@@ -11,7 +11,6 @@ interface ProtectedRouteProps {
 export default function ProtectedRoute({ requiredRole, redirectPath }: ProtectedRouteProps) {
   const location = useLocation();
   const user = useAuthStore((state) => state.user);
-  const mustChangePassword = useAuthStore((state) => state.mustChangePassword);
 
   if (!user) {
     return (
@@ -27,11 +26,7 @@ export default function ProtectedRoute({ requiredRole, redirectPath }: Protected
     return <Navigate to={user.role === 'Admin' ? '/admin/dashboard' : '/dashboard'} replace />;
   }
 
-  if (
-    requiredRole === 'Employee' &&
-    mustChangePassword &&
-    location.pathname !== '/change-password'
-  ) {
+  if (user.mustChangePassword && location.pathname !== '/change-password') {
     return <Navigate to="/change-password" replace />;
   }
 

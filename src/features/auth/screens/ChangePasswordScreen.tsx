@@ -15,7 +15,7 @@ interface ChangePasswordFormData {
 export default function ChangePasswordScreen() {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
-  const setMustChangePassword = useAuthStore((state) => state.setMustChangePassword);
+  const updateUser = useAuthStore((state) => state.updateUser);
   const {
     formState: { isSubmitting },
     handleSubmit,
@@ -25,9 +25,13 @@ export default function ChangePasswordScreen() {
   const onSubmit = async (data: ChangePasswordFormData) => {
     try {
       await changePassword(data);
-      setMustChangePassword(false);
+      updateUser({
+        mustChangePassword: false,
+      });
       toast.success('Password Updated', 'Your password has been updated successfully.');
-      navigate(user?.role === 'Admin' ? '/admin/dashboard' : '/dashboard', { replace: true });
+      setTimeout(() => {
+        navigate(user?.role === 'Admin' ? '/admin/dashboard' : '/dashboard', { replace: true });
+      }, 1000);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unable to change password';
       toast.error('Password Change Failed', message);

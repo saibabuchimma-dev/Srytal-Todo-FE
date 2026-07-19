@@ -7,19 +7,19 @@ import type {
   UserRole,
 } from '../types/auth';
 
-const normalizeAuthUser = (user: Partial<AuthUser> | null | undefined): AuthUser => ({
-  id: user?.id ?? '',
-  fullName: user?.fullName ?? user?.name ?? '',
-  name: user?.name ?? user?.fullName ?? '',
-  email: user?.email ?? '',
-  role: (user?.role ?? 'Employee') as UserRole,
-  avatar: user?.avatar,
-  mustChangePassword: Boolean(user?.mustChangePassword),
+const normalizeAuthUser = (user: LoginResponse['data']['user']): AuthUser => ({
+  id: user.id,
+  fullName: user.fullName,
+  name: user.fullName,
+  email: user.email,
+  role: user.role as UserRole,
+  avatar: user.avatar,
+  mustChangePassword: user.mustChangePassword,
 });
 
 export const login = async (payload: LoginRequest): Promise<AuthUser> => {
   const response = await api.post<LoginResponse>('/auth/login', payload);
-  const loginData = response.data?.data;
+  const loginData = response.data.data;
 
   if (!loginData?.token || !loginData?.user) {
     throw new Error('Invalid login response');

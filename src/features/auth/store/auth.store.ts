@@ -6,10 +6,10 @@ import type { AuthUser } from '../types/auth';
 interface AuthStore {
   user: AuthUser | null;
   token: string | null;
-  mustChangePassword: boolean;
   login: (user: AuthUser, token?: string) => void;
   logout: () => void;
-  setMustChangePassword: (value: boolean) => void;
+
+  updateUser: (data: Partial<AuthUser>) => void;
 }
 
 export const useAuthStore = create<AuthStore>()(
@@ -17,17 +17,31 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       user: null,
       token: null,
-      mustChangePassword: false,
 
       login: (user, token) =>
         set({
-          user: { ...user, token: token ?? user.token ?? undefined },
+          user: {
+            ...user,
+            token: token ?? user.token,
+          },
           token: token ?? user.token ?? null,
-          mustChangePassword: Boolean(user.mustChangePassword),
         }),
 
-      logout: () => set({ user: null, token: null, mustChangePassword: false }),
-      setMustChangePassword: (value) => set({ mustChangePassword: value }),
+      logout: () =>
+        set({
+          user: null,
+          token: null,
+        }),
+
+      updateUser: (data) =>
+        set((state) => ({
+          user: state.user
+            ? {
+                ...state.user,
+                ...data,
+              }
+            : null,
+        })),
     }),
     {
       name: 'auth-storage',
