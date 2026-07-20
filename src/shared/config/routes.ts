@@ -7,14 +7,22 @@ export const ROUTES = {
 
   CHANGE_PASSWORD: '/change-password',
 
+  // Employee
+  TASKS: '/dashboard/tasks',
+  PROJECTS: '/dashboard/projects',
+  PROFILE: '/dashboard/profile',
+
+  // Admin
   EMPLOYEES: '/admin/dashboard/employees',
-  EMPLOYEE_DETAILS: (employeeId: string) => `/admin/dashboard/employees/${employeeId}`,
+  EMPLOYEE_DETAILS: (id: string) => `/admin/dashboard/employees/${id}`,
 
-  TASKS: '/admin/dashboard/tasks',
-  TASK_DETAILS: (taskId: string) => `/dashboard/tasks/${taskId}`,
-  ADMIN_TASK_DETAILS: (taskId: string) => `/admin/dashboard/tasks/${taskId}`,
+  ADMIN_TASKS: '/admin/dashboard/tasks',
+  ADMIN_PROJECTS: '/admin/dashboard/projects',
+  ADMIN_PROFILE: '/admin/dashboard/profile',
 
-  PROJECTS: '/admin/dashboard/projects',
+  TASK_DETAILS: (id: string) => `/dashboard/tasks/${id}`,
+  ADMIN_TASK_DETAILS: (id: string) => `/admin/dashboard/tasks/${id}`,
 
-  PROFILE: '/admin/dashboard/profile',
+  PROJECT_DETAILS: (id: string) => `/dashboard/projects/${id}/details`,
+  ADMIN_PROJECT_DETAILS: (id: string) => `/admin/dashboard/projects/${id}/details`,
 } as const;

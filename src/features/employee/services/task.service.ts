@@ -1,7 +1,8 @@
 export {
-  createTask,
-  deleteTask,
-  getTask,
   getTasks,
+  getMyTasks,
+  getTask,
+  createTask,
   updateTask,
+  deleteTask,
 } from '@/features/task/services/task.service';

@@ -1,14 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/config';
-import { getTasks, getTask, createTask, updateTask, deleteTask } from '../services/task.service';
+import {
+  getTasks,
+  getTask,
+  createTask,
+  updateTask,
+  deleteTask,
+  getMyTasks,
+} from '../services/task.service';
 import type { CreateTaskPayload, UpdateTaskPayload } from '../types/task';
 
-export function useTasks() {
-  return useQuery({
-    queryKey: QUERY_KEYS.TASKS,
+export const useTasks = (options?: { enabled?: boolean }) =>
+  useQuery({
+    queryKey: ['tasks'],
     queryFn: getTasks,
+    enabled: options?.enabled ?? true,
   });
-}
 
 export function useTask(id: string) {
   return useQuery({
@@ -17,6 +24,13 @@ export function useTask(id: string) {
     enabled: !!id,
   });
 }
+
+export const useMyTasks = (options?: { enabled?: boolean }) =>
+  useQuery({
+    queryKey: ['my-tasks'],
+    queryFn: getMyTasks,
+    enabled: options?.enabled ?? true,
+  });
 
 export function useCreateTask() {
   const queryClient = useQueryClient();

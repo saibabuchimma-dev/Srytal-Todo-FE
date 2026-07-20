@@ -8,11 +8,12 @@ import type { Task } from '../types/task';
 
 interface TaskCardProps {
   task: Task;
-  onEdit: (task: Task) => void;
-  onDelete: (task: Task) => void;
+  onEdit?: (task: Task) => void;
+  onDelete?: (task: Task) => void;
+  readOnly?: boolean;
 }
 
-export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
+export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: TaskCardProps) {
   const navigate = useNavigate();
   const { user } = useAuthStore();
   const handleView = () => {
@@ -50,36 +51,38 @@ export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
             </Group>
           </Stack>
 
-          <Menu shadow="md" width={180}>
-            <Menu.Target>
-              <ActionIcon variant="subtle" onClick={(e) => e.stopPropagation()}>
-                <IconDotsVertical size={18} />
-              </ActionIcon>
-            </Menu.Target>
+          {!readOnly && (
+            <Menu shadow="md" width={180}>
+              <Menu.Target>
+                <ActionIcon variant="subtle" onClick={(e) => e.stopPropagation()}>
+                  <IconDotsVertical size={18} />
+                </ActionIcon>
+              </Menu.Target>
 
-            <Menu.Dropdown>
-              <Menu.Item
-                leftSection={<IconEdit size={16} />}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onEdit(task);
-                }}
-              >
-                Edit
-              </Menu.Item>
+              <Menu.Dropdown>
+                <Menu.Item
+                  leftSection={<IconEdit size={16} />}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onEdit?.(task);
+                  }}
+                >
+                  Edit
+                </Menu.Item>
 
-              <Menu.Item
-                color="red"
-                leftSection={<IconTrash size={16} />}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDelete(task);
-                }}
-              >
-                Delete
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
+                <Menu.Item
+                  color="red"
+                  leftSection={<IconTrash size={16} />}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete?.(task);
+                  }}
+                >
+                  Delete
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          )}
         </Group>
       </Card>
     </motion.div>

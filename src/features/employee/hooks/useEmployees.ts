@@ -9,12 +9,12 @@ import {
 } from '../services/employee.service';
 import type { CreateEmployeePayload, UpdateEmployeePayload } from '../types/employee';
 
-export function useEmployees() {
-  return useQuery({
-    queryKey: QUERY_KEYS.EMPLOYEES,
+export const useEmployees = (options?: { enabled?: boolean }) =>
+  useQuery({
+    queryKey: ['employees'],
     queryFn: getEmployees,
+    enabled: options?.enabled ?? true,
   });
-}
 
 export function useEmployee(employeeId: string) {
   return useQuery({

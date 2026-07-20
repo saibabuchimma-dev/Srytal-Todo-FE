@@ -12,14 +12,15 @@ export default function Sidebar() {
   const items = isAdmin
     ? [
         { label: 'Dashboard', path: ROUTES.ADMIN_DASHBOARD },
-        { label: 'Projects', path: ROUTES.PROJECTS },
-        { label: 'Profile', path: ROUTES.PROFILE },
+        { label: 'Projects', path: ROUTES.ADMIN_PROJECTS },
         { label: 'Employees', path: ROUTES.EMPLOYEES },
-        { label: 'Tasks', path: ROUTES.TASKS },
+        { label: 'Tasks', path: ROUTES.ADMIN_TASKS },
+        { label: 'Profile', path: ROUTES.ADMIN_PROFILE },
       ]
     : [
         { label: 'Dashboard', path: ROUTES.DASHBOARD },
-        { label: 'Projects', path: ROUTES.PROJECTS },
+        { label: 'My Tasks', path: ROUTES.TASKS },
+        { label: 'My Projects', path: ROUTES.PROJECTS },
         { label: 'Profile', path: ROUTES.PROFILE },
         { label: 'Change Password', path: ROUTES.CHANGE_PASSWORD },
       ];

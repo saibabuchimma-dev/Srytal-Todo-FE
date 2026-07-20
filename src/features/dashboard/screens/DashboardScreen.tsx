@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import DashboardStats from '../components/DashboardStats';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import { useEmployees } from '@/features/employee/hooks/useEmployees';
-import { useTasks } from '@/features/task/hooks/useTasks';
+import { useMyTasks, useTasks } from '@/features/task/hooks/useTasks';
 import { getTaskStats } from '@/features/task/utils/task.utils';
 import { ROUTES } from '@/shared/config/routes';
 
@@ -11,8 +11,21 @@ export default function DashboardScreen() {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const isAdmin = user?.role === 'Admin';
-  const { data: employees = [] } = useEmployees();
-  const { data: tasks = [] } = useTasks();
+  const employeesQuery = useEmployees({
+    enabled: isAdmin,
+  });
+
+  const adminTasksQuery = useTasks({
+    enabled: isAdmin,
+  });
+
+  const myTasksQuery = useMyTasks({
+    enabled: !isAdmin,
+  });
+
+  const employees = employeesQuery.data ?? [];
+  const tasks = isAdmin ? (adminTasksQuery.data ?? []) : (myTasksQuery.data ?? []);
+
   const stats = getTaskStats(tasks);
 
   const upcomingTasks = [...tasks]
