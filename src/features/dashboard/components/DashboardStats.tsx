@@ -2,14 +2,29 @@ import { SimpleGrid, Skeleton } from '@mantine/core';
 import StatsCard from './StatsCard';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import { useEmployees } from '@/features/employee/hooks/useEmployees';
-import { useTasks } from '@/features/task/hooks/useTasks';
+import { useMyTasks, useTasks } from '@/features/task/hooks/useTasks';
 import { getTaskStats } from '@/features/task/utils/task.utils';
 
 export default function DashboardStats() {
   const user = useAuthStore((state) => state.user);
   const isAdmin = user?.role === 'Admin';
-  const { data: employees = [], isLoading: isEmployeesLoading } = useEmployees();
-  const { data: tasks = [], isLoading: isTasksLoading } = useTasks();
+
+  const employeesQuery = useEmployees({
+    enabled: isAdmin,
+  });
+
+  const adminTasksQuery = useTasks({
+    enabled: isAdmin,
+  });
+
+  const myTasksQuery = useMyTasks({
+    enabled: !isAdmin,
+  });
+
+  const employees = employeesQuery.data ?? [];
+  const tasks = isAdmin ? (adminTasksQuery.data ?? []) : (myTasksQuery.data ?? []);
+  const isEmployeesLoading = employeesQuery.isLoading;
+  const isTasksLoading = isAdmin ? adminTasksQuery.isLoading : myTasksQuery.isLoading;
   const stats = getTaskStats(tasks);
 
   if (isTasksLoading || isEmployeesLoading) {

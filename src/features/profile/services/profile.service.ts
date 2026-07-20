@@ -16,6 +16,10 @@ export const getProfile = async (): Promise<AdminProfile> => {
     location: '',
   };
 
+  if (currentUser?.role === 'Employee') {
+    return fallbackProfile;
+  }
+
   if (currentUser?.id) {
     try {
       const response = await api.get<unknown>(`/employees/${currentUser.id}`);

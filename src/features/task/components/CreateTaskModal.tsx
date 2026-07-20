@@ -16,7 +16,7 @@ const schema = z.object({
   assignedTo: z.string().optional(),
   priority: z.enum(['Low', 'Medium', 'High']),
   status: z.enum(['Pending', 'In Progress', 'Completed']),
-  project: z.string().optional(),
+  project: z.string().min(1, 'Project is required'),
   dueDate: z.date(),
 });
 
@@ -152,28 +152,25 @@ export default function CreateTaskModal({
         {...register('description')}
       />
 
-      {!projectId && (
-        <Controller
-          control={control}
-          name="project"
-          render={({ field }) => (
-            <Select
-              label="Project"
-              placeholder="Select project"
-              error={errors.project?.message}
-              searchable
-              clearable
-              disabled={projectsLoading}
-              data={projects.map((project) => ({
-                value: project.id,
-                label: project.name,
-              }))}
-              value={field.value}
-              onChange={(value) => field.onChange(value ?? undefined)}
-            />
-          )}
-        />
-      )}
+      <Controller
+        control={control}
+        name="project"
+        render={({ field }) => (
+          <Select
+            label="Project"
+            placeholder="Select project"
+            error={errors.project?.message}
+            searchable
+            disabled={projectsLoading}
+            data={projects.map((project) => ({
+              value: project.id,
+              label: project.name,
+            }))}
+            value={field.value}
+            onChange={(value) => field.onChange(value ?? undefined)}
+          />
+        )}
+      />
 
       <Controller
         control={control}

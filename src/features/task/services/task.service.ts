@@ -81,3 +81,12 @@ export const updateTask = async (taskId: string, payload: UpdateTaskPayload): Pr
 export const deleteTask = async (taskId: string): Promise<void> => {
   await api.delete(`/tasks/${taskId}`);
 };
+
+export const getMyTasks = async (): Promise<Task[]> => {
+  const { data } = await api.get<{
+    success: boolean;
+    data: TaskApiResponse[];
+  }>('/tasks/my-tasks');
+
+  return data.data.map(normalizeTask);
+};

@@ -4,6 +4,7 @@ import {
   createProject,
   deleteProject,
   getEmployeeProjectTasks,
+  getMyProjects,
   getProject,
   getProjectDetails,
   getProjects,
@@ -75,3 +76,10 @@ export const useDeleteProject = () => {
     },
   });
 };
+
+export const useMyProjects = (options?: { enabled?: boolean }) =>
+  useQuery({
+    queryKey: ['my-projects'],
+    queryFn: getMyProjects,
+    enabled: options?.enabled ?? true,
+  });

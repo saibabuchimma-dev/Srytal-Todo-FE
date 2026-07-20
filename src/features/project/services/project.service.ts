@@ -165,3 +165,9 @@ export const getEmployeeProjectTasks = async (
 export const deleteProject = async (projectId: string): Promise<void> => {
   await api.delete(`/projects/${projectId}`);
 };
+
+export const getMyProjects = async (): Promise<Project[]> => {
+  const response = await api.get('/projects/my-projects');
+
+  return normalizeProjectList(response.data);
+};

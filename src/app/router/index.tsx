@@ -2,29 +2,36 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import LoginScreen from '@/features/auth/screens/LoginScreen';
 import ChangePasswordScreen from '@/features/auth/screens/ChangePasswordScreen';
 import DashboardScreen from '@/features/dashboard/screens/DashboardScreen';
-import EmployeeDetailsPage from '@/features/employee/screens/EmployeeDetailsPage';
 import { EmployeesPage } from '@/features/employee/screens/EmployeesPage';
-import ProfilePage from '@/features/profile/screens/ProfilePage';
+import EmployeeDetailsPage from '@/features/employee/screens/EmployeeDetailsPage';
+import TasksPage from '@/features/task/screens/TasksPage';
+import TaskDetailsPage from '@/features/task/screens/TaskDetailsPage';
 import ProjectsPage from '@/features/project/screens/ProjectsPage';
+import ProjectDetailsPage from '@/features/project/screens/ProjectDetailsPage';
+import ProfilePage from '@/features/profile/screens/ProfilePage';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
-import TaskDetailsPage from '@/features/task/screens/TaskDetailsPage';
-import TasksPage from '@/features/task/screens/TasksPage';
-import ProjectDetailsPage from '@/features/project/screens/ProjectDetailsPage';
+import MyTasksPage from '@/features/task/screens/MyTasksPage';
+import MyProjectsPage from '@/features/project/screens/MyProjectsPage';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Navigate to="/login" replace />,
   },
+
   {
     path: '/login',
     element: <LoginScreen portal="employee" />,
   },
+
   {
     path: '/admin/login',
     element: <LoginScreen portal="admin" />,
   },
+
+  // ================= EMPLOYEE =================
+
   {
     element: <ProtectedRoute requiredRole="Employee" redirectPath="/login" />,
     children: [
@@ -41,12 +48,16 @@ export const router = createBrowserRouter([
             element: <DashboardScreen />,
           },
           {
+            path: 'tasks',
+            element: <MyTasksPage />,
+          },
+          {
             path: 'tasks/:taskId',
             element: <TaskDetailsPage />,
           },
           {
             path: 'projects',
-            element: <ProjectsPage />,
+            element: <MyProjectsPage />,
           },
           {
             path: 'projects/:projectId/details',
@@ -60,6 +71,9 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  // ================= ADMIN =================
+
   {
     element: <ProtectedRoute requiredRole="Admin" redirectPath="/admin/login" />,
     children: [
