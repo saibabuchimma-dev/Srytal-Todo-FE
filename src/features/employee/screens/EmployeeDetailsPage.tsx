@@ -1,6 +1,6 @@
-import { Alert } from '@mantine/core';
+import { Alert, Card, Stack, Text, Title } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import DashboardStats from '@/features/dashboard/components/DashboardStats';
 import EmployeeHeader from '../components/EmployeeHeader';
@@ -17,9 +17,12 @@ export default function EmployeeDetailsPage() {
 
   const { data: employee, isLoading, isError } = useEmployee(employeeId ?? '');
 
-  const { data: tasks = [], isLoading: isTasksLoading } = useTasks({
-    assignedTo: employeeId ?? '',
-  });
+  const { data: tasks = [], isLoading: isTasksLoading } = useTasks();
+
+  const employeeTasks = useMemo(
+    () => tasks.filter((task) => task.assignedTo === employeeId),
+    [tasks, employeeId],
+  );
 
   useEffect(() => {
     if (employee) {
@@ -49,14 +52,19 @@ export default function EmployeeDetailsPage() {
 
       <DashboardStats />
 
-      <TaskList
-        tasks={tasks}
-        isLoading={isTasksLoading}
-        title="Employee Tasks"
-        subtitle={`${tasks.length} task${tasks.length === 1 ? '' : 's'} assigned to ${employee.fullName}`}
-        canCreate={false}
-        employeeId={employee.id}
-      />
+      <Card withBorder radius="lg">
+        <Stack gap="md">
+          <div>
+            <Title order={4}>Employee Tasks</Title>
+            <Text c="dimmed" size="sm">
+              {employeeTasks.length} task{employeeTasks.length === 1 ? '' : 's'} assigned to{' '}
+              {employee.fullName}
+            </Text>
+          </div>
+
+          <TaskList tasks={employeeTasks} readOnly />
+        </Stack>
+      </Card>
     </div>
   );
 }

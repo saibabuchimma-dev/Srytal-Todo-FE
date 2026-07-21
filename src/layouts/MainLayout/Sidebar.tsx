@@ -15,11 +15,13 @@ export default function Sidebar() {
         { label: 'Projects', path: ROUTES.ADMIN_PROJECTS },
         { label: 'Employees', path: ROUTES.EMPLOYEES },
         { label: 'Tasks', path: ROUTES.ADMIN_TASKS },
+        { label: 'Board', path: ROUTES.ADMIN_BOARD },
         { label: 'Profile', path: ROUTES.ADMIN_PROFILE },
       ]
     : [
         { label: 'Dashboard', path: ROUTES.DASHBOARD },
         { label: 'My Tasks', path: ROUTES.TASKS },
+        { label: 'My Board', path: ROUTES.BOARD },
         { label: 'My Projects', path: ROUTES.PROJECTS },
         { label: 'Profile', path: ROUTES.PROFILE },
         { label: 'Change Password', path: ROUTES.CHANGE_PASSWORD },
