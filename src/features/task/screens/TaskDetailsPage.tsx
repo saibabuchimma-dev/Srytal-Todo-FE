@@ -3,6 +3,7 @@ import { IconAlertCircle } from '@tabler/icons-react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import Loader from '@/styles/loader';
+import CommentSection from '@/features/comment/components/CommentSection';
 import { useTask } from '../hooks/useTasks';
 import { useUpdateTaskStatus } from '../hooks/useUpdateTaskStatus';
 
@@ -141,6 +142,8 @@ export default function TaskDetailsPage() {
           />
         </Stack>
       </Card>
+
+      <CommentSection taskId={task.id} />
     </div>
   );
 }
