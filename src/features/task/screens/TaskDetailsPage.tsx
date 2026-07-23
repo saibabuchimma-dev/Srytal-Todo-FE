@@ -3,6 +3,7 @@ import { IconAlertCircle } from '@tabler/icons-react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import Loader from '@/styles/loader';
+import ActivityTimeline from '@/features/activity/components/ActivityTimeline';
 import CommentSection from '@/features/comment/components/CommentSection';
 import { useTask } from '../hooks/useTasks';
 import { useUpdateTaskStatus } from '../hooks/useUpdateTaskStatus';
@@ -142,6 +143,8 @@ export default function TaskDetailsPage() {
           />
         </Stack>
       </Card>
+
+      <ActivityTimeline taskId={task.id} />
 
       <CommentSection taskId={task.id} />
     </div>

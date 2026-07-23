@@ -33,6 +33,7 @@ export const useAddComment = (taskId: string) => {
     mutationFn: (content: string) => addTaskComment(taskId, content),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: commentsKey(taskId) });
+      queryClient.invalidateQueries({ queryKey: ['activities', taskId] });
     },
     onError: (error: AxiosError<{ message: string }>) =>
       showError(error, 'Unable to add comment.'),

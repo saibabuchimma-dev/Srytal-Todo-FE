@@ -57,6 +57,7 @@ export const useUpdateTaskStatus = () => {
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       queryClient.invalidateQueries({ queryKey: ['my-tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['activities'] });
     },
   });
 };
