@@ -13,6 +13,7 @@ import MainLayout from '@/layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
 import MyTasksPage from '@/features/task/screens/MyTasksPage';
 import MyProjectsPage from '@/features/project/screens/MyProjectsPage';
+import TaskBoardPage from '@/features/task/screens/TaskBoardPage';
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
           {
             path: 'tasks',
             element: <MyTasksPage />,
+          },
+          {
+            path: 'board',
+            element: <TaskBoardPage />,
           },
           {
             path: 'tasks/:taskId',
@@ -96,6 +101,10 @@ export const router = createBrowserRouter([
           {
             path: 'tasks',
             element: <TasksPage />,
+          },
+          {
+            path: 'board',
+            element: <TaskBoardPage />,
           },
           {
             path: 'tasks/:taskId',
