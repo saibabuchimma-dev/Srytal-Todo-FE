@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Select, TextInput } from '@mantine/core';
+import { IconUserEdit } from '@tabler/icons-react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -70,7 +71,9 @@ export default function EditEmployeeModal({ opened, employee, onClose }: EditEmp
     <FormModal
       opened={opened}
       onClose={close}
+      icon={<IconUserEdit size={20} />}
       title="Edit Employee"
+      subtitle="Update this team member’s details."
       loading={updateEmployeeMutation.isPending}
       submitLabel="Update"
       onSubmit={handleSubmit(onSubmit)}

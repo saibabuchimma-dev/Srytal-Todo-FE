@@ -33,7 +33,7 @@ export default function AttachmentItem({ attachment, taskId }: AttachmentItemPro
     <Card withBorder radius="md" p="sm">
       <Group justify="space-between" wrap="nowrap">
         <Group gap="sm" wrap="nowrap" style={{ minWidth: 0 }}>
-          <IconFile size={22} className="text-blue-500" />
+          <IconFile size={22} color="var(--app-accent)" />
 
           <Stack gap={0} style={{ minWidth: 0 }}>
             <Anchor

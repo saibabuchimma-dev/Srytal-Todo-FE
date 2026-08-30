@@ -1,37 +1,48 @@
-import { Alert, Button, Card, Group, Paper, SimpleGrid, Stack, Text, Title } from '@mantine/core';
-import { IconAlertCircle, IconChecklist } from '@tabler/icons-react';
-import { useMemo, useState } from 'react';
+import { Button, Card, Group, Paper, Stack, Text, Title } from '@mantine/core';
+import { IconChecklist } from '@tabler/icons-react';
+import { useState } from 'react';
+import { useDebouncedValue } from '@mantine/hooks';
 import ConfirmDeleteModal from '@/components/common/ConfirmDeleteModal';
-import Loader from '@/styles/loader';
+import CenteredState from '@/shared/ui/CenteredState/CenteredState';
+import Pagination from '@/shared/ui/Pagination/Pagination';
+import { usePagination } from '@/shared/hooks/usePagination';
 import CreateTaskModal from '../components/CreateTaskModal';
 import EditTaskModal from '../components/EditTaskModal';
 import TaskList from '../components/TaskList';
 import TaskSearch from '../components/TaskSearch';
-import { useDeleteTask, useTasks } from '../hooks/useTasks';
+import { useDeleteTask, usePaginatedTasks } from '../hooks/useTasks';
 import type { Task } from '../types/task';
 
 export default function TasksPage() {
   const [search, setSearch] = useState('');
+  const [debouncedSearch] = useDebouncedValue(search, 350);
+  const { page, setPage, limit, setLimit, reset } = usePagination({ initialLimit: 10 });
+
   const [createOpened, setCreateOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
   const [deleteOpened, setDeleteOpened] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const { data: tasks = [], isLoading, isError } = useTasks();
+
+  const { data, isLoading, isFetching, isError } = usePaginatedTasks({
+    page,
+    limit,
+    search: debouncedSearch.trim() || undefined,
+  });
+
+  const tasks = data?.items ?? [];
+  const total = data?.total ?? 0;
+  const totalPages = data?.totalPages ?? 1;
+
+  if (data && totalPages > 0 && page > totalPages) {
+    setPage(totalPages);
+  }
+
   const deleteTaskMutation = useDeleteTask();
 
-  const filteredTasks = useMemo(() => {
-    const keyword = search.trim().toLowerCase();
-
-    if (!keyword) {
-      return tasks;
-    }
-
-    return tasks.filter((task) =>
-      [task.title, task.description, task.status, task.priority, task.assignedEmployee?.fullName]
-        .filter(Boolean)
-        .some((value) => value!.toLowerCase().includes(keyword)),
-    );
-  }, [tasks, search]);
+  const handleSearch = (value: string) => {
+    setSearch(value);
+    reset();
+  };
 
   const handleEdit = (task: Task) => {
     setSelectedTask(task);
@@ -55,15 +66,11 @@ export default function TasksPage() {
   };
 
   if (isLoading) {
-    return <Loader label="Loading tasks..." size={44} />;
+    return <CenteredState variant="loading" label="Loading tasks..." />;
   }
 
   if (isError) {
-    return (
-      <Alert radius="md" color="red" icon={<IconAlertCircle size={18} />}>
-        Tasks could not be loaded.
-      </Alert>
-    );
+    return <CenteredState variant="error" message="Tasks could not be loaded." />;
   }
 
   return (
@@ -76,32 +83,36 @@ export default function TasksPage() {
           </div>
           <Group>
             <Button onClick={() => setCreateOpened(true)}>Create Task</Button>
-            <div className="rounded-full bg-blue-50 p-3 text-blue-600">
+            <div
+              className="rounded-full p-3"
+              style={{ background: 'var(--app-accent-soft)', color: 'var(--app-accent-fg)' }}
+            >
               <IconChecklist size={24} />
             </div>
           </Group>
         </Group>
       </Paper>
 
-      <SimpleGrid cols={{ base: 1, lg: 2 }}>
-        <Card withBorder radius="lg">
-          <Title order={4}>Total Tasks</Title>
-          <Text mt="xs" c="dimmed">
-            {tasks.length}
-          </Text>
-        </Card>
-        <Card withBorder radius="lg">
-          <Title order={4}>Search</Title>
-          <Text mt="xs" c="dimmed">
-            Find tasks quickly.
-          </Text>
-        </Card>
-      </SimpleGrid>
-
       <Card withBorder radius="lg">
         <Stack>
-          <TaskSearch value={search} onChange={setSearch} />
-          <TaskList tasks={filteredTasks} onEdit={handleEdit} onDelete={handleDelete} />
+          <TaskSearch value={search} onChange={handleSearch} />
+
+          {tasks.length === 0 ? (
+            <Text c="dimmed" py="md" ta="center">
+              {debouncedSearch ? 'No tasks match your search.' : 'No tasks yet.'}
+            </Text>
+          ) : (
+            <TaskList tasks={tasks} onEdit={handleEdit} onDelete={handleDelete} />
+          )}
+
+          <Pagination
+            page={page}
+            total={total}
+            limit={limit}
+            onPageChange={setPage}
+            onLimitChange={setLimit}
+            loading={isFetching}
+          />
         </Stack>
       </Card>
 

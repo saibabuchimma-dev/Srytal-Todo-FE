@@ -1,67 +1,16 @@
-import { createElement, type ReactNode } from 'react';
-import { notifications } from '@mantine/notifications';
-import { IconCheck, IconInfoCircle, IconX, IconAlertTriangle } from '@tabler/icons-react';
+import { toast as sonner } from 'sonner';
+import type { ReactNode } from 'react';
 
-interface ToastOptions {
-  title?: string;
-  message: ReactNode;
-  autoClose?: number;
-}
-
-const showToast = ({
-  title,
-  message,
-  autoClose,
-  color,
-  icon,
-}: ToastOptions & { color: string; icon: ReactNode }) => {
-  notifications.show({
-    title,
-    message,
-    color,
-    icon,
-    autoClose,
-  });
-};
-
+/**
+ * Thin wrapper over sonner so call sites stay decoupled from the toast library.
+ * `title` is the primary line; the optional `message` becomes the description.
+ */
 export const toast = {
-  success: (title: string, message: ReactNode) => {
-    showToast({
-      title,
-      message,
-      color: 'green',
-      icon: createElement(IconCheck, { size: 18 }),
-      autoClose: 3000,
-    });
-  },
+  success: (title: string, message?: ReactNode) => sonner.success(title, { description: message }),
 
-  error: (title: string, message: ReactNode) => {
-    showToast({
-      title,
-      message,
-      color: 'red',
-      icon: createElement(IconX, { size: 18 }),
-      autoClose: 4000,
-    });
-  },
+  error: (title: string, message?: ReactNode) => sonner.error(title, { description: message }),
 
-  warning: (title: string, message: ReactNode) => {
-    showToast({
-      title,
-      message,
-      color: 'yellow',
-      icon: createElement(IconAlertTriangle, { size: 18 }),
-      autoClose: 4000,
-    });
-  },
+  warning: (title: string, message?: ReactNode) => sonner.warning(title, { description: message }),
 
-  info: (title: string, message: ReactNode) => {
-    showToast({
-      title,
-      message,
-      color: 'blue',
-      icon: createElement(IconInfoCircle, { size: 18 }),
-      autoClose: 3000,
-    });
-  },
+  info: (title: string, message?: ReactNode) => sonner.info(title, { description: message }),
 };

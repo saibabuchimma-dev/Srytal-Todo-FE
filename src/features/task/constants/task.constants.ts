@@ -6,13 +6,13 @@ export const TASK_SORT_OPTIONS: TaskSortOption[] = ['Newest', 'Oldest', 'Due Dat
 export const TASK_PAGE_SIZE = 6;
 
 export const TASK_STATUS_COLORS: Record<TaskStatus, string> = {
-  Pending: 'gray',
+  Pending: 'yellow',
   'In Progress': 'blue',
   Completed: 'green',
 };
 
 export const TASK_PRIORITY_COLORS: Record<TaskPriority, string> = {
-  Low: 'teal',
+  Low: 'green',
   Medium: 'yellow',
   High: 'red',
 };

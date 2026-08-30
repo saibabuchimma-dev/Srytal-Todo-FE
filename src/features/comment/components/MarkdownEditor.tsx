@@ -1,5 +1,4 @@
 import { ActionIcon, Box, Group, Tabs, Text, Textarea, Tooltip } from '@mantine/core';
-import { notifications } from '@mantine/notifications';
 import {
   IconBold,
   IconCode,
@@ -14,6 +13,7 @@ import {
 import { useRef, useState } from 'react';
 
 import { uploadTaskAttachment } from '@/features/attachment/services/attachment.service';
+import { toast } from '@/shared/utils/toast';
 import MarkdownContent from './MarkdownContent';
 
 type Command = 'heading' | 'bold' | 'italic' | 'quote' | 'code' | 'link' | 'ul' | 'ol';
@@ -123,11 +123,7 @@ export default function MarkdownEditor({
         onChange(text);
       }
     } catch {
-      notifications.show({
-        color: 'red',
-        title: 'Upload failed',
-        message: 'One or more files could not be uploaded.',
-      });
+      toast.error('One or more files could not be uploaded.');
     } finally {
       setUploading(false);
     }

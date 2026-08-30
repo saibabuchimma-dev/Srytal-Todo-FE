@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { notifications } from '@mantine/notifications';
 import type { AxiosError } from 'axios';
 
+import { toast } from '@/shared/utils/toast';
 import {
   addTaskComment,
   deleteTaskComment,
@@ -12,11 +12,7 @@ import {
 const commentsKey = (taskId: string) => ['comments', taskId];
 
 const showError = (error: AxiosError<{ message: string }>, fallback: string) => {
-  notifications.show({
-    color: 'red',
-    title: 'Failed',
-    message: error.response?.data?.message ?? fallback,
-  });
+  toast.error(error.response?.data?.message ?? fallback);
 };
 
 export const useTaskComments = (taskId: string) =>
@@ -33,6 +29,7 @@ export const useAddComment = (taskId: string) => {
     mutationFn: (content: string) => addTaskComment(taskId, content),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: commentsKey(taskId) });
+      queryClient.invalidateQueries({ queryKey: ['activities', taskId] });
     },
     onError: (error: AxiosError<{ message: string }>) =>
       showError(error, 'Unable to add comment.'),

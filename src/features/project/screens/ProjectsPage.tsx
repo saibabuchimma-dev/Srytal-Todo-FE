@@ -1,166 +1,299 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button, Card, Group, Paper, SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import {
-  IconAlertCircle,
+  ActionIcon,
+  Badge,
+  Button,
+  Card,
+  Divider,
+  Group,
+  Menu,
+  Paper,
+  SimpleGrid,
+  Stack,
+  Text,
+  TextInput,
+  ThemeIcon,
+  Title,
+} from '@mantine/core';
+import { useDebouncedValue } from '@mantine/hooks';
+import {
   IconArrowRight,
+  IconCalendar,
+  IconDotsVertical,
   IconEdit,
+  IconFolder,
   IconFolders,
+  IconPlus,
+  IconSearch,
   IconTrash,
+  IconUsers,
 } from '@tabler/icons-react';
-import { modals } from '@mantine/modals';
 import { useAuthStore } from '@/features/auth/store/auth.store';
+import ConfirmDeleteModal from '@/components/common/ConfirmDeleteModal';
+import CenteredState from '@/shared/ui/CenteredState/CenteredState';
+import Pagination from '@/shared/ui/Pagination/Pagination';
+import { usePagination } from '@/shared/hooks/usePagination';
+import { formatDate } from '@/shared/utils/date';
+import { ROUTES } from '@/shared/config/routes';
 import ProjectModal from '../components/ProjectModal';
-import { useDeleteProject, useProjects } from '../hooks/useProjects';
+import { useDeleteProject, usePaginatedProjects } from '../hooks/useProjects';
 import type { Project } from '../types/project';
+
+const statusColors: Record<string, string> = {
+  Planning: 'gray',
+  'In Progress': 'blue',
+  Completed: 'green',
+};
 
 export default function ProjectsPage() {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const isAdmin = user?.role === 'Admin';
-  const [opened, setOpened] = useState(false);
+
+  const [search, setSearch] = useState('');
+  const [debouncedSearch] = useDebouncedValue(search, 350);
+  const { page, setPage, limit, setLimit, reset } = usePagination({ initialLimit: 9 });
+
+  const [modalOpened, setModalOpened] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
-  const { data = [], isLoading, isError } = useProjects();
+  const [deleteOpened, setDeleteOpened] = useState(false);
+  const [deletingProject, setDeletingProject] = useState<Project | null>(null);
+
+  const { data, isLoading, isFetching, isError } = usePaginatedProjects({
+    page,
+    limit,
+    search: debouncedSearch.trim() || undefined,
+  });
+
+  const projects = data?.items ?? [];
+  const total = data?.total ?? 0;
+  const totalPages = data?.totalPages ?? 1;
+
+  if (data && totalPages > 0 && page > totalPages) {
+    setPage(totalPages);
+  }
+
   const deleteProjectMutation = useDeleteProject();
+
+  const handleSearch = (value: string) => {
+    setSearch(value);
+    reset();
+  };
+
   const closeModal = () => {
-    setOpened(false);
+    setModalOpened(false);
     setEditingProject(null);
   };
+
   const projectDetailsPath = (projectId: string) =>
-    isAdmin
-      ? `/admin/dashboard/projects/${projectId}/details`
-      : `/dashboard/projects/${projectId}/details`;
-
-  const handleDelete = (project: Project) => {
-    modals.openConfirmModal({
-      title: 'Delete Project',
-      centered: true,
-      children: (
-        <Text size="sm">
-          Are you sure you want to delete <strong>{project.name}</strong>?
-        </Text>
-      ),
-
-      labels: {
-        confirm: 'Delete',
-        cancel: 'Cancel',
-      },
-
-      confirmProps: {
-        color: 'red',
-      },
-
-      onConfirm: () => deleteProjectMutation.mutate(project.id),
-    });
-  };
+    isAdmin ? ROUTES.ADMIN_PROJECT_DETAILS(projectId) : ROUTES.PROJECT_DETAILS(projectId);
 
   if (isLoading) {
-    return <Text c="dimmed">Loading projects...</Text>;
+    return <CenteredState variant="loading" label="Loading projects..." />;
   }
 
   if (isError) {
-    return (
-      <Alert color="red" radius="md" icon={<IconAlertCircle size={18} />}>
-        Projects could not be loaded.
-      </Alert>
-    );
+    return <CenteredState variant="error" message="Projects could not be loaded." />;
   }
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
       <Paper withBorder radius="lg" p="lg">
-        <Group justify="space-between">
-          <div>
-            <Title order={2}>{isAdmin ? 'Project Management' : 'My Projects'}</Title>
-            <Text c="dimmed" mt="xs">
-              {isAdmin ? 'Create, manage and assign projects.' : 'Projects assigned to you.'}
-            </Text>
-          </div>
-          <div className="rounded-full bg-violet-50 p-3 text-violet-600">
-            <IconFolders size={24} />
-          </div>
+        <Group justify="space-between" wrap="wrap" gap="md">
+          <Group gap="sm" wrap="nowrap">
+            <div
+              className="rounded-xl p-3"
+              style={{ background: 'var(--app-accent-soft)', color: 'var(--app-accent-fg)' }}
+            >
+              <IconFolders size={26} />
+            </div>
+            <div>
+              <Title order={2}>{isAdmin ? 'Project Management' : 'My Projects'}</Title>
+              <Text c="dimmed">
+                {isAdmin ? 'Create, manage and assign projects.' : 'Projects assigned to you.'}
+              </Text>
+            </div>
+          </Group>
+
+          {isAdmin && (
+            <Button
+              leftSection={<IconPlus size={16} />}
+              onClick={() => {
+                setEditingProject(null);
+                setModalOpened(true);
+              }}
+            >
+              Create Project
+            </Button>
+          )}
         </Group>
       </Paper>
 
-      {isAdmin && (
-        <Group justify="flex-end">
-          <Button
-            onClick={() => {
-              setEditingProject(null);
-              setOpened(true);
-            }}
-          >
-            Create Project
-          </Button>
-        </Group>
-      )}
+      <Card withBorder radius="lg" p="lg">
+        <Stack>
+          <Group justify="space-between" wrap="wrap" gap="sm">
+            <TextInput
+              placeholder="Search projects..."
+              leftSection={<IconSearch size={16} />}
+              radius="md"
+              value={search}
+              onChange={(event) => handleSearch(event.currentTarget.value)}
+              style={{ flex: '1 1 260px', maxWidth: 360 }}
+            />
+            <Text size="sm" c="dimmed">
+              {total} project{total === 1 ? '' : 's'}
+            </Text>
+          </Group>
 
-      {data.length === 0 ? (
-        <Alert color="gray">No projects found.</Alert>
-      ) : (
-        <SimpleGrid cols={{ base: 1, md: 2 }}>
-          {data.map((project) => (
-            <Card key={project.id} withBorder radius="md" shadow="sm">
-              <Stack>
-                <Group justify="space-between">
-                  <Title order={5}>{project.name}</Title>
-                  <Text size="sm" c="dimmed">
-                    {project.status}
-                  </Text>
-                </Group>
-                <Text size="sm" c="dimmed">
-                  {project.description}
-                </Text>
-                <Text size="xs" c="dimmed">
-                  {new Date(project.startDate).toLocaleDateString()} -{' '}
-                  {new Date(project.endDate).toLocaleDateString()}
-                </Text>
+          <Divider />
 
-                <Group justify="space-between" mt="md">
-                  <Button
-                    variant="light"
-                    rightSection={<IconArrowRight size={16} />}
-                    onClick={() => navigate(projectDetailsPath(project.id))}
-                  >
-                    Open
-                  </Button>
-                  {isAdmin && (
-                    <Group>
-                      <Button
-                        variant="light"
-                        color="blue"
-                        leftSection={<IconEdit size={16} />}
-                        onClick={() => {
-                          setEditingProject(project);
-                          setOpened(true);
-                        }}
-                      >
-                        Edit
-                      </Button>
-
-                      <Button
-                        color="red"
-                        variant="light"
-                        leftSection={<IconTrash size={16} />}
-                        loading={deleteProjectMutation.isPending}
-                        onClick={() => handleDelete(project)}
-                      >
-                        Delete
-                      </Button>
+          {projects.length === 0 ? (
+            <CenteredState
+              variant="empty"
+              minHeight={220}
+              message={debouncedSearch ? 'No projects match your search.' : 'No projects yet.'}
+            />
+          ) : (
+            <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
+              {projects.map((project) => (
+                <Card
+                  key={project.id}
+                  withBorder
+                  radius="lg"
+                  p="lg"
+                  className="cursor-pointer"
+                  onClick={() => navigate(projectDetailsPath(project.id))}
+                >
+                  <Group justify="space-between" align="flex-start" wrap="nowrap">
+                    <Group gap="sm" wrap="nowrap" style={{ minWidth: 0 }}>
+                      <ThemeIcon variant="light" radius="md" size={42}>
+                        <IconFolder size={22} />
+                      </ThemeIcon>
+                      <div style={{ minWidth: 0 }}>
+                        <Text fw={700} lineClamp={1}>
+                          {project.name}
+                        </Text>
+                        <Badge
+                          size="sm"
+                          mt={4}
+                          variant="light"
+                          color={statusColors[project.status] ?? 'gray'}
+                        >
+                          {project.status}
+                        </Badge>
+                      </div>
                     </Group>
-                  )}
-                </Group>
-              </Stack>
-            </Card>
-          ))}
-        </SimpleGrid>
-      )}
+
+                    {isAdmin && (
+                      <Menu position="bottom-end" width={160} shadow="md" radius="md">
+                        <Menu.Target>
+                          <ActionIcon
+                            variant="subtle"
+                            color="gray"
+                            aria-label="Project actions"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            <IconDotsVertical size={18} />
+                          </ActionIcon>
+                        </Menu.Target>
+                        <Menu.Dropdown>
+                          <Menu.Item
+                            leftSection={<IconEdit size={16} />}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              setEditingProject(project);
+                              setModalOpened(true);
+                            }}
+                          >
+                            Edit
+                          </Menu.Item>
+                          <Menu.Item
+                            color="red"
+                            leftSection={<IconTrash size={16} />}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              setDeletingProject(project);
+                              setDeleteOpened(true);
+                            }}
+                          >
+                            Delete
+                          </Menu.Item>
+                        </Menu.Dropdown>
+                      </Menu>
+                    )}
+                  </Group>
+
+                  <Text size="sm" c="dimmed" lineClamp={2} mt="md" style={{ minHeight: 40 }}>
+                    {project.description}
+                  </Text>
+
+                  <Group gap="lg" mt="md" wrap="wrap">
+                    <Group gap={6} wrap="nowrap">
+                      <IconCalendar size={15} style={{ color: 'var(--app-text-muted)' }} />
+                      <Text size="xs" c="dimmed">
+                        {formatDate(project.startDate)} – {formatDate(project.endDate)}
+                      </Text>
+                    </Group>
+                    <Group gap={6} wrap="nowrap">
+                      <IconUsers size={15} style={{ color: 'var(--app-text-muted)' }} />
+                      <Text size="xs" c="dimmed">
+                        {project.members?.length ?? 0} member
+                        {(project.members?.length ?? 0) === 1 ? '' : 's'}
+                      </Text>
+                    </Group>
+                  </Group>
+
+                  <Divider my="md" />
+
+                  <Group justify="space-between" align="center">
+                    <Text size="sm" fw={600} style={{ color: 'var(--app-accent)' }}>
+                      View details
+                    </Text>
+                    <IconArrowRight size={16} style={{ color: 'var(--app-accent)' }} />
+                  </Group>
+                </Card>
+              ))}
+            </SimpleGrid>
+          )}
+
+          <Pagination
+            page={page}
+            total={total}
+            limit={limit}
+            onPageChange={setPage}
+            onLimitChange={setLimit}
+            loading={isFetching}
+          />
+        </Stack>
+      </Card>
 
       <ProjectModal
-        opened={opened}
+        opened={modalOpened}
         onClose={closeModal}
         mode={editingProject ? 'edit' : 'create'}
         project={editingProject ?? undefined}
+      />
+
+      <ConfirmDeleteModal
+        opened={deleteOpened}
+        loading={deleteProjectMutation.isPending}
+        title="Delete Project"
+        message={`Are you sure you want to delete "${deletingProject?.name ?? ''}"?`}
+        onClose={() => {
+          setDeleteOpened(false);
+          setDeletingProject(null);
+        }}
+        onConfirm={() => {
+          if (!deletingProject) return;
+
+          deleteProjectMutation.mutate(deletingProject.id, {
+            onSuccess: () => {
+              setDeleteOpened(false);
+              setDeletingProject(null);
+            },
+          });
+        }}
       />
     </div>
   );

@@ -1,12 +1,13 @@
-import { Button, PasswordInput, Stack, Text, TextInput, Title } from '@mantine/core';
+import { Badge, Button, PasswordInput, Stack, Text, TextInput, Title } from '@mantine/core';
+import type { CSSProperties } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiOutlineEnvelope, HiOutlineLockClosed } from 'react-icons/hi2';
-import logo from '@/assets/logo/logo.png';
 import { useNavigate } from 'react-router-dom';
+
+import logo from '@/assets/logo/logo1.png';
 import { login } from '../services/auth.service';
 import { useAuthStore } from '../store/auth.store';
 import { toast } from '@/shared/utils/toast';
-import Loader from '@/styles/loader';
 
 interface LoginFormData {
   email: string;
@@ -17,12 +18,25 @@ interface LoginFormProps {
   portal: 'admin' | 'employee';
 }
 
+const cardStyle: CSSProperties = {
+  background: 'var(--app-surface)',
+  border: '1px solid var(--app-border)',
+  borderRadius: 20,
+  padding: '36px 32px',
+  boxShadow: '0 24px 60px -28px var(--app-shadow)',
+};
+
 export default function LoginForm({ portal }: LoginFormProps) {
   const {
-    formState: { isSubmitting },
-    handleSubmit,
     register,
-  } = useForm<LoginFormData>();
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
   const navigate = useNavigate();
   const loginStore = useAuthStore((state) => state.login);
   const expectedRole = portal === 'admin' ? 'Admin' : 'Employee';
@@ -56,68 +70,99 @@ export default function LoginForm({ portal }: LoginFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack gap="lg">
-        {/* Logo */}
-        <div className="mb-6 ">
-          <img src={logo} alt="Logo" className="h-28 w-full object-contain " />
+    <div style={cardStyle}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack gap="lg">
+          {/* Brand + heading */}
+          <Stack gap={10} align="center">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <img
+                src={logo}
+                alt="SRYTAL"
+                style={{ height: 80, objectFit: 'contain', borderRadius: 12 }}
+              />
+            </div>
 
-          <Title order={2} mt="lg" ta="center">
-            Welcome Back
-          </Title>
+            <Badge
+              variant="light"
+              color={portal === 'admin' ? 'indigo' : 'teal'}
+              radius="sm"
+              size="sm"
+            >
+              {portal === 'admin' ? 'Admin Portal' : 'Employee Portal'}
+            </Badge>
 
-          <Text ta="center" c="dimmed" size="sm" mt={5}>
-            {portal === 'admin'
-              ? 'Sign in to the Admin Management Portal'
-              : 'Sign in to the Employee Management Portal'}
-          </Text>
-        </div>
+            <Title order={2} ta="center" fw={800} lh={1.2}>
+              Welcome back
+            </Title>
 
-        {/* Username */}
-        <TextInput
-          label="Email"
-          placeholder="Enter your Email"
-          radius="md"
-          size="md"
-          leftSection={<HiOutlineEnvelope size={18} />}
-          disabled={isSubmitting}
-          {...register('email')}
-        />
+            <Text ta="center" c="dimmed" size="sm">
+              Sign in to continue to your {portal === 'admin' ? 'admin' : 'employee'} dashboard
+            </Text>
+          </Stack>
 
-        {/* Password */}
-        <PasswordInput
-          label="Password"
-          placeholder="Enter your password"
-          radius="md"
-          size="md"
-          leftSection={<HiOutlineLockClosed size={18} />}
-          disabled={isSubmitting}
-          {...register('password')}
-        />
+          <Stack gap="md">
+            <TextInput
+              label="Email"
+              placeholder="you@example.com"
+              radius="md"
+              size="md"
+              autoComplete="email"
+              leftSection={<HiOutlineEnvelope size={18} />}
+              disabled={isSubmitting}
+              error={errors.email?.message}
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Enter a valid email',
+                },
+              })}
+            />
 
-        {/* Login Button */}
-        {isSubmitting ? (
-          <div className="flex h-12 items-center justify-center rounded-md bg-slate-50">
-            <Loader label="Signing in" size={28} />
-          </div>
-        ) : (
+            <PasswordInput
+              label="Password"
+              placeholder="Enter your password"
+              radius="md"
+              size="md"
+              autoComplete="current-password"
+              leftSection={<HiOutlineLockClosed size={18} />}
+              disabled={isSubmitting}
+              error={errors.password?.message}
+              {...register('password', {
+                required: 'Password is required',
+                minLength: {
+                  value: 6,
+                  message: 'Password must be at least 6 characters',
+                },
+              })}
+            />
+          </Stack>
+
           <Button
             type="submit"
             size="md"
             radius="md"
             fullWidth
-            variant="gradient"
-            gradient={{ from: 'indigo', to: 'cyan', deg: 90 }}
-            className="h-12"
+            h={48}
+            loading={isSubmitting}
+            styles={{
+              root: {
+                border: 'none',
+                background: 'var(--app-brand-gradient)',
+                color: 'var(--app-brand-on)',
+                fontWeight: 600,
+              },
+            }}
           >
             Sign In
           </Button>
-        )}
 
-        <Text ta="center" size="xs" c="dimmed">
-          © 2026 SRYTAL Employee Task Management System
-        </Text>
-      </Stack>
-    </form>
+          <Text ta="center" size="xs" c="dimmed">
+            Trouble signing in? Contact your administrator.
+          </Text>
+        </Stack>
+      </form>
+    </div>
   );
 }

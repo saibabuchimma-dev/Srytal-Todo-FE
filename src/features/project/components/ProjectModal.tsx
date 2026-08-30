@@ -1,24 +1,14 @@
-import { Button, Group, Modal, Select, Stack, TextInput, Textarea } from '@mantine/core';
-import { DateInput } from '@mantine/dates';
+import { Select, TextInput, Textarea } from '@mantine/core';
+import { DatePickerInput } from '@mantine/dates';
+import { IconFolderPlus } from '@tabler/icons-react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useCreateProject, useUpdateProject } from '../hooks/useProjects';
 import type { Project } from '../types/project';
 import { useEffect } from 'react';
-
-const toDateValue = (value: string) => (value ? new Date(value) : null);
-const toInputValue = (value: Date | string | null) => {
-  if (!value) {
-    return '';
-  }
-
-  if (typeof value === 'string') {
-    return value;
-  }
-
-  return value.toISOString().slice(0, 10);
-};
+import FormModal from '@/components/common/FormModal';
+import { toDateInputValue } from '@/shared/utils/date';
 
 const projectSchema = z.object({
   name: z.string().trim().min(3, 'Name is required'),
@@ -107,69 +97,62 @@ export default function ProjectModal({
   }, [opened, mode, project, reset]);
 
   return (
-    <Modal
+    <FormModal
       opened={opened}
       onClose={close}
+      icon={<IconFolderPlus size={20} />}
       title={mode === 'create' ? 'Create Project' : 'Edit Project'}
-      centered
+      subtitle={
+        mode === 'create'
+          ? 'Set up a new project and timeline.'
+          : 'Update this project’s details.'
+      }
+      submitLabel={mode === 'create' ? 'Create Project' : 'Update Project'}
+      loading={
+        mode === 'create' ? createProjectMutation.isPending : updateProjectMutation.isPending
+      }
+      onSubmit={handleSubmit(onSubmit)}
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack gap="md">
-          <TextInput label="Project Name" {...register('name')} />
-          <Textarea label="Description" minRows={3} {...register('description')} />
-          <Controller
-            control={control}
-            name="status"
-            render={({ field }) => (
-              <Select
-                label="Status"
-                data={['Planning', 'In Progress', 'Completed']}
-                value={field.value}
-                onChange={(value) => field.onChange(value)}
-              />
-            )}
+      <TextInput label="Project Name" {...register('name')} />
+      <Textarea label="Description" minRows={3} autosize {...register('description')} />
+      <Controller
+        control={control}
+        name="status"
+        render={({ field }) => (
+          <Select
+            label="Status"
+            data={['Planning', 'In Progress', 'Completed']}
+            value={field.value}
+            onChange={(value) => field.onChange(value)}
           />
-          <Controller
-            control={control}
-            name="startDate"
-            render={({ field }) => (
-              <DateInput
-                label="Start Date"
-                valueFormat="DD MMM YYYY"
-                value={toDateValue(field.value)}
-                onChange={(value) => field.onChange(toInputValue(value))}
-              />
-            )}
+        )}
+      />
+      <Controller
+        control={control}
+        name="startDate"
+        render={({ field }) => (
+          <DatePickerInput
+            label="Start Date"
+            placeholder="Pick a start date"
+            valueFormat="DD MMM YYYY"
+            value={toDateInputValue(field.value) || null}
+            onChange={(value) => field.onChange(value ?? '')}
           />
-          <Controller
-            control={control}
-            name="endDate"
-            render={({ field }) => (
-              <DateInput
-                label="End Date"
-                valueFormat="DD MMM YYYY"
-                value={toDateValue(field.value)}
-                onChange={(value) => field.onChange(toInputValue(value))}
-              />
-            )}
+        )}
+      />
+      <Controller
+        control={control}
+        name="endDate"
+        render={({ field }) => (
+          <DatePickerInput
+            label="End Date"
+            placeholder="Pick an end date"
+            valueFormat="DD MMM YYYY"
+            value={toDateInputValue(field.value) || null}
+            onChange={(value) => field.onChange(value ?? '')}
           />
-          <Group justify="flex-end">
-            <Button variant="default" onClick={close}>
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              loading={
-                mode === 'create'
-                  ? createProjectMutation.isPending
-                  : updateProjectMutation.isPending
-              }
-            >
-              {mode === 'create' ? 'Create Project' : 'Update Project'}
-            </Button>
-          </Group>
-        </Stack>
-      </form>
-    </Modal>
+        )}
+      />
+    </FormModal>
   );
 }

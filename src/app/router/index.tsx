@@ -1,19 +1,33 @@
+import { Suspense, type ReactElement } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import LoginScreen from '@/features/auth/screens/LoginScreen';
-import ChangePasswordScreen from '@/features/auth/screens/ChangePasswordScreen';
-import DashboardScreen from '@/features/dashboard/screens/DashboardScreen';
-import { EmployeesPage } from '@/features/employee/screens/EmployeesPage';
-import EmployeeDetailsPage from '@/features/employee/screens/EmployeeDetailsPage';
-import TasksPage from '@/features/task/screens/TasksPage';
-import TaskDetailsPage from '@/features/task/screens/TaskDetailsPage';
-import ProjectsPage from '@/features/project/screens/ProjectsPage';
-import ProjectDetailsPage from '@/features/project/screens/ProjectDetailsPage';
-import ProfilePage from '@/features/profile/screens/ProfilePage';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
-import MyTasksPage from '@/features/task/screens/MyTasksPage';
-import MyProjectsPage from '@/features/project/screens/MyProjectsPage';
-import TaskBoardPage from '@/features/task/screens/TaskBoardPage';
+import CenteredState from '@/shared/ui/CenteredState/CenteredState';
+import {
+  ChangePasswordScreen,
+  DashboardScreen,
+  EmployeeDetailsPage,
+  EmployeesPage,
+  LoginScreen,
+  MyProjectsPage,
+  MyTasksPage,
+  ProfilePage,
+  ProjectDetailsPage,
+  ProjectsPage,
+  ReportsPage,
+  SettingsPage,
+  TaskBoardPage,
+  TaskDetailsPage,
+  TasksPage,
+} from './lazyScreens';
+
+// Screens rendered outside MainLayout (login / change-password) need their own
+// Suspense boundary; screens inside MainLayout share the one around its Outlet.
+const withSuspense = (element: ReactElement): ReactElement => (
+  <Suspense fallback={<CenteredState variant="loading" minHeight="100vh" />}>
+    {element}
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -23,12 +37,12 @@ export const router = createBrowserRouter([
 
   {
     path: '/login',
-    element: <LoginScreen portal="employee" />,
+    element: withSuspense(<LoginScreen portal="employee" />),
   },
 
   {
     path: '/admin/login',
-    element: <LoginScreen portal="admin" />,
+    element: withSuspense(<LoginScreen portal="admin" />),
   },
 
   // ================= EMPLOYEE =================
@@ -38,7 +52,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/change-password',
-        element: <ChangePasswordScreen />,
+        element: withSuspense(<ChangePasswordScreen />),
       },
       {
         path: '/dashboard',
@@ -71,6 +85,10 @@ export const router = createBrowserRouter([
           {
             path: 'profile',
             element: <ProfilePage />,
+          },
+          {
+            path: 'settings',
+            element: <SettingsPage />,
           },
         ],
       },
@@ -119,8 +137,16 @@ export const router = createBrowserRouter([
             element: <ProjectDetailsPage />,
           },
           {
+            path: 'reports',
+            element: <ReportsPage />,
+          },
+          {
             path: 'profile',
             element: <ProfilePage />,
+          },
+          {
+            path: 'settings',
+            element: <SettingsPage />,
           },
         ],
       },

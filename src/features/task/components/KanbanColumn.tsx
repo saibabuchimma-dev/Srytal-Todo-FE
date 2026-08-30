@@ -1,4 +1,5 @@
 import { Badge, Group, Paper, ScrollArea, Stack, Text } from '@mantine/core';
+
 import { TASK_STATUS_COLORS } from '../constants/task.constants';
 import type { Task, TaskStatus } from '../types/task';
 import KanbanCard from './KanbanCard';
@@ -24,9 +25,10 @@ export default function KanbanColumn({
   onDragOver,
   onDrop,
 }: KanbanColumnProps) {
+  const color = TASK_STATUS_COLORS[status];
+
   return (
     <Paper
-      withBorder
       radius="lg"
       p="sm"
       onDragOver={(event) => {
@@ -39,33 +41,52 @@ export default function KanbanColumn({
         onDrop(status);
       }}
       style={{
-        backgroundColor: isOver ? 'var(--mantine-color-blue-0)' : 'var(--mantine-color-gray-0)',
-        borderColor: isOver ? 'var(--mantine-color-blue-4)' : undefined,
-        borderStyle: isOver ? 'dashed' : 'solid',
+        backgroundColor: isOver ? 'var(--app-accent-soft)' : 'var(--app-surface-2)',
+        border: `1px ${isOver ? 'dashed' : 'solid'} ${
+          isOver ? 'var(--app-primary)' : 'var(--app-border)'
+        }`,
         transition: 'background-color 120ms ease, border-color 120ms ease',
         minWidth: 260,
         display: 'flex',
         flexDirection: 'column',
       }}
     >
-      <Group justify="space-between" mb="xs" px={4}>
-        <Group gap={8}>
-          <Badge color={TASK_STATUS_COLORS[status]} variant="light" radius="sm">
+      <Group justify="space-between" mb="sm" px={4}>
+        <Group gap={8} wrap="nowrap">
+          <span
+            style={{
+              width: 9,
+              height: 9,
+              borderRadius: '50%',
+              background: `var(--mantine-color-${color}-6)`,
+              display: 'inline-block',
+            }}
+          />
+          <Text fw={700} size="sm">
             {status}
-          </Badge>
+          </Text>
         </Group>
 
-        <Text size="sm" c="dimmed" fw={600}>
+        <Badge color="gray" variant="light" radius="sm" size="sm">
           {tasks.length}
-        </Text>
+        </Badge>
       </Group>
 
       <ScrollArea.Autosize mah={560} type="hover" offsetScrollbars>
         <Stack gap="xs" pr={4} mih={80}>
           {tasks.length === 0 ? (
-            <Text size="xs" c="dimmed" ta="center" py="lg">
-              Drop tasks here
-            </Text>
+            <div
+              style={{
+                border: '1px dashed var(--app-border)',
+                borderRadius: 'var(--mantine-radius-md)',
+                padding: '28px 12px',
+                textAlign: 'center',
+              }}
+            >
+              <Text size="xs" c="dimmed">
+                Drop tasks here
+              </Text>
+            </div>
           ) : (
             tasks.map((task) => (
               <KanbanCard

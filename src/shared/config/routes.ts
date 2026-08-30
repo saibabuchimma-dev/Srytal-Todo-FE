@@ -12,6 +12,7 @@ export const ROUTES = {
   BOARD: '/dashboard/board',
   PROJECTS: '/dashboard/projects',
   PROFILE: '/dashboard/profile',
+  SETTINGS: '/dashboard/settings',
 
   // Admin
   EMPLOYEES: '/admin/dashboard/employees',
@@ -20,7 +21,9 @@ export const ROUTES = {
   ADMIN_TASKS: '/admin/dashboard/tasks',
   ADMIN_BOARD: '/admin/dashboard/board',
   ADMIN_PROJECTS: '/admin/dashboard/projects',
+  ADMIN_REPORTS: '/admin/dashboard/reports',
   ADMIN_PROFILE: '/admin/dashboard/profile',
+  ADMIN_SETTINGS: '/admin/dashboard/settings',
 
   TASK_DETAILS: (id: string) => `/dashboard/tasks/${id}`,
   ADMIN_TASK_DETAILS: (id: string) => `/admin/dashboard/tasks/${id}`,

@@ -1,69 +1,138 @@
-import { Button, Card, Group, ScrollArea, Stack, Text, Title } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
+import { Avatar, Box, Group, NavLink, ScrollArea, Stack, Text, UnstyledButton } from '@mantine/core';
+import {
+  IconChartBar,
+  IconChecklist,
+  IconChevronRight,
+  IconFolders,
+  IconLayoutDashboard,
+  IconLayoutKanban,
+  IconSettings,
+  IconUsers,
+} from '@tabler/icons-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '@/features/auth/store/auth.store';
+import { useProfile } from '@/features/profile/hooks/useProfile';
 import { ROUTES } from '@/shared/config/routes';
 
-export default function Sidebar() {
+interface SidebarProps {
+  /** Called after a nav item is chosen — used to close the mobile slide-over. */
+  onNavigate?: () => void;
+}
+
+export default function Sidebar({ onNavigate }: SidebarProps = {}) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const go = (path: string) => {
+    navigate(path);
+    onNavigate?.();
+  };
   const user = useAuthStore((state) => state.user);
+  const { data: profile } = useProfile();
   const isAdmin = user?.role === 'Admin';
+  const settingsRoute = isAdmin ? ROUTES.ADMIN_SETTINGS : ROUTES.SETTINGS;
+
+  const dashboardPath = isAdmin ? ROUTES.ADMIN_DASHBOARD : ROUTES.DASHBOARD;
+  const current = location.pathname.replace(/\/+$/, '');
+
+  const isActive = (path: string) => {
+    const target = path.replace(/\/+$/, '');
+    if (target === dashboardPath.replace(/\/+$/, '')) {
+      return current === target;
+    }
+    return current === target || current.startsWith(`${target}/`);
+  };
 
   const items = isAdmin
     ? [
-        { label: 'Dashboard', path: ROUTES.ADMIN_DASHBOARD },
-        { label: 'Projects', path: ROUTES.ADMIN_PROJECTS },
-        { label: 'Employees', path: ROUTES.EMPLOYEES },
-        { label: 'Tasks', path: ROUTES.ADMIN_TASKS },
-        { label: 'Board', path: ROUTES.ADMIN_BOARD },
-        { label: 'Profile', path: ROUTES.ADMIN_PROFILE },
+        { label: 'Dashboard', path: ROUTES.ADMIN_DASHBOARD, icon: IconLayoutDashboard },
+        { label: 'Projects', path: ROUTES.ADMIN_PROJECTS, icon: IconFolders },
+        { label: 'Employees', path: ROUTES.EMPLOYEES, icon: IconUsers },
+        { label: 'Tasks', path: ROUTES.ADMIN_TASKS, icon: IconChecklist },
+        { label: 'Board', path: ROUTES.ADMIN_BOARD, icon: IconLayoutKanban },
+        { label: 'Reports', path: ROUTES.ADMIN_REPORTS, icon: IconChartBar },
+        { label: 'Settings', path: ROUTES.ADMIN_SETTINGS, icon: IconSettings },
       ]
     : [
-        { label: 'Dashboard', path: ROUTES.DASHBOARD },
-        { label: 'My Tasks', path: ROUTES.TASKS },
-        { label: 'My Board', path: ROUTES.BOARD },
-        { label: 'My Projects', path: ROUTES.PROJECTS },
-        { label: 'Profile', path: ROUTES.PROFILE },
-        { label: 'Change Password', path: ROUTES.CHANGE_PASSWORD },
+        { label: 'Dashboard', path: ROUTES.DASHBOARD, icon: IconLayoutDashboard },
+        { label: 'My Tasks', path: ROUTES.TASKS, icon: IconChecklist },
+        { label: 'My Board', path: ROUTES.BOARD, icon: IconLayoutKanban },
+        { label: 'My Projects', path: ROUTES.PROJECTS, icon: IconFolders },
+        { label: 'Settings', path: ROUTES.SETTINGS, icon: IconSettings },
       ];
 
+  const displayName = profile?.name ?? user?.fullName ?? 'User';
+  const initial = displayName.charAt(0).toUpperCase();
+
   return (
-    <ScrollArea className="h-full bg-slate-50">
-      <div className="p-4">
-        <Card withBorder radius="md" p="md" mb="md">
-          <Title order={4}>Workspace</Title>
-          <Text c="dimmed" size="sm" mt="xs">
-            {isAdmin ? 'Administrative overview' : 'Personal task workspace'}
+    <Box
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        backgroundColor: 'var(--app-surface)',
+      }}
+    >
+      <ScrollArea style={{ flex: 1 }}>
+        <Stack gap={4} p="md">
+          <Text
+            size="xs"
+            fw={700}
+            c="dimmed"
+            tt="uppercase"
+            px="xs"
+            mb={4}
+            style={{ letterSpacing: 0.6 }}
+          >
+            Menu
           </Text>
-        </Card>
 
-        <Stack gap="xs">
-          {items.map((item) => (
-            <Button
-              key={item.path}
-              variant="subtle"
-              justify="flex-start"
-              onClick={() => navigate(item.path)}
-            >
-              {item.label}
-            </Button>
-          ))}
+          {items.map((item) => {
+            const active = isActive(item.path);
+            const Icon = item.icon;
+
+            return (
+              <NavLink
+                key={item.path}
+                active={active}
+                variant="light"
+                label={item.label}
+                leftSection={<Icon size={20} stroke={1.6} />}
+                onClick={() => go(item.path)}
+                styles={{
+                  root: { borderRadius: 'var(--mantine-radius-md)', paddingBlock: 10 },
+                  label: { fontWeight: active ? 600 : 500, fontSize: 14 },
+                }}
+              />
+            );
+          })}
         </Stack>
+      </ScrollArea>
 
-        <Card withBorder radius="md" p="md" mt="md">
-          <Group justify="space-between" align="center">
-            <Text fw={600}>Portal</Text>
-            <Text size="sm" c="blue">
-              {isAdmin ? 'Admin' : 'Employee'}
+      <UnstyledButton
+        onClick={() => go(settingsRoute)}
+        style={{
+          width: '100%',
+          padding: '14px 16px',
+          borderTop: '1px solid var(--app-border)',
+        }}
+      >
+        <Group gap="sm" wrap="nowrap">
+          <Avatar src={profile?.avatar || undefined} radius="xl" size={40} color="blue">
+            {initial}
+          </Avatar>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <Text size="sm" fw={600} lineClamp={1}>
+              {displayName}
             </Text>
-          </Group>
-          <Text c="dimmed" size="sm" mt="xs">
-            {isAdmin
-              ? 'Manage employees, tasks, and projects from one place.'
-              : 'Track your assigned work and keep your profile up to date.'}
-          </Text>
-        </Card>
-      </div>
-    </ScrollArea>
+            <Text size="xs" c="dimmed">
+              {isAdmin ? 'Administrator' : 'Employee'}
+            </Text>
+          </div>
+          <IconChevronRight size={16} style={{ color: 'var(--app-text-muted)' }} />
+        </Group>
+      </UnstyledButton>
+    </Box>
   );
 }

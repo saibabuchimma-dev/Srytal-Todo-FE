@@ -1,10 +1,12 @@
 import api from '@/shared/services/api';
+import type { Paginated } from '@/shared/types/pagination';
 import type {
   CreateProjectPayload,
   EmployeeTaskGroup,
   Project,
   ProjectDetailsResponse,
   ProjectQueryParams,
+  ProjectStatus,
   ProjectTask,
 } from '../types/project';
 
@@ -80,6 +82,34 @@ const normalizeProjectList = (payload: unknown): Project[] => {
 export const getProjects = async (params: ProjectQueryParams = {}): Promise<Project[]> => {
   const response = await api.get<unknown>('/projects', { params });
   return normalizeProjectList(response.data);
+};
+
+interface ProjectPageResponse {
+  projects?: unknown[];
+  total?: number;
+  page?: number;
+  limit?: number;
+  totalPages?: number;
+}
+
+export const getProjectsPage = async (params: {
+  page: number;
+  limit: number;
+  search?: string;
+  status?: ProjectStatus;
+}): Promise<Paginated<Project>> => {
+  const response = await api.get<ProjectPageResponse>('/projects/search', { params });
+  const data = response.data ?? {};
+
+  return {
+    items: Array.isArray(data.projects)
+      ? data.projects.map((item) => normalizeProject(item as Record<string, unknown>))
+      : [],
+    total: Number(data.total ?? 0),
+    page: Number(data.page ?? params.page),
+    limit: Number(data.limit ?? params.limit),
+    totalPages: Number(data.totalPages ?? 1),
+  };
 };
 
 export const createProject = async (payload: CreateProjectPayload): Promise<Project> => {

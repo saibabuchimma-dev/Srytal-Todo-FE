@@ -2,13 +2,15 @@ import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { DateInput } from '@mantine/dates';
+import { DatePickerInput } from '@mantine/dates';
 import { Select, Textarea, TextInput } from '@mantine/core';
+import { IconClipboardText } from '@tabler/icons-react';
 import FormModal from '@/components/common/FormModal';
 import { useUpdateTask } from '../hooks/useTasks';
 import type { Task } from '../types/task';
 import { useEmployees } from '@/features/employee/hooks/useEmployees';
 import { useProjects } from '@/features/project';
+import { toDateInputValue } from '@/shared/utils/date';
 
 const schema = z.object({
   title: z.string().min(2),
@@ -17,7 +19,7 @@ const schema = z.object({
   project: z.string().optional(),
   status: z.enum(['Pending', 'In Progress', 'Completed']),
   priority: z.enum(['Low', 'Medium', 'High']),
-  dueDate: z.date(),
+  dueDate: z.string().min(1, 'Due date is required'),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -43,7 +45,7 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
       project: undefined,
       priority: 'Medium',
       status: 'Pending',
-      dueDate: new Date(),
+      dueDate: toDateInputValue(new Date()),
     },
   });
 
@@ -57,7 +59,7 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
       project: task.project,
       priority: task.priority,
       status: task.status,
-      dueDate: task.dueDate ? new Date(task.dueDate) : new Date(),
+      dueDate: toDateInputValue(task.dueDate ?? new Date()),
     });
   }, [task, reset]);
 
@@ -74,7 +76,6 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
         id: task.id,
         payload: {
           ...values,
-          dueDate: values.dueDate.toISOString(),
         },
       },
       {
@@ -87,7 +88,9 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
     <FormModal
       opened={opened}
       onClose={close}
+      icon={<IconClipboardText size={20} />}
       title="Edit Task"
+      subtitle="Update this task’s details."
       submitLabel="Update"
       loading={updateTask.isPending}
       onSubmit={handleSubmit(onSubmit)}
@@ -166,7 +169,13 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
         control={control}
         name="dueDate"
         render={({ field }) => (
-          <DateInput label="Due Date" value={field.value} onChange={field.onChange} />
+          <DatePickerInput
+            label="Due Date"
+            placeholder="Pick a due date"
+            valueFormat="DD MMM YYYY"
+            value={field.value || null}
+            onChange={(value) => field.onChange(value ?? '')}
+          />
         )}
       />
     </FormModal>

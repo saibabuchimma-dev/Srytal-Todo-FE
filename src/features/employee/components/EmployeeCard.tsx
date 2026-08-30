@@ -8,12 +8,11 @@ import type { Employee } from '../types/employee';
 
 interface EmployeeCardProps {
   employee: Employee;
-  taskCount: number;
   onEdit: (employee: Employee) => void;
   onDelete: (employee: Employee) => void;
 }
 
-export default function EmployeeCard({ employee, taskCount, onEdit, onDelete }: EmployeeCardProps) {
+export default function EmployeeCard({ employee, onEdit, onDelete }: EmployeeCardProps) {
   const navigate = useNavigate();
 
   const { selectedEmployee, setSelectedEmployee } = useEmployeeStore();
@@ -31,9 +30,12 @@ export default function EmployeeCard({ employee, taskCount, onEdit, onDelete }: 
         withBorder
         radius="md"
         p="md"
-        className={`cursor-pointer transition-all ${
-          isSelected ? 'border-blue-500 bg-blue-50' : ''
-        }`}
+        className="cursor-pointer transition-all"
+        style={
+          isSelected
+            ? { borderColor: 'var(--app-primary)', background: 'var(--app-accent-soft)' }
+            : undefined
+        }
         onClick={handleView}
       >
         <Group justify="space-between">
@@ -52,7 +54,9 @@ export default function EmployeeCard({ employee, taskCount, onEdit, onDelete }: 
           <Group>
             <Badge variant="light">{employee.role}</Badge>
 
-            <Badge color="indigo">{taskCount}</Badge>
+            <Badge color={employee.isActive ? 'green' : 'gray'} variant="light">
+              {employee.isActive ? 'Active' : 'Inactive'}
+            </Badge>
 
             <Menu shadow="md" width={180}>
               <Menu.Target>
