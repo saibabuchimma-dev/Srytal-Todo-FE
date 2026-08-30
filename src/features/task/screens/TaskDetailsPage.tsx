@@ -77,7 +77,6 @@ export default function TaskDetailsPage() {
       <BackButton label="Back to Tasks" />
 
       <Grid>
-        {/* Main column */}
         <Grid.Col span={{ base: 12, md: 8 }}>
           <Stack gap="lg">
             <Card
@@ -133,7 +132,6 @@ export default function TaskDetailsPage() {
           </Stack>
         </Grid.Col>
 
-        {/* Sidebar */}
         <Grid.Col span={{ base: 12, md: 4 }}>
           <Stack gap="lg">
             <Card withBorder radius="lg" p="lg">

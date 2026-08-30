@@ -1,10 +1,6 @@
 import { toast as sonner } from 'sonner';
 import type { ReactNode } from 'react';
 
-/**
- * Thin wrapper over sonner so call sites stay decoupled from the toast library.
- * `title` is the primary line; the optional `message` becomes the description.
- */
 export const toast = {
   success: (title: string, message?: ReactNode) => sonner.success(title, { description: message }),
 

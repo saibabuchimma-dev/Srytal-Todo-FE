@@ -7,7 +7,6 @@ import type { Task, TaskStatus } from '../types/task';
 
 type UpdateStatusVars = { id: string; status: TaskStatus };
 
-// Cached task lists that should reflect a status change immediately.
 const TASK_LIST_KEYS = [['tasks'], ['my-tasks']] as const;
 
 export const useUpdateTaskStatus = () => {
@@ -16,7 +15,6 @@ export const useUpdateTaskStatus = () => {
   return useMutation({
     mutationFn: ({ id, status }: UpdateStatusVars) => updateTaskStatus(id, status),
 
-    // Optimistically move the card so the board/list updates instantly.
     onMutate: async ({ id, status }: UpdateStatusVars) => {
       const snapshots: Array<{ key: readonly string[]; data: Task[] | undefined }> = [];
 
@@ -38,7 +36,6 @@ export const useUpdateTaskStatus = () => {
     },
 
     onError: (error: AxiosError<{ message: string }>, _variables, context) => {
-      // Roll back to the pre-drag state on failure.
       context?.snapshots.forEach(({ key, data }) => {
         queryClient.setQueryData(key, data);
       });
@@ -50,7 +47,6 @@ export const useUpdateTaskStatus = () => {
       toast.success('Task status updated');
     },
 
-    // Reconcile with the server on both success and failure.
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       queryClient.invalidateQueries({ queryKey: ['my-tasks'] });

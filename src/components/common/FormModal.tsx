@@ -16,10 +16,6 @@ interface FormModalProps {
   onSubmit: FormEventHandler<HTMLFormElement>;
 }
 
-/**
- * Thin wrapper around {@link AppModal} kept for backwards compatibility.
- * All form popups (create/edit employee, task, project) render through here.
- */
 export default function FormModal({
   opened,
   onClose,

@@ -73,7 +73,6 @@ export default function LoginForm({ portal }: LoginFormProps) {
     <div style={cardStyle}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="lg">
-          {/* Brand + heading */}
           <Stack gap={10} align="center">
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <img

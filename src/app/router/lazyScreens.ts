@@ -1,12 +1,5 @@
 import { lazy } from 'react';
 
-/**
- * Route screens, code-split with React.lazy so each feature ships in its own
- * chunk and the initial bundle only loads what the first screen needs. Kept in
- * a dedicated module (separate from the router's non-component `router` export)
- * so Fast Refresh stays happy.
- */
-
 export const LoginScreen = lazy(() => import('@/features/auth/screens/LoginScreen'));
 
 export const ChangePasswordScreen = lazy(

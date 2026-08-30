@@ -6,7 +6,6 @@ export default function LoginHero() {
       className="relative flex h-full flex-col justify-between overflow-hidden rounded-[28px] p-12"
       style={{ background: 'var(--app-brand-gradient)', color: 'var(--app-brand-on)' }}
     >
-      {/* Background illustration */}
       <img
         src={loginIllustration}
         alt=""
@@ -21,17 +20,7 @@ export default function LoginHero() {
         }}
       />
 
-      {/* Brand-colored scrim: strong on the left (behind the text), lighter on
-          the right so the illustration stays visible. Keeps white text readable. */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          // background:
-          //   'linear-gradient(120deg, rgba(37,50,170,0.94) 0%, rgba(58,45,165,0.82) 45%, rgba(96,78,205,0.55) 100%)',
-        }}
-      />
+      <div aria-hidden />
     </div>
   );
 }

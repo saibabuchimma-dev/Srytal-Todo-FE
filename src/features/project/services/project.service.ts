@@ -58,7 +58,15 @@ const normalizeProject = (item: Record<string, unknown>): Project => ({
   status: (item.status as Project['status']) ?? 'Planning',
   startDate: String(item.startDate ?? ''),
   endDate: String(item.endDate ?? ''),
-  members: Array.isArray(item.members) ? item.members.map((member) => String(member)) : [],
+  members: Array.isArray(item.members)
+    ? item.members.map((member) => {
+        if (member && typeof member === 'object') {
+          const m = member as Record<string, unknown>;
+          return String(m._id ?? '');
+        }
+        return String(member);
+      })
+    : [],
   createdAt: typeof item.createdAt === 'string' ? item.createdAt : undefined,
   updatedAt: typeof item.updatedAt === 'string' ? item.updatedAt : undefined,
 });

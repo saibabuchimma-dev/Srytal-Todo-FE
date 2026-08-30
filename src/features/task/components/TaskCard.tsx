@@ -41,7 +41,6 @@ export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: T
   const statusColor = statusColors[task.status] ?? 'gray';
   const priorityColor = priorityColors[task.priority] ?? 'gray';
 
-  // Capture "now" once on mount so the render stays pure.
   const [now] = useState(() => Date.now());
   const due = task.dueDate ? new Date(task.dueDate) : null;
   const isOverdue =

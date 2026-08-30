@@ -8,20 +8,13 @@ type StateVariant = 'loading' | 'empty' | 'error';
 
 interface CenteredStateProps {
   variant?: StateVariant;
-  /** Loader label (loading) or the message text (empty/error). */
   message?: string;
   label?: string;
   icon?: ReactNode;
-  /** Vertical space the state occupies; centered within it. */
   minHeight?: number | string;
   size?: number;
 }
 
-/**
- * Reusable, perfectly-centered container for page loading / empty / error
- * states. Keeps spinners and "no data" messages centered instead of pinned
- * to the top-left of the content area.
- */
 export default function CenteredState({
   variant = 'loading',
   message,

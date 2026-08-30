@@ -19,17 +19,14 @@ export default function LoginScreen({ portal = 'employee' }: LoginScreenProps) {
         color: 'var(--app-text)',
       }}
     >
-      {/* Light / dark toggle — mirrors the dashboard, pinned to the top-right. */}
       <Box style={{ position: 'absolute', top: 16, right: 16, zIndex: 10 }}>
         <ThemeToggle chip />
       </Box>
 
-      {/* Brand panel — hidden on small screens */}
       <Box visibleFrom="md" style={{ flexBasis: '65%', maxWidth: '65%', padding: 16 }}>
         <LoginHero />
       </Box>
 
-      {/* Form panel */}
       <Box
         style={{
           flex: 1,

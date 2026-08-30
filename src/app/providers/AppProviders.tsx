@@ -15,10 +15,7 @@ const queryClient = new QueryClient({
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
-      // Treat data as fresh for 30s so revisiting a screen (or remounting a
-      // component) doesn't trigger a redundant network refetch every time.
       staleTime: 30_000,
-      // Keep unused query data cached for 5 min before garbage collection.
       gcTime: 5 * 60_000,
     },
   },

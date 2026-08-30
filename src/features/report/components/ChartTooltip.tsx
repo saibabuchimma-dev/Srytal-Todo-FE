@@ -14,10 +14,6 @@ interface ChartTooltipProps {
   colorByName?: Record<string, string>;
 }
 
-/**
- * Shared tooltip for the report charts. Recharts injects `active`, `payload`
- * and `label` when the element is passed to <Tooltip content={...} />.
- */
 export default function ChartTooltip({ active, payload, label, colorByName }: ChartTooltipProps) {
   if (!active || !payload || payload.length === 0) {
     return null;

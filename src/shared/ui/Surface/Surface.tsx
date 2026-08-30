@@ -6,16 +6,11 @@ import { token } from '@/theme/tokens';
 
 interface SurfaceProps extends Omit<BoxProps, 'style'> {
   children: ReactNode;
-  /** `base` = standard card surface, `raised` = subtle nested surface. */
   level?: 'base' | 'raised';
   withBorder?: boolean;
   style?: CSSProperties;
 }
 
-/**
- * Reusable themed panel. Uses the centralized color tokens so it always
- * matches the active light/dark theme without any per-usage color code.
- */
 export default function Surface({
   children,
   level = 'base',

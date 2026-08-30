@@ -5,21 +5,16 @@ export interface AppModalProps {
   opened: boolean;
   onClose: () => void;
   title: string;
-  /** Optional supporting line under the title. */
   subtitle?: string;
-  /** Optional icon shown in a tinted badge beside the title. */
   icon?: ReactNode;
   size?: string | number;
   children: ReactNode;
 
-  /** When provided, the body is wrapped in a <form> and a submit button is rendered. */
   onSubmit?: FormEventHandler<HTMLFormElement>;
   submitLabel?: string;
   cancelLabel?: string;
   submitColor?: string;
-  /** Disables inputs / shows an overlay and puts the submit button in a loading state. */
   loading?: boolean;
-  /** Hide the Cancel/Submit footer entirely (e.g. read-only detail modals). */
   hideFooter?: boolean;
 }
 
@@ -60,12 +55,6 @@ const footerStyle: CSSProperties = {
   background: 'var(--app-surface-2)',
 };
 
-/**
- * Reusable, professional modal used across the app for create/edit forms and
- * detail popups. Renders a distinct header band (gradient icon badge, title +
- * subtitle, close button), a scrollable content area, and an anchored footer.
- * Fully theme-aware (adapts to light/dark automatically via design tokens).
- */
 export default function AppModal({
   opened,
   onClose,
@@ -83,7 +72,6 @@ export default function AppModal({
 }: AppModalProps) {
   const content = (
     <>
-      {/* Slim gradient accent along the very top edge of the modal. */}
       <div style={{ height: 4, background: 'var(--app-brand-gradient)' }} />
 
       <header style={headerStyle}>

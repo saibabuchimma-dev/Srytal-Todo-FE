@@ -7,8 +7,6 @@ import Sidebar from './Sidebar';
 import CenteredState from '@/shared/ui/CenteredState/CenteredState';
 
 export default function MainLayout() {
-  // Controls the slide-over navbar on mobile. On desktop (≥ md) the navbar is
-  // always visible; below md it is collapsed until the burger toggles it.
   const [mobileOpened, { toggle: toggleMobile, close: closeMobile }] = useDisclosure();
 
   return (
@@ -26,12 +24,10 @@ export default function MainLayout() {
       </AppShell.Header>
 
       <AppShell.Navbar>
-        {/* Close the slide-over after navigating on mobile. */}
         <Sidebar onNavigate={closeMobile} />
       </AppShell.Navbar>
 
       <AppShell.Main style={{ backgroundColor: 'var(--app-bg)' }}>
-        {/* One Suspense boundary for all lazily-loaded child screens. */}
         <Suspense fallback={<CenteredState variant="loading" />}>
           <Outlet />
         </Suspense>

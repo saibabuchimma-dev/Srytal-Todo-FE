@@ -19,6 +19,7 @@ export interface AuthUser {
   role: UserRole;
   avatar?: string;
   token?: string;
+  refreshToken?: string;
   mustChangePassword: boolean;
 }
 
@@ -26,14 +27,29 @@ export interface LoginResponse {
   success: boolean;
   message: string;
   data: {
-    token: string;
+    accessToken: string;
+    refreshToken: string;
+    mustChangePassword: boolean;
     user: {
       id: string;
       fullName: string;
       email: string;
       role: UserRole;
-      avatar?: string;
       mustChangePassword: boolean;
     };
   };
+}
+
+export interface RefreshRequest {
+  refreshToken: string;
+}
+
+export interface LogoutRequest {
+  refreshToken: string;
+}
+
+export interface AuthSession {
+  user: AuthUser;
+  accessToken: string;
+  refreshToken: string;
 }
