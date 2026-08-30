@@ -39,7 +39,10 @@ export default function ChangePasswordScreen() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
+    <div
+      className="flex min-h-screen items-center justify-center px-4 py-10"
+      style={{ background: 'var(--app-bg)' }}
+    >
       <Card className="w-full max-w-md" shadow="md" radius="lg">
         <Stack gap="md">
           <div>

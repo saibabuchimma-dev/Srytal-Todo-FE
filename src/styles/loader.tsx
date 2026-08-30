@@ -21,7 +21,7 @@ const StyledWrapper = styled.div<{ $fullScreen: boolean; $size: number }>`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  color: #475569;
+  color: var(--app-text-muted);
   font-size: 0.875rem;
   font-weight: 600;
 
@@ -58,28 +58,28 @@ const StyledWrapper = styled.div<{ $fullScreen: boolean; $size: number }>`
     0% {
       width: ${({ $size }) => `${$size / 5}px`};
       box-shadow:
-        ${({ $size }) => `${$size / 2.5}px ${-$size / 5}px`} rgba(225, 20, 98, 0.75),
-        ${({ $size }) => `${-$size / 2.5}px ${$size / 5}px`} rgba(111, 202, 220, 0.75);
+        ${({ $size }) => `${$size / 2.5}px ${-$size / 5}px`} var(--app-loader-a),
+        ${({ $size }) => `${-$size / 2.5}px ${$size / 5}px`} var(--app-loader-b);
     }
 
     35% {
       width: ${({ $size }) => `${$size}px`};
       box-shadow:
-        ${({ $size }) => `0 ${-$size / 5}px`} rgba(225, 20, 98, 0.75),
-        ${({ $size }) => `0 ${$size / 5}px`} rgba(111, 202, 220, 0.75);
+        ${({ $size }) => `0 ${-$size / 5}px`} var(--app-loader-a),
+        ${({ $size }) => `0 ${$size / 5}px`} var(--app-loader-b);
     }
 
     70% {
       width: ${({ $size }) => `${$size / 5}px`};
       box-shadow:
-        ${({ $size }) => `${-$size / 2.5}px ${-$size / 5}px`} rgba(225, 20, 98, 0.75),
-        ${({ $size }) => `${$size / 2.5}px ${$size / 5}px`} rgba(111, 202, 220, 0.75);
+        ${({ $size }) => `${-$size / 2.5}px ${-$size / 5}px`} var(--app-loader-a),
+        ${({ $size }) => `${$size / 2.5}px ${$size / 5}px`} var(--app-loader-b);
     }
 
     100% {
       box-shadow:
-        ${({ $size }) => `${$size / 2.5}px ${-$size / 5}px`} rgba(225, 20, 98, 0.75),
-        ${({ $size }) => `${-$size / 2.5}px ${$size / 5}px`} rgba(111, 202, 220, 0.75);
+        ${({ $size }) => `${$size / 2.5}px ${-$size / 5}px`} var(--app-loader-a),
+        ${({ $size }) => `${-$size / 2.5}px ${$size / 5}px`} var(--app-loader-b);
     }
   }
 
@@ -87,28 +87,28 @@ const StyledWrapper = styled.div<{ $fullScreen: boolean; $size: number }>`
     0% {
       height: ${({ $size }) => `${$size / 5}px`};
       box-shadow:
-        ${({ $size }) => `${$size / 5}px ${$size / 2.5}px`} rgba(61, 184, 143, 0.75),
-        ${({ $size }) => `${-$size / 5}px ${-$size / 2.5}px`} rgba(233, 169, 32, 0.75);
+        ${({ $size }) => `${$size / 5}px ${$size / 2.5}px`} var(--app-loader-c),
+        ${({ $size }) => `${-$size / 5}px ${-$size / 2.5}px`} var(--app-loader-d);
     }
 
     35% {
       height: ${({ $size }) => `${$size}px`};
       box-shadow:
-        ${({ $size }) => `${$size / 5}px 0`} rgba(61, 184, 143, 0.75),
-        ${({ $size }) => `${-$size / 5}px 0`} rgba(233, 169, 32, 0.75);
+        ${({ $size }) => `${$size / 5}px 0`} var(--app-loader-c),
+        ${({ $size }) => `${-$size / 5}px 0`} var(--app-loader-d);
     }
 
     70% {
       height: ${({ $size }) => `${$size / 5}px`};
       box-shadow:
-        ${({ $size }) => `${$size / 5}px ${-$size / 2.5}px`} rgba(61, 184, 143, 0.75),
-        ${({ $size }) => `${-$size / 5}px ${$size / 2.5}px`} rgba(233, 169, 32, 0.75);
+        ${({ $size }) => `${$size / 5}px ${-$size / 2.5}px`} var(--app-loader-c),
+        ${({ $size }) => `${-$size / 5}px ${$size / 2.5}px`} var(--app-loader-d);
     }
 
     100% {
       box-shadow:
-        ${({ $size }) => `${$size / 5}px ${$size / 2.5}px`} rgba(61, 184, 143, 0.75),
-        ${({ $size }) => `${-$size / 5}px ${-$size / 2.5}px`} rgba(233, 169, 32, 0.75);
+        ${({ $size }) => `${$size / 5}px ${$size / 2.5}px`} var(--app-loader-c),
+        ${({ $size }) => `${-$size / 5}px ${-$size / 2.5}px`} var(--app-loader-d);
     }
   }
 `;

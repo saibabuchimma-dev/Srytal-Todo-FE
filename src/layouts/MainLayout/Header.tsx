@@ -1,70 +1,140 @@
-import { ActionIcon, Avatar, Group, Menu, Text, TextInput } from '@mantine/core';
-import { IconLogout, IconSearch, IconUserCircle } from '@tabler/icons-react';
-import { useNavigate } from 'react-router-dom';
+import {
+  Avatar,
+  Box,
+  Burger,
+  Divider,
+  Group,
+  Menu,
+  Text,
+  UnstyledButton,
+} from '@mantine/core';
+import {
+  IconChevronDown,
+  IconLogout,
+  IconSettings,
+  IconUserCircle,
+} from '@tabler/icons-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import NotificationMenu from '@/features/notification/components/NotificationMenu';
 import { useProfile } from '@/features/profile/hooks/useProfile';
+import ThemeToggle from '@/shared/ui/ThemeToggle/ThemeToggle';
 import logo from '@/assets/logo/logo.png';
 import { ROUTES } from '@/shared/config/routes';
 
-export default function Header() {
+interface HeaderProps {
+  /** Mobile navbar open state (from MainLayout). */
+  navOpened?: boolean;
+  /** Toggles the mobile navbar. */
+  onNavToggle?: () => void;
+}
+
+function getPageTitle(pathname: string): string {
+  const path = pathname.replace(/\/+$/, '');
+
+  if (/\/employees\/[^/]+$/.test(path)) return 'Employee Details';
+  if (/\/employees$/.test(path)) return 'Employees';
+  if (/\/tasks\/[^/]+$/.test(path)) return 'Task Details';
+  if (/\/tasks$/.test(path)) return 'Tasks';
+  if (/\/projects\/[^/]+\/details$/.test(path)) return 'Project Details';
+  if (/\/projects$/.test(path)) return 'Projects';
+  if (/\/board$/.test(path)) return 'Board';
+  if (/\/reports$/.test(path)) return 'Reports';
+  if (/\/settings$/.test(path)) return 'Settings';
+  return 'Dashboard';
+}
+
+export default function Header({ navOpened = false, onNavToggle }: HeaderProps) {
   const logout = useAuthStore((state) => state.logout);
   const user = useAuthStore((state) => state.user);
   const { data: profile } = useProfile();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isAdmin = user?.role === 'Admin';
+  const settingsRoute = isAdmin ? ROUTES.ADMIN_SETTINGS : ROUTES.SETTINGS;
+  const pageTitle = getPageTitle(location.pathname);
+  const displayName = profile?.name ?? user?.fullName ?? 'User';
+  const roleLabel = isAdmin ? 'Administrator' : 'Employee';
+  const initial = displayName.charAt(0).toUpperCase();
 
   const handleLogout = () => {
     logout();
-    navigate(user?.role === 'Admin' ? ROUTES.ADMIN_LOGIN : ROUTES.LOGIN);
+    navigate(isAdmin ? ROUTES.ADMIN_LOGIN : ROUTES.LOGIN);
   };
 
   return (
-    <Group justify="space-between" h="100%" px="md" wrap="nowrap">
+    <Group justify="space-between" h="100%" px="lg" wrap="nowrap">
+      {/* Brand + current page */}
       <Group gap="sm" wrap="nowrap">
-        <Avatar src={logo} radius="md" size={42} />
+        <Burger
+          opened={navOpened}
+          onClick={onNavToggle}
+          hiddenFrom="md"
+          size="sm"
+          aria-label="Toggle navigation"
+        />
+        <Avatar src={logo} radius="md" size={40} />
         <div>
-          <Text fw={800} lh={1.1}>
+          <Text fw={800} lh={1.05} fz="lg">
             Srytal
           </Text>
-          <Text size="xs" c="dimmed">
+          <Text size="xs" c="dimmed" lh={1}>
             Task Management
           </Text>
         </div>
+
+        <Divider orientation="vertical" mx="md" visibleFrom="md" />
+        <Text fw={600} c="dimmed" visibleFrom="md">
+          {pageTitle}
+        </Text>
       </Group>
 
-      <TextInput
-        visibleFrom="sm"
-        w={{ sm: 280, md: 360 }}
-        placeholder="Search dashboard"
-        leftSection={<IconSearch size={17} />}
-      />
+      {/* Actions */}
+      <Group gap="xs" wrap="nowrap">
+        <ThemeToggle />
 
-      <Group gap="sm" wrap="nowrap">
         <NotificationMenu />
 
-        <Menu position="bottom-end" shadow="md" width={220}>
+        <Divider orientation="vertical" mx={4} visibleFrom="sm" />
+
+        <Menu position="bottom-end" width={230} shadow="md" radius="md">
           <Menu.Target>
-            <ActionIcon variant="subtle" size={42} radius="xl" aria-label="Admin profile">
-              <Avatar src={profile?.avatar} radius="xl" color="blue">
-                {profile?.name.charAt(0) ?? 'A'}
-              </Avatar>
-            </ActionIcon>
+            <UnstyledButton
+              style={{ padding: '6px 8px', borderRadius: 'var(--mantine-radius-md)' }}
+              aria-label="Account menu"
+            >
+              <Group gap="xs" wrap="nowrap">
+                <Avatar src={profile?.avatar || undefined} radius="xl" size={36} color="blue">
+                  {initial}
+                </Avatar>
+                <Box visibleFrom="sm" style={{ minWidth: 0 }}>
+                  <Text size="sm" fw={600} lh={1.1} lineClamp={1}>
+                    {displayName}
+                  </Text>
+                  <Text size="xs" c="dimmed" lh={1.1}>
+                    {roleLabel}
+                  </Text>
+                </Box>
+                <IconChevronDown size={16} style={{ color: 'var(--app-text-muted)' }} />
+              </Group>
+            </UnstyledButton>
           </Menu.Target>
+
           <Menu.Dropdown>
-            <Menu.Label>Profile</Menu.Label>
+            <Menu.Label>{displayName}</Menu.Label>
             <Menu.Item
               leftSection={<IconUserCircle size={16} />}
-              onClick={() => void navigate(ROUTES.PROFILE)}
+              onClick={() => void navigate(settingsRoute)}
             >
-              <div>
-                <Text size="sm" fw={600}>
-                  {profile?.name ?? 'Administrator'}
-                </Text>
-                <Text size="xs" c="dimmed">
-                  {profile?.role ?? 'Admin'}
-                </Text>
-              </div>
+              Profile
+            </Menu.Item>
+            <Menu.Item
+              leftSection={<IconSettings size={16} />}
+              onClick={() => void navigate(settingsRoute)}
+            >
+              Settings
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item color="red" leftSection={<IconLogout size={16} />} onClick={handleLogout}>

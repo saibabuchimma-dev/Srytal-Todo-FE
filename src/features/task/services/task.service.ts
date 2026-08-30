@@ -1,9 +1,12 @@
 import api from '@/shared/services/api';
+import type { Paginated } from '@/shared/types/pagination';
 import type {
   CreateTaskPayload,
   Task,
   TaskApiResponse,
   TaskListResponse,
+  TaskPriority,
+  TaskStatus,
   UpdateTaskPayload,
 } from '../types/task';
 
@@ -80,6 +83,33 @@ export const updateTask = async (taskId: string, payload: UpdateTaskPayload): Pr
 
 export const deleteTask = async (taskId: string): Promise<void> => {
   await api.delete(`/tasks/${taskId}`);
+};
+
+interface TaskPageResponse {
+  tasks?: TaskApiResponse[];
+  total?: number;
+  page?: number;
+  limit?: number;
+  totalPages?: number;
+}
+
+export const getTasksPage = async (params: {
+  page: number;
+  limit: number;
+  search?: string;
+  status?: TaskStatus;
+  priority?: TaskPriority;
+}): Promise<Paginated<Task>> => {
+  const response = await api.get<TaskPageResponse>('/tasks/search', { params });
+  const data = response.data ?? {};
+
+  return {
+    items: Array.isArray(data.tasks) ? data.tasks.map(normalizeTask) : [],
+    total: Number(data.total ?? 0),
+    page: Number(data.page ?? params.page),
+    limit: Number(data.limit ?? params.limit),
+    totalPages: Number(data.totalPages ?? 1),
+  };
 };
 
 export const getMyTasks = async (): Promise<Task[]> => {

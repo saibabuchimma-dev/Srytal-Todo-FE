@@ -1,20 +1,44 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/config';
 import {
   getTasks,
   getTask,
+  getTasksPage,
   createTask,
   updateTask,
   deleteTask,
   getMyTasks,
 } from '../services/task.service';
-import type { CreateTaskPayload, UpdateTaskPayload } from '../types/task';
+import type {
+  CreateTaskPayload,
+  TaskPriority,
+  TaskStatus,
+  UpdateTaskPayload,
+} from '../types/task';
 
 export const useTasks = (options?: { enabled?: boolean }) =>
   useQuery({
     queryKey: ['tasks'],
     queryFn: getTasks,
     enabled: options?.enabled ?? true,
+  });
+
+export const usePaginatedTasks = (params: {
+  page: number;
+  limit: number;
+  search?: string;
+  status?: TaskStatus;
+  priority?: TaskPriority;
+}) =>
+  useQuery({
+    queryKey: [...QUERY_KEYS.TASKS, 'page', params],
+    queryFn: () => getTasksPage(params),
+    placeholderData: keepPreviousData,
   });
 
 export function useTask(id: string) {

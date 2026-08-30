@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/config';
 import {
   createProject,
@@ -8,14 +13,31 @@ import {
   getProject,
   getProjectDetails,
   getProjects,
+  getProjectsPage,
   updateProject,
 } from '../services/project.service';
-import type { CreateProjectPayload, ProjectQueryParams } from '../types/project';
+import type {
+  CreateProjectPayload,
+  ProjectQueryParams,
+  ProjectStatus,
+} from '../types/project';
 
 export const useProjects = (params: ProjectQueryParams = {}) =>
   useQuery({
     queryKey: [...QUERY_KEYS.PROJECTS, params],
     queryFn: () => getProjects(params),
+  });
+
+export const usePaginatedProjects = (params: {
+  page: number;
+  limit: number;
+  search?: string;
+  status?: ProjectStatus;
+}) =>
+  useQuery({
+    queryKey: [...QUERY_KEYS.PROJECTS, 'page', params],
+    queryFn: () => getProjectsPage(params),
+    placeholderData: keepPreviousData,
   });
 
 export const useProject = (projectId: string) =>

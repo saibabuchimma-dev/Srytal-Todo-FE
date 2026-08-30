@@ -1,6 +1,8 @@
-import { Paper } from '@mantine/core';
+import { Box } from '@mantine/core';
+
+import ThemeToggle from '@/shared/ui/ThemeToggle/ThemeToggle';
 import LoginForm from '../components/LoginForm';
-import LoginVideo from '@/assets/images/vdo.mp4';
+import LoginHero from '../components/LoginHero';
 
 interface LoginScreenProps {
   portal?: 'admin' | 'employee';
@@ -8,36 +10,39 @@ interface LoginScreenProps {
 
 export default function LoginScreen({ portal = 'employee' }: LoginScreenProps) {
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Background Video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="absolute inset-0 h-full w-full object-cover"
+    <Box
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        background: 'var(--app-bg)',
+        color: 'var(--app-text)',
+      }}
+    >
+      {/* Light / dark toggle — mirrors the dashboard, pinned to the top-right. */}
+      <Box style={{ position: 'absolute', top: 16, right: 16, zIndex: 10 }}>
+        <ThemeToggle chip />
+      </Box>
+
+      {/* Brand panel — hidden on small screens */}
+      <Box visibleFrom="md" style={{ flexBasis: '65%', maxWidth: '65%', padding: 16 }}>
+        <LoginHero />
+      </Box>
+
+      {/* Form panel */}
+      <Box
+        style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '32px 24px',
+        }}
       >
-        <source src={LoginVideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
-
-      {/* Content */}
-      <div className="relative z-10 flex min-h-screen items-center">
-        {/* Login Form */}
-        <div className="ml-8 w-full max-w-md md:ml-16 lg:ml-24">
-          <Paper
-            radius="xl"
-            shadow="xl"
-            className="w-full max-w-md rounded-3xl border border-white/20 bg-white/90 p-12 backdrop-blur-xl"
-          >
-            <LoginForm portal={portal} />
-          </Paper>
-        </div>
-      </div>
-    </div>
+        <Box w="100%" maw={420}>
+          <LoginForm portal={portal} />
+        </Box>
+      </Box>
+    </Box>
   );
 }

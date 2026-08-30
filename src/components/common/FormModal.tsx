@@ -1,42 +1,52 @@
-import { Modal, Stack, Group, Button } from '@mantine/core';
-import type { ReactNode, FormEventHandler } from 'react';
+import type { FormEventHandler, ReactNode } from 'react';
+
+import AppModal from '@/shared/ui/Modal/AppModal';
 
 interface FormModalProps {
   opened: boolean;
   onClose: () => void;
   title: string;
+  subtitle?: string;
+  icon?: ReactNode;
   children: ReactNode;
   loading?: boolean;
   submitLabel?: string;
+  cancelLabel?: string;
+  size?: string | number;
   onSubmit: FormEventHandler<HTMLFormElement>;
 }
 
+/**
+ * Thin wrapper around {@link AppModal} kept for backwards compatibility.
+ * All form popups (create/edit employee, task, project) render through here.
+ */
 export default function FormModal({
   opened,
   onClose,
   title,
+  subtitle,
+  icon,
   children,
   loading = false,
   submitLabel = 'Save',
+  cancelLabel = 'Cancel',
+  size = 'md',
   onSubmit,
 }: FormModalProps) {
   return (
-    <Modal opened={opened} onClose={onClose} centered title={title} size="md" radius="md">
-      <form onSubmit={onSubmit}>
-        <Stack>
-          {children}
-
-          <Group justify="flex-end">
-            <Button variant="default" onClick={onClose}>
-              Cancel
-            </Button>
-
-            <Button type="submit" loading={loading}>
-              {submitLabel}
-            </Button>
-          </Group>
-        </Stack>
-      </form>
-    </Modal>
+    <AppModal
+      opened={opened}
+      onClose={onClose}
+      title={title}
+      subtitle={subtitle}
+      icon={icon}
+      size={size}
+      loading={loading}
+      submitLabel={submitLabel}
+      cancelLabel={cancelLabel}
+      onSubmit={onSubmit}
+    >
+      {children}
+    </AppModal>
   );
 }

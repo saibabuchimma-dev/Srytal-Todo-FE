@@ -1,8 +1,8 @@
 import { ActionIcon, Avatar, Button, Card, Group, Menu, Stack, Text } from '@mantine/core';
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons-react';
-import dayjs from 'dayjs';
 import { useState } from 'react';
 
+import { fromNow, formatDateTime } from '@/shared/utils/date';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import { useDeleteComment, useUpdateComment } from '../hooks/useComments';
 import type { TaskComment } from '../types/comment';
@@ -54,8 +54,8 @@ export default function CommentItem({ comment, taskId }: CommentItemProps) {
                 {comment.author?.fullName ?? 'Unknown'}
               </Text>
 
-              <Text size="xs" c="dimmed">
-                {comment.createdAt ? dayjs(comment.createdAt).format('DD MMM YYYY, HH:mm') : ''}
+              <Text size="xs" c="dimmed" title={formatDateTime(comment.createdAt)}>
+                {fromNow(comment.createdAt)}
               </Text>
             </Group>
 

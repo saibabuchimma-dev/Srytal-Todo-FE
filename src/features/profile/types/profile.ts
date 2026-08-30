@@ -1,10 +1,15 @@
-export interface AdminProfile {
+export interface Profile {
   id: string;
   name: string;
   email: string;
   role: string;
-  designation: string;
   avatar: string;
-  phone: string;
-  location: string;
+  isActive: boolean;
+  lastLogin?: string;
+  createdAt?: string;
+}
+
+export interface UpdateProfilePayload {
+  fullName?: string;
+  avatar?: string;
 }

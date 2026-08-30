@@ -1,11 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { notifications } from '@mantine/notifications';
 import type { AxiosError } from 'axios';
+
+import { toast } from '@/shared/utils/toast';
 import { updateTaskStatus } from '../services/taskStatus.service';
 import type { Task, TaskStatus } from '../types/task';
 
 type UpdateStatusVars = { id: string; status: TaskStatus };
 
+// Cached task lists that should reflect a status change immediately.
 const TASK_LIST_KEYS = [['tasks'], ['my-tasks']] as const;
 
 export const useUpdateTaskStatus = () => {
@@ -14,6 +16,7 @@ export const useUpdateTaskStatus = () => {
   return useMutation({
     mutationFn: ({ id, status }: UpdateStatusVars) => updateTaskStatus(id, status),
 
+    // Optimistically move the card so the board/list updates instantly.
     onMutate: async ({ id, status }: UpdateStatusVars) => {
       const snapshots: Array<{ key: readonly string[]; data: Task[] | undefined }> = [];
 
@@ -35,25 +38,19 @@ export const useUpdateTaskStatus = () => {
     },
 
     onError: (error: AxiosError<{ message: string }>, _variables, context) => {
+      // Roll back to the pre-drag state on failure.
       context?.snapshots.forEach(({ key, data }) => {
         queryClient.setQueryData(key, data);
       });
 
-      notifications.show({
-        color: 'red',
-        title: 'Failed',
-        message: error.response?.data?.message ?? 'Unable to update task status.',
-      });
+      toast.error(error.response?.data?.message ?? 'Unable to update task status.');
     },
 
     onSuccess: () => {
-      notifications.show({
-        color: 'green',
-        title: 'Success',
-        message: 'Task status updated successfully.',
-      });
+      toast.success('Task status updated');
     },
 
+    // Reconcile with the server on both success and failure.
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       queryClient.invalidateQueries({ queryKey: ['my-tasks'] });

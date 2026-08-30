@@ -1,10 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/config';
 import {
   createEmployee,
   deleteEmployee,
   getEmployee,
   getEmployees,
+  getEmployeesPage,
   updateEmployee,
 } from '../services/employee.service';
 import type { CreateEmployeePayload, UpdateEmployeePayload } from '../types/employee';
@@ -14,6 +20,17 @@ export const useEmployees = (options?: { enabled?: boolean }) =>
     queryKey: ['employees'],
     queryFn: getEmployees,
     enabled: options?.enabled ?? true,
+  });
+
+export const usePaginatedEmployees = (params: {
+  page: number;
+  limit: number;
+  search?: string;
+}) =>
+  useQuery({
+    queryKey: [...QUERY_KEYS.EMPLOYEES, 'page', params],
+    queryFn: () => getEmployeesPage(params),
+    placeholderData: keepPreviousData,
   });
 
 export function useEmployee(employeeId: string) {

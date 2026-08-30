@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Select, Textarea, TextInput } from '@mantine/core';
-import { DateInput } from '@mantine/dates';
+import { DatePickerInput } from '@mantine/dates';
+import { IconClipboardPlus } from '@tabler/icons-react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import FormModal from '@/components/common/FormModal';
@@ -8,6 +9,7 @@ import { useCreateTask, useUpdateTask } from '../hooks/useTasks';
 import { useEmployees } from '@/features/employee/hooks/useEmployees';
 import { useProjects } from '@/features/project';
 import { useEffect } from 'react';
+import { toDateInputValue } from '@/shared/utils/date';
 import type { Task } from '../types/task';
 
 const schema = z.object({
@@ -17,7 +19,7 @@ const schema = z.object({
   priority: z.enum(['Low', 'Medium', 'High']),
   status: z.enum(['Pending', 'In Progress', 'Completed']),
   project: z.string().min(1, 'Project is required'),
-  dueDate: z.date(),
+  dueDate: z.string().min(1, 'Due date is required'),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -59,7 +61,7 @@ export default function CreateTaskModal({
       priority: 'Medium',
       status: 'Pending',
       project: projectId,
-      dueDate: new Date(),
+      dueDate: toDateInputValue(new Date()),
     },
   });
 
@@ -69,10 +71,7 @@ export default function CreateTaskModal({
   };
 
   const onSubmit = (values: FormValues) => {
-    const payload = {
-      ...values,
-      dueDate: values.dueDate.toISOString(),
-    };
+    const payload = { ...values };
 
     if (mode === 'edit' && task) {
       updateTask.mutate(
@@ -110,7 +109,7 @@ export default function CreateTaskModal({
         priority: task.priority,
         status: task.status,
         project: task.project,
-        dueDate: new Date(task.dueDate),
+        dueDate: toDateInputValue(task.dueDate),
       });
 
       return;
@@ -123,7 +122,7 @@ export default function CreateTaskModal({
       priority: 'Medium',
       status: 'Pending',
       project: projectId,
-      dueDate: new Date(),
+      dueDate: toDateInputValue(new Date()),
     });
   }, [opened, task, mode, projectId, reset]);
 
@@ -131,7 +130,11 @@ export default function CreateTaskModal({
     <FormModal
       opened={opened}
       onClose={close}
+      icon={<IconClipboardPlus size={20} />}
       title={mode === 'create' ? 'Create Task' : 'Edit Task'}
+      subtitle={
+        mode === 'create' ? 'Assign work to a team member.' : 'Update this task’s details.'
+      }
       submitLabel={mode === 'create' ? 'Create' : 'Update'}
       loading={mode === 'create' ? createTask.isPending : updateTask.isPending}
       onSubmit={handleSubmit(onSubmit)}
@@ -225,11 +228,13 @@ export default function CreateTaskModal({
         control={control}
         name="dueDate"
         render={({ field }) => (
-          <DateInput
+          <DatePickerInput
             label="Due Date"
+            placeholder="Pick a due date"
+            valueFormat="DD MMM YYYY"
             error={errors.dueDate?.message}
-            value={field.value}
-            onChange={field.onChange}
+            value={field.value || null}
+            onChange={(value) => field.onChange(value ?? '')}
           />
         )}
       />

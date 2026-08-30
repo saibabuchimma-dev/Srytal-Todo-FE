@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Select, TextInput } from '@mantine/core';
+import { IconUserPlus } from '@tabler/icons-react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import FormModal from '@/components/common/FormModal';
@@ -46,7 +47,9 @@ export default function CreateEmployeeModal({ opened, onClose }: CreateEmployeeM
     <FormModal
       opened={opened}
       onClose={close}
+      icon={<IconUserPlus size={20} />}
       title="Create Employee"
+      subtitle="Add a new team member to your workspace."
       loading={createEmployeeMutation.isPending}
       submitLabel="Create"
       onSubmit={handleSubmit(onSubmit)}

@@ -1,13 +1,15 @@
+// Kept for backwards compatibility. Values now resolve from the centralized
+// tokens in theme/tokens.css so there are no competing static colors.
 export const colors = {
-  primary: '#2563EB',
-  secondary: '#6366F1',
+  primary: 'var(--app-primary)',
+  secondary: 'var(--app-accent)',
 
-  success: '#22C55E',
-  warning: '#F59E0B',
-  error: '#EF4444',
+  success: 'var(--app-success)',
+  warning: 'var(--app-warning)',
+  error: 'var(--app-danger)',
 
-  gray: '#6B7280',
+  gray: 'var(--app-text-muted)',
 
-  background: '#F8FAFC',
-  white: '#FFFFFF',
+  background: 'var(--app-bg)',
+  white: 'var(--app-surface)',
 } as const;

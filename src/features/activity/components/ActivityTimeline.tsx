@@ -5,8 +5,7 @@ import {
   IconPlus,
   IconUserPlus,
 } from '@tabler/icons-react';
-import dayjs from 'dayjs';
-
+import { fromNow, formatDateTime } from '@/shared/utils/date';
 import Loader from '@/styles/loader';
 import { useTaskActivities } from '../hooks/useActivities';
 import type { ActivityType } from '../types/activity';
@@ -66,8 +65,8 @@ export default function ActivityTimeline({ taskId }: ActivityTimelineProps) {
                 </Text>
 
                 {activity.createdAt && (
-                  <Text size="xs" c="dimmed" mt={2}>
-                    {dayjs(activity.createdAt).format('DD MMM YYYY, HH:mm')}
+                  <Text size="xs" c="dimmed" mt={2} title={formatDateTime(activity.createdAt)}>
+                    {fromNow(activity.createdAt)}
                   </Text>
                 )}
               </Timeline.Item>

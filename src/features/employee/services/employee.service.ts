@@ -1,4 +1,5 @@
 import api from '@/shared/services/api';
+import type { Paginated } from '@/shared/types/pagination';
 import type { CreateEmployeePayload, Employee, UpdateEmployeePayload } from '../types/employee';
 
 const normalizeEmployee = (item: Record<string, unknown>): Employee => ({
@@ -36,6 +37,33 @@ const normalizeEmployeeList = (payload: unknown): Employee[] => {
 export const getEmployees = async (): Promise<Employee[]> => {
   const response = await api.get('/employees');
   return normalizeEmployeeList(response.data);
+};
+
+interface EmployeePageResponse {
+  employees?: unknown[];
+  total?: number;
+  page?: number;
+  limit?: number;
+  totalPages?: number;
+}
+
+export const getEmployeesPage = async (params: {
+  page: number;
+  limit: number;
+  search?: string;
+}): Promise<Paginated<Employee>> => {
+  const response = await api.get<EmployeePageResponse>('/employees/search', { params });
+  const data = response.data ?? {};
+
+  return {
+    items: Array.isArray(data.employees)
+      ? data.employees.map((item) => normalizeEmployee(item as Record<string, unknown>))
+      : [],
+    total: Number(data.total ?? 0),
+    page: Number(data.page ?? params.page),
+    limit: Number(data.limit ?? params.limit),
+    totalPages: Number(data.totalPages ?? 1),
+  };
 };
 
 export const getEmployee = async (employeeId: string): Promise<Employee> => {

@@ -1,0 +1,125 @@
+/* =========================================================================
+   Centralized color tokens — the single source of truth for app colors.
+   Change a value here once and it updates everywhere, in both themes.
+
+   Light values live on :root, dark values override when Mantine sets
+   data-mantine-color-scheme="dark" on <html>. Tokens are built on Mantine's
+   palette so custom surfaces stay consistent with Mantine components.
+
+   Groups:
+     - Surfaces / text / borders / primary  (theme-aware UI chrome)
+     - Accent                                (tinted chips, selected states)
+     - Semantic                             (success / warning / danger)
+     - Chart                                (data colors fixed; chrome theme-aware)
+     - Brand                                (login / marketing identity)
+     - Loader                               (spinner accents)
+   ========================================================================= */
+
+:root {
+  /* Backgrounds */
+  --app-bg: var(--mantine-color-gray-0);
+  --app-surface: #ffffff;
+  --app-surface-2: var(--mantine-color-gray-0);
+  --app-surface-hover: var(--mantine-color-gray-1);
+
+  /* Borders & dividers */
+  --app-border: var(--mantine-color-gray-3);
+
+  /* Text */
+  --app-text: var(--mantine-color-gray-9);
+  --app-text-muted: var(--mantine-color-gray-6);
+
+  /* Brand primary */
+  --app-primary: var(--mantine-color-blue-6);
+  --app-primary-hover: var(--mantine-color-blue-7);
+
+  /* Accent — tinted icon badges, selected cards, soft highlights */
+  --app-accent: var(--mantine-color-blue-6);
+  --app-accent-fg: var(--mantine-color-blue-7);
+  --app-accent-soft: rgba(34, 139, 230, 0.1);
+
+  /* Semantic */
+  --app-success: var(--mantine-color-green-6);
+  --app-warning: var(--mantine-color-yellow-6);
+  --app-danger: var(--mantine-color-red-6);
+
+  /* Chart — DATA colors (CVD-safe, kept identical across themes so the
+     meaning of each series is consistent). Change a hue here to rebrand charts. */
+  --app-chart-pending: #eda100;
+  --app-chart-in-progress: #2a78d6;
+  --app-chart-completed: #1baf7a;
+  --app-chart-low: #0ca30c;
+  --app-chart-medium: #fab219;
+  --app-chart-high: #d03b3b;
+  --app-chart-blue: #2a78d6;
+  /* Chart — CHROME (grid/axis/ink) adapts to theme */
+  --app-chart-grid: var(--mantine-color-gray-2);
+  --app-chart-axis: var(--mantine-color-gray-6);
+  --app-chart-baseline: var(--mantine-color-gray-3);
+  --app-chart-text: var(--mantine-color-gray-7);
+  --app-chart-strong: var(--mantine-color-gray-9);
+  --app-chart-surface: #ffffff;
+  --app-chart-cursor: rgba(11, 11, 11, 0.04);
+
+  /* Brand — login / marketing surfaces (fixed identity) */
+  --app-brand-gradient: linear-gradient(
+    135deg,
+    var(--mantine-color-blue-7),
+    var(--mantine-color-indigo-7),
+    var(--mantine-color-violet-7)
+  );
+  --app-brand-on: #ffffff;
+  --app-overlay: rgba(0, 0, 0, 0.5);
+  --app-glass-bg: rgba(255, 255, 255, 0.9);
+  --app-glass-border: rgba(255, 255, 255, 0.2);
+
+  /* Loader — spinner accents */
+  --app-loader-a: rgba(225, 20, 98, 0.75);
+  --app-loader-b: rgba(111, 202, 220, 0.75);
+  --app-loader-c: rgba(61, 184, 143, 0.75);
+  --app-loader-d: rgba(233, 169, 32, 0.75);
+
+  /* Elevation */
+  --app-shadow: rgba(0, 0, 0, 0.08);
+
+  /* Scrollbar */
+  --app-scrollbar-thumb: var(--mantine-color-gray-4);
+  --app-scrollbar-thumb-hover: var(--mantine-color-gray-5);
+}
+
+:root[data-mantine-color-scheme='dark'] {
+  --app-bg: var(--mantine-color-dark-8);
+  --app-surface: var(--mantine-color-dark-7);
+  --app-surface-2: var(--mantine-color-dark-6);
+  --app-surface-hover: var(--mantine-color-dark-5);
+
+  --app-border: var(--mantine-color-dark-4);
+
+  --app-text: var(--mantine-color-dark-0);
+  --app-text-muted: var(--mantine-color-dark-2);
+
+  --app-primary: var(--mantine-color-blue-4);
+  --app-primary-hover: var(--mantine-color-blue-3);
+
+  --app-accent: var(--mantine-color-blue-4);
+  --app-accent-fg: var(--mantine-color-blue-3);
+  --app-accent-soft: rgba(77, 171, 247, 0.15);
+
+  --app-success: var(--mantine-color-green-4);
+  --app-warning: var(--mantine-color-yellow-4);
+  --app-danger: var(--mantine-color-red-4);
+
+  /* Chart chrome for dark surfaces (data colors stay the same) */
+  --app-chart-grid: var(--mantine-color-dark-4);
+  --app-chart-axis: var(--mantine-color-dark-2);
+  --app-chart-baseline: var(--mantine-color-dark-4);
+  --app-chart-text: var(--mantine-color-dark-1);
+  --app-chart-strong: var(--mantine-color-dark-0);
+  --app-chart-surface: var(--mantine-color-dark-7);
+  --app-chart-cursor: rgba(255, 255, 255, 0.06);
+
+  --app-shadow: rgba(0, 0, 0, 0.45);
+
+  --app-scrollbar-thumb: var(--mantine-color-dark-4);
+  --app-scrollbar-thumb-hover: var(--mantine-color-dark-3);
+}

@@ -1,14 +1,21 @@
-import { Alert, Card, Stack, Text, Title } from '@mantine/core';
-import { IconAlertCircle } from '@tabler/icons-react';
+import { Card, SimpleGrid, Stack, Text, Title } from '@mantine/core';
+import {
+  IconChecklist,
+  IconCircleCheck,
+  IconClockHour4,
+  IconProgress,
+} from '@tabler/icons-react';
 import { useEffect, useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import DashboardStats from '@/features/dashboard/components/DashboardStats';
+import StatsCard from '@/features/dashboard/components/StatsCard';
+import BackButton from '@/shared/ui/BackButton/BackButton';
 import EmployeeHeader from '../components/EmployeeHeader';
 import { useEmployee } from '../hooks/useEmployees';
 import { useEmployeeStore } from '../store/employee.store';
 import { useTasks } from '@/features/task/hooks/useTasks';
+import { getTaskStats } from '@/features/task/utils/task.utils';
 import TaskList from '@/features/task/components/TaskList';
-import Loader from '@/styles/loader';
+import CenteredState from '@/shared/ui/CenteredState/CenteredState';
 
 export default function EmployeeDetailsPage() {
   const { employeeId } = useParams();
@@ -24,6 +31,9 @@ export default function EmployeeDetailsPage() {
     [tasks, employeeId],
   );
 
+  const stats = useMemo(() => getTaskStats(employeeTasks), [employeeTasks]);
+  const completion = stats.total ? Math.round((stats.completed / stats.total) * 100) : 0;
+
   useEffect(() => {
     if (employee) {
       setSelectedEmployee(employee);
@@ -35,22 +45,47 @@ export default function EmployeeDetailsPage() {
   }
 
   if (isLoading || isTasksLoading) {
-    return <Loader label="Loading employee..." size={44} />;
+    return <CenteredState variant="loading" label="Loading employee..." />;
   }
 
   if (isError || !employee) {
-    return (
-      <Alert color="red" icon={<IconAlertCircle size={18} />}>
-        Employee details could not be loaded.
-      </Alert>
-    );
+    return <CenteredState variant="error" message="Employee details could not be loaded." />;
   }
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
+      <BackButton to="/admin/dashboard/employees" label="Back to Employees" />
+
       <EmployeeHeader />
 
-      <DashboardStats />
+      {/* Stats scoped to THIS employee's assigned tasks. */}
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }}>
+        <StatsCard
+          label="Assigned Tasks"
+          value={stats.total}
+          icon={<IconChecklist size={24} />}
+          accent="var(--app-primary)"
+        />
+        <StatsCard
+          label="Pending"
+          value={stats.pending}
+          icon={<IconClockHour4 size={24} />}
+          accent="var(--app-warning)"
+        />
+        <StatsCard
+          label="In Progress"
+          value={stats.inProgress}
+          icon={<IconProgress size={24} />}
+          accent="var(--app-chart-in-progress)"
+        />
+        <StatsCard
+          label="Completed"
+          value={stats.completed}
+          icon={<IconCircleCheck size={24} />}
+          accent="var(--app-success)"
+          hint={`${completion}% done`}
+        />
+      </SimpleGrid>
 
       <Card withBorder radius="lg">
         <Stack gap="md">
@@ -62,7 +97,15 @@ export default function EmployeeDetailsPage() {
             </Text>
           </div>
 
-          <TaskList tasks={employeeTasks} readOnly />
+          {employeeTasks.length === 0 ? (
+            <CenteredState
+              variant="empty"
+              message={`No tasks assigned to ${employee.fullName} yet.`}
+              minHeight={180}
+            />
+          ) : (
+            <TaskList tasks={employeeTasks} readOnly />
+          )}
         </Stack>
       </Card>
     </div>

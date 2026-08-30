@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import '../theme/tokens.css';
 
 html,
 body,
@@ -10,8 +11,9 @@ body,
 body {
   margin: 0;
   font-family: Inter, sans-serif;
-  background: #f8fafc;
-  color: #1f2937;
+  /* Theme-aware: these flip automatically between light and dark. */
+  background: var(--app-bg);
+  color: var(--app-text);
 }
 
 * {
@@ -23,10 +25,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #94a3b8;
+  background: var(--app-scrollbar-thumb);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: var(--app-scrollbar-thumb-hover);
 }
