@@ -1,5 +1,3 @@
-// Kept for backwards compatibility. Values now resolve from the centralized
-// tokens in theme/tokens.css so there are no competing static colors.
 export const colors = {
   primary: 'var(--app-primary)',
   secondary: 'var(--app-accent)',

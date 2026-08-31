@@ -3,15 +3,10 @@ import { IconArrowLeft } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 
 interface BackButtonProps {
-  /** Explicit destination route. When omitted, navigates to the previous page. */
   to?: string;
   label?: string;
 }
 
-/**
- * Reusable "Back" navigation control. Defaults to browser-history back,
- * or navigates to an explicit route when `to` is provided.
- */
 export default function BackButton({ to, label = 'Back' }: BackButtonProps) {
   const navigate = useNavigate();
 

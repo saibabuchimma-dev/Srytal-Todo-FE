@@ -17,6 +17,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '@/features/auth/store/auth.store';
+import { logout as apiLogout } from '@/features/auth/services/auth.service';
 import NotificationMenu from '@/features/notification/components/NotificationMenu';
 import { useProfile } from '@/features/profile/hooks/useProfile';
 import ThemeToggle from '@/shared/ui/ThemeToggle/ThemeToggle';
@@ -24,9 +25,7 @@ import logo from '@/assets/logo/logo.png';
 import { ROUTES } from '@/shared/config/routes';
 
 interface HeaderProps {
-  /** Mobile navbar open state (from MainLayout). */
   navOpened?: boolean;
-  /** Toggles the mobile navbar. */
   onNavToggle?: () => void;
 }
 
@@ -60,13 +59,16 @@ export default function Header({ navOpened = false, onNavToggle }: HeaderProps) 
   const initial = displayName.charAt(0).toUpperCase();
 
   const handleLogout = () => {
+    const refreshToken = useAuthStore.getState().refreshToken;
+    if (refreshToken) {
+      void apiLogout(refreshToken);
+    }
     logout();
     navigate(isAdmin ? ROUTES.ADMIN_LOGIN : ROUTES.LOGIN);
   };
 
   return (
     <Group justify="space-between" h="100%" px="lg" wrap="nowrap">
-      {/* Brand + current page */}
       <Group gap="sm" wrap="nowrap">
         <Burger
           opened={navOpened}
@@ -91,7 +93,6 @@ export default function Header({ navOpened = false, onNavToggle }: HeaderProps) 
         </Text>
       </Group>
 
-      {/* Actions */}
       <Group gap="xs" wrap="nowrap">
         <ThemeToggle />
 

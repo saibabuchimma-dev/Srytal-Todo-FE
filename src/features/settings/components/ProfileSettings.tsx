@@ -22,9 +22,8 @@ import { formatDate, formatDateTime } from '@/shared/utils/date';
 import { toast } from '@/shared/utils/toast';
 import { useProfile, useUpdateProfile } from '@/features/profile/hooks/useProfile';
 
-const MAX_SOURCE_BYTES = 5 * 1024 * 1024; // 5 MB original file cap
+const MAX_SOURCE_BYTES = 5 * 1024 * 1024;
 
-/** Load an image file, shrink it to a square thumbnail, and return a data URL. */
 function fileToResizedDataUrl(file: File, size = 400): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -41,7 +40,6 @@ function fileToResizedDataUrl(file: File, size = 400): Promise<string> {
           reject(new Error('Image processing is not supported in this browser.'));
           return;
         }
-        // Center-crop to a square, then draw scaled into the canvas.
         const side = Math.min(img.width, img.height);
         const sx = (img.width - side) / 2;
         const sy = (img.height - side) / 2;
@@ -64,7 +62,6 @@ export default function ProfileSettings() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [syncedId, setSyncedId] = useState<string | null>(null);
 
-  // Seed the form from the fetched profile during render (no effect needed).
   if (profile && profile.id !== syncedId) {
     setSyncedId(profile.id);
     setName(profile.name);
@@ -81,7 +78,7 @@ export default function ProfileSettings() {
 
   const handleFileSelected = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    event.target.value = ''; // allow re-selecting the same file later
+    event.target.value = '';
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {

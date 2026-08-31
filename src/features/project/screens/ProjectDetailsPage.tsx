@@ -119,7 +119,6 @@ export default function ProjectDetailsPage() {
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
       <BackButton label="Back to Projects" />
 
-      {/* Hero */}
       <Paper withBorder radius="lg" p="lg">
         <Group justify="space-between" align="flex-start" wrap="wrap" gap="md">
           <Group gap="md" wrap="nowrap" style={{ minWidth: 0 }}>
@@ -184,7 +183,6 @@ export default function ProjectDetailsPage() {
         <Progress value={completion} color="green" radius="xl" size="md" />
       </Paper>
 
-      {/* KPI stats */}
       <SimpleGrid cols={{ base: 2, md: 4 }} spacing="md">
         <StatsCard
           label="Team Members"
@@ -212,7 +210,6 @@ export default function ProjectDetailsPage() {
         />
       </SimpleGrid>
 
-      {/* Tasks table */}
       <Card withBorder radius="lg" p="lg">
         <Group justify="space-between" mb="md">
           <Title order={4}>Tasks</Title>
@@ -247,7 +244,6 @@ export default function ProjectDetailsPage() {
         )}
       </Card>
 
-      {/* Team + per-member tasks */}
       <Grid>
         <Grid.Col span={{ base: 12, md: 4 }}>
           <Card withBorder radius="lg" p="lg">
@@ -391,7 +387,6 @@ export default function ProjectDetailsPage() {
         project={project}
       />
 
-      {/* Create Task */}
       <TaskModal
         opened={taskOpened}
         onClose={() => setTaskOpened(false)}
@@ -405,7 +400,6 @@ export default function ProjectDetailsPage() {
         }}
       />
 
-      {/* Edit Task */}
       <TaskModal
         opened={editTaskOpened}
         onClose={() => {
@@ -425,7 +419,6 @@ export default function ProjectDetailsPage() {
         }}
       />
 
-      {/* View Task */}
       <TaskDetailsModal
         opened={viewOpened}
         onClose={() => {

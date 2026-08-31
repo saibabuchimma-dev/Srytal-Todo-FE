@@ -7,14 +7,12 @@ export const ROUTES = {
 
   CHANGE_PASSWORD: '/change-password',
 
-  // Employee
   TASKS: '/dashboard/tasks',
   BOARD: '/dashboard/board',
   PROJECTS: '/dashboard/projects',
   PROFILE: '/dashboard/profile',
   SETTINGS: '/dashboard/settings',
 
-  // Admin
   EMPLOYEES: '/admin/dashboard/employees',
   EMPLOYEE_DETAILS: (id: string) => `/admin/dashboard/employees/${id}`,
 

@@ -32,7 +32,6 @@ export function EmployeesPage() {
   const total = data?.total ?? 0;
   const totalPages = data?.totalPages ?? 1;
 
-  // Keep the page in range after deletes shrink the result set.
   if (data && totalPages > 0 && page > totalPages) {
     setPage(totalPages);
   }

@@ -1,6 +1,6 @@
 # SRYTAL — Task Management (Frontend)
 
-A modern, role-based task and project management web app built with **React 19**, **TypeScript**, and **Mantine**. SRYTAL lets administrators manage employees, projects, and tasks, while employees track their own work through a clean dashboard, Kanban board, and task views. It talks to the [SRYTAL backend API](https://github.com/) over REST.
+A modern, role-based task and project management web app built with **React 19**, **TypeScript**, and **Mantine**. SRYTAL lets administrators manage employees, projects, and tasks, while employees track their own work through a clean dashboard, Kanban board, and task views. It talks to the SRYTAL backend API over REST.
 
 > This is the **frontend** repository. The REST API lives in the `Srytal-Todo-BE` repository and must be running for the app to work.
 
@@ -53,8 +53,7 @@ A modern, role-based task and project management web app built with **React 19**
 # 1. Install dependencies
 npm install
 
-# 2. Create your environment file (see below)
-cp .env.example .env
+# 2. Create your .env file (a .env already ships with sensible defaults; see below)
 
 # 3. Start the dev server (http://localhost:5173)
 npm run dev
@@ -90,9 +89,11 @@ VITE_APP_VERSION=1.0.0
 | `npm run preview` | Preview the production build locally |
 | `npm run lint` | Run ESLint |
 | `npm run format` | Format the codebase with Prettier |
+| `npm run format:check` | Check formatting without writing |
 | `npm test` | Run the Jest unit test suite |
 | `npm run test:watch` | Run tests in watch mode |
 | `npm run test:coverage` | Run tests and generate a coverage report |
+| `npm run server` | Serve the mock API (json-server) for local prototyping |
 
 ---
 
@@ -151,7 +152,9 @@ src/
 
 ## 🔌 Connecting to the Backend
 
-The app expects the backend at `VITE_API_BASE_URL`. Axios automatically attaches the JWT (from the persisted auth store) to every request and surfaces API errors as toasts. Start the backend first, then run `npm run dev`.
+The app expects the backend at `VITE_API_BASE_URL` (default `http://localhost:5000/api`). Start the backend first, then run `npm run dev`.
+
+Auth uses **access + refresh tokens**. The Axios interceptor attaches `Authorization: Bearer <access-token>` (from the persisted auth store) to every request. When a request returns `401`, it silently refreshes via `POST /auth/refresh`, retries the original request once, and falls back to signing the user out if the refresh fails. Logout best-effort-posts the refresh token to `POST /auth/logout` before clearing local state. API errors are surfaced as toasts.
 
 ---
 

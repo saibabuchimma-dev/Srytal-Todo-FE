@@ -5,10 +5,6 @@ interface UsePaginationOptions {
   initialLimit?: number;
 }
 
-/**
- * Reusable page/limit state for any paginated list.
- * Changing the page size (or calling reset) returns to the first page.
- */
 export function usePagination({ initialPage = 1, initialLimit = 10 }: UsePaginationOptions = {}) {
   const [page, setPage] = useState(initialPage);
   const [limit, setLimitState] = useState(initialLimit);

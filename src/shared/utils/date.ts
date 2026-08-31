@@ -19,13 +19,11 @@ const activeTimezone = (): string | undefined => {
   }
 };
 
-/** Relative time, e.g. "about 2 hours ago" (timezone-independent). */
 export const fromNow = (value?: string | number | Date): string => {
   const date = toDate(value);
   return date ? formatDistanceToNow(date, { addSuffix: true }) : '';
 };
 
-/** Absolute timestamp in the user's preferred timezone, e.g. "21 Jul 2026, 14:30". */
 export const formatDateTime = (value?: string | number | Date): string => {
   const date = toDate(value);
   if (!date) {
@@ -47,7 +45,6 @@ export const formatDateTime = (value?: string | number | Date): string => {
   }
 };
 
-/** Absolute date in the user's preferred timezone, e.g. "21 Jul 2026". */
 export const formatDate = (value?: string | number | Date): string => {
   const date = toDate(value);
   if (!date) {
@@ -66,7 +63,6 @@ export const formatDate = (value?: string | number | Date): string => {
   }
 };
 
-/** Value for @mantine/dates inputs (string, "yyyy-MM-dd", local). */
 export const toDateInputValue = (value?: string | number | Date): string => {
   const date = toDate(value);
   return date ? format(date, 'yyyy-MM-dd') : '';

@@ -21,8 +21,6 @@ import {
   TasksPage,
 } from './lazyScreens';
 
-// Screens rendered outside MainLayout (login / change-password) need their own
-// Suspense boundary; screens inside MainLayout share the one around its Outlet.
 const withSuspense = (element: ReactElement): ReactElement => (
   <Suspense fallback={<CenteredState variant="loading" minHeight="100vh" />}>
     {element}
@@ -44,8 +42,6 @@ export const router = createBrowserRouter([
     path: '/admin/login',
     element: withSuspense(<LoginScreen portal="admin" />),
   },
-
-  // ================= EMPLOYEE =================
 
   {
     element: <ProtectedRoute requiredRole="Employee" redirectPath="/login" />,
@@ -94,8 +90,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
-  // ================= ADMIN =================
 
   {
     element: <ProtectedRoute requiredRole="Admin" redirectPath="/admin/login" />,

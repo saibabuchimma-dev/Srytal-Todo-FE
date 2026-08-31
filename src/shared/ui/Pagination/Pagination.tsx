@@ -5,17 +5,11 @@ interface PaginationProps {
   total: number;
   limit: number;
   onPageChange: (page: number) => void;
-  /** When provided, renders a page-size selector. */
   onLimitChange?: (limit: number) => void;
   pageSizeOptions?: number[];
-  /** Shown while the query is fetching a new page (keeps controls interactive). */
   loading?: boolean;
 }
 
-/**
- * Reusable pagination footer: "Showing X–Y of Z", an optional rows-per-page
- * selector, and page controls. Renders nothing when there are no items.
- */
 export default function Pagination({
   page,
   total,

@@ -74,7 +74,6 @@ export default function DashboardScreen() {
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
-      {/* Hero header */}
       <Paper radius="lg" p="xl" withBorder>
         <Group justify="space-between" align="flex-start" wrap="wrap">
           <div>
@@ -129,10 +128,8 @@ export default function DashboardScreen() {
         </Group>
       </Paper>
 
-      {/* KPI row */}
       <DashboardStats />
 
-      {/* Overview + upcoming */}
       <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md">
         <Card withBorder radius="lg" p="lg">
           <Title order={4}>Task Overview</Title>

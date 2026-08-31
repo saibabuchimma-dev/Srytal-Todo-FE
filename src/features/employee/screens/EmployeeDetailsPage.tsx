@@ -58,7 +58,6 @@ export default function EmployeeDetailsPage() {
 
       <EmployeeHeader />
 
-      {/* Stats scoped to THIS employee's assigned tasks. */}
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }}>
         <StatsCard
           label="Assigned Tasks"

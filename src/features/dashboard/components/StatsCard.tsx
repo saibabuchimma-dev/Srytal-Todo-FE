@@ -6,7 +6,6 @@ interface StatsCardProps {
   label: string;
   value: number | string;
   icon: ReactNode;
-  /** Accent color (a token/CSS color). The tinted icon chip derives from it. */
   accent?: string;
   hint?: string;
 }

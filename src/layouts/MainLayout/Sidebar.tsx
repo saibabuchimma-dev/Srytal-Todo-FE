@@ -16,7 +16,6 @@ import { useProfile } from '@/features/profile/hooks/useProfile';
 import { ROUTES } from '@/shared/config/routes';
 
 interface SidebarProps {
-  /** Called after a nav item is chosen — used to close the mobile slide-over. */
   onNavigate?: () => void;
 }
 
