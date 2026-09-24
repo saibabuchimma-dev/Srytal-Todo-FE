@@ -1,4 +1,13 @@
-import { ActionIcon, Avatar, Button, Card, Group, Menu, Stack, Text } from '@mantine/core';
+import {
+  ActionIcon,
+  Avatar,
+  Button,
+  Card,
+  Group,
+  Menu,
+  Stack,
+  Text,
+} from '@mantine/core';
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons-react';
 import { useState } from 'react';
 
@@ -44,7 +53,11 @@ export default function CommentItem({ comment, taskId }: CommentItemProps) {
     <Card withBorder radius="md" p="sm">
       <Group justify="space-between" align="flex-start" wrap="nowrap">
         <Group gap="xs" align="flex-start" wrap="nowrap" style={{ flex: 1 }}>
-          <Avatar size="sm" radius="xl" src={comment.author?.avatar || undefined}>
+          <Avatar
+            size="sm"
+            radius="xl"
+            src={comment.author?.avatar || undefined}
+          >
             {comment.author?.fullName?.charAt(0)?.toUpperCase() ?? '?'}
           </Avatar>
 
@@ -54,7 +67,11 @@ export default function CommentItem({ comment, taskId }: CommentItemProps) {
                 {comment.author?.fullName ?? 'Unknown'}
               </Text>
 
-              <Text size="xs" c="dimmed" title={formatDateTime(comment.createdAt)}>
+              <Text
+                size="xs"
+                c="dimmed"
+                title={formatDateTime(comment.createdAt)}
+              >
                 {fromNow(comment.createdAt)}
               </Text>
             </Group>
@@ -69,7 +86,11 @@ export default function CommentItem({ comment, taskId }: CommentItemProps) {
                 />
 
                 <Group gap="xs">
-                  <Button size="xs" onClick={handleSave} loading={updateComment.isPending}>
+                  <Button
+                    size="xs"
+                    onClick={handleSave}
+                    loading={updateComment.isPending}
+                  >
                     Save
                   </Button>
 
@@ -102,7 +123,10 @@ export default function CommentItem({ comment, taskId }: CommentItemProps) {
 
             <Menu.Dropdown>
               {isAuthor && (
-                <Menu.Item leftSection={<IconEdit size={14} />} onClick={() => setEditing(true)}>
+                <Menu.Item
+                  leftSection={<IconEdit size={14} />}
+                  onClick={() => setEditing(true)}
+                >
                   Edit
                 </Menu.Item>
               )}

@@ -10,7 +10,12 @@ interface TaskListProps {
   readOnly?: boolean;
 }
 
-export default function TaskList({ tasks, onEdit, onDelete, readOnly = false }: TaskListProps) {
+export default function TaskList({
+  tasks,
+  onEdit,
+  onDelete,
+  readOnly = false,
+}: TaskListProps) {
   return (
     <Stack gap="sm">
       {tasks.map((task) => (

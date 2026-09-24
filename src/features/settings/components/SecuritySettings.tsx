@@ -37,7 +37,9 @@ export default function SecuritySettings() {
       toast.success('Password updated');
       reset();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Unable to change password.');
+      toast.error(
+        error instanceof Error ? error.message : 'Unable to change password.',
+      );
     }
   };
 

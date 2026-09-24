@@ -25,18 +25,18 @@ A modern, role-based task and project management web app built with **React 19**
 
 ## 🧰 Tech Stack
 
-| Area | Technology |
-| --- | --- |
-| Framework | React 19, Vite 8 |
-| Language | TypeScript (strict) |
-| UI | Mantine 9, Tailwind CSS 4, Tabler / React Icons |
-| Data fetching | TanStack Query v5, Axios |
-| State | Zustand (with persistence) |
-| Routing | React Router 7 (lazy-loaded routes) |
-| Forms | React Hook Form + Zod |
-| Charts | Recharts |
-| Misc | framer-motion, sonner (toasts), date-fns, react-markdown |
-| Testing | Jest + React Testing Library |
+| Area          | Technology                                               |
+| ------------- | -------------------------------------------------------- |
+| Framework     | React 19, Vite 8                                         |
+| Language      | TypeScript (strict)                                      |
+| UI            | Mantine 9, Tailwind CSS 4, Tabler / React Icons          |
+| Data fetching | TanStack Query v5, Axios                                 |
+| State         | Zustand (with persistence)                               |
+| Routing       | React Router 7 (lazy-loaded routes)                      |
+| Forms         | React Hook Form + Zod                                    |
+| Charts        | Recharts                                                 |
+| Misc          | framer-motion, sonner (toasts), date-fns, react-markdown |
+| Testing       | Jest + React Testing Library                             |
 
 ---
 
@@ -72,28 +72,28 @@ VITE_APP_NAME=SRYTAL
 VITE_APP_VERSION=1.0.0
 ```
 
-| Variable | Description | Default |
-| --- | --- | --- |
+| Variable            | Description                      | Default                     |
+| ------------------- | -------------------------------- | --------------------------- |
 | `VITE_API_BASE_URL` | Base URL of the backend REST API | `http://localhost:5000/api` |
-| `VITE_APP_NAME` | Application name shown in the UI | `SRYTAL` |
-| `VITE_APP_VERSION` | Displayed app version | `1.0.0` |
+| `VITE_APP_NAME`     | Application name shown in the UI | `SRYTAL`                    |
+| `VITE_APP_VERSION`  | Displayed app version            | `1.0.0`                     |
 
 ---
 
 ## 📜 Scripts
 
-| Script | Description |
-| --- | --- |
-| `npm run dev` | Start the Vite dev server |
-| `npm run build` | Type-check and build for production |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format the codebase with Prettier |
-| `npm run format:check` | Check formatting without writing |
-| `npm test` | Run the Jest unit test suite |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:coverage` | Run tests and generate a coverage report |
-| `npm run server` | Serve the mock API (json-server) for local prototyping |
+| Script                  | Description                                            |
+| ----------------------- | ------------------------------------------------------ |
+| `npm run dev`           | Start the Vite dev server                              |
+| `npm run build`         | Type-check and build for production                    |
+| `npm run preview`       | Preview the production build locally                   |
+| `npm run lint`          | Run ESLint                                             |
+| `npm run format`        | Format the codebase with Prettier                      |
+| `npm run format:check`  | Check formatting without writing                       |
+| `npm test`              | Run the Jest unit test suite                           |
+| `npm run test:watch`    | Run tests in watch mode                                |
+| `npm run test:coverage` | Run tests and generate a coverage report               |
+| `npm run server`        | Serve the mock API (json-server) for local prototyping |
 
 ---
 

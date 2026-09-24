@@ -1,10 +1,18 @@
 jest.mock('@/features/attachment/services/attachment.service', () => ({
   uploadTaskAttachment: jest.fn(),
 }));
-jest.mock('@/shared/utils/toast', () => ({ toast: { error: jest.fn(), success: jest.fn() } }));
+jest.mock('@/shared/utils/toast', () => ({
+  toast: { error: jest.fn(), success: jest.fn() },
+}));
 
 import { useState } from 'react';
-import { renderWithProviders, screen, userEvent, fireEvent, waitFor } from '@test-utils';
+import {
+  renderWithProviders,
+  screen,
+  userEvent,
+  fireEvent,
+  waitFor,
+} from '@test-utils';
 import MarkdownEditor from '@/features/comment/components/MarkdownEditor';
 import MarkdownContent from '@/features/comment/components/MarkdownContent';
 import { uploadTaskAttachment } from '@/features/attachment/services/attachment.service';
@@ -43,26 +51,46 @@ describe('MarkdownEditor', () => {
   });
 
   it('uploads pasted files and inserts a link', async () => {
-    mockUpload.mockResolvedValueOnce({ originalName: 'pic.png', url: 'http://x/pic.png', mimeType: 'image/png' });
+    mockUpload.mockResolvedValueOnce({
+      originalName: 'pic.png',
+      url: 'http://x/pic.png',
+      mimeType: 'image/png',
+    });
     renderWithProviders(<Harness />, { withRouter: false });
     const textarea = screen.getByRole('textbox');
-    fireEvent.paste(textarea, { clipboardData: { files: [new File(['a'], 'pic.png', { type: 'image/png' })] } });
-    await waitFor(() => expect(mockUpload).toHaveBeenCalledWith('t1', expect.any(File)));
-    await waitFor(() => expect((textarea as HTMLTextAreaElement).value).toContain('![pic.png](http://x/pic.png)'));
+    fireEvent.paste(textarea, {
+      clipboardData: {
+        files: [new File(['a'], 'pic.png', { type: 'image/png' })],
+      },
+    });
+    await waitFor(() =>
+      expect(mockUpload).toHaveBeenCalledWith('t1', expect.any(File)),
+    );
+    await waitFor(() =>
+      expect((textarea as HTMLTextAreaElement).value).toContain(
+        '![pic.png](http://x/pic.png)',
+      ),
+    );
   });
 
   it('toasts when an upload fails', async () => {
     mockUpload.mockRejectedValueOnce(new Error('nope'));
     renderWithProviders(<Harness />, { withRouter: false });
     const textarea = screen.getByRole('textbox');
-    fireEvent.drop(textarea, { dataTransfer: { files: [new File(['a'], 'f.txt', { type: 'text/plain' })] } });
+    fireEvent.drop(textarea, {
+      dataTransfer: {
+        files: [new File(['a'], 'f.txt', { type: 'text/plain' })],
+      },
+    });
     await waitFor(() => expect(mToast.error).toHaveBeenCalled());
   });
 });
 
 describe('MarkdownContent', () => {
   it('renders markdown children', () => {
-    renderWithProviders(<MarkdownContent># Title</MarkdownContent>, { withRouter: false });
+    renderWithProviders(<MarkdownContent># Title</MarkdownContent>, {
+      withRouter: false,
+    });
     expect(screen.getByTestId('markdown')).toBeInTheDocument();
   });
 });

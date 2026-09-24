@@ -10,7 +10,6 @@ interface ApiErrorResponse {
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
-    /** Skips the automatic access-token refresh for this request. */
     skipAuthRefresh?: boolean;
   }
 
@@ -52,8 +51,6 @@ api.interceptors.response.use(
       const status = error.response?.status;
       const original = error.config as RetryConfig | undefined;
 
-      // Attempt single-token-refresh when the access token expires (401)
-      // and a refresh token is available. `skipAuthRefresh` prevents infinite loops.
       if (
         status === 401 &&
         original &&
@@ -68,7 +65,9 @@ api.interceptors.response.use(
 
           try {
             const session = await refresh(refreshToken);
-            useAuthStore.getState().setSession(session.accessToken, session.refreshToken);
+            useAuthStore
+              .getState()
+              .setSession(session.accessToken, session.refreshToken);
 
             const headers = original.headers ?? {};
             original.headers = axios.AxiosHeaders.from({
@@ -76,8 +75,8 @@ api.interceptors.response.use(
               Authorization: `Bearer ${session.accessToken}`,
             });
             return api(original);
-          } catch {
-            // Refresh failed — fall through to full logout below.
+          } catch (_refreshError) {
+            void _refreshError;
           }
         }
 

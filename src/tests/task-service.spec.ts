@@ -1,6 +1,12 @@
 jest.mock('@/shared/services/api', () => ({
   __esModule: true,
-  default: { get: jest.fn(), post: jest.fn(), put: jest.fn(), patch: jest.fn(), delete: jest.fn() },
+  default: {
+    get: jest.fn(),
+    post: jest.fn(),
+    put: jest.fn(),
+    patch: jest.fn(),
+    delete: jest.fn(),
+  },
 }));
 
 import api from '@/shared/services/api';
@@ -14,7 +20,10 @@ import {
   getMyTasks,
 } from '@/features/task/services/task.service';
 
-const mockApi = api as unknown as Record<'get' | 'post' | 'put' | 'delete', jest.Mock>;
+const mockApi = api as unknown as Record<
+  'get' | 'post' | 'put' | 'delete',
+  jest.Mock
+>;
 
 describe('task.service', () => {
   it('getTasks normalizes populated assignedTo/project objects', async () => {
@@ -42,21 +51,38 @@ describe('task.service', () => {
       data: [{ id: 't2', assignedTo: 'u2', project: 'p2' }],
     });
     const [task] = await getTasks();
-    expect(task).toMatchObject({ id: 't2', status: 'Pending', priority: 'Medium', assignedTo: 'u2', project: 'p2' });
+    expect(task).toMatchObject({
+      id: 't2',
+      status: 'Pending',
+      priority: 'Medium',
+      assignedTo: 'u2',
+      project: 'p2',
+    });
     expect(task.assignedEmployee).toBeUndefined();
     expect(task.projectDetails).toBeUndefined();
   });
 
   it('getTask unwraps { data }', async () => {
-    mockApi.get.mockResolvedValueOnce({ data: { data: { _id: 't3', title: 'X' } } });
+    mockApi.get.mockResolvedValueOnce({
+      data: { data: { _id: 't3', title: 'X' } },
+    });
     expect((await getTask('t3')).title).toBe('X');
     expect(mockApi.get).toHaveBeenCalledWith('/tasks/t3');
   });
 
   it('createTask posts payload', async () => {
     mockApi.post.mockResolvedValueOnce({ data: { data: { _id: 't4' } } });
-    const created = await createTask({ title: 'N', description: 'd', priority: 'Low', status: 'Pending', dueDate: '2026-01-01' });
-    expect(mockApi.post).toHaveBeenCalledWith('/tasks', expect.objectContaining({ title: 'N' }));
+    const created = await createTask({
+      title: 'N',
+      description: 'd',
+      priority: 'Low',
+      status: 'Pending',
+      dueDate: '2026-01-01',
+    });
+    expect(mockApi.post).toHaveBeenCalledWith(
+      '/tasks',
+      expect.objectContaining({ title: 'N' }),
+    );
     expect(created.id).toBe('t4');
   });
 
@@ -73,13 +99,27 @@ describe('task.service', () => {
   });
 
   it('getTasksPage maps envelope and empty', async () => {
-    mockApi.get.mockResolvedValueOnce({ data: { tasks: [{ _id: 't7' }], total: 1, page: 1, limit: 10, totalPages: 1 } });
+    mockApi.get.mockResolvedValueOnce({
+      data: {
+        tasks: [{ _id: 't7' }],
+        total: 1,
+        page: 1,
+        limit: 10,
+        totalPages: 1,
+      },
+    });
     const page = await getTasksPage({ page: 1, limit: 10 });
     expect(page.items[0].id).toBe('t7');
 
     mockApi.get.mockResolvedValueOnce({ data: {} });
     const empty = await getTasksPage({ page: 4, limit: 15 });
-    expect(empty).toMatchObject({ items: [], total: 0, page: 4, limit: 15, totalPages: 1 });
+    expect(empty).toMatchObject({
+      items: [],
+      total: 0,
+      page: 4,
+      limit: 15,
+      totalPages: 1,
+    });
   });
 
   it('getMyTasks maps the data array', async () => {

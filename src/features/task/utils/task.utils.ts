@@ -1,6 +1,11 @@
 import dayjs from 'dayjs';
 
-import type { Task, TaskPriority, TaskSortOption, TaskStatus } from '../types/task';
+import type {
+  Task,
+  TaskPriority,
+  TaskSortOption,
+  TaskStatus,
+} from '../types/task';
 
 export const getTaskStats = (tasks: Task[]) => ({
   pending: tasks.filter((task) => task.status === 'Pending').length,
@@ -36,18 +41,30 @@ export const filterTasks = ({
 
   return filteredTasks.toSorted((currentTask, nextTask) => {
     if (sort === 'Oldest') {
-      return dayjs(currentTask.createdAt).valueOf() - dayjs(nextTask.createdAt).valueOf();
+      return (
+        dayjs(currentTask.createdAt).valueOf() -
+        dayjs(nextTask.createdAt).valueOf()
+      );
     }
 
     if (sort === 'Due Date') {
-      return dayjs(currentTask.dueDate).valueOf() - dayjs(nextTask.dueDate).valueOf();
+      return (
+        dayjs(currentTask.dueDate).valueOf() - dayjs(nextTask.dueDate).valueOf()
+      );
     }
 
-    return dayjs(nextTask.createdAt).valueOf() - dayjs(currentTask.createdAt).valueOf();
+    return (
+      dayjs(nextTask.createdAt).valueOf() -
+      dayjs(currentTask.createdAt).valueOf()
+    );
   });
 };
 
-export const getPaginatedTasks = (tasks: Task[], page: number, pageSize: number) => {
+export const getPaginatedTasks = (
+  tasks: Task[],
+  page: number,
+  pageSize: number,
+) => {
   const startIndex = (page - 1) * pageSize;
 
   return tasks.slice(startIndex, startIndex + pageSize);

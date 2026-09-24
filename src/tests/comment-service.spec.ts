@@ -1,6 +1,11 @@
 jest.mock('@/shared/services/api', () => ({
   __esModule: true,
-  default: { get: jest.fn(), post: jest.fn(), patch: jest.fn(), delete: jest.fn() },
+  default: {
+    get: jest.fn(),
+    post: jest.fn(),
+    patch: jest.fn(),
+    delete: jest.fn(),
+  },
 }));
 
 import api from '@/shared/services/api';
@@ -11,14 +16,28 @@ import {
   deleteTaskComment,
 } from '@/features/comment/services/comment.service';
 
-const mockApi = api as unknown as Record<'get' | 'post' | 'patch' | 'delete', jest.Mock>;
+const mockApi = api as unknown as Record<
+  'get' | 'post' | 'patch' | 'delete',
+  jest.Mock
+>;
 
 describe('comment.service', () => {
   it('getTaskComments normalizes populated author + string/object task refs', async () => {
     mockApi.get.mockResolvedValueOnce({
       data: {
         data: [
-          { _id: 'c1', content: 'hi', task: { _id: 't1' }, author: { _id: 'a1', fullName: 'A', email: 'a@x.com', role: 'Admin', avatar: 'x' } },
+          {
+            _id: 'c1',
+            content: 'hi',
+            task: { _id: 't1' },
+            author: {
+              _id: 'a1',
+              fullName: 'A',
+              email: 'a@x.com',
+              role: 'Admin',
+              avatar: 'x',
+            },
+          },
           { id: 'c2', task: 't2' },
         ],
       },
@@ -37,16 +56,24 @@ describe('comment.service', () => {
   });
 
   it('addTaskComment posts content', async () => {
-    mockApi.post.mockResolvedValueOnce({ data: { data: { _id: 'c3', content: 'new' } } });
+    mockApi.post.mockResolvedValueOnce({
+      data: { data: { _id: 'c3', content: 'new' } },
+    });
     const c = await addTaskComment('t1', 'new');
-    expect(mockApi.post).toHaveBeenCalledWith('/comments/task/t1', { content: 'new' });
+    expect(mockApi.post).toHaveBeenCalledWith('/comments/task/t1', {
+      content: 'new',
+    });
     expect(c).toMatchObject({ id: 'c3', content: 'new' });
   });
 
   it('updateTaskComment patches content', async () => {
-    mockApi.patch.mockResolvedValueOnce({ data: { data: { _id: 'c4', content: 'edit' } } });
+    mockApi.patch.mockResolvedValueOnce({
+      data: { data: { _id: 'c4', content: 'edit' } },
+    });
     await updateTaskComment('c4', 'edit');
-    expect(mockApi.patch).toHaveBeenCalledWith('/comments/c4', { content: 'edit' });
+    expect(mockApi.patch).toHaveBeenCalledWith('/comments/c4', {
+      content: 'edit',
+    });
   });
 
   it('deleteTaskComment deletes', async () => {

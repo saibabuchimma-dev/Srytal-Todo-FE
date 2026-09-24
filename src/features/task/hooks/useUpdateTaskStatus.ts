@@ -13,10 +13,14 @@ export const useUpdateTaskStatus = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, status }: UpdateStatusVars) => updateTaskStatus(id, status),
+    mutationFn: ({ id, status }: UpdateStatusVars) =>
+      updateTaskStatus(id, status),
 
     onMutate: async ({ id, status }: UpdateStatusVars) => {
-      const snapshots: Array<{ key: readonly string[]; data: Task[] | undefined }> = [];
+      const snapshots: Array<{
+        key: readonly string[];
+        data: Task[] | undefined;
+      }> = [];
 
       for (const key of TASK_LIST_KEYS) {
         await queryClient.cancelQueries({ queryKey: key });
@@ -40,7 +44,9 @@ export const useUpdateTaskStatus = () => {
         queryClient.setQueryData(key, data);
       });
 
-      toast.error(error.response?.data?.message ?? 'Unable to update task status.');
+      toast.error(
+        error.response?.data?.message ?? 'Unable to update task status.',
+      );
     },
 
     onSuccess: () => {

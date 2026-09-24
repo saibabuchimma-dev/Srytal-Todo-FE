@@ -1,6 +1,11 @@
 jest.mock('@/shared/services/api', () => ({
   __esModule: true,
-  default: { get: jest.fn(), post: jest.fn(), put: jest.fn(), delete: jest.fn() },
+  default: {
+    get: jest.fn(),
+    post: jest.fn(),
+    put: jest.fn(),
+    delete: jest.fn(),
+  },
 }));
 
 import api from '@/shared/services/api';
@@ -16,13 +21,23 @@ import {
   getMyProjects,
 } from '@/features/project/services/project.service';
 
-const mockApi = api as unknown as Record<'get' | 'post' | 'put' | 'delete', jest.Mock>;
+const mockApi = api as unknown as Record<
+  'get' | 'post' | 'put' | 'delete',
+  jest.Mock
+>;
 
 describe('project.service', () => {
   it('getProjects normalizes a bare array with defaults', async () => {
-    mockApi.get.mockResolvedValueOnce({ data: [{ _id: 'p1', name: 'A', members: ['m1'] }] });
+    mockApi.get.mockResolvedValueOnce({
+      data: [{ _id: 'p1', name: 'A', members: ['m1'] }],
+    });
     const [proj] = await getProjects();
-    expect(proj).toMatchObject({ id: 'p1', name: 'A', status: 'Planning', members: ['m1'] });
+    expect(proj).toMatchObject({
+      id: 'p1',
+      name: 'A',
+      status: 'Planning',
+      members: ['m1'],
+    });
   });
 
   it('getProjects normalizes a { data: [...] } envelope', async () => {
@@ -38,16 +53,41 @@ describe('project.service', () => {
   });
 
   it('getProjectsPage maps the envelope and the empty case', async () => {
-    mockApi.get.mockResolvedValueOnce({ data: { projects: [{ _id: 'p3' }], total: 1, page: 1, limit: 10, totalPages: 1 } });
-    expect((await getProjectsPage({ page: 1, limit: 10 })).items[0].id).toBe('p3');
+    mockApi.get.mockResolvedValueOnce({
+      data: {
+        projects: [{ _id: 'p3' }],
+        total: 1,
+        page: 1,
+        limit: 10,
+        totalPages: 1,
+      },
+    });
+    expect((await getProjectsPage({ page: 1, limit: 10 })).items[0].id).toBe(
+      'p3',
+    );
 
     mockApi.get.mockResolvedValueOnce({ data: {} });
-    expect(await getProjectsPage({ page: 2, limit: 5 })).toMatchObject({ items: [], total: 0, page: 2, limit: 5 });
+    expect(await getProjectsPage({ page: 2, limit: 5 })).toMatchObject({
+      items: [],
+      total: 0,
+      page: 2,
+      limit: 5,
+    });
   });
 
   it('createProject / getProject unwrap { data } and raw', async () => {
     mockApi.post.mockResolvedValueOnce({ data: { data: { _id: 'p4' } } });
-    expect((await createProject({ name: 'N', description: 'd', status: 'Planning', startDate: '', endDate: '' })).id).toBe('p4');
+    expect(
+      (
+        await createProject({
+          name: 'N',
+          description: 'd',
+          status: 'Planning',
+          startDate: '',
+          endDate: '',
+        })
+      ).id,
+    ).toBe('p4');
 
     mockApi.get.mockResolvedValueOnce({ data: { _id: 'p5' } });
     expect((await getProject('p5')).id).toBe('p5');
@@ -60,7 +100,22 @@ describe('project.service', () => {
           project: { _id: 'p6', name: 'P6' },
           stats: { totalTasks: 3, completed: 1, pending: 1, inProgress: 1 },
           employees: [
-            { employee: { _id: 'u1', fullName: 'U', email: 'u@x.com', role: 'Employee', avatar: 'a.png' }, taskCount: 2, tasks: [{ _id: 't1', assignedTo: { _id: 'u1', fullName: 'U', avatar: 'a.png' } }] },
+            {
+              employee: {
+                _id: 'u1',
+                fullName: 'U',
+                email: 'u@x.com',
+                role: 'Employee',
+                avatar: 'a.png',
+              },
+              taskCount: 2,
+              tasks: [
+                {
+                  _id: 't1',
+                  assignedTo: { _id: 'u1', fullName: 'U', avatar: 'a.png' },
+                },
+              ],
+            },
           ],
           tasks: [{ _id: 't2' }],
         },
@@ -77,14 +132,29 @@ describe('project.service', () => {
   it('getProjectDetails falls back to defaults when data is missing', async () => {
     mockApi.get.mockResolvedValueOnce({ data: {} });
     const details = await getProjectDetails('p7');
-    expect(details.stats).toEqual({ totalTasks: 0, completed: 0, pending: 0, inProgress: 0 });
+    expect(details.stats).toEqual({
+      totalTasks: 0,
+      completed: 0,
+      pending: 0,
+      inProgress: 0,
+    });
     expect(details.employees).toEqual([]);
     expect(details.tasks).toEqual([]);
   });
 
   it('updateProject puts and normalizes', async () => {
     mockApi.put.mockResolvedValueOnce({ data: { data: { _id: 'p8' } } });
-    expect((await updateProject('p8', { name: 'N', description: 'd', status: 'Planning', startDate: '', endDate: '' })).id).toBe('p8');
+    expect(
+      (
+        await updateProject('p8', {
+          name: 'N',
+          description: 'd',
+          status: 'Planning',
+          startDate: '',
+          endDate: '',
+        })
+      ).id,
+    ).toBe('p8');
   });
 
   it('getEmployeeProjectTasks returns normalized tasks and [] fallback', async () => {

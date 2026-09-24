@@ -21,7 +21,9 @@ const normalizeAttachment = (item: AttachmentApiResponse): Attachment => ({
   createdAt: item.createdAt,
 });
 
-export const getTaskAttachments = async (taskId: string): Promise<Attachment[]> => {
+export const getTaskAttachments = async (
+  taskId: string,
+): Promise<Attachment[]> => {
   const { data } = await api.get<{
     success: boolean;
     data: AttachmentApiResponse[];
@@ -30,7 +32,10 @@ export const getTaskAttachments = async (taskId: string): Promise<Attachment[]> 
   return (data.data ?? []).map(normalizeAttachment);
 };
 
-export const uploadTaskAttachment = async (taskId: string, file: File): Promise<Attachment> => {
+export const uploadTaskAttachment = async (
+  taskId: string,
+  file: File,
+): Promise<Attachment> => {
   const form = new FormData();
   form.append('file', file);
 
@@ -44,6 +49,8 @@ export const uploadTaskAttachment = async (taskId: string, file: File): Promise<
   return normalizeAttachment(data.data);
 };
 
-export const deleteTaskAttachment = async (attachmentId: string): Promise<void> => {
+export const deleteTaskAttachment = async (
+  attachmentId: string,
+): Promise<void> => {
   await api.delete(`/attachments/${attachmentId}`);
 };

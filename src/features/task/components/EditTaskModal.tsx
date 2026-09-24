@@ -97,7 +97,12 @@ export default function EditTaskModal({ opened, task, onClose }: Props) {
     >
       <TextInput label="Task Title" {...register('title')} />
 
-      <Textarea label="Description" autosize minRows={4} {...register('description')} />
+      <Textarea
+        label="Description"
+        autosize
+        minRows={4}
+        {...register('description')}
+      />
 
       <Controller
         control={control}

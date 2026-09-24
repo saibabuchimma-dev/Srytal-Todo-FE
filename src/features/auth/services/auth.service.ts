@@ -8,7 +8,6 @@ import type {
   UserRole,
 } from '../types/auth';
 
-/** The `data` block shared by `/auth/login` and `/auth/refresh`. */
 type AuthPayload = LoginResponse['data'];
 
 const normalizeAuthUser = (user: AuthPayload['user']): AuthUser => ({
@@ -20,11 +19,6 @@ const normalizeAuthUser = (user: AuthPayload['user']): AuthUser => ({
   mustChangePassword: user.mustChangePassword,
 });
 
-/**
- * Builds an auth session from the BE response, mapping `accessToken`/`refreshToken`
- * onto the local session model. `token` is kept as an alias of the access token so
- * the axios interceptor and existing callers keep working.
- */
 const toSession = (payload: AuthPayload): AuthSession => {
   if (!payload.accessToken || !payload.user) {
     throw new Error('Invalid login response');
@@ -58,8 +52,8 @@ export const refresh = async (refreshToken: string): Promise<AuthSession> => {
 export const logout = async (refreshToken: string): Promise<void> => {
   try {
     await api.post('/auth/logout', { refreshToken });
-  } catch {
-    // Logout is best-effort — always clear the local session regardless.
+  } catch (_error) {
+    void _error;
   }
 };
 

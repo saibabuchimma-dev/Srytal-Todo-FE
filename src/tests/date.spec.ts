@@ -1,4 +1,9 @@
-import { fromNow, formatDate, formatDateTime, toDateInputValue } from '@/shared/utils/date';
+import {
+  fromNow,
+  formatDate,
+  formatDateTime,
+  toDateInputValue,
+} from '@/shared/utils/date';
 import { usePreferencesStore } from '@/shared/store/preferences.store';
 
 describe('date utils', () => {
@@ -26,13 +31,17 @@ describe('date utils', () => {
 
     it('formats a valid date in en-GB style', () => {
       expect(formatDate('2026-07-21T10:00:00Z')).toMatch(/\d{2}\s\w{3}\s\d{4}/);
-      expect(formatDateTime('2026-07-21T10:00:00Z')).toMatch(/\d{2}\s\w{3}\s\d{4}/);
+      expect(formatDateTime('2026-07-21T10:00:00Z')).toMatch(
+        /\d{2}\s\w{3}\s\d{4}/,
+      );
     });
 
     it('falls back to date-fns formatting when the timezone is invalid', () => {
       usePreferencesStore.setState({ timezone: 'Invalid/Zone' });
       expect(formatDate('2026-07-21T10:00:00Z')).toMatch(/\d{2}\s\w{3}\s\d{4}/);
-      expect(formatDateTime('2026-07-21T10:00:00Z')).toMatch(/\d{2}\s\w{3}\s\d{4}/);
+      expect(formatDateTime('2026-07-21T10:00:00Z')).toMatch(
+        /\d{2}\s\w{3}\s\d{4}/,
+      );
     });
   });
 
@@ -42,7 +51,9 @@ describe('date utils', () => {
     });
 
     it('returns yyyy-MM-dd for a valid date', () => {
-      expect(toDateInputValue('2026-07-21T10:00:00Z')).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(toDateInputValue('2026-07-21T10:00:00Z')).toMatch(
+        /^\d{4}-\d{2}-\d{2}$/,
+      );
     });
   });
 });

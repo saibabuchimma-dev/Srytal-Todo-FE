@@ -17,7 +17,9 @@ describe('UI primitive wrappers', () => {
   });
 
   it('Button renders and forwards props', () => {
-    renderWithProviders(<Button data-testid="btn">Click</Button>, { withRouter: false });
+    renderWithProviders(<Button data-testid="btn">Click</Button>, {
+      withRouter: false,
+    });
     expect(screen.getByTestId('btn')).toHaveTextContent('Click');
   });
 
@@ -27,7 +29,9 @@ describe('UI primitive wrappers', () => {
   });
 
   it('Input renders with a label', () => {
-    renderWithProviders(<Input label="Email" placeholder="you@x.com" />, { withRouter: false });
+    renderWithProviders(<Input label="Email" placeholder="you@x.com" />, {
+      withRouter: false,
+    });
     expect(screen.getByLabelText('Email')).toBeInTheDocument();
   });
 });

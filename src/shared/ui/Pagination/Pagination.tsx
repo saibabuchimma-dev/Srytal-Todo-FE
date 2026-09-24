@@ -1,61 +1,98 @@
-import { Group, Pagination as MantinePagination, Select, Text } from '@mantine/core';
+import {
+  Group,
+  Pagination as MantinePagination,
+  Select,
+  Text,
+} from '@mantine/core';
 
-interface PaginationProps {
-  page: number;
-  total: number;
-  limit: number;
-  onPageChange: (page: number) => void;
+export interface CustomPaginationProps {
+  page?: number;
+  total?: number;
+  limit?: number;
+  totalPages?: number;
+  onPageChange?: (page: number) => void;
   onLimitChange?: (limit: number) => void;
-  pageSizeOptions?: number[];
   loading?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  value?: number;
+  onChange?: (value: number) => void;
 }
 
-export default function Pagination({
-  page,
-  total,
-  limit,
+export function Pagination({
+  page = 1,
+  total = 0,
+  limit = 10,
+  totalPages,
   onPageChange,
   onLimitChange,
-  pageSizeOptions = [10, 20, 50],
-  loading = false,
-}: PaginationProps) {
-  if (total === 0) {
-    return null;
-  }
+  loading,
+  value,
+  onChange,
+  className,
+  style,
+}: CustomPaginationProps) {
+  const currentPage = value ?? page;
+  const numPages =
+    totalPages ?? Math.max(1, Math.ceil(total / Math.max(1, limit)));
 
-  const totalPages = Math.max(1, Math.ceil(total / limit));
-  const from = (page - 1) * limit + 1;
-  const to = Math.min(page * limit, total);
+  const handleChange = (p: number) => {
+    if (onPageChange) onPageChange(p);
+    if (onChange) onChange(p);
+  };
 
   return (
-    <Group justify="space-between" align="center" wrap="wrap" gap="sm" mt="md">
-      <Text size="sm" c="dimmed">
-        Showing {from}–{to} of {total}
-      </Text>
-
-      <Group gap="sm" wrap="nowrap">
-        {onLimitChange && (
+    <Group
+      justify="space-between"
+      align="center"
+      wrap="wrap"
+      gap="sm"
+      className={className}
+      style={style}
+    >
+      {onLimitChange && (
+        <Group gap="xs" wrap="nowrap">
+          <Text size="xs" c="dimmed">
+            Per page:
+          </Text>
           <Select
             size="xs"
-            w={120}
-            aria-label="Rows per page"
-            allowDeselect={false}
-            data={pageSizeOptions.map((size) => ({ value: String(size), label: `${size} / page` }))}
+            w={76}
             value={String(limit)}
-            onChange={(value) => value && onLimitChange(Number(value))}
+            onChange={(val) => onLimitChange(Number(val) || 10)}
+            data={['5', '10', '20', '50']}
+            disabled={loading}
+            styles={{
+              input: {
+                borderRadius: 8,
+                fontSize: 12,
+              },
+            }}
           />
-        )}
+        </Group>
+      )}
 
-        <MantinePagination
-          total={totalPages}
-          value={page}
-          onChange={onPageChange}
-          size="sm"
-          radius="md"
-          withEdges
-          disabled={loading}
-        />
-      </Group>
+      <MantinePagination
+        value={currentPage}
+        onChange={handleChange}
+        total={numPages}
+        size="sm"
+        radius="md"
+        disabled={loading}
+        styles={{
+          control: {
+            borderColor: 'var(--app-border)',
+            backgroundColor: 'var(--app-surface)',
+            borderRadius: 8,
+            minWidth: 32,
+            height: 32,
+            fontSize: 13,
+            fontWeight: 500,
+          },
+        }}
+      />
     </Group>
   );
 }
+
+export default Pagination;

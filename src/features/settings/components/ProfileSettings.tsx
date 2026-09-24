@@ -20,7 +20,10 @@ import type { ChangeEvent } from 'react';
 import CenteredState from '@/shared/ui/CenteredState/CenteredState';
 import { formatDate, formatDateTime } from '@/shared/utils/date';
 import { toast } from '@/shared/utils/toast';
-import { useProfile, useUpdateProfile } from '@/features/profile/hooks/useProfile';
+import {
+  useProfile,
+  useUpdateProfile,
+} from '@/features/profile/hooks/useProfile';
 
 const MAX_SOURCE_BYTES = 5 * 1024 * 1024;
 
@@ -37,7 +40,9 @@ function fileToResizedDataUrl(file: File, size = 400): Promise<string> {
         canvas.height = size;
         const ctx = canvas.getContext('2d');
         if (!ctx) {
-          reject(new Error('Image processing is not supported in this browser.'));
+          reject(
+            new Error('Image processing is not supported in this browser.'),
+          );
           return;
         }
         const side = Math.min(img.width, img.height);
@@ -69,7 +74,14 @@ export default function ProfileSettings() {
   }
 
   if (isLoading || !profile) {
-    return <CenteredState variant="loading" label="Loading profile..." minHeight={280} size={32} />;
+    return (
+      <CenteredState
+        variant="loading"
+        label="Loading profile..."
+        minHeight={280}
+        size={32}
+      />
+    );
   }
 
   const dirty = name.trim() !== profile.name || avatar !== profile.avatar;
@@ -94,7 +106,10 @@ export default function ProfileSettings() {
       const dataUrl = await fileToResizedDataUrl(file);
       setAvatar(dataUrl);
     } catch (error) {
-      toast.error('Upload failed', error instanceof Error ? error.message : 'Could not read image.');
+      toast.error(
+        'Upload failed',
+        error instanceof Error ? error.message : 'Could not read image.',
+      );
     }
   };
 
@@ -136,7 +151,9 @@ export default function ProfileSettings() {
             <Stack gap={4}>
               <Group gap="xs">
                 <Title order={3}>{profile.name}</Title>
-                <Badge color={profile.role === 'Admin' ? 'indigo' : 'teal'}>{profile.role}</Badge>
+                <Badge color={profile.role === 'Admin' ? 'indigo' : 'teal'}>
+                  {profile.role}
+                </Badge>
               </Group>
               <Text c="dimmed" size="sm">
                 {profile.email}
@@ -146,7 +163,12 @@ export default function ProfileSettings() {
                   Change photo
                 </Button>
                 {avatar && (
-                  <Button variant="subtle" color="red" size="xs" onClick={() => setAvatar('')}>
+                  <Button
+                    variant="subtle"
+                    color="red"
+                    size="xs"
+                    onClick={() => setAvatar('')}
+                  >
                     Remove
                   </Button>
                 )}
@@ -202,12 +224,16 @@ export default function ProfileSettings() {
 
           <Group justify="space-between">
             <Text c="dimmed">Last login</Text>
-            <Text>{profile.lastLogin ? formatDateTime(profile.lastLogin) : '—'}</Text>
+            <Text>
+              {profile.lastLogin ? formatDateTime(profile.lastLogin) : '—'}
+            </Text>
           </Group>
 
           <Group justify="space-between">
             <Text c="dimmed">Member since</Text>
-            <Text>{profile.createdAt ? formatDate(profile.createdAt) : '—'}</Text>
+            <Text>
+              {profile.createdAt ? formatDate(profile.createdAt) : '—'}
+            </Text>
           </Group>
         </Stack>
       </Card>

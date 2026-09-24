@@ -1,4 +1,12 @@
-import { ActionIcon, Box, Group, Tabs, Text, Textarea, Tooltip } from '@mantine/core';
+import {
+  ActionIcon,
+  Box,
+  Group,
+  Tabs,
+  Text,
+  Textarea,
+  Tooltip,
+} from '@mantine/core';
 import {
   IconBold,
   IconCode,
@@ -16,19 +24,23 @@ import { uploadTaskAttachment } from '@/features/attachment/services/attachment.
 import { toast } from '@/shared/utils/toast';
 import MarkdownContent from './MarkdownContent';
 
-type Command = 'heading' | 'bold' | 'italic' | 'quote' | 'code' | 'link' | 'ul' | 'ol';
+type Command =
+  'heading' | 'bold' | 'italic' | 'quote' | 'code' | 'link' | 'ul' | 'ol';
 
-const TOOLBAR: { icon: React.ComponentType<{ size?: number }>; label: string; command: Command }[] =
-  [
-    { icon: IconHeading, label: 'Heading', command: 'heading' },
-    { icon: IconBold, label: 'Bold', command: 'bold' },
-    { icon: IconItalic, label: 'Italic', command: 'italic' },
-    { icon: IconQuote, label: 'Quote', command: 'quote' },
-    { icon: IconCode, label: 'Code', command: 'code' },
-    { icon: IconLink, label: 'Link', command: 'link' },
-    { icon: IconList, label: 'Bulleted list', command: 'ul' },
-    { icon: IconListNumbers, label: 'Numbered list', command: 'ol' },
-  ];
+const TOOLBAR: {
+  icon: React.ComponentType<{ size?: number }>;
+  label: string;
+  command: Command;
+}[] = [
+  { icon: IconHeading, label: 'Heading', command: 'heading' },
+  { icon: IconBold, label: 'Bold', command: 'bold' },
+  { icon: IconItalic, label: 'Italic', command: 'italic' },
+  { icon: IconQuote, label: 'Quote', command: 'quote' },
+  { icon: IconCode, label: 'Code', command: 'code' },
+  { icon: IconLink, label: 'Link', command: 'link' },
+  { icon: IconList, label: 'Bulleted list', command: 'ul' },
+  { icon: IconListNumbers, label: 'Numbered list', command: 'ol' },
+];
 
 interface MarkdownEditorProps {
   value: string;
@@ -65,8 +77,13 @@ export default function MarkdownEditor({
     const start = el.selectionStart;
     const end = el.selectionEnd;
     const selected = value.slice(start, end);
-    onChange(value.slice(0, start) + before + selected + after + value.slice(end));
-    restoreSelection(start + before.length, start + before.length + selected.length);
+    onChange(
+      value.slice(0, start) + before + selected + after + value.slice(end),
+    );
+    restoreSelection(
+      start + before.length,
+      start + before.length + selected.length,
+    );
   };
 
   const linePrefix = (prefix: string) => {

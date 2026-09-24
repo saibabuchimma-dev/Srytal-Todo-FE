@@ -7,7 +7,11 @@ interface ChartCardProps {
   children: ReactNode;
 }
 
-export default function ChartCard({ title, subtitle, children }: ChartCardProps) {
+export default function ChartCard({
+  title,
+  subtitle,
+  children,
+}: ChartCardProps) {
   return (
     <Card withBorder radius="lg" p="lg">
       <Title order={5}>{title}</Title>

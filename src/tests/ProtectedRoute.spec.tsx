@@ -4,8 +4,19 @@ import ProtectedRoute from '@/app/router/ProtectedRoute';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import type { AuthUser } from '@/features/auth/types/auth';
 
-const admin: AuthUser = { id: 'u1', fullName: 'Ad', name: 'Ad', email: 'a@x.com', role: 'Admin', mustChangePassword: false };
-const employee: AuthUser = { ...admin, role: 'Employee', mustChangePassword: false };
+const admin: AuthUser = {
+  id: 'u1',
+  fullName: 'Ad',
+  name: 'Ad',
+  email: 'a@x.com',
+  role: 'Admin',
+  mustChangePassword: false,
+};
+const employee: AuthUser = {
+  ...admin,
+  role: 'Employee',
+  mustChangePassword: false,
+};
 
 function tree() {
   return (

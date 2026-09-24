@@ -1,5 +1,12 @@
-import { Badge, Button, PasswordInput, Stack, Text, TextInput, Title } from '@mantine/core';
-import type { CSSProperties } from 'react';
+import {
+  Badge,
+  Button,
+  PasswordInput,
+  Stack,
+  Text,
+  TextInput,
+  Title,
+} from '@mantine/core';
 import { useForm } from 'react-hook-form';
 import { HiOutlineEnvelope, HiOutlineLockClosed } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
@@ -17,14 +24,6 @@ interface LoginFormData {
 interface LoginFormProps {
   portal: 'admin' | 'employee';
 }
-
-const cardStyle: CSSProperties = {
-  background: 'var(--app-surface)',
-  border: '1px solid var(--app-border)',
-  borderRadius: 20,
-  padding: '36px 32px',
-  boxShadow: '0 24px 60px -28px var(--app-shadow)',
-};
 
 export default function LoginForm({ portal }: LoginFormProps) {
   const {
@@ -46,7 +45,10 @@ export default function LoginForm({ portal }: LoginFormProps) {
       const user = await login(data);
 
       if (user.role !== expectedRole) {
-        toast.error('Wrong Portal', 'You are trying to login from the wrong portal.');
+        toast.error(
+          'Wrong Portal',
+          'You are trying to login from the wrong portal.',
+        );
         return;
       }
 
@@ -58,7 +60,9 @@ export default function LoginForm({ portal }: LoginFormProps) {
       }
 
       toast.success('Success', 'Login successful');
-      navigate(portal === 'admin' ? '/admin/dashboard' : '/dashboard', { replace: true });
+      navigate(portal === 'admin' ? '/admin/dashboard' : '/dashboard', {
+        replace: true,
+      });
     } catch (error) {
       const message =
         error instanceof Error && error.message !== 'Invalid email or password'
@@ -70,15 +74,23 @@ export default function LoginForm({ portal }: LoginFormProps) {
   };
 
   return (
-    <div style={cardStyle}>
+    <div
+      style={{
+        backgroundColor: 'var(--app-surface)',
+        border: '1px solid var(--app-border)',
+        borderRadius: 20,
+        padding: '36px 32px',
+        boxShadow: 'var(--app-shadow-card-hover)',
+      }}
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="lg">
-          <Stack gap={10} align="center">
+          <Stack gap={8} align="center">
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <img
                 src={logo}
                 alt="SRYTAL"
-                style={{ height: 80, objectFit: 'contain', borderRadius: 12 }}
+                style={{ height: 68, objectFit: 'contain', borderRadius: 12 }}
               />
             </div>
 
@@ -87,34 +99,37 @@ export default function LoginForm({ portal }: LoginFormProps) {
               color={portal === 'admin' ? 'indigo' : 'teal'}
               radius="sm"
               size="sm"
+              tt="uppercase"
+              fw={700}
             >
               {portal === 'admin' ? 'Admin Portal' : 'Employee Portal'}
             </Badge>
 
-            <Title order={2} ta="center" fw={800} lh={1.2}>
+            <Title order={2} ta="center" fw={800} lh={1.2} mt={4}>
               Welcome back
             </Title>
 
-            <Text ta="center" c="dimmed" size="sm">
-              Sign in to continue to your {portal === 'admin' ? 'admin' : 'employee'} dashboard
+            <Text ta="center" c="dimmed" size="xs">
+              Sign in to continue to your{' '}
+              {portal === 'admin' ? 'administrator' : 'team member'} workspace
             </Text>
           </Stack>
 
-          <Stack gap="md">
+          <Stack gap="sm">
             <TextInput
-              label="Email"
-              placeholder="you@example.com"
+              label="Work Email"
+              placeholder="name@company.com"
               radius="md"
-              size="md"
+              size="sm"
               autoComplete="email"
-              leftSection={<HiOutlineEnvelope size={18} />}
+              leftSection={<HiOutlineEnvelope size={16} />}
               disabled={isSubmitting}
               error={errors.email?.message}
               {...register('email', {
                 required: 'Email is required',
                 pattern: {
                   value: /^\S+@\S+$/i,
-                  message: 'Enter a valid email',
+                  message: 'Enter a valid email address',
                 },
               })}
             />
@@ -123,9 +138,9 @@ export default function LoginForm({ portal }: LoginFormProps) {
               label="Password"
               placeholder="Enter your password"
               radius="md"
-              size="md"
+              size="sm"
               autoComplete="current-password"
-              leftSection={<HiOutlineLockClosed size={18} />}
+              leftSection={<HiOutlineLockClosed size={16} />}
               disabled={isSubmitting}
               error={errors.password?.message}
               {...register('password', {
@@ -143,14 +158,17 @@ export default function LoginForm({ portal }: LoginFormProps) {
             size="md"
             radius="md"
             fullWidth
-            h={48}
+            h={44}
             loading={isSubmitting}
             styles={{
               root: {
                 border: 'none',
-                background: 'var(--app-brand-gradient)',
-                color: 'var(--app-brand-on)',
+                background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+                color: '#FFFFFF',
                 fontWeight: 600,
+                fontSize: 14,
+                boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)',
+                transition: 'transform 150ms ease, box-shadow 150ms ease',
               },
             }}
           >
@@ -158,7 +176,7 @@ export default function LoginForm({ portal }: LoginFormProps) {
           </Button>
 
           <Text ta="center" size="xs" c="dimmed">
-            Trouble signing in? Contact your administrator.
+            Trouble signing in? Contact your system administrator.
           </Text>
         </Stack>
       </form>

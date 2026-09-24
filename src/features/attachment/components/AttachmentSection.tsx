@@ -1,8 +1,19 @@
-import { Button, Card, FileButton, Group, Stack, Text, Title } from '@mantine/core';
+import {
+  Button,
+  Card,
+  FileButton,
+  Group,
+  Stack,
+  Text,
+  Title,
+} from '@mantine/core';
 import { IconUpload } from '@tabler/icons-react';
 
 import Loader from '@/styles/loader';
-import { useTaskAttachments, useUploadAttachment } from '../hooks/useAttachments';
+import {
+  useTaskAttachments,
+  useUploadAttachment,
+} from '../hooks/useAttachments';
 import AttachmentItem from './AttachmentItem';
 
 interface AttachmentSectionProps {
@@ -10,7 +21,11 @@ interface AttachmentSectionProps {
 }
 
 export default function AttachmentSection({ taskId }: AttachmentSectionProps) {
-  const { data: attachments = [], isLoading, isError } = useTaskAttachments(taskId);
+  const {
+    data: attachments = [],
+    isLoading,
+    isError,
+  } = useTaskAttachments(taskId);
   const uploadAttachment = useUploadAttachment(taskId);
 
   const handleUpload = (file: File | null) => {
@@ -23,7 +38,9 @@ export default function AttachmentSection({ taskId }: AttachmentSectionProps) {
     <Card withBorder radius="md" p="md">
       <Stack>
         <Group justify="space-between">
-          <Title order={5}>Attachments{attachments.length ? ` (${attachments.length})` : ''}</Title>
+          <Title order={5}>
+            Attachments{attachments.length ? ` (${attachments.length})` : ''}
+          </Title>
 
           <FileButton onChange={handleUpload}>
             {(props) => (
@@ -53,7 +70,11 @@ export default function AttachmentSection({ taskId }: AttachmentSectionProps) {
         ) : (
           <Stack gap="sm">
             {attachments.map((attachment) => (
-              <AttachmentItem key={attachment.id} attachment={attachment} taskId={taskId} />
+              <AttachmentItem
+                key={attachment.id}
+                attachment={attachment}
+                taskId={taskId}
+              />
             ))}
           </Stack>
         )}

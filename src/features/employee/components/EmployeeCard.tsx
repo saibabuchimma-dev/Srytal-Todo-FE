@@ -1,4 +1,13 @@
-import { ActionIcon, Avatar, Badge, Card, Group, Menu, Stack, Text } from '@mantine/core';
+import {
+  ActionIcon,
+  Avatar,
+  Badge,
+  Card,
+  Group,
+  Menu,
+  Stack,
+  Text,
+} from '@mantine/core';
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +21,11 @@ interface EmployeeCardProps {
   onDelete: (employee: Employee) => void;
 }
 
-export default function EmployeeCard({ employee, onEdit, onDelete }: EmployeeCardProps) {
+export default function EmployeeCard({
+  employee,
+  onEdit,
+  onDelete,
+}: EmployeeCardProps) {
   const navigate = useNavigate();
 
   const { selectedEmployee, setSelectedEmployee } = useEmployeeStore();
@@ -33,7 +46,10 @@ export default function EmployeeCard({ employee, onEdit, onDelete }: EmployeeCar
         className="cursor-pointer transition-all"
         style={
           isSelected
-            ? { borderColor: 'var(--app-primary)', background: 'var(--app-accent-soft)' }
+            ? {
+                borderColor: 'var(--app-primary)',
+                background: 'var(--app-accent-soft)',
+              }
             : undefined
         }
         onClick={handleView}
@@ -60,7 +76,10 @@ export default function EmployeeCard({ employee, onEdit, onDelete }: EmployeeCar
 
             <Menu shadow="md" width={180}>
               <Menu.Target>
-                <ActionIcon variant="subtle" onClick={(e) => e.stopPropagation()}>
+                <ActionIcon
+                  variant="subtle"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <IconDotsVertical size={18} />
                 </ActionIcon>
               </Menu.Target>

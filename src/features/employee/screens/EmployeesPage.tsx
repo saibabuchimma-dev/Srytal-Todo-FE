@@ -1,26 +1,43 @@
-import { Button, Card, Divider, Group, Paper, Stack, Text, TextInput, Title } from '@mantine/core';
+import {
+  Button,
+  Card,
+  Divider,
+  Group,
+  Paper,
+  Stack,
+  Text,
+  TextInput,
+  Title,
+} from '@mantine/core';
 import { IconPlus, IconSearch, IconUsers } from '@tabler/icons-react';
 import { useState } from 'react';
 import { useDebouncedValue } from '@mantine/hooks';
 import CenteredState from '@/shared/ui/CenteredState/CenteredState';
-import Pagination from '@/shared/ui/Pagination/Pagination';
+import { Pagination } from '@/shared/ui/Pagination/Pagination';
 import { usePagination } from '@/shared/hooks/usePagination';
 import CreateEmployeeModal from '../components/CreateEmployeeModal';
 import EditEmployeeModal from '../components/EditEmployeeModal';
 import EmployeeTable from '../components/EmployeeTable';
 import ConfirmDeleteModal from '@/components/common/ConfirmDeleteModal';
-import { useDeleteEmployee, usePaginatedEmployees } from '../hooks/useEmployees';
+import {
+  useDeleteEmployee,
+  usePaginatedEmployees,
+} from '../hooks/useEmployees';
 import type { Employee } from '../types/employee';
 
 export function EmployeesPage() {
   const [search, setSearch] = useState('');
-  const [debouncedSearch] = useDebouncedValue(search, 350);
-  const { page, setPage, limit, setLimit, reset } = usePagination({ initialLimit: 10 });
+  const [debouncedSearch] = useDebouncedValue(search, 300);
+  const { page, setPage, limit, setLimit, reset } = usePagination({
+    initialLimit: 10,
+  });
 
   const [createOpened, setCreateOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
   const [deleteOpened, setDeleteOpened] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
+    null,
+  );
 
   const { data, isLoading, isFetching, isError } = usePaginatedEmployees({
     page,
@@ -48,56 +65,95 @@ export function EmployeesPage() {
   }
 
   if (isError) {
-    return <CenteredState variant="error" message="Failed to load employees." />;
+    return (
+      <CenteredState variant="error" message="Failed to load employees." />
+    );
   }
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-6">
-      <Paper p="lg" radius="lg" withBorder>
+    <div className="mx-auto flex max-w-7xl flex-col gap-6 animate-in">
+      <Paper
+        p="lg"
+        radius="lg"
+        withBorder
+        style={{
+          backgroundColor: 'var(--app-surface)',
+          borderColor: 'var(--app-border)',
+          boxShadow: 'var(--app-shadow-card)',
+        }}
+      >
         <Group justify="space-between" wrap="wrap" gap="md">
           <Group gap="sm" wrap="nowrap">
             <div
-              className="rounded-xl p-3"
-              style={{ background: 'var(--app-accent-soft)', color: 'var(--app-accent-fg)' }}
+              style={{
+                padding: 10,
+                borderRadius: 12,
+                background: 'var(--app-accent-soft)',
+                color: 'var(--app-accent-fg)',
+              }}
             >
-              <IconUsers size={26} />
+              <IconUsers size={24} />
             </div>
             <div>
-              <Title order={2}>Employee Management</Title>
-              <Text c="dimmed">Manage your team members from one place.</Text>
+              <Title order={2} fw={800} fz={22}>
+                Employee Directory
+              </Title>
+              <Text c="dimmed" size="xs">
+                Manage team members, roles, and workspace permissions.
+              </Text>
             </div>
           </Group>
 
-          <Button leftSection={<IconPlus size={16} />} onClick={() => setCreateOpened(true)}>
-            Create Employee
+          <Button
+            leftSection={<IconPlus size={16} />}
+            onClick={() => setCreateOpened(true)}
+            style={{
+              background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+              fontWeight: 600,
+            }}
+          >
+            Add Employee
           </Button>
         </Group>
       </Paper>
 
-      <Card withBorder radius="lg" p="lg">
-        <Stack>
+      <Card
+        withBorder
+        radius="lg"
+        p="lg"
+        style={{
+          backgroundColor: 'var(--app-surface)',
+          borderColor: 'var(--app-border)',
+          boxShadow: 'var(--app-shadow-card)',
+        }}
+      >
+        <Stack gap="md">
           <Group justify="space-between" wrap="wrap" gap="sm">
             <TextInput
               placeholder="Search by name or email..."
               leftSection={<IconSearch size={16} />}
               radius="md"
+              size="sm"
               value={search}
               onChange={(event) => handleSearch(event.currentTarget.value)}
               style={{ flex: '1 1 260px', maxWidth: 360 }}
             />
-            <Text size="sm" c="dimmed">
-              {total} employee{total === 1 ? '' : 's'}
+            <Text size="xs" c="dimmed" fw={500}>
+              Showing {employees.length} of {total} employee
+              {total === 1 ? '' : 's'}
             </Text>
           </Group>
 
-          <Divider />
+          <Divider my={4} style={{ borderColor: 'var(--app-border)' }} />
 
           {employees.length === 0 ? (
             <CenteredState
               variant="empty"
               minHeight={220}
               message={
-                debouncedSearch ? 'No employees match your search.' : 'No employees added yet.'
+                debouncedSearch
+                  ? 'No employees match your search.'
+                  : 'No employees added yet.'
               }
             />
           ) : (
@@ -125,7 +181,10 @@ export function EmployeesPage() {
         </Stack>
       </Card>
 
-      <CreateEmployeeModal opened={createOpened} onClose={() => setCreateOpened(false)} />
+      <CreateEmployeeModal
+        opened={createOpened}
+        onClose={() => setCreateOpened(false)}
+      />
 
       <EditEmployeeModal
         opened={editOpened}
@@ -161,3 +220,5 @@ export function EmployeesPage() {
     </div>
   );
 }
+
+export default EmployeesPage;

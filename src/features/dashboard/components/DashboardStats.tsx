@@ -22,9 +22,13 @@ export default function DashboardStats() {
   const myTasksQuery = useMyTasks({ enabled: !isAdmin });
 
   const employees = employeesQuery.data ?? [];
-  const tasks = isAdmin ? (adminTasksQuery.data ?? []) : (myTasksQuery.data ?? []);
+  const tasks = isAdmin
+    ? (adminTasksQuery.data ?? [])
+    : (myTasksQuery.data ?? []);
   const isEmployeesLoading = isAdmin && employeesQuery.isLoading;
-  const isTasksLoading = isAdmin ? adminTasksQuery.isLoading : myTasksQuery.isLoading;
+  const isTasksLoading = isAdmin
+    ? adminTasksQuery.isLoading
+    : myTasksQuery.isLoading;
   const stats = getTaskStats(tasks);
 
   if (isTasksLoading || isEmployeesLoading) {
@@ -38,7 +42,9 @@ export default function DashboardStats() {
   }
 
   if (isAdmin) {
-    const activeEmployees = employees.filter((employee) => employee.isActive !== false).length;
+    const activeEmployees = employees.filter(
+      (employee) => employee.isActive !== false,
+    ).length;
 
     return (
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }}>

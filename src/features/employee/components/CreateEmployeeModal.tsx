@@ -20,17 +20,21 @@ interface CreateEmployeeModalProps {
   onClose: () => void;
 }
 
-export default function CreateEmployeeModal({ opened, onClose }: CreateEmployeeModalProps) {
+export default function CreateEmployeeModal({
+  opened,
+  onClose,
+}: CreateEmployeeModalProps) {
   const createEmployeeMutation = useCreateEmployee();
-  const { control, register, handleSubmit, reset } = useForm<EmployeeFormValues>({
-    resolver: zodResolver(employeeSchema),
-    defaultValues: {
-      fullName: '',
-      email: '',
-      role: 'Employee',
-      isActive: true,
-    },
-  });
+  const { control, register, handleSubmit, reset } =
+    useForm<EmployeeFormValues>({
+      resolver: zodResolver(employeeSchema),
+      defaultValues: {
+        fullName: '',
+        email: '',
+        role: 'Employee',
+        isActive: true,
+      },
+    });
 
   const close = () => {
     reset();
@@ -54,9 +58,17 @@ export default function CreateEmployeeModal({ opened, onClose }: CreateEmployeeM
       submitLabel="Create"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <TextInput label="Full Name" placeholder="Enter full name" {...register('fullName')} />
+      <TextInput
+        label="Full Name"
+        placeholder="Enter full name"
+        {...register('fullName')}
+      />
 
-      <TextInput label="Email" placeholder="Enter email" {...register('email')} />
+      <TextInput
+        label="Email"
+        placeholder="Enter email"
+        {...register('email')}
+      />
 
       <Controller
         control={control}

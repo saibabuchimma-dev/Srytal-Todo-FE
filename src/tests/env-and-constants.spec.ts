@@ -12,10 +12,18 @@ describe('ENV', () => {
 
 describe('constants', () => {
   it('exposes API path segments', () => {
-    expect(API).toEqual({ AUTH: '/auth', EMPLOYEES: '/employees', TASKS: '/tasks' });
+    expect(API).toEqual({
+      AUTH: '/auth',
+      EMPLOYEES: '/employees',
+      TASKS: '/tasks',
+    });
   });
 
   it('exposes storage keys', () => {
-    expect(STORAGE_KEYS).toEqual({ TOKEN: 'token', USER: 'user', THEME: 'theme' });
+    expect(STORAGE_KEYS).toEqual({
+      TOKEN: 'token',
+      USER: 'user',
+      THEME: 'theme',
+    });
   });
 });

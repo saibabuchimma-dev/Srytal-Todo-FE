@@ -8,18 +8,27 @@ describe('CenteredState', () => {
   });
 
   it('renders the default empty message', () => {
-    renderWithProviders(<CenteredState variant="empty" />, { withRouter: false });
+    renderWithProviders(<CenteredState variant="empty" />, {
+      withRouter: false,
+    });
     expect(screen.getByText('No data to show.')).toBeInTheDocument();
   });
 
   it('renders the default error message', () => {
-    renderWithProviders(<CenteredState variant="error" />, { withRouter: false });
+    renderWithProviders(<CenteredState variant="error" />, {
+      withRouter: false,
+    });
     expect(screen.getByText('Something went wrong.')).toBeInTheDocument();
   });
 
   it('renders a custom message and a custom icon', () => {
     renderWithProviders(
-      <CenteredState variant="empty" message="Nothing here" icon={<span data-testid="ic" />} minHeight={200} />,
+      <CenteredState
+        variant="empty"
+        message="Nothing here"
+        icon={<span data-testid="ic" />}
+        minHeight={200}
+      />,
       { withRouter: false },
     );
     expect(screen.getByText('Nothing here')).toBeInTheDocument();

@@ -20,7 +20,9 @@ import CenteredState from '@/shared/ui/CenteredState/CenteredState';
 export default function EmployeeDetailsPage() {
   const { employeeId } = useParams();
 
-  const setSelectedEmployee = useEmployeeStore((state) => state.setSelectedEmployee);
+  const setSelectedEmployee = useEmployeeStore(
+    (state) => state.setSelectedEmployee,
+  );
 
   const { data: employee, isLoading, isError } = useEmployee(employeeId ?? '');
 
@@ -32,7 +34,9 @@ export default function EmployeeDetailsPage() {
   );
 
   const stats = useMemo(() => getTaskStats(employeeTasks), [employeeTasks]);
-  const completion = stats.total ? Math.round((stats.completed / stats.total) * 100) : 0;
+  const completion = stats.total
+    ? Math.round((stats.completed / stats.total) * 100)
+    : 0;
 
   useEffect(() => {
     if (employee) {
@@ -49,7 +53,12 @@ export default function EmployeeDetailsPage() {
   }
 
   if (isError || !employee) {
-    return <CenteredState variant="error" message="Employee details could not be loaded." />;
+    return (
+      <CenteredState
+        variant="error"
+        message="Employee details could not be loaded."
+      />
+    );
   }
 
   return (
@@ -91,8 +100,8 @@ export default function EmployeeDetailsPage() {
           <div>
             <Title order={4}>Employee Tasks</Title>
             <Text c="dimmed" size="sm">
-              {employeeTasks.length} task{employeeTasks.length === 1 ? '' : 's'} assigned to{' '}
-              {employee.fullName}
+              {employeeTasks.length} task{employeeTasks.length === 1 ? '' : 's'}{' '}
+              assigned to {employee.fullName}
             </Text>
           </div>
 

@@ -4,8 +4,7 @@ import type { CommentApiResponse, TaskComment } from '../types/comment';
 const normalizeComment = (item: CommentApiResponse): TaskComment => ({
   id: String(item._id ?? item.id ?? ''),
   content: item.content ?? '',
-  taskId:
-    typeof item.task === 'string' ? item.task : (item.task?._id ?? ''),
+  taskId: typeof item.task === 'string' ? item.task : (item.task?._id ?? ''),
   author:
     item.author && typeof item.author === 'object'
       ? {
@@ -20,7 +19,9 @@ const normalizeComment = (item: CommentApiResponse): TaskComment => ({
   updatedAt: item.updatedAt,
 });
 
-export const getTaskComments = async (taskId: string): Promise<TaskComment[]> => {
+export const getTaskComments = async (
+  taskId: string,
+): Promise<TaskComment[]> => {
   const { data } = await api.get<{
     success: boolean;
     data: CommentApiResponse[];
@@ -29,7 +30,10 @@ export const getTaskComments = async (taskId: string): Promise<TaskComment[]> =>
   return (data.data ?? []).map(normalizeComment);
 };
 
-export const addTaskComment = async (taskId: string, content: string): Promise<TaskComment> => {
+export const addTaskComment = async (
+  taskId: string,
+  content: string,
+): Promise<TaskComment> => {
   const { data } = await api.post<{
     success: boolean;
     data: CommentApiResponse;

@@ -26,13 +26,25 @@ describe('employee hooks', () => {
     const { result } = renderHook(() => useEmployees(), hookWrapper());
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
-    const { result: off } = renderHook(() => useEmployees({ enabled: false }), hookWrapper());
+    const { result: off } = renderHook(
+      () => useEmployees({ enabled: false }),
+      hookWrapper(),
+    );
     expect(off.current.fetchStatus).toBe('idle');
   });
 
   it('usePaginatedEmployees fetches a page', async () => {
-    mocked.getEmployeesPage.mockResolvedValueOnce({ items: [], total: 0, page: 1, limit: 10, totalPages: 1 });
-    const { result } = renderHook(() => usePaginatedEmployees({ page: 1, limit: 10 }), hookWrapper());
+    mocked.getEmployeesPage.mockResolvedValueOnce({
+      items: [],
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    });
+    const { result } = renderHook(
+      () => usePaginatedEmployees({ page: 1, limit: 10 }),
+      hookWrapper(),
+    );
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
   });
 
@@ -51,11 +63,19 @@ describe('employee hooks', () => {
     mocked.deleteEmployee.mockResolvedValueOnce();
 
     const create = renderHook(() => useCreateEmployee(), hookWrapper());
-    await create.result.current.mutateAsync({ fullName: 'N', email: 'n@x.com', role: 'Employee', isActive: true });
+    await create.result.current.mutateAsync({
+      fullName: 'N',
+      email: 'n@x.com',
+      role: 'Employee',
+      isActive: true,
+    });
     expect(mocked.createEmployee).toHaveBeenCalled();
 
     const update = renderHook(() => useUpdateEmployee(), hookWrapper());
-    await update.result.current.mutateAsync({ id: 'e3', payload: { fullName: 'U' } });
+    await update.result.current.mutateAsync({
+      id: 'e3',
+      payload: { fullName: 'U' },
+    });
     expect(mocked.updateEmployee).toHaveBeenCalledWith('e3', { fullName: 'U' });
 
     const del = renderHook(() => useDeleteEmployee(), hookWrapper());

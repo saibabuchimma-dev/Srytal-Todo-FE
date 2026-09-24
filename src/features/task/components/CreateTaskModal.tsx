@@ -133,7 +133,9 @@ export default function CreateTaskModal({
       icon={<IconClipboardPlus size={20} />}
       title={mode === 'create' ? 'Create Task' : 'Edit Task'}
       subtitle={
-        mode === 'create' ? 'Assign work to a team member.' : 'Update this task’s details.'
+        mode === 'create'
+          ? 'Assign work to a team member.'
+          : 'Update this task’s details.'
       }
       submitLabel={mode === 'create' ? 'Create' : 'Update'}
       loading={mode === 'create' ? createTask.isPending : updateTask.isPending}

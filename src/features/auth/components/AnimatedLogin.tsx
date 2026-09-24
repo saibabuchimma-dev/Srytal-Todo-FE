@@ -515,20 +515,28 @@ export default function AnimatedLogin() {
 
           <div className="intro-copy">
             <p className="eyebrow">SRYTAL</p>
-            <h1 className="intro-title">Work smarter with a calmer workspace</h1>
+            <h1 className="intro-title">
+              Work smarter with a calmer workspace
+            </h1>
             <p className="intro-text">
-              Keep your team aligned, monitor tasks, and stay on top of every update from one
-              elegant dashboard.
+              Keep your team aligned, monitor tasks, and stay on top of every
+              update from one elegant dashboard.
             </p>
           </div>
 
           <div className={`face ${focusPassword ? 'cover' : ''}`}>
             <div className="eye left">
-              <div className="pupil" style={{ transform: `translate(${eye.x}px, ${eye.y}px)` }} />
+              <div
+                className="pupil"
+                style={{ transform: `translate(${eye.x}px, ${eye.y}px)` }}
+              />
             </div>
 
             <div className="eye right">
-              <div className="pupil" style={{ transform: `translate(${eye.x}px, ${eye.y}px)` }} />
+              <div
+                className="pupil"
+                style={{ transform: `translate(${eye.x}px, ${eye.y}px)` }}
+              />
             </div>
 
             <div className="mouth" />

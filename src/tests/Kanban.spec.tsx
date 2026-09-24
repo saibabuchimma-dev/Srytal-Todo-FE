@@ -16,17 +16,31 @@ const task = (over: Partial<Task> = {}): Task => ({
   ...over,
 });
 
-const dataTransfer = () => ({ setData: jest.fn(), getData: jest.fn(), effectAllowed: '', dropEffect: '' });
+const dataTransfer = () => ({
+  setData: jest.fn(),
+  getData: jest.fn(),
+  effectAllowed: '',
+  dropEffect: '',
+});
 
 describe('KanbanCard', () => {
   it('renders assignee, project and fires drag callbacks', () => {
     const onDragStart = jest.fn();
     const onDragEnd = jest.fn();
-    renderWithProviders(<KanbanCard task={task()} onDragStart={onDragStart} onDragEnd={onDragEnd} />, { withRouter: false });
+    renderWithProviders(
+      <KanbanCard
+        task={task()}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+      />,
+      { withRouter: false },
+    );
     expect(screen.getByText('Card title')).toBeInTheDocument();
     expect(screen.getByText('Emma')).toBeInTheDocument();
 
-    const card = screen.getByText('Card title').closest('div[draggable]') as HTMLElement;
+    const card = screen
+      .getByText('Card title')
+      .closest('div[draggable]') as HTMLElement;
     fireEvent.dragStart(card, { dataTransfer: dataTransfer() });
     expect(onDragStart).toHaveBeenCalled();
     fireEvent.dragEnd(card);
@@ -35,7 +49,12 @@ describe('KanbanCard', () => {
 
   it('shows an updating state and an unassigned label', () => {
     renderWithProviders(
-      <KanbanCard task={task({ assignedEmployee: undefined })} isUpdating onDragStart={jest.fn()} onDragEnd={jest.fn()} />,
+      <KanbanCard
+        task={task({ assignedEmployee: undefined })}
+        isUpdating
+        onDragStart={jest.fn()}
+        onDragEnd={jest.fn()}
+      />,
       { withRouter: false },
     );
     expect(screen.getByText('Unassigned')).toBeInTheDocument();
@@ -89,7 +108,11 @@ describe('KanbanBoard', () => {
   it('groups tasks into columns and reports a status change on drop', () => {
     const onStatusChange = jest.fn();
     const { container } = renderWithProviders(
-      <KanbanBoard tasks={[task()]} updatingTaskId={null} onStatusChange={onStatusChange} />,
+      <KanbanBoard
+        tasks={[task()]}
+        updatingTaskId={null}
+        onStatusChange={onStatusChange}
+      />,
       { withRouter: false },
     );
     // three columns rendered
@@ -98,11 +121,15 @@ describe('KanbanBoard', () => {
     expect(screen.getByText('Completed')).toBeInTheDocument();
 
     // drag the pending card, drop on the In Progress column
-    const card = screen.getByText('Card title').closest('div[draggable]') as HTMLElement;
+    const card = screen
+      .getByText('Card title')
+      .closest('div[draggable]') as HTMLElement;
     fireEvent.dragStart(card, { dataTransfer: dataTransfer() });
 
     const columns = container.querySelectorAll('.mantine-Paper-root');
-    const inProgressCol = Array.from(columns).find((c) => c.textContent?.startsWith('In Progress')) as HTMLElement;
+    const inProgressCol = Array.from(columns).find((c) =>
+      c.textContent?.startsWith('In Progress'),
+    ) as HTMLElement;
     fireEvent.dragOver(inProgressCol, { dataTransfer: dataTransfer() });
     fireEvent.drop(inProgressCol, { dataTransfer: dataTransfer() });
 

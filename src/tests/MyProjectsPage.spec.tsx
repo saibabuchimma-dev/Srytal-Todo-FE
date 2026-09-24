@@ -6,7 +6,15 @@ jest.mock('@/features/project/hooks/useProjects', () => ({
 import { renderWithProviders, screen } from '@test-utils';
 import MyProjectsPage from '@/features/project/screens/MyProjectsPage';
 
-const project = { id: 'p1', name: 'Website', description: 'desc', status: 'In Progress', startDate: '2026-01-01', endDate: '2026-03-01', members: ['m1'] };
+const project = {
+  id: 'p1',
+  name: 'Website',
+  description: 'desc',
+  status: 'In Progress',
+  startDate: '2026-01-01',
+  endDate: '2026-03-01',
+  members: ['m1'],
+};
 
 describe('MyProjectsPage', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -20,13 +28,17 @@ describe('MyProjectsPage', () => {
   it('shows error', () => {
     mockUseMyProjects.mockReturnValue({ data: [], isError: true });
     renderWithProviders(<MyProjectsPage />);
-    expect(screen.getByText('Failed to load your projects.')).toBeInTheDocument();
+    expect(
+      screen.getByText('Failed to load your projects.'),
+    ).toBeInTheDocument();
   });
 
   it('shows the empty state', () => {
     mockUseMyProjects.mockReturnValue({ data: [], isLoading: false });
     renderWithProviders(<MyProjectsPage />);
-    expect(screen.getByText('You have no projects assigned yet.')).toBeInTheDocument();
+    expect(
+      screen.getByText('You have no projects assigned yet.'),
+    ).toBeInTheDocument();
   });
 
   it('renders assigned projects', () => {

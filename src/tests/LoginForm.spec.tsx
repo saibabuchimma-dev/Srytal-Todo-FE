@@ -3,7 +3,9 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
-jest.mock('@/features/auth/services/auth.service', () => ({ login: jest.fn() }));
+jest.mock('@/features/auth/services/auth.service', () => ({
+  login: jest.fn(),
+}));
 jest.mock('@/shared/utils/toast', () => ({
   toast: { success: jest.fn(), error: jest.fn() },
 }));
@@ -31,7 +33,11 @@ describe('LoginForm', () => {
 
   it('logs an employee in and routes to the dashboard', async () => {
     const user = userEvent.setup();
-    mockLogin.mockResolvedValueOnce({ role: 'Employee', token: 't', mustChangePassword: false });
+    mockLogin.mockResolvedValueOnce({
+      role: 'Employee',
+      token: 't',
+      mustChangePassword: false,
+    });
     renderWithProviders(<LoginForm portal="employee" />);
     await fill(user);
     expect(mToast.success).toHaveBeenCalledWith('Success', 'Login successful');
@@ -40,27 +46,46 @@ describe('LoginForm', () => {
 
   it('routes an admin to the admin dashboard', async () => {
     const user = userEvent.setup();
-    mockLogin.mockResolvedValueOnce({ role: 'Admin', token: 't', mustChangePassword: false });
+    mockLogin.mockResolvedValueOnce({
+      role: 'Admin',
+      token: 't',
+      mustChangePassword: false,
+    });
     renderWithProviders(<LoginForm portal="admin" />);
     await fill(user);
-    expect(mockNavigate).toHaveBeenCalledWith('/admin/dashboard', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith('/admin/dashboard', {
+      replace: true,
+    });
   });
 
   it('rejects login from the wrong portal', async () => {
     const user = userEvent.setup();
-    mockLogin.mockResolvedValueOnce({ role: 'Admin', token: 't', mustChangePassword: false });
+    mockLogin.mockResolvedValueOnce({
+      role: 'Admin',
+      token: 't',
+      mustChangePassword: false,
+    });
     renderWithProviders(<LoginForm portal="employee" />);
     await fill(user);
-    expect(mToast.error).toHaveBeenCalledWith('Wrong Portal', expect.any(String));
+    expect(mToast.error).toHaveBeenCalledWith(
+      'Wrong Portal',
+      expect.any(String),
+    );
     expect(mockNavigate).not.toHaveBeenCalled();
   });
 
   it('redirects to change-password when required', async () => {
     const user = userEvent.setup();
-    mockLogin.mockResolvedValueOnce({ role: 'Employee', token: 't', mustChangePassword: true });
+    mockLogin.mockResolvedValueOnce({
+      role: 'Employee',
+      token: 't',
+      mustChangePassword: true,
+    });
     renderWithProviders(<LoginForm portal="employee" />);
     await fill(user);
-    expect(mockNavigate).toHaveBeenCalledWith('/change-password', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith('/change-password', {
+      replace: true,
+    });
   });
 
   it('shows an error toast when login throws', async () => {

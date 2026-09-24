@@ -14,7 +14,9 @@ export default function CommentSection({ taskId }: CommentSectionProps) {
   return (
     <Card withBorder radius="md" p="md">
       <Stack>
-        <Title order={5}>Comments{comments.length ? ` (${comments.length})` : ''}</Title>
+        <Title order={5}>
+          Comments{comments.length ? ` (${comments.length})` : ''}
+        </Title>
 
         <CommentInput taskId={taskId} />
 

@@ -1,4 +1,12 @@
-import { ActionIcon, Badge, Card, Group, Menu, Stack, Text } from '@mantine/core';
+import {
+  ActionIcon,
+  Badge,
+  Card,
+  Group,
+  Menu,
+  Stack,
+  Text,
+} from '@mantine/core';
 import {
   IconCalendar,
   IconDotsVertical,
@@ -34,7 +42,12 @@ const priorityColors: Record<string, string> = {
   High: 'red',
 };
 
-export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: TaskCardProps) {
+export default function TaskCard({
+  task,
+  onEdit,
+  onDelete,
+  readOnly = false,
+}: TaskCardProps) {
   const navigate = useNavigate();
   const { user } = useAuthStore();
 
@@ -44,11 +57,16 @@ export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: T
   const [now] = useState(() => Date.now());
   const due = task.dueDate ? new Date(task.dueDate) : null;
   const isOverdue =
-    !!due && task.status !== 'Completed' && !Number.isNaN(due.getTime()) && due.getTime() < now;
+    !!due &&
+    task.status !== 'Completed' &&
+    !Number.isNaN(due.getTime()) &&
+    due.getTime() < now;
 
   const handleView = () => {
     const route =
-      user?.role === 'Admin' ? ROUTES.ADMIN_TASK_DETAILS(task.id) : ROUTES.TASK_DETAILS(task.id);
+      user?.role === 'Admin'
+        ? ROUTES.ADMIN_TASK_DETAILS(task.id)
+        : ROUTES.TASK_DETAILS(task.id);
     void navigate(route);
   };
 
@@ -60,7 +78,9 @@ export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: T
         p="md"
         className="cursor-pointer"
         onClick={handleView}
-        style={{ borderLeft: `4px solid var(--mantine-color-${statusColor}-6)` }}
+        style={{
+          borderLeft: `4px solid var(--mantine-color-${statusColor}-6)`,
+        }}
       >
         <Group justify="space-between" align="flex-start" wrap="nowrap">
           <Stack gap={6} style={{ minWidth: 0, flex: 1 }}>
@@ -77,7 +97,10 @@ export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: T
             <Group gap="lg" wrap="wrap" mt={2}>
               {task.projectDetails && (
                 <Group gap={5} wrap="nowrap">
-                  <IconFolder size={14} style={{ color: 'var(--app-accent)' }} />
+                  <IconFolder
+                    size={14}
+                    style={{ color: 'var(--app-accent)' }}
+                  />
                   <Text size="xs" c="dimmed" lineClamp={1}>
                     {task.projectDetails.name}
                   </Text>
@@ -88,9 +111,17 @@ export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: T
                 <Group gap={5} wrap="nowrap">
                   <IconCalendar
                     size={14}
-                    style={{ color: isOverdue ? 'var(--app-danger)' : 'var(--app-text-muted)' }}
+                    style={{
+                      color: isOverdue
+                        ? 'var(--app-danger)'
+                        : 'var(--app-text-muted)',
+                    }}
                   />
-                  <Text size="xs" c={isOverdue ? 'red' : 'dimmed'} fw={isOverdue ? 600 : 400}>
+                  <Text
+                    size="xs"
+                    c={isOverdue ? 'red' : 'dimmed'}
+                    fw={isOverdue ? 600 : 400}
+                  >
                     {formatDate(task.dueDate)}
                     {isOverdue ? ' · Overdue' : ''}
                   </Text>
@@ -99,7 +130,10 @@ export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: T
 
               {!readOnly && task.assignedEmployee && (
                 <Group gap={5} wrap="nowrap">
-                  <IconUser size={14} style={{ color: 'var(--app-text-muted)' }} />
+                  <IconUser
+                    size={14}
+                    style={{ color: 'var(--app-text-muted)' }}
+                  />
                   <Text size="xs" c="dimmed" lineClamp={1}>
                     {task.assignedEmployee.fullName}
                   </Text>
@@ -120,7 +154,11 @@ export default function TaskCard({ task, onEdit, onDelete, readOnly = false }: T
           {!readOnly && (
             <Menu shadow="md" width={180} position="bottom-end">
               <Menu.Target>
-                <ActionIcon variant="subtle" color="gray" onClick={(e) => e.stopPropagation()}>
+                <ActionIcon
+                  variant="subtle"
+                  color="gray"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <IconDotsVertical size={18} />
                 </ActionIcon>
               </Menu.Target>

@@ -40,14 +40,21 @@ const normalizeProfile = (data: MeResponse): Profile => ({
 
 export const getProfile = async (): Promise<Profile> => {
   try {
-    const { data } = await api.get<{ success: boolean; data: MeResponse }>('/employees/me');
+    const { data } = await api.get<{ success: boolean; data: MeResponse }>(
+      '/employees/me',
+    );
     return normalizeProfile(data.data);
   } catch {
     return fallbackProfile();
   }
 };
 
-export const updateMyProfile = async (payload: UpdateProfilePayload): Promise<Profile> => {
-  const { data } = await api.patch<{ success: boolean; data: MeResponse }>('/employees/me', payload);
+export const updateMyProfile = async (
+  payload: UpdateProfilePayload,
+): Promise<Profile> => {
+  const { data } = await api.patch<{ success: boolean; data: MeResponse }>(
+    '/employees/me',
+    payload,
+  );
   return normalizeProfile(data.data);
 };

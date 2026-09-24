@@ -7,7 +7,11 @@ describe('PreferencesSettings', () => {
     usePreferencesStore.setState({
       timezone: 'UTC',
       language: 'en',
-      notifications: { taskAssigned: true, statusChanges: true, comments: true },
+      notifications: {
+        taskAssigned: true,
+        statusChanges: true,
+        comments: true,
+      },
     });
   });
 
@@ -36,6 +40,8 @@ describe('PreferencesSettings', () => {
   it('prepends an unknown timezone to the options list', () => {
     usePreferencesStore.setState({ timezone: 'Mars/Olympus' });
     renderWithProviders(<PreferencesSettings />, { withRouter: false });
-    expect(screen.getAllByDisplayValue('Mars/Olympus').length).toBeGreaterThan(0);
+    expect(screen.getAllByDisplayValue('Mars/Olympus').length).toBeGreaterThan(
+      0,
+    );
   });
 });

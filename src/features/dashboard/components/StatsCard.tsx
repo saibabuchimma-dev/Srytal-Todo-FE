@@ -18,11 +18,21 @@ export default function StatsCard({
   hint,
 }: StatsCardProps) {
   return (
-    <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} style={{ height: '100%' }}>
+    <motion.div
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+      style={{ height: '100%' }}
+    >
       <Card withBorder radius="lg" p="lg" h="100%">
         <Group justify="space-between" align="flex-start" wrap="nowrap">
           <div>
-            <Text size="xs" fw={600} c="dimmed" tt="uppercase" style={{ letterSpacing: 0.5 }}>
+            <Text
+              size="xs"
+              fw={600}
+              c="dimmed"
+              tt="uppercase"
+              style={{ letterSpacing: 0.5 }}
+            >
               {label}
             </Text>
             <Text fz={30} fw={800} lh={1.15} mt={8}>

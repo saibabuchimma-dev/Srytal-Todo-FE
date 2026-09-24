@@ -31,7 +31,15 @@ describe('BackButton', () => {
     renderWithProviders(
       <Routes>
         <Route path="/first" element={<div>First Page</div>} />
-        <Route path="/second" element={<><BackButton /><LocationProbe /></>} />
+        <Route
+          path="/second"
+          element={
+            <>
+              <BackButton />
+              <LocationProbe />
+            </>
+          }
+        />
       </Routes>,
       { route: '/second' },
     );

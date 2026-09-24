@@ -10,7 +10,15 @@ jest.mock('@/features/employee/hooks/useEmployees', () => ({
 import { renderWithProviders, screen, userEvent } from '@test-utils';
 import { EmployeesPage } from '@/features/employee/screens/EmployeesPage';
 
-const employee = { id: 'e1', fullName: 'Sravani K', email: 's@x.com', role: 'Employee', avatar: '', isActive: true, mustChangePassword: false };
+const employee = {
+  id: 'e1',
+  fullName: 'Sravani K',
+  email: 's@x.com',
+  role: 'Employee',
+  avatar: '',
+  isActive: true,
+  mustChangePassword: false,
+};
 
 describe('EmployeesPage', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -28,18 +36,26 @@ describe('EmployeesPage', () => {
   });
 
   it('shows the empty state', () => {
-    mockUsePaginated.mockReturnValue({ data: { items: [], total: 0, totalPages: 1 }, isLoading: false });
+    mockUsePaginated.mockReturnValue({
+      data: { items: [], total: 0, totalPages: 1 },
+      isLoading: false,
+    });
     renderWithProviders(<EmployeesPage />);
     expect(screen.getByText('No employees added yet.')).toBeInTheDocument();
   });
 
   it('renders the employee table and opens the create modal', async () => {
-    mockUsePaginated.mockReturnValue({ data: { items: [employee], total: 1, totalPages: 1 }, isLoading: false });
+    mockUsePaginated.mockReturnValue({
+      data: { items: [employee], total: 1, totalPages: 1 },
+      isLoading: false,
+    });
     const user = userEvent.setup();
     renderWithProviders(<EmployeesPage />);
     expect(screen.getByText('Sravani K')).toBeInTheDocument();
     expect(screen.getByText('1 employee')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /create employee/i }));
-    expect(await screen.findByText('Add a new team member to your workspace.')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Add a new team member to your workspace.'),
+    ).toBeInTheDocument();
   });
 });

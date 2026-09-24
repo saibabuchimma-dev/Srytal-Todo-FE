@@ -26,7 +26,10 @@ import {
   IconProgress,
   IconUsers,
 } from '@tabler/icons-react';
-import { useEmployeeProjectTasks, useProjectDetails } from '../hooks/useProjects';
+import {
+  useEmployeeProjectTasks,
+  useProjectDetails,
+} from '../hooks/useProjects';
 import ProjectModal from '../components/ProjectModal';
 import ProjectTasksTable from '../components/ProjectTasksTable';
 import TaskModal from '@/features/task/components/CreateTaskModal';
@@ -68,10 +71,8 @@ export default function ProjectDetailsPage() {
   const [editTaskOpened, setEditTaskOpened] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const { data, isLoading, isError, refetch } = useProjectDetails(projectId);
-  const { data: employeeTasks = [], refetch: refetchEmployeeTasks } = useEmployeeProjectTasks(
-    projectId,
-    selectedEmployeeId,
-  );
+  const { data: employeeTasks = [], refetch: refetchEmployeeTasks } =
+    useEmployeeProjectTasks(projectId, selectedEmployeeId);
   const deleteTaskMutation = useDeleteTask();
   const [deleteOpened, setDeleteOpened] = useState(false);
   const [deletingTask, setDeletingTask] = useState<Task | null>(null);
@@ -106,14 +107,21 @@ export default function ProjectDetailsPage() {
   }
 
   if (isError || !data) {
-    return <CenteredState variant="error" message="Unable to load project details." />;
+    return (
+      <CenteredState
+        variant="error"
+        message="Unable to load project details."
+      />
+    );
   }
 
   const { project, stats, employees, tasks } = data;
   const completion = stats.totalTasks
     ? Math.round((stats.completed / stats.totalTasks) * 100)
     : 0;
-  const selectedMember = employees.find((member) => member.employee._id === selectedEmployeeId);
+  const selectedMember = employees.find(
+    (member) => member.employee._id === selectedEmployeeId,
+  );
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
@@ -130,7 +138,10 @@ export default function ProjectDetailsPage() {
                 <Title order={2} lineClamp={1}>
                   {project.name}
                 </Title>
-                <Badge variant="light" color={statusColors[project.status] ?? 'gray'}>
+                <Badge
+                  variant="light"
+                  color={statusColors[project.status] ?? 'gray'}
+                >
                   {project.status}
                 </Badge>
               </Group>
@@ -141,13 +152,20 @@ export default function ProjectDetailsPage() {
 
               <Group gap="lg" mt="sm" wrap="wrap">
                 <Group gap={6} wrap="nowrap">
-                  <IconCalendar size={15} style={{ color: 'var(--app-text-muted)' }} />
+                  <IconCalendar
+                    size={15}
+                    style={{ color: 'var(--app-text-muted)' }}
+                  />
                   <Text size="xs" c="dimmed">
-                    {formatDate(project.startDate)} – {formatDate(project.endDate)}
+                    {formatDate(project.startDate)} –{' '}
+                    {formatDate(project.endDate)}
                   </Text>
                 </Group>
                 <Group gap={6} wrap="nowrap">
-                  <IconUsers size={15} style={{ color: 'var(--app-text-muted)' }} />
+                  <IconUsers
+                    size={15}
+                    style={{ color: 'var(--app-text-muted)' }}
+                  />
                   <Text size="xs" c="dimmed">
                     {employees.length} member{employees.length === 1 ? '' : 's'}
                   </Text>
@@ -164,7 +182,10 @@ export default function ProjectDetailsPage() {
             >
               Edit Project
             </Button>
-            <Button leftSection={<IconPlus size={16} />} onClick={() => setTaskOpened(true)}>
+            <Button
+              leftSection={<IconPlus size={16} />}
+              onClick={() => setTaskOpened(true)}
+            >
               Add Task
             </Button>
           </Group>
@@ -224,7 +245,11 @@ export default function ProjectDetailsPage() {
         </Group>
 
         {tasks.length === 0 ? (
-          <CenteredState variant="empty" minHeight={180} message="No tasks in this project yet." />
+          <CenteredState
+            variant="empty"
+            minHeight={180}
+            message="No tasks in this project yet."
+          />
         ) : (
           <ProjectTasksTable
             tasks={tasks}
@@ -278,7 +303,11 @@ export default function ProjectDetailsPage() {
                     >
                       <Group justify="space-between" wrap="nowrap">
                         <Group gap="sm" wrap="nowrap" style={{ minWidth: 0 }}>
-                          <Avatar radius="xl" src={member.employee.avatar || undefined} color="blue">
+                          <Avatar
+                            radius="xl"
+                            src={member.employee.avatar || undefined}
+                            color="blue"
+                          >
                             {member.employee.fullName.charAt(0).toUpperCase()}
                           </Avatar>
                           <div style={{ minWidth: 0 }}>
@@ -305,7 +334,9 @@ export default function ProjectDetailsPage() {
         <Grid.Col span={{ base: 12, md: 8 }}>
           <Card withBorder radius="lg" p="lg">
             <Title order={4} mb="md">
-              {selectedMember ? `${selectedMember.employee.fullName}'s Tasks` : 'Employee Tasks'}
+              {selectedMember
+                ? `${selectedMember.employee.fullName}'s Tasks`
+                : 'Employee Tasks'}
             </Title>
 
             {!selectedEmployeeId ? (
@@ -335,7 +366,11 @@ export default function ProjectDetailsPage() {
                     }}
                   >
                     <Stack gap={6}>
-                      <Group justify="space-between" align="flex-start" wrap="nowrap">
+                      <Group
+                        justify="space-between"
+                        align="flex-start"
+                        wrap="nowrap"
+                      >
                         <Text fw={600} size="sm" lineClamp={1}>
                           {task.title}
                         </Text>
@@ -364,7 +399,10 @@ export default function ProjectDetailsPage() {
                         </Badge>
                         {task.dueDate && (
                           <Group gap={4} wrap="nowrap">
-                            <IconCalendar size={13} style={{ color: 'var(--app-text-muted)' }} />
+                            <IconCalendar
+                              size={13}
+                              style={{ color: 'var(--app-text-muted)' }}
+                            />
                             <Text size="xs" c="dimmed">
                               {formatDate(task.dueDate)}
                             </Text>

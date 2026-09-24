@@ -1,12 +1,16 @@
 import { ActionIcon, useMantineColorScheme } from '@mantine/core';
 import { IconMoon, IconSun } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
 
 interface ThemeToggleProps {
   size?: number;
   chip?: boolean;
 }
 
-export default function ThemeToggle({ size = 40, chip = false }: ThemeToggleProps) {
+export default function ThemeToggle({
+  size = 40,
+  chip = false,
+}: ThemeToggleProps) {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const isDark = colorScheme === 'dark';
 
@@ -30,7 +34,14 @@ export default function ThemeToggle({ size = 40, chip = false }: ThemeToggleProp
           : undefined
       }
     >
-      {isDark ? <IconSun size={20} /> : <IconMoon size={20} />}
+      <motion.div
+        layout
+        initial={false}
+        animate={{ rotate: isDark ? 180 : 0, scale: [1, 1.1, 1] }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      >
+        {isDark ? <IconSun size={20} /> : <IconMoon size={20} />}
+      </motion.div>
     </ActionIcon>
   );
 }

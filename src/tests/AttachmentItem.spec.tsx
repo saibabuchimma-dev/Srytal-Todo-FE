@@ -24,25 +24,47 @@ describe('AttachmentItem', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     useAuthStore.getState().login(
-      { id: 'u1', fullName: 'Sravani', name: 'Sravani', email: 's@x.com', role: 'Employee', mustChangePassword: false },
+      {
+        id: 'u1',
+        fullName: 'Sravani',
+        name: 'Sravani',
+        email: 's@x.com',
+        role: 'Employee',
+        mustChangePassword: false,
+      },
       't',
     );
   });
 
   it('renders the name, formatted size and uploader', () => {
-    renderWithProviders(<AttachmentItem attachment={attachment} taskId="t1" />, { withRouter: false });
+    renderWithProviders(
+      <AttachmentItem attachment={attachment} taskId="t1" />,
+      {
+        withRouter: false,
+      },
+    );
     expect(screen.getByText('report.pdf')).toBeInTheDocument();
     expect(screen.getByText(/2\.0 KB · Sravani/)).toBeInTheDocument();
   });
 
   it('formats a zero-byte file', () => {
-    renderWithProviders(<AttachmentItem attachment={{ ...attachment, size: 0 }} taskId="t1" />, { withRouter: false });
+    renderWithProviders(
+      <AttachmentItem attachment={{ ...attachment, size: 0 }} taskId="t1" />,
+      {
+        withRouter: false,
+      },
+    );
     expect(screen.getByText(/0 B/)).toBeInTheDocument();
   });
 
   it('lets the uploader delete', async () => {
     const user = userEvent.setup();
-    renderWithProviders(<AttachmentItem attachment={attachment} taskId="t1" />, { withRouter: false });
+    renderWithProviders(
+      <AttachmentItem attachment={attachment} taskId="t1" />,
+      {
+        withRouter: false,
+      },
+    );
     // open the menu (last action icon)
     const buttons = screen.getAllByRole('button');
     await user.click(buttons[buttons.length - 1]);
@@ -52,10 +74,22 @@ describe('AttachmentItem', () => {
 
   it('hides delete for a non-uploader non-admin', () => {
     useAuthStore.getState().login(
-      { id: 'other', fullName: 'O', name: 'O', email: 'o@x.com', role: 'Employee', mustChangePassword: false },
+      {
+        id: 'other',
+        fullName: 'O',
+        name: 'O',
+        email: 'o@x.com',
+        role: 'Employee',
+        mustChangePassword: false,
+      },
       't',
     );
-    renderWithProviders(<AttachmentItem attachment={attachment} taskId="t1" />, { withRouter: false });
+    renderWithProviders(
+      <AttachmentItem attachment={attachment} taskId="t1" />,
+      {
+        withRouter: false,
+      },
+    );
     // download link still present, but no menu delete
     expect(screen.queryByText('Delete')).not.toBeInTheDocument();
   });

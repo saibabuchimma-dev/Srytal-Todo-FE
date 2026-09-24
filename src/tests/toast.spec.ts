@@ -20,13 +20,19 @@ const mocked = sonner as unknown as {
 describe('toast wrapper', () => {
   it('delegates each variant to sonner with the description', () => {
     toast.success('Saved', 'All good');
-    expect(mocked.success).toHaveBeenCalledWith('Saved', { description: 'All good' });
+    expect(mocked.success).toHaveBeenCalledWith('Saved', {
+      description: 'All good',
+    });
 
     toast.error('Failed', 'Nope');
-    expect(mocked.error).toHaveBeenCalledWith('Failed', { description: 'Nope' });
+    expect(mocked.error).toHaveBeenCalledWith('Failed', {
+      description: 'Nope',
+    });
 
     toast.warning('Careful');
-    expect(mocked.warning).toHaveBeenCalledWith('Careful', { description: undefined });
+    expect(mocked.warning).toHaveBeenCalledWith('Careful', {
+      description: undefined,
+    });
 
     toast.info('FYI', 'note');
     expect(mocked.info).toHaveBeenCalledWith('FYI', { description: 'note' });

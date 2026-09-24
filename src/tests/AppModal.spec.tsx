@@ -35,7 +35,12 @@ describe('AppModal', () => {
     const user = userEvent.setup();
     const onClose = jest.fn();
     renderWithProviders(
-      <AppModal opened onClose={onClose} title="T" onSubmit={jest.fn((e) => e.preventDefault())}>
+      <AppModal
+        opened
+        onClose={onClose}
+        title="T"
+        onSubmit={jest.fn((e) => e.preventDefault())}
+      >
         <div>b</div>
       </AppModal>,
       { withRouter: false },
@@ -49,7 +54,13 @@ describe('AppModal', () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn((e) => e.preventDefault());
     renderWithProviders(
-      <AppModal opened onClose={jest.fn()} title="T" submitLabel="Save it" onSubmit={onSubmit}>
+      <AppModal
+        opened
+        onClose={jest.fn()}
+        title="T"
+        submitLabel="Save it"
+        onSubmit={onSubmit}
+      >
         <div>b</div>
       </AppModal>,
       { withRouter: false },
@@ -65,12 +76,20 @@ describe('AppModal', () => {
       </AppModal>,
       { withRouter: false },
     );
-    expect(screen.queryByRole('button', { name: /cancel/i })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /cancel/i }),
+    ).not.toBeInTheDocument();
   });
 
   it('applies a submitColor without the gradient override', () => {
     renderWithProviders(
-      <AppModal opened onClose={jest.fn()} title="T" submitColor="red" onSubmit={jest.fn((e) => e.preventDefault())}>
+      <AppModal
+        opened
+        onClose={jest.fn()}
+        title="T"
+        submitColor="red"
+        onSubmit={jest.fn((e) => e.preventDefault())}
+      >
         <div>b</div>
       </AppModal>,
       { withRouter: false },

@@ -23,7 +23,10 @@ export default function LoginScreen({ portal = 'employee' }: LoginScreenProps) {
         <ThemeToggle chip />
       </Box>
 
-      <Box visibleFrom="md" style={{ flexBasis: '65%', maxWidth: '65%', padding: 16 }}>
+      <Box
+        visibleFrom="md"
+        style={{ flexBasis: '65%', maxWidth: '65%', padding: 16 }}
+      >
         <LoginHero />
       </Box>
 

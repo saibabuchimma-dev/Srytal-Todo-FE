@@ -1,9 +1,6 @@
-import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider } from './MantineProvider';
 import { Toaster } from 'sonner';
-import { theme } from '@/theme';
 import type { ReactNode } from 'react';
 
 interface AppProvidersProps {
@@ -24,7 +21,7 @@ const queryClient = new QueryClient({
 export default function AppProviders({ children }: AppProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider theme={theme} defaultColorScheme="light">
+      <MantineProvider defaultColorScheme="light">
         <Toaster
           position="top-right"
           richColors
@@ -32,7 +29,11 @@ export default function AppProviders({ children }: AppProvidersProps) {
           expand
           visibleToasts={4}
           toastOptions={{
-            style: { borderRadius: '10px' },
+            style: { borderRadius: '12px' },
+            classNames: {
+              toast: 'glass-strong',
+              description: 'text-sm',
+            },
           }}
         />
         {children}

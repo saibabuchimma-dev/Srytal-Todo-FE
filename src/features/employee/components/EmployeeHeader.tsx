@@ -25,7 +25,10 @@ export default function EmployeeHeader() {
           </Stack>
         </Group>
 
-        <Badge color={selectedEmployee.role === 'Admin' ? 'red' : 'blue'} variant="light">
+        <Badge
+          color={selectedEmployee.role === 'Admin' ? 'red' : 'blue'}
+          variant="light"
+        >
           {selectedEmployee.role}
         </Badge>
       </Group>

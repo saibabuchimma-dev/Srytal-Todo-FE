@@ -24,7 +24,14 @@ describe('TaskCard', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     useAuthStore.getState().login(
-      { id: 'u1', fullName: 'A', name: 'A', email: 'a@x.com', role: 'Admin', mustChangePassword: false },
+      {
+        id: 'u1',
+        fullName: 'A',
+        name: 'A',
+        email: 'a@x.com',
+        role: 'Admin',
+        mustChangePassword: false,
+      },
       't',
     );
   });
@@ -48,7 +55,9 @@ describe('TaskCard', () => {
     const user = userEvent.setup();
     const onEdit = jest.fn();
     const onDelete = jest.fn();
-    renderWithProviders(<TaskCard task={baseTask} onEdit={onEdit} onDelete={onDelete} />);
+    renderWithProviders(
+      <TaskCard task={baseTask} onEdit={onEdit} onDelete={onDelete} />,
+    );
     await user.click(screen.getByRole('button'));
     await user.click(await screen.findByText('Edit'));
     expect(onEdit).toHaveBeenCalledWith(baseTask);
@@ -59,7 +68,12 @@ describe('TaskCard', () => {
   });
 
   it('hides the menu in readOnly mode', () => {
-    renderWithProviders(<TaskCard task={{ ...baseTask, status: 'Completed', dueDate: '' }} readOnly />);
+    renderWithProviders(
+      <TaskCard
+        task={{ ...baseTask, status: 'Completed', dueDate: '' }}
+        readOnly
+      />,
+    );
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 });

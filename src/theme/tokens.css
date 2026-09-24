@@ -1,125 +1,178 @@
-/* =========================================================================
-   Centralized color tokens — the single source of truth for app colors.
-   Change a value here once and it updates everywhere, in both themes.
-
-   Light values live on :root, dark values override when Mantine sets
-   data-mantine-color-scheme="dark" on <html>. Tokens are built on Mantine's
-   palette so custom surfaces stay consistent with Mantine components.
-
-   Groups:
-     - Surfaces / text / borders / primary  (theme-aware UI chrome)
-     - Accent                                (tinted chips, selected states)
-     - Semantic                             (success / warning / danger)
-     - Chart                                (data colors fixed; chrome theme-aware)
-     - Brand                                (login / marketing identity)
-     - Loader                               (spinner accents)
-   ========================================================================= */
-
 :root {
-  /* Backgrounds */
-  --app-bg: var(--mantine-color-gray-0);
+  --app-bg: #f8fafc;
   --app-surface: #ffffff;
-  --app-surface-2: var(--mantine-color-gray-0);
-  --app-surface-hover: var(--mantine-color-gray-1);
+  --app-surface-2: #f1f5f9;
+  --app-surface-hover: #f8fafc;
+  --app-surface-pressed: #e2e8f0;
+  --app-surface-elevated: #ffffff;
+  --app-border: #e2e8f0;
+  --app-border-subtle: #f1f5f9;
+  --app-border-strong: #cbd5e1;
+  --app-text: #0f172a;
+  --app-text-secondary: #475569;
+  --app-text-muted: #64748b;
+  --app-text-inverse: #ffffff;
 
-  /* Borders & dividers */
-  --app-border: var(--mantine-color-gray-3);
+  --app-primary: #4f46e5;
+  --app-primary-hover: #4338ca;
+  --app-primary-light: #eef2ff;
+  --app-primary-glow: rgba(79, 70, 229, 0.15);
 
-  /* Text */
-  --app-text: var(--mantine-color-gray-9);
-  --app-text-muted: var(--mantine-color-gray-6);
+  --app-accent: #7c3aed;
+  --app-accent-hover: #6d28d9;
+  --app-accent-light: #f5f3ff;
+  --app-accent-soft: rgba(124, 58, 237, 0.08);
+  --app-accent-fg: #7c3aed;
 
-  /* Brand primary */
-  --app-primary: var(--mantine-color-blue-6);
-  --app-primary-hover: var(--mantine-color-blue-7);
+  --app-success: #10b981;
+  --app-success-hover: #059669;
+  --app-success-light: #ecfdf5;
+  --app-success-soft: rgba(16, 185, 129, 0.1);
 
-  /* Accent — tinted icon badges, selected cards, soft highlights */
-  --app-accent: var(--mantine-color-blue-6);
-  --app-accent-fg: var(--mantine-color-blue-7);
-  --app-accent-soft: rgba(34, 139, 230, 0.1);
+  --app-warning: #f59e0b;
+  --app-warning-hover: #d97706;
+  --app-warning-light: #fffbeb;
+  --app-warning-soft: rgba(245, 158, 11, 0.1);
 
-  /* Semantic */
-  --app-success: var(--mantine-color-green-6);
-  --app-warning: var(--mantine-color-yellow-6);
-  --app-danger: var(--mantine-color-red-6);
+  --app-danger: #ef4444;
+  --app-danger-hover: #dc2626;
+  --app-danger-light: #fef2f2;
+  --app-danger-soft: rgba(239, 68, 68, 0.1);
 
-  /* Chart — DATA colors (CVD-safe, kept identical across themes so the
-     meaning of each series is consistent). Change a hue here to rebrand charts. */
-  --app-chart-pending: #eda100;
-  --app-chart-in-progress: #2a78d6;
-  --app-chart-completed: #1baf7a;
-  --app-chart-low: #0ca30c;
-  --app-chart-medium: #fab219;
-  --app-chart-high: #d03b3b;
-  --app-chart-blue: #2a78d6;
-  /* Chart — CHROME (grid/axis/ink) adapts to theme */
-  --app-chart-grid: var(--mantine-color-gray-2);
-  --app-chart-axis: var(--mantine-color-gray-6);
-  --app-chart-baseline: var(--mantine-color-gray-3);
-  --app-chart-text: var(--mantine-color-gray-7);
-  --app-chart-strong: var(--mantine-color-gray-9);
-  --app-chart-surface: #ffffff;
-  --app-chart-cursor: rgba(11, 11, 11, 0.04);
+  --app-info: #0ea5e9;
+  --app-info-hover: #0284c7;
+  --app-info-light: #f0f9ff;
+  --app-info-soft: rgba(14, 165, 233, 0.1);
 
-  /* Brand — login / marketing surfaces (fixed identity) */
+  --app-shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --app-shadow-sm:
+    0 1px 3px 0 rgba(15, 23, 42, 0.07), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
+  --app-shadow-md:
+    0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --app-shadow-lg:
+    0 10px 15px -3px rgba(15, 23, 42, 0.08),
+    0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --app-shadow-xl:
+    0 20px 25px -5px rgba(15, 23, 42, 0.08),
+    0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --app-shadow-card:
+    0 1px 3px rgba(15, 23, 42, 0.05), 0 8px 24px -4px rgba(15, 23, 42, 0.04);
+  --app-shadow-card-hover:
+    0 4px 12px rgba(15, 23, 42, 0.08), 0 16px 32px -8px rgba(15, 23, 42, 0.08);
+
+  --app-overlay: rgba(15, 23, 42, 0.4);
+  --app-glass-bg: rgba(255, 255, 255, 0.85);
+  --app-glass-border: rgba(226, 232, 240, 0.8);
   --app-brand-gradient: linear-gradient(
     135deg,
-    var(--mantine-color-blue-7),
-    var(--mantine-color-indigo-7),
-    var(--mantine-color-violet-7)
+    #4f46e5 0%,
+    #7c3aed 50%,
+    #ec4899 100%
   );
   --app-brand-on: #ffffff;
-  --app-overlay: rgba(0, 0, 0, 0.5);
-  --app-glass-bg: rgba(255, 255, 255, 0.9);
-  --app-glass-border: rgba(255, 255, 255, 0.2);
+  --app-scrollbar-thumb: #cbd5e1;
+  --app-scrollbar-thumb-hover: #94a3b8;
 
-  /* Loader — spinner accents */
-  --app-loader-a: rgba(225, 20, 98, 0.75);
-  --app-loader-b: rgba(111, 202, 220, 0.75);
-  --app-loader-c: rgba(61, 184, 143, 0.75);
-  --app-loader-d: rgba(233, 169, 32, 0.75);
-
-  /* Elevation */
-  --app-shadow: rgba(0, 0, 0, 0.08);
-
-  /* Scrollbar */
-  --app-scrollbar-thumb: var(--mantine-color-gray-4);
-  --app-scrollbar-thumb-hover: var(--mantine-color-gray-5);
+  --app-chart-pending: #f59e0b;
+  --app-chart-in-progress: #3b82f6;
+  --app-chart-completed: #10b981;
+  --app-chart-low: #10b981;
+  --app-chart-medium: #f59e0b;
+  --app-chart-high: #ef4444;
+  --app-chart-blue: #4f46e5;
+  --app-chart-grid: #e2e8f0;
+  --app-chart-axis: #94a3b8;
+  --app-chart-baseline: #cbd5e1;
+  --app-chart-text: #64748b;
+  --app-chart-strong: #0f172a;
+  --app-chart-surface: #ffffff;
+  --app-chart-cursor: rgba(15, 23, 42, 0.04);
 }
 
 :root[data-mantine-color-scheme='dark'] {
-  --app-bg: var(--mantine-color-dark-8);
-  --app-surface: var(--mantine-color-dark-7);
-  --app-surface-2: var(--mantine-color-dark-6);
-  --app-surface-hover: var(--mantine-color-dark-5);
+  --app-bg: #09090b;
+  --app-surface: #121215;
+  --app-surface-2: #18181b;
+  --app-surface-hover: #222227;
+  --app-surface-pressed: #2e2e35;
+  --app-surface-elevated: #18181b;
+  --app-border: #27272a;
+  --app-border-subtle: #1c1c20;
+  --app-border-strong: #3f3f46;
+  --app-text: #f8fafc;
+  --app-text-secondary: #94a3b8;
+  --app-text-muted: #64748b;
+  --app-text-inverse: #09090b;
 
-  --app-border: var(--mantine-color-dark-4);
+  --app-primary: #6366f1;
+  --app-primary-hover: #818cf8;
+  --app-primary-light: rgba(99, 102, 241, 0.14);
+  --app-primary-glow: rgba(99, 102, 241, 0.25);
 
-  --app-text: var(--mantine-color-dark-0);
-  --app-text-muted: var(--mantine-color-dark-2);
+  --app-accent: #8b5cf6;
+  --app-accent-hover: #a78bfa;
+  --app-accent-light: rgba(139, 92, 246, 0.14);
+  --app-accent-soft: rgba(139, 92, 246, 0.12);
+  --app-accent-fg: #a78bfa;
 
-  --app-primary: var(--mantine-color-blue-4);
-  --app-primary-hover: var(--mantine-color-blue-3);
+  --app-success: #10b981;
+  --app-success-hover: #34d399;
+  --app-success-light: rgba(16, 185, 129, 0.14);
+  --app-success-soft: rgba(16, 185, 129, 0.12);
 
-  --app-accent: var(--mantine-color-blue-4);
-  --app-accent-fg: var(--mantine-color-blue-3);
-  --app-accent-soft: rgba(77, 171, 247, 0.15);
+  --app-warning: #f59e0b;
+  --app-warning-hover: #fbbf24;
+  --app-warning-light: rgba(245, 158, 11, 0.14);
+  --app-warning-soft: rgba(245, 158, 11, 0.12);
 
-  --app-success: var(--mantine-color-green-4);
-  --app-warning: var(--mantine-color-yellow-4);
-  --app-danger: var(--mantine-color-red-4);
+  --app-danger: #ef4444;
+  --app-danger-hover: #f87171;
+  --app-danger-light: rgba(239, 68, 68, 0.14);
+  --app-danger-soft: rgba(239, 68, 68, 0.12);
 
-  /* Chart chrome for dark surfaces (data colors stay the same) */
-  --app-chart-grid: var(--mantine-color-dark-4);
-  --app-chart-axis: var(--mantine-color-dark-2);
-  --app-chart-baseline: var(--mantine-color-dark-4);
-  --app-chart-text: var(--mantine-color-dark-1);
-  --app-chart-strong: var(--mantine-color-dark-0);
-  --app-chart-surface: var(--mantine-color-dark-7);
+  --app-info: #0ea5e9;
+  --app-info-hover: #38bdf8;
+  --app-info-light: rgba(14, 165, 233, 0.14);
+  --app-info-soft: rgba(14, 165, 233, 0.12);
+
+  --app-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+  --app-shadow-sm:
+    0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --app-shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.45), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --app-shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --app-shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.55), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --app-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --app-shadow-card-hover:
+    0 10px 28px rgba(0, 0, 0, 0.6), 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  --app-overlay: rgba(0, 0, 0, 0.7);
+  --app-glass-bg: rgba(18, 18, 21, 0.85);
+  --app-glass-border: rgba(255, 255, 255, 0.08);
+  --app-brand-gradient: linear-gradient(
+    135deg,
+    #6366f1 0%,
+    #8b5cf6 50%,
+    #ec4899 100%
+  );
+  --app-brand-on: #ffffff;
+  --app-scrollbar-thumb: #3f3f46;
+  --app-scrollbar-thumb-hover: #52525b;
+
+  --app-chart-pending: #f59e0b;
+  --app-chart-in-progress: #60a5fa;
+  --app-chart-completed: #34d399;
+  --app-chart-low: #34d399;
+  --app-chart-medium: #fbbf24;
+  --app-chart-high: #f87171;
+  --app-chart-blue: #818cf8;
+  --app-chart-grid: #27272a;
+  --app-chart-axis: #71717a;
+  --app-chart-baseline: #3f3f46;
+  --app-chart-text: #94a3b8;
+  --app-chart-strong: #f8fafc;
+  --app-chart-surface: #18181b;
   --app-chart-cursor: rgba(255, 255, 255, 0.06);
-
-  --app-shadow: rgba(0, 0, 0, 0.45);
-
-  --app-scrollbar-thumb: var(--mantine-color-dark-4);
-  --app-scrollbar-thumb-hover: var(--mantine-color-dark-3);
 }

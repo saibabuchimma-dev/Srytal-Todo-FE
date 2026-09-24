@@ -10,7 +10,10 @@ import {
 
 const attachmentsKey = (taskId: string) => ['attachments', taskId];
 
-const showError = (error: AxiosError<{ message: string }>, fallback: string) => {
+const showError = (
+  error: AxiosError<{ message: string }>,
+  fallback: string,
+) => {
   toast.error(error.response?.data?.message ?? fallback);
 };
 

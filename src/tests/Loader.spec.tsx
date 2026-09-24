@@ -10,7 +10,9 @@ describe('Loader', () => {
   });
 
   it('honours a custom label, size and fullScreen', () => {
-    renderWithProviders(<Loader label="Please wait" size={60} fullScreen />, { withRouter: false });
+    renderWithProviders(<Loader label="Please wait" size={60} fullScreen />, {
+      withRouter: false,
+    });
     expect(screen.getByText('Please wait')).toBeInTheDocument();
   });
 });
