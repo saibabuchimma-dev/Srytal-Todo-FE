@@ -9,7 +9,10 @@
       try {
         var stored = localStorage.getItem('mantine-color-scheme-value');
         if (stored === 'dark' || stored === 'light') {
-          document.documentElement.setAttribute('data-mantine-color-scheme', stored);
+          document.documentElement.setAttribute(
+            'data-mantine-color-scheme',
+            stored,
+          );
         }
       } catch (e) {
         /* ignore */

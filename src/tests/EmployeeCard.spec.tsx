@@ -27,7 +27,13 @@ describe('EmployeeCard', () => {
 
   it('renders the employee and navigates to details on click', async () => {
     const user = userEvent.setup();
-    renderWithProviders(<EmployeeCard employee={employee} onEdit={jest.fn()} onDelete={jest.fn()} />);
+    renderWithProviders(
+      <EmployeeCard
+        employee={employee}
+        onEdit={jest.fn()}
+        onDelete={jest.fn()}
+      />,
+    );
     expect(screen.getByText('Sravani K')).toBeInTheDocument();
     expect(screen.getByText('Active')).toBeInTheDocument();
     await user.click(screen.getByText('Sravani K'));
@@ -40,7 +46,11 @@ describe('EmployeeCard', () => {
     const onEdit = jest.fn();
     const onDelete = jest.fn();
     renderWithProviders(
-      <EmployeeCard employee={{ ...employee, isActive: false }} onEdit={onEdit} onDelete={onDelete} />,
+      <EmployeeCard
+        employee={{ ...employee, isActive: false }}
+        onEdit={onEdit}
+        onDelete={onDelete}
+      />,
     );
     expect(screen.getByText('Inactive')).toBeInTheDocument();
     await user.click(screen.getByRole('button'));
@@ -53,7 +63,13 @@ describe('EmployeeCard', () => {
 
   it('highlights when it is the selected employee', () => {
     useEmployeeStore.setState({ selectedEmployee: employee });
-    renderWithProviders(<EmployeeCard employee={employee} onEdit={jest.fn()} onDelete={jest.fn()} />);
+    renderWithProviders(
+      <EmployeeCard
+        employee={employee}
+        onEdit={jest.fn()}
+        onDelete={jest.fn()}
+      />,
+    );
     expect(screen.getByText('Sravani K')).toBeInTheDocument();
   });
 });

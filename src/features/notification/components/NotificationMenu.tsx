@@ -32,13 +32,19 @@ import {
 } from '../hooks/useNotifications';
 import type { AppNotification, NotificationType } from '../types/notification';
 
-const PREF_BY_TYPE: Record<NotificationType, 'taskAssigned' | 'statusChanges' | 'comments'> = {
+const PREF_BY_TYPE: Record<
+  NotificationType,
+  'taskAssigned' | 'statusChanges' | 'comments'
+> = {
   TASK_ASSIGNED: 'taskAssigned',
   TASK_STATUS: 'statusChanges',
   COMMENT_ADDED: 'comments',
 };
 
-const TYPE_CONFIG: Record<NotificationType, { icon: typeof IconBell; color: string }> = {
+const TYPE_CONFIG: Record<
+  NotificationType,
+  { icon: typeof IconBell; color: string }
+> = {
   TASK_ASSIGNED: { icon: IconUserPlus, color: 'blue' },
   TASK_STATUS: { icon: IconProgress, color: 'grape' },
   COMMENT_ADDED: { icon: IconMessageCircle, color: 'teal' },
@@ -57,7 +63,9 @@ export default function NotificationMenu() {
     (notification) => preferences[PREF_BY_TYPE[notification.type]] !== false,
   );
 
-  const unreadCount = notifications.filter((notification) => !notification.isRead).length;
+  const unreadCount = notifications.filter(
+    (notification) => !notification.isRead,
+  ).length;
 
   const handleClick = (notification: AppNotification) => {
     if (!notification.isRead) {
@@ -146,20 +154,35 @@ export default function NotificationMenu() {
                     onClick={() => handleClick(notification)}
                     style={{
                       borderRadius: 0,
-                      background: notification.isRead ? undefined : 'var(--app-accent-soft)',
+                      background: notification.isRead
+                        ? undefined
+                        : 'var(--app-accent-soft)',
                     }}
                   >
                     <Group gap="sm" wrap="nowrap" align="flex-start">
-                      <ThemeIcon size={34} radius="xl" variant="light" color={config.color}>
+                      <ThemeIcon
+                        size={34}
+                        radius="xl"
+                        variant="light"
+                        color={config.color}
+                      >
                         <Icon size={18} />
                       </ThemeIcon>
 
                       <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
-                        <Text size="sm" fw={notification.isRead ? 400 : 600} lineClamp={2}>
+                        <Text
+                          size="sm"
+                          fw={notification.isRead ? 400 : 600}
+                          lineClamp={2}
+                        >
                           {notification.message}
                         </Text>
                         {notification.createdAt && (
-                          <Text size="xs" c="dimmed" title={formatDateTime(notification.createdAt)}>
+                          <Text
+                            size="xs"
+                            c="dimmed"
+                            title={formatDateTime(notification.createdAt)}
+                          >
                             {fromNow(notification.createdAt)}
                           </Text>
                         )}

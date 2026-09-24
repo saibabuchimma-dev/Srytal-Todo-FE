@@ -6,9 +6,18 @@ interface LoaderProps {
   fullScreen?: boolean;
 }
 
-const Loader = ({ label = 'Loading', size = 40, fullScreen = false }: LoaderProps) => {
+const Loader = ({
+  label = 'Loading',
+  size = 40,
+  fullScreen = false,
+}: LoaderProps) => {
   return (
-    <StyledWrapper $fullScreen={fullScreen} $size={size} role="status" aria-live="polite">
+    <StyledWrapper
+      $fullScreen={fullScreen}
+      $size={size}
+      role="status"
+      aria-live="polite"
+    >
       <div className="loader" aria-hidden="true" />
       <span>{label}</span>
     </StyledWrapper>
@@ -72,7 +81,8 @@ const StyledWrapper = styled.div<{ $fullScreen: boolean; $size: number }>`
     70% {
       width: ${({ $size }) => `${$size / 5}px`};
       box-shadow:
-        ${({ $size }) => `${-$size / 2.5}px ${-$size / 5}px`} var(--app-loader-a),
+        ${({ $size }) => `${-$size / 2.5}px ${-$size / 5}px`}
+          var(--app-loader-a),
         ${({ $size }) => `${$size / 2.5}px ${$size / 5}px`} var(--app-loader-b);
     }
 
@@ -88,7 +98,8 @@ const StyledWrapper = styled.div<{ $fullScreen: boolean; $size: number }>`
       height: ${({ $size }) => `${$size / 5}px`};
       box-shadow:
         ${({ $size }) => `${$size / 5}px ${$size / 2.5}px`} var(--app-loader-c),
-        ${({ $size }) => `${-$size / 5}px ${-$size / 2.5}px`} var(--app-loader-d);
+        ${({ $size }) => `${-$size / 5}px ${-$size / 2.5}px`}
+          var(--app-loader-d);
     }
 
     35% {
@@ -108,7 +119,8 @@ const StyledWrapper = styled.div<{ $fullScreen: boolean; $size: number }>`
     100% {
       box-shadow:
         ${({ $size }) => `${$size / 5}px ${$size / 2.5}px`} var(--app-loader-c),
-        ${({ $size }) => `${-$size / 5}px ${-$size / 2.5}px`} var(--app-loader-d);
+        ${({ $size }) => `${-$size / 5}px ${-$size / 2.5}px`}
+          var(--app-loader-d);
     }
   }
 `;

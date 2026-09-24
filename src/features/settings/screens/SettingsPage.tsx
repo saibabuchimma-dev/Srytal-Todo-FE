@@ -1,4 +1,14 @@
-import { Card, Grid, Group, NavLink, Paper, Stack, Text, ThemeIcon, Title } from '@mantine/core';
+import {
+  Card,
+  Grid,
+  Group,
+  NavLink,
+  Paper,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
+} from '@mantine/core';
 import { IconLock, IconSettings, IconUser } from '@tabler/icons-react';
 import { useState } from 'react';
 import type { ReactNode } from 'react';
@@ -41,7 +51,8 @@ const sections: {
 
 export default function SettingsPage() {
   const [activeKey, setActiveKey] = useState<SectionKey>('profile');
-  const active = sections.find((section) => section.key === activeKey) ?? sections[0];
+  const active =
+    sections.find((section) => section.key === activeKey) ?? sections[0];
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-6">
@@ -52,7 +63,9 @@ export default function SettingsPage() {
           </ThemeIcon>
           <div>
             <Title order={2}>Settings</Title>
-            <Text c="dimmed">Manage your profile, security, and preferences.</Text>
+            <Text c="dimmed">
+              Manage your profile, security, and preferences.
+            </Text>
           </div>
         </Group>
       </Paper>

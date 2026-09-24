@@ -32,7 +32,10 @@ import * as notifSvc from '@/features/notification/services/notification.service
 import * as commentSvc from '@/features/comment/services/comment.service';
 import * as attachSvc from '@/features/attachment/services/attachment.service';
 import * as activitySvc from '@/features/activity/services/activity.service';
-import { useProfile, useUpdateProfile } from '@/features/profile/hooks/useProfile';
+import {
+  useProfile,
+  useUpdateProfile,
+} from '@/features/profile/hooks/useProfile';
 import {
   useNotifications,
   useMarkNotificationRead,
@@ -56,27 +59,46 @@ const mToast = toast as unknown as { success: jest.Mock; error: jest.Mock };
 
 describe('profile hooks', () => {
   it('useProfile fetches', async () => {
-    (profileSvc.getProfile as jest.Mock).mockResolvedValueOnce({ id: 'u1', name: 'A' });
+    (profileSvc.getProfile as jest.Mock).mockResolvedValueOnce({
+      id: 'u1',
+      name: 'A',
+    });
     const { result } = renderHook(() => useProfile(), hookWrapper());
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
   });
 
   it('useUpdateProfile updates the auth store + toasts on success', async () => {
     useAuthStore.getState().login(
-      { id: 'u1', fullName: 'Old', name: 'Old', email: 'a@x.com', role: 'Employee', mustChangePassword: false },
+      {
+        id: 'u1',
+        fullName: 'Old',
+        name: 'Old',
+        email: 'a@x.com',
+        role: 'Employee',
+        mustChangePassword: false,
+      },
       't',
     );
-    (profileSvc.updateMyProfile as jest.Mock).mockResolvedValueOnce({ name: 'New', avatar: 'x' });
+    (profileSvc.updateMyProfile as jest.Mock).mockResolvedValueOnce({
+      name: 'New',
+      avatar: 'x',
+    });
     const { result } = renderHook(() => useUpdateProfile(), hookWrapper());
     await result.current.mutateAsync({ name: 'New' });
-    await waitFor(() => expect(mToast.success).toHaveBeenCalledWith('Profile updated'));
+    await waitFor(() =>
+      expect(mToast.success).toHaveBeenCalledWith('Profile updated'),
+    );
     expect(useAuthStore.getState().user?.name).toBe('New');
   });
 
   it('useUpdateProfile toasts server error message', async () => {
-    (profileSvc.updateMyProfile as jest.Mock).mockRejectedValueOnce({ response: { data: { message: 'Bad' } } });
+    (profileSvc.updateMyProfile as jest.Mock).mockRejectedValueOnce({
+      response: { data: { message: 'Bad' } },
+    });
     const { result } = renderHook(() => useUpdateProfile(), hookWrapper());
-    await expect(result.current.mutateAsync({ name: 'X' })).rejects.toBeDefined();
+    await expect(
+      result.current.mutateAsync({ name: 'X' }),
+    ).rejects.toBeDefined();
     await waitFor(() => expect(mToast.error).toHaveBeenCalledWith('Bad'));
   });
 });
@@ -87,12 +109,16 @@ describe('notification hooks', () => {
     const list = renderHook(() => useNotifications(), hookWrapper());
     await waitFor(() => expect(list.result.current.isSuccess).toBe(true));
 
-    (notifSvc.markNotificationRead as jest.Mock).mockResolvedValueOnce(undefined);
+    (notifSvc.markNotificationRead as jest.Mock).mockResolvedValueOnce(
+      undefined,
+    );
     const one = renderHook(() => useMarkNotificationRead(), hookWrapper());
     await one.result.current.mutateAsync('n1');
     expect(notifSvc.markNotificationRead).toHaveBeenCalledWith('n1');
 
-    (notifSvc.markAllNotificationsRead as jest.Mock).mockResolvedValueOnce(undefined);
+    (notifSvc.markAllNotificationsRead as jest.Mock).mockResolvedValueOnce(
+      undefined,
+    );
     const all = renderHook(() => useMarkAllNotificationsRead(), hookWrapper());
     await all.result.current.mutateAsync();
     expect(notifSvc.markAllNotificationsRead).toHaveBeenCalled();
@@ -105,22 +131,30 @@ describe('comment hooks', () => {
     const list = renderHook(() => useTaskComments('t1'), hookWrapper());
     await waitFor(() => expect(list.result.current.isSuccess).toBe(true));
 
-    (commentSvc.addTaskComment as jest.Mock).mockResolvedValueOnce({ id: 'c1' });
+    (commentSvc.addTaskComment as jest.Mock).mockResolvedValueOnce({
+      id: 'c1',
+    });
     const add = renderHook(() => useAddComment('t1'), hookWrapper());
     await add.result.current.mutateAsync('hi');
     expect(commentSvc.addTaskComment).toHaveBeenCalledWith('t1', 'hi');
 
-    (commentSvc.addTaskComment as jest.Mock).mockRejectedValueOnce({ response: { data: { message: 'no' } } });
+    (commentSvc.addTaskComment as jest.Mock).mockRejectedValueOnce({
+      response: { data: { message: 'no' } },
+    });
     const addErr = renderHook(() => useAddComment('t1'), hookWrapper());
     await expect(addErr.result.current.mutateAsync('x')).rejects.toBeDefined();
     await waitFor(() => expect(mToast.error).toHaveBeenCalledWith('no'));
 
-    (commentSvc.updateTaskComment as jest.Mock).mockResolvedValueOnce({ id: 'c1' });
+    (commentSvc.updateTaskComment as jest.Mock).mockResolvedValueOnce({
+      id: 'c1',
+    });
     const upd = renderHook(() => useUpdateComment('t1'), hookWrapper());
     await upd.result.current.mutateAsync({ id: 'c1', content: 'edit' });
     expect(commentSvc.updateTaskComment).toHaveBeenCalled();
 
-    (commentSvc.deleteTaskComment as jest.Mock).mockResolvedValueOnce(undefined);
+    (commentSvc.deleteTaskComment as jest.Mock).mockResolvedValueOnce(
+      undefined,
+    );
     const del = renderHook(() => useDeleteComment('t1'), hookWrapper());
     await del.result.current.mutateAsync('c1');
     expect(commentSvc.deleteTaskComment).toHaveBeenCalledWith('c1');
@@ -128,8 +162,12 @@ describe('comment hooks', () => {
     // fallback error message branch
     (commentSvc.updateTaskComment as jest.Mock).mockRejectedValueOnce({});
     const updErr = renderHook(() => useUpdateComment('t1'), hookWrapper());
-    await expect(updErr.result.current.mutateAsync({ id: 'c1', content: 'z' })).rejects.toBeDefined();
-    await waitFor(() => expect(mToast.error).toHaveBeenCalledWith('Unable to update comment.'));
+    await expect(
+      updErr.result.current.mutateAsync({ id: 'c1', content: 'z' }),
+    ).rejects.toBeDefined();
+    await waitFor(() =>
+      expect(mToast.error).toHaveBeenCalledWith('Unable to update comment.'),
+    );
   });
 });
 
@@ -139,12 +177,18 @@ describe('attachment hooks', () => {
     const list = renderHook(() => useTaskAttachments('t1'), hookWrapper());
     await waitFor(() => expect(list.result.current.isSuccess).toBe(true));
 
-    (attachSvc.uploadTaskAttachment as jest.Mock).mockResolvedValueOnce({ id: 'f1' });
+    (attachSvc.uploadTaskAttachment as jest.Mock).mockResolvedValueOnce({
+      id: 'f1',
+    });
     const up = renderHook(() => useUploadAttachment('t1'), hookWrapper());
     await up.result.current.mutateAsync(new File(['a'], 'a.txt'));
-    await waitFor(() => expect(mToast.success).toHaveBeenCalledWith('File uploaded'));
+    await waitFor(() =>
+      expect(mToast.success).toHaveBeenCalledWith('File uploaded'),
+    );
 
-    (attachSvc.deleteTaskAttachment as jest.Mock).mockResolvedValueOnce(undefined);
+    (attachSvc.deleteTaskAttachment as jest.Mock).mockResolvedValueOnce(
+      undefined,
+    );
     const del = renderHook(() => useDeleteAttachment('t1'), hookWrapper());
     await del.result.current.mutateAsync('f1');
     expect(attachSvc.deleteTaskAttachment).toHaveBeenCalledWith('f1');
@@ -152,7 +196,9 @@ describe('attachment hooks', () => {
     (attachSvc.deleteTaskAttachment as jest.Mock).mockRejectedValueOnce({});
     const delErr = renderHook(() => useDeleteAttachment('t1'), hookWrapper());
     await expect(delErr.result.current.mutateAsync('f1')).rejects.toBeDefined();
-    await waitFor(() => expect(mToast.error).toHaveBeenCalledWith('Unable to delete attachment.'));
+    await waitFor(() =>
+      expect(mToast.error).toHaveBeenCalledWith('Unable to delete attachment.'),
+    );
   });
 });
 

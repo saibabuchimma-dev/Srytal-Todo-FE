@@ -25,7 +25,11 @@ interface ActivityTimelineProps {
 }
 
 export default function ActivityTimeline({ taskId }: ActivityTimelineProps) {
-  const { data: activities = [], isLoading, isError } = useTaskActivities(taskId);
+  const {
+    data: activities = [],
+    isLoading,
+    isError,
+  } = useTaskActivities(taskId);
 
   return (
     <Card withBorder radius="md" p="md">
@@ -65,7 +69,12 @@ export default function ActivityTimeline({ taskId }: ActivityTimelineProps) {
                 </Text>
 
                 {activity.createdAt && (
-                  <Text size="xs" c="dimmed" mt={2} title={formatDateTime(activity.createdAt)}>
+                  <Text
+                    size="xs"
+                    c="dimmed"
+                    mt={2}
+                    title={formatDateTime(activity.createdAt)}
+                  >
                     {fromNow(activity.createdAt)}
                   </Text>
                 )}

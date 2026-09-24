@@ -18,7 +18,14 @@ describe('notification.service', () => {
     mockApi.get.mockResolvedValueOnce({
       data: {
         data: [
-          { _id: 'n1', type: 'TASK_ASSIGNED', message: 'm', isRead: 1, task: { _id: 't1' }, actor: { _id: 'a1', fullName: 'A', avatar: 'x' } },
+          {
+            _id: 'n1',
+            type: 'TASK_ASSIGNED',
+            message: 'm',
+            isRead: 1,
+            task: { _id: 't1' },
+            actor: { _id: 'a1', fullName: 'A', avatar: 'x' },
+          },
           { id: 'n2', task: 't2' },
         ],
       },
@@ -27,7 +34,12 @@ describe('notification.service', () => {
     expect(mockApi.get).toHaveBeenCalledWith('/notifications');
     expect(list[0]).toMatchObject({ id: 'n1', taskId: 't1', isRead: true });
     expect(list[0].actor).toEqual({ id: 'a1', fullName: 'A', avatar: 'x' });
-    expect(list[1]).toMatchObject({ id: 'n2', type: 'COMMENT_ADDED', taskId: 't2', isRead: false });
+    expect(list[1]).toMatchObject({
+      id: 'n2',
+      type: 'COMMENT_ADDED',
+      taskId: 't2',
+      isRead: false,
+    });
     expect(list[1].actor).toBeUndefined();
   });
 

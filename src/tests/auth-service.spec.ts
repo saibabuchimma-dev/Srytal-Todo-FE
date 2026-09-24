@@ -16,24 +16,52 @@ describe('auth.service', () => {
           accessToken: 'tok',
           refreshToken: 'refresh',
           mustChangePassword: false,
-          user: { id: 'u1', fullName: 'Sravani', email: 's@x.com', role: 'Admin', avatar: 'a.png', mustChangePassword: false },
+          user: {
+            id: 'u1',
+            fullName: 'Sravani',
+            email: 's@x.com',
+            role: 'Admin',
+            avatar: 'a.png',
+            mustChangePassword: false,
+          },
         },
       },
     });
     const user = await login({ email: 's@x.com', password: 'pw' });
-    expect(mockApi.post).toHaveBeenCalledWith('/auth/login', { email: 's@x.com', password: 'pw' });
-    expect(user).toMatchObject({ id: 'u1', name: 'Sravani', fullName: 'Sravani', role: 'Admin', token: 'tok', refreshToken: 'refresh' });
+    expect(mockApi.post).toHaveBeenCalledWith('/auth/login', {
+      email: 's@x.com',
+      password: 'pw',
+    });
+    expect(user).toMatchObject({
+      id: 'u1',
+      name: 'Sravani',
+      fullName: 'Sravani',
+      role: 'Admin',
+      token: 'tok',
+      refreshToken: 'refresh',
+    });
   });
 
   it('login throws when token or user is missing', async () => {
-    mockApi.post.mockResolvedValueOnce({ data: { data: { accessToken: '', user: null } } });
-    await expect(login({ email: 'x', password: 'y' })).rejects.toThrow('Invalid login response');
+    mockApi.post.mockResolvedValueOnce({
+      data: { data: { accessToken: '', user: null } },
+    });
+    await expect(login({ email: 'x', password: 'y' })).rejects.toThrow(
+      'Invalid login response',
+    );
   });
 
   it('changePassword patches and returns the response data', async () => {
     mockApi.patch.mockResolvedValueOnce({ data: { success: true } });
-    const result = await changePassword({ currentPassword: 'a', newPassword: 'b', confirmPassword: 'b' });
-    expect(mockApi.patch).toHaveBeenCalledWith('/employees/change-password', expect.any(Object));
+    const result = await changePassword({
+      currentPassword: 'a',
+      newPassword: 'b',
+      confirmPassword: 'b',
+    });
+    expect(mockApi.patch).toHaveBeenCalledWith(
+      '/employees/change-password',
+      expect.any(Object),
+    );
     expect(result).toEqual({ success: true });
   });
 });

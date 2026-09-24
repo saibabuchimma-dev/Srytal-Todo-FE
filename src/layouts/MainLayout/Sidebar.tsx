@@ -1,4 +1,16 @@
-import { Avatar, Box, Group, NavLink, ScrollArea, Stack, Text, UnstyledButton } from '@mantine/core';
+import { motion } from 'framer-motion';
+import {
+  Avatar,
+  Box,
+  Group,
+  NavLink,
+  ScrollArea,
+  Stack,
+  Text,
+  UnstyledButton,
+  Tooltip,
+  ActionIcon,
+} from '@mantine/core';
 import {
   IconChartBar,
   IconChecklist,
@@ -8,25 +20,114 @@ import {
   IconLayoutKanban,
   IconSettings,
   IconUsers,
+  IconLayoutSidebarLeftCollapse,
+  IconLayoutSidebarLeftExpand,
 } from '@tabler/icons-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDisclosure } from '@mantine/hooks';
 
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import { useProfile } from '@/features/profile/hooks/useProfile';
 import { ROUTES } from '@/shared/config/routes';
+import logo from '@/assets/logo/logo.png';
 
 interface SidebarProps {
   onNavigate?: () => void;
 }
 
+const navItemsAdmin = [
+  {
+    label: 'Dashboard',
+    path: ROUTES.ADMIN_DASHBOARD,
+    icon: IconLayoutDashboard,
+    key: 'dashboard',
+  },
+  {
+    label: 'Projects',
+    path: ROUTES.ADMIN_PROJECTS,
+    icon: IconFolders,
+    key: 'projects',
+  },
+  {
+    label: 'Employees',
+    path: ROUTES.EMPLOYEES,
+    icon: IconUsers,
+    key: 'employees',
+  },
+  {
+    label: 'Tasks',
+    path: ROUTES.ADMIN_TASKS,
+    icon: IconChecklist,
+    key: 'tasks',
+  },
+  {
+    label: 'Board',
+    path: ROUTES.ADMIN_BOARD,
+    icon: IconLayoutKanban,
+    key: 'board',
+  },
+  {
+    label: 'Reports',
+    path: ROUTES.ADMIN_REPORTS,
+    icon: IconChartBar,
+    key: 'reports',
+  },
+  {
+    label: 'Settings',
+    path: ROUTES.ADMIN_SETTINGS,
+    icon: IconSettings,
+    key: 'settings',
+  },
+] as const;
+
+const navItemsEmployee = [
+  {
+    label: 'Dashboard',
+    path: ROUTES.DASHBOARD,
+    icon: IconLayoutDashboard,
+    key: 'dashboard',
+  },
+  {
+    label: 'My Tasks',
+    path: ROUTES.TASKS,
+    icon: IconChecklist,
+    key: 'tasks',
+  },
+  {
+    label: 'My Board',
+    path: ROUTES.BOARD,
+    icon: IconLayoutKanban,
+    key: 'board',
+  },
+  {
+    label: 'My Projects',
+    path: ROUTES.PROJECTS,
+    icon: IconFolders,
+    key: 'projects',
+  },
+  {
+    label: 'Settings',
+    path: ROUTES.SETTINGS,
+    icon: IconSettings,
+    key: 'settings',
+  },
+] as const;
+
+const NAV_ITEMS = {
+  admin: navItemsAdmin,
+  employee: navItemsEmployee,
+} as const;
+
 export default function Sidebar({ onNavigate }: SidebarProps = {}) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [collapsed, { toggle: toggleCollapsed }] = useDisclosure(false);
 
   const go = (path: string) => {
     navigate(path);
     onNavigate?.();
   };
+
   const user = useAuthStore((state) => state.user);
   const { data: profile } = useProfile();
   const isAdmin = user?.role === 'Admin';
@@ -43,95 +144,222 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
     return current === target || current.startsWith(`${target}/`);
   };
 
-  const items = isAdmin
-    ? [
-        { label: 'Dashboard', path: ROUTES.ADMIN_DASHBOARD, icon: IconLayoutDashboard },
-        { label: 'Projects', path: ROUTES.ADMIN_PROJECTS, icon: IconFolders },
-        { label: 'Employees', path: ROUTES.EMPLOYEES, icon: IconUsers },
-        { label: 'Tasks', path: ROUTES.ADMIN_TASKS, icon: IconChecklist },
-        { label: 'Board', path: ROUTES.ADMIN_BOARD, icon: IconLayoutKanban },
-        { label: 'Reports', path: ROUTES.ADMIN_REPORTS, icon: IconChartBar },
-        { label: 'Settings', path: ROUTES.ADMIN_SETTINGS, icon: IconSettings },
-      ]
-    : [
-        { label: 'Dashboard', path: ROUTES.DASHBOARD, icon: IconLayoutDashboard },
-        { label: 'My Tasks', path: ROUTES.TASKS, icon: IconChecklist },
-        { label: 'My Board', path: ROUTES.BOARD, icon: IconLayoutKanban },
-        { label: 'My Projects', path: ROUTES.PROJECTS, icon: IconFolders },
-        { label: 'Settings', path: ROUTES.SETTINGS, icon: IconSettings },
-      ];
+  const items = isAdmin ? NAV_ITEMS.admin : NAV_ITEMS.employee;
 
   const displayName = profile?.name ?? user?.fullName ?? 'User';
   const initial = displayName.charAt(0).toUpperCase();
 
   return (
-    <Box
+    <motion.aside
+      initial={false}
+      animate={{ width: collapsed ? 76 : 280 }}
+      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
       style={{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
         backgroundColor: 'var(--app-surface)',
+        borderRight: '1px solid var(--app-border)',
+        overflow: 'hidden',
+        userSelect: 'none',
       }}
     >
-      <ScrollArea style={{ flex: 1 }}>
-        <Stack gap={4} p="md">
+      <Box
+        p="md"
+        style={{
+          borderBottom: '1px solid var(--app-border)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: collapsed ? 'center' : 'space-between',
+          minHeight: 64,
+        }}
+      >
+        {!collapsed && (
+          <Group
+            gap="xs"
+            wrap="nowrap"
+            style={{ cursor: 'pointer' }}
+            onClick={() => go(dashboardPath)}
+          >
+            <Avatar src={logo} radius="md" size={34} />
+            <div>
+              <Text fw={800} fz="sm" lh={1.1} c="var(--app-text)">
+                SRYTAL
+              </Text>
+              <Text
+                fz={10}
+                c="dimmed"
+                fw={600}
+                tt="uppercase"
+                style={{ letterSpacing: 0.5 }}
+              >
+                Task Cloud
+              </Text>
+            </div>
+          </Group>
+        )}
+
+        <Tooltip
+          label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          position="right"
+          withArrow
+        >
+          <ActionIcon
+            variant="subtle"
+            color="gray"
+            size="sm"
+            onClick={toggleCollapsed}
+            aria-label="Toggle sidebar"
+          >
+            {collapsed ? (
+              <IconLayoutSidebarLeftExpand size={18} />
+            ) : (
+              <IconLayoutSidebarLeftCollapse size={18} />
+            )}
+          </ActionIcon>
+        </Tooltip>
+      </Box>
+
+      <ScrollArea style={{ flex: 1 }} p={collapsed ? 'xs' : 'sm'}>
+        {!collapsed && (
           <Text
             size="xs"
             fw={700}
             c="dimmed"
             tt="uppercase"
             px="xs"
-            mb={4}
-            style={{ letterSpacing: 0.6 }}
+            mb="xs"
+            style={{ letterSpacing: 0.8, fontSize: 10 }}
           >
-            Menu
+            Workspace
           </Text>
+        )}
 
+        <Stack gap={4}>
           {items.map((item) => {
             const active = isActive(item.path);
             const Icon = item.icon;
 
-            return (
+            const linkContent = (
               <NavLink
-                key={item.path}
                 active={active}
-                variant="light"
-                label={item.label}
-                leftSection={<Icon size={20} stroke={1.6} />}
+                label={collapsed ? null : item.label}
+                leftSection={<Icon size={18} stroke={active ? 2.2 : 1.8} />}
+                rightSection={
+                  !collapsed && active ? (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      style={{
+                        width: 5,
+                        height: 5,
+                        borderRadius: '50%',
+                        background: 'var(--app-primary)',
+                        boxShadow: '0 0 8px var(--app-primary)',
+                      }}
+                    />
+                  ) : null
+                }
                 onClick={() => go(item.path)}
                 styles={{
-                  root: { borderRadius: 'var(--mantine-radius-md)', paddingBlock: 10 },
-                  label: { fontWeight: active ? 600 : 500, fontSize: 14 },
+                  root: {
+                    borderRadius: 10,
+                    padding: collapsed ? '10px 0' : '10px 12px',
+                    justifyContent: collapsed ? 'center' : 'flex-start',
+                    backgroundColor: active
+                      ? 'var(--app-primary-light)'
+                      : 'transparent',
+                    color: active ? 'var(--app-primary)' : 'var(--app-text)',
+                    transition: 'all 140ms ease-out',
+                    '&:hover': {
+                      backgroundColor: active
+                        ? 'var(--app-primary-light)'
+                        : 'var(--app-surface-hover)',
+                      transform: 'translateX(2px)',
+                    },
+                  },
+                  label: {
+                    fontWeight: active ? 600 : 500,
+                    fontSize: 13,
+                    color: active ? 'var(--app-primary)' : 'var(--app-text)',
+                  },
+                  section: {
+                    marginRight: collapsed ? 0 : 10,
+                    color: active
+                      ? 'var(--app-primary)'
+                      : 'var(--app-text-muted)',
+                  },
                 }}
               />
             );
+
+            if (collapsed) {
+              return (
+                <Tooltip
+                  key={item.key}
+                  label={item.label}
+                  position="right"
+                  withArrow
+                >
+                  <Box>{linkContent}</Box>
+                </Tooltip>
+              );
+            }
+
+            return <Box key={item.key}>{linkContent}</Box>;
           })}
         </Stack>
       </ScrollArea>
 
-      <UnstyledButton
-        onClick={() => go(settingsRoute)}
+      <Box
+        p="xs"
         style={{
-          width: '100%',
-          padding: '14px 16px',
           borderTop: '1px solid var(--app-border)',
+          backgroundColor: 'var(--app-surface)',
         }}
       >
-        <Group gap="sm" wrap="nowrap">
-          <Avatar src={profile?.avatar || undefined} radius="xl" size={40} color="blue">
-            {initial}
-          </Avatar>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <Text size="sm" fw={600} lineClamp={1}>
-              {displayName}
-            </Text>
-            <Text size="xs" c="dimmed">
-              {isAdmin ? 'Administrator' : 'Employee'}
-            </Text>
-          </div>
-          <IconChevronRight size={16} style={{ color: 'var(--app-text-muted)' }} />
-        </Group>
-      </UnstyledButton>
-    </Box>
+        <UnstyledButton
+          onClick={() => go(settingsRoute)}
+          style={{
+            width: '100%',
+            padding: '8px 10px',
+            borderRadius: 10,
+            transition: 'background-color 150ms ease-out',
+            backgroundColor: 'transparent',
+          }}
+          className="hover:bg-[var(--app-surface-hover)]"
+        >
+          <Group
+            gap="xs"
+            wrap="nowrap"
+            justify={collapsed ? 'center' : 'flex-start'}
+          >
+            <Avatar
+              src={profile?.avatar || undefined}
+              radius="xl"
+              size={32}
+              color="indigo"
+            >
+              {initial}
+            </Avatar>
+            {!collapsed && (
+              <>
+                <Box style={{ flex: 1, minWidth: 0 }}>
+                  <Text size="xs" fw={600} lineClamp={1} c="var(--app-text)">
+                    {displayName}
+                  </Text>
+                  <Text size="10px" c="dimmed" lineClamp={1}>
+                    {isAdmin ? 'Administrator' : 'Employee'}
+                  </Text>
+                </Box>
+                <IconChevronRight
+                  size={14}
+                  style={{ color: 'var(--app-text-muted)' }}
+                />
+              </>
+            )}
+          </Group>
+        </UnstyledButton>
+      </Box>
+    </motion.aside>
   );
 }

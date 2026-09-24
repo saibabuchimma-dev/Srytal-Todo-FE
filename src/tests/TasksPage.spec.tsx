@@ -5,7 +5,8 @@ jest.mock('@/features/task/hooks/useTasks', () => ({
 }));
 jest.mock('@/features/task/components/CreateTaskModal', () => ({
   __esModule: true,
-  default: ({ opened }: { opened: boolean }) => (opened ? <div>create-task-modal</div> : null),
+  default: ({ opened }: { opened: boolean }) =>
+    opened ? <div>create-task-modal</div> : null,
 }));
 jest.mock('@/features/task/components/EditTaskModal', () => ({
   __esModule: true,
@@ -15,7 +16,14 @@ jest.mock('@/features/task/components/EditTaskModal', () => ({
 import { renderWithProviders, screen, userEvent } from '@test-utils';
 import TasksPage from '@/features/task/screens/TasksPage';
 
-const task = { id: 't1', title: 'Alpha', description: 'a', status: 'Pending', priority: 'High', dueDate: '2026-02-01' };
+const task = {
+  id: 't1',
+  title: 'Alpha',
+  description: 'a',
+  status: 'Pending',
+  priority: 'High',
+  dueDate: '2026-02-01',
+};
 
 describe('TasksPage', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -32,7 +40,10 @@ describe('TasksPage', () => {
   });
 
   it('renders tasks and opens the create modal', async () => {
-    mockUsePaginated.mockReturnValue({ data: { items: [task], total: 1, totalPages: 1 }, isLoading: false });
+    mockUsePaginated.mockReturnValue({
+      data: { items: [task], total: 1, totalPages: 1 },
+      isLoading: false,
+    });
     const user = userEvent.setup();
     renderWithProviders(<TasksPage />);
     expect(screen.getByText('Task Management')).toBeInTheDocument();

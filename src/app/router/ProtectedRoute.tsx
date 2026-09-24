@@ -8,14 +8,19 @@ interface ProtectedRouteProps {
   redirectPath?: string;
 }
 
-export default function ProtectedRoute({ requiredRole, redirectPath }: ProtectedRouteProps) {
+export default function ProtectedRoute({
+  requiredRole,
+  redirectPath,
+}: ProtectedRouteProps) {
   const location = useLocation();
   const user = useAuthStore((state) => state.user);
 
   if (!user) {
     return (
       <Navigate
-        to={redirectPath ?? (requiredRole === 'Admin' ? '/admin/login' : '/login')}
+        to={
+          redirectPath ?? (requiredRole === 'Admin' ? '/admin/login' : '/login')
+        }
         replace
         state={{ from: location }}
       />
@@ -23,7 +28,12 @@ export default function ProtectedRoute({ requiredRole, redirectPath }: Protected
   }
 
   if (requiredRole && user.role !== requiredRole) {
-    return <Navigate to={user.role === 'Admin' ? '/admin/dashboard' : '/dashboard'} replace />;
+    return (
+      <Navigate
+        to={user.role === 'Admin' ? '/admin/dashboard' : '/dashboard'}
+        replace
+      />
+    );
   }
 
   if (user.mustChangePassword && location.pathname !== '/change-password') {

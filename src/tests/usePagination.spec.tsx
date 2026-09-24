@@ -12,7 +12,9 @@ describe('usePagination', () => {
   });
 
   it('accepts custom initial values', () => {
-    const { result } = renderHook(() => usePagination({ initialPage: 2, initialLimit: 25 }));
+    const { result } = renderHook(() =>
+      usePagination({ initialPage: 2, initialLimit: 25 }),
+    );
     expect(result.current.page).toBe(2);
     expect(result.current.limit).toBe(25);
   });

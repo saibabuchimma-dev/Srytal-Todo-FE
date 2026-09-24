@@ -1,5 +1,9 @@
-jest.mock('@/features/auth/services/auth.service', () => ({ changePassword: jest.fn() }));
-jest.mock('@/shared/utils/toast', () => ({ toast: { success: jest.fn(), error: jest.fn() } }));
+jest.mock('@/features/auth/services/auth.service', () => ({
+  changePassword: jest.fn(),
+}));
+jest.mock('@/shared/utils/toast', () => ({
+  toast: { success: jest.fn(), error: jest.fn() },
+}));
 
 import { renderWithProviders, screen, userEvent, waitFor } from '@test-utils';
 import SecuritySettings from '@/features/settings/components/SecuritySettings';
@@ -10,7 +14,12 @@ import { useAuthStore } from '@/features/auth/store/auth.store';
 const mockChange = changePassword as jest.Mock;
 const mToast = toast as unknown as { success: jest.Mock; error: jest.Mock };
 
-const fill = async (u: ReturnType<typeof userEvent.setup>, cur: string, nw: string, cf: string) => {
+const fill = async (
+  u: ReturnType<typeof userEvent.setup>,
+  cur: string,
+  nw: string,
+  cf: string,
+) => {
   await u.type(screen.getByLabelText('Current password'), cur);
   await u.type(screen.getByLabelText('New password'), nw);
   await u.type(screen.getByLabelText('Confirm new password'), cf);
@@ -21,7 +30,14 @@ describe('SecuritySettings', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     useAuthStore.getState().login(
-      { id: 'u1', fullName: 'A', name: 'A', email: 'a@x.com', role: 'Admin', mustChangePassword: true },
+      {
+        id: 'u1',
+        fullName: 'A',
+        name: 'A',
+        email: 'a@x.com',
+        role: 'Admin',
+        mustChangePassword: true,
+      },
       't',
     );
   });
@@ -30,7 +46,9 @@ describe('SecuritySettings', () => {
     const u = userEvent.setup();
     renderWithProviders(<SecuritySettings />, { withRouter: false });
     await fill(u, 'old', 'short', 'short');
-    expect(mToast.error).toHaveBeenCalledWith('Password must be at least 8 characters.');
+    expect(mToast.error).toHaveBeenCalledWith(
+      'Password must be at least 8 characters.',
+    );
     expect(mockChange).not.toHaveBeenCalled();
   });
 
@@ -46,7 +64,9 @@ describe('SecuritySettings', () => {
     const u = userEvent.setup();
     renderWithProviders(<SecuritySettings />, { withRouter: false });
     await fill(u, 'old', 'longenough1', 'longenough1');
-    await waitFor(() => expect(mToast.success).toHaveBeenCalledWith('Password updated'));
+    await waitFor(() =>
+      expect(mToast.success).toHaveBeenCalledWith('Password updated'),
+    );
     expect(useAuthStore.getState().user?.mustChangePassword).toBe(false);
   });
 
@@ -55,6 +75,8 @@ describe('SecuritySettings', () => {
     const u = userEvent.setup();
     renderWithProviders(<SecuritySettings />, { withRouter: false });
     await fill(u, 'old', 'longenough1', 'longenough1');
-    await waitFor(() => expect(mToast.error).toHaveBeenCalledWith('Bad current password'));
+    await waitFor(() =>
+      expect(mToast.error).toHaveBeenCalledWith('Bad current password'),
+    );
   });
 });

@@ -1,5 +1,18 @@
-import { ActionIcon, Anchor, Card, Group, Menu, Stack, Text } from '@mantine/core';
-import { IconDotsVertical, IconDownload, IconFile, IconTrash } from '@tabler/icons-react';
+import {
+  ActionIcon,
+  Anchor,
+  Card,
+  Group,
+  Menu,
+  Stack,
+  Text,
+} from '@mantine/core';
+import {
+  IconDotsVertical,
+  IconDownload,
+  IconFile,
+  IconTrash,
+} from '@tabler/icons-react';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import { useDeleteAttachment } from '../hooks/useAttachments';
 import type { Attachment } from '../types/attachment';
@@ -15,13 +28,19 @@ const formatSize = (bytes: number): string => {
   }
 
   const units = ['B', 'KB', 'MB', 'GB'];
-  const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+  const exponent = Math.min(
+    Math.floor(Math.log(bytes) / Math.log(1024)),
+    units.length - 1,
+  );
   const value = bytes / Math.pow(1024, exponent);
 
   return `${value.toFixed(value >= 10 || exponent === 0 ? 0 : 1)} ${units[exponent]}`;
 };
 
-export default function AttachmentItem({ attachment, taskId }: AttachmentItemProps) {
+export default function AttachmentItem({
+  attachment,
+  taskId,
+}: AttachmentItemProps) {
   const user = useAuthStore((state) => state.user);
   const deleteAttachment = useDeleteAttachment(taskId);
 
@@ -49,7 +68,9 @@ export default function AttachmentItem({ attachment, taskId }: AttachmentItemPro
 
             <Text size="xs" c="dimmed">
               {formatSize(attachment.size)}
-              {attachment.uploadedBy?.fullName ? ` · ${attachment.uploadedBy.fullName}` : ''}
+              {attachment.uploadedBy?.fullName
+                ? ` · ${attachment.uploadedBy.fullName}`
+                : ''}
             </Text>
           </Stack>
         </Group>
@@ -70,7 +91,11 @@ export default function AttachmentItem({ attachment, taskId }: AttachmentItemPro
           {canDelete && (
             <Menu shadow="md" width={150} position="bottom-end">
               <Menu.Target>
-                <ActionIcon variant="subtle" color="gray" aria-label="Attachment actions">
+                <ActionIcon
+                  variant="subtle"
+                  color="gray"
+                  aria-label="Attachment actions"
+                >
                   <IconDotsVertical size={18} />
                 </ActionIcon>
               </Menu.Target>

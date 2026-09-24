@@ -1,4 +1,5 @@
-export type ActivityType = 'TASK_CREATED' | 'STATUS_CHANGED' | 'ASSIGNED' | 'COMMENT_ADDED';
+export type ActivityType =
+  'TASK_CREATED' | 'STATUS_CHANGED' | 'ASSIGNED' | 'COMMENT_ADDED';
 
 export interface ActivityActor {
   id: string;

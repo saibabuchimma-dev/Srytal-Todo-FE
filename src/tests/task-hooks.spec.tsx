@@ -31,13 +31,25 @@ describe('task hooks (queries)', () => {
   });
 
   it('useTasks respects enabled:false', () => {
-    const { result } = renderHook(() => useTasks({ enabled: false }), hookWrapper());
+    const { result } = renderHook(
+      () => useTasks({ enabled: false }),
+      hookWrapper(),
+    );
     expect(result.current.fetchStatus).toBe('idle');
   });
 
   it('usePaginatedTasks fetches a page', async () => {
-    mocked.getTasksPage.mockResolvedValueOnce({ items: [], total: 0, page: 1, limit: 10, totalPages: 1 });
-    const { result } = renderHook(() => usePaginatedTasks({ page: 1, limit: 10 }), hookWrapper());
+    mocked.getTasksPage.mockResolvedValueOnce({
+      items: [],
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    });
+    const { result } = renderHook(
+      () => usePaginatedTasks({ page: 1, limit: 10 }),
+      hookWrapper(),
+    );
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(mocked.getTasksPage).toHaveBeenCalled();
   });
@@ -62,14 +74,27 @@ describe('task hooks (mutations)', () => {
   it('useCreateTask invalidates (with a project) on success', async () => {
     mocked.createTask.mockResolvedValueOnce({ id: 't3' } as never);
     const { result } = renderHook(() => useCreateTask(), hookWrapper());
-    await result.current.mutateAsync({ title: 'A', description: 'd', priority: 'Low', status: 'Pending', dueDate: '2026-01-01', project: 'p1' });
+    await result.current.mutateAsync({
+      title: 'A',
+      description: 'd',
+      priority: 'Low',
+      status: 'Pending',
+      dueDate: '2026-01-01',
+      project: 'p1',
+    });
     expect(mocked.createTask).toHaveBeenCalled();
   });
 
   it('useCreateTask works without a project (else branch)', async () => {
     mocked.createTask.mockResolvedValueOnce({ id: 't4' } as never);
     const { result } = renderHook(() => useCreateTask(), hookWrapper());
-    await result.current.mutateAsync({ title: 'B', description: 'd', priority: 'Low', status: 'Pending', dueDate: '2026-01-01' });
+    await result.current.mutateAsync({
+      title: 'B',
+      description: 'd',
+      priority: 'Low',
+      status: 'Pending',
+      dueDate: '2026-01-01',
+    });
     expect(mocked.createTask).toHaveBeenCalled();
   });
 

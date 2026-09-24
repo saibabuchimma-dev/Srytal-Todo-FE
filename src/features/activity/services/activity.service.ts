@@ -7,12 +7,18 @@ const normalizeActivity = (item: ActivityApiResponse): Activity => ({
   message: item.message ?? '',
   actor:
     item.actor && typeof item.actor === 'object'
-      ? { id: item.actor._id, fullName: item.actor.fullName, avatar: item.actor.avatar }
+      ? {
+          id: item.actor._id,
+          fullName: item.actor.fullName,
+          avatar: item.actor.avatar,
+        }
       : undefined,
   createdAt: item.createdAt,
 });
 
-export const getTaskActivities = async (taskId: string): Promise<Activity[]> => {
+export const getTaskActivities = async (
+  taskId: string,
+): Promise<Activity[]> => {
   const { data } = await api.get<{
     success: boolean;
     data: ActivityApiResponse[];

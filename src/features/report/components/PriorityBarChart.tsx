@@ -1,4 +1,13 @@
-import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 import { CHART_BLUE, CHART_INK, PRIORITY_COLORS } from '../constants/chart';
 import type { NameValue } from '../types/report';
@@ -36,7 +45,10 @@ export default function PriorityBarChart({ data }: PriorityBarChartProps) {
 
         <Bar dataKey="value" radius={[6, 6, 0, 0]} maxBarSize={56}>
           {data.map((entry) => (
-            <Cell key={entry.name} fill={PRIORITY_COLORS[entry.name] ?? CHART_BLUE} />
+            <Cell
+              key={entry.name}
+              fill={PRIORITY_COLORS[entry.name] ?? CHART_BLUE}
+            />
           ))}
         </Bar>
       </BarChart>

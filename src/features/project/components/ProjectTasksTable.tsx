@@ -22,7 +22,12 @@ const priorityColor = {
   High: 'red',
 } as const;
 
-export default function ProjectTasksTable({ tasks, onView, onEdit, onDelete }: Props) {
+export default function ProjectTasksTable({
+  tasks,
+  onView,
+  onEdit,
+  onDelete,
+}: Props) {
   return (
     <Paper shadow="xs" p="md" radius="md" mt="lg">
       <Group justify="space-between" mb="md">
@@ -70,22 +75,36 @@ export default function ProjectTasksTable({ tasks, onView, onEdit, onDelete }: P
                 </Table.Td>
 
                 <Table.Td>
-                  <Badge color={priorityColor[task.priority]}>{task.priority}</Badge>
+                  <Badge color={priorityColor[task.priority]}>
+                    {task.priority}
+                  </Badge>
                 </Table.Td>
 
                 <Table.Td>{dayjs(task.dueDate).format('DD MMM YYYY')}</Table.Td>
 
                 <Table.Td>
                   <Group gap={5}>
-                    <ActionIcon variant="light" color="blue" onClick={() => onView(task)}>
+                    <ActionIcon
+                      variant="light"
+                      color="blue"
+                      onClick={() => onView(task)}
+                    >
                       <IconEye size={16} />
                     </ActionIcon>
 
-                    <ActionIcon variant="light" color="yellow" onClick={() => onEdit(task)}>
+                    <ActionIcon
+                      variant="light"
+                      color="yellow"
+                      onClick={() => onEdit(task)}
+                    >
                       <IconEdit size={16} />
                     </ActionIcon>
 
-                    <ActionIcon variant="light" color="red" onClick={() => onDelete(task)}>
+                    <ActionIcon
+                      variant="light"
+                      color="red"
+                      onClick={() => onDelete(task)}
+                    >
                       <IconTrash size={16} />
                     </ActionIcon>
                   </Group>

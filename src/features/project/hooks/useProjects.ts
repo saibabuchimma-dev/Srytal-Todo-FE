@@ -64,7 +64,10 @@ export const useProjectDetails = (projectId: string) =>
     enabled: !!projectId,
   });
 
-export const useEmployeeProjectTasks = (projectId: string, employeeId: string) =>
+export const useEmployeeProjectTasks = (
+  projectId: string,
+  employeeId: string,
+) =>
   useQuery({
     queryKey: [...QUERY_KEYS.PROJECTS, projectId, employeeId, 'tasks'],
     queryFn: () => getEmployeeProjectTasks(projectId, employeeId),
@@ -75,8 +78,13 @@ export const useUpdateProject = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ projectId, payload }: { projectId: string; payload: CreateProjectPayload }) =>
-      updateProject(projectId, payload),
+    mutationFn: ({
+      projectId,
+      payload,
+    }: {
+      projectId: string;
+      payload: CreateProjectPayload;
+    }) => updateProject(projectId, payload),
 
     onSuccess: () => {
       void queryClient.invalidateQueries({

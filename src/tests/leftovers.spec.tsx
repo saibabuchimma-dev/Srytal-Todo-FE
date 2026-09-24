@@ -1,5 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import { render, renderWithProviders, screen, userEvent, act } from '@test-utils';
+import {
+  render,
+  renderWithProviders,
+  screen,
+  userEvent,
+  act,
+} from '@test-utils';
 
 import { useTaskStore } from '@/features/task/store/task.store';
 import EmployeeList from '@/features/employee/components/EmployeeList';
@@ -22,10 +28,30 @@ describe('useTaskStore', () => {
 
 describe('EmployeeList', () => {
   it('renders a card per employee', () => {
-    useAuthStore.getState().login({ id: 'u', fullName: 'A', name: 'A', email: 'a@x.com', role: 'Admin', mustChangePassword: false }, 't');
+    useAuthStore.getState().login(
+      {
+        id: 'u',
+        fullName: 'A',
+        name: 'A',
+        email: 'a@x.com',
+        role: 'Admin',
+        mustChangePassword: false,
+      },
+      't',
+    );
     renderWithProviders(
       <EmployeeList
-        employees={[{ id: 'e1', fullName: 'Sravani', email: 's@x.com', role: 'Employee', avatar: '', isActive: true, mustChangePassword: false }]}
+        employees={[
+          {
+            id: 'e1',
+            fullName: 'Sravani',
+            email: 's@x.com',
+            role: 'Employee',
+            avatar: '',
+            isActive: true,
+            mustChangePassword: false,
+          },
+        ]}
         onEdit={jest.fn()}
         onDelete={jest.fn()}
       />,
@@ -38,7 +64,9 @@ describe('EmployeeSearch', () => {
   it('fires onChange when typing', async () => {
     const onChange = jest.fn();
     const user = userEvent.setup();
-    renderWithProviders(<EmployeeSearch value="" onChange={onChange} />, { withRouter: false });
+    renderWithProviders(<EmployeeSearch value="" onChange={onChange} />, {
+      withRouter: false,
+    });
     await user.type(screen.getByPlaceholderText('Search employee...'), 'x');
     expect(onChange).toHaveBeenCalledWith('x');
   });
@@ -46,12 +74,20 @@ describe('EmployeeSearch', () => {
 
 describe('providers and layouts', () => {
   it('MantineProvider renders its children', () => {
-    render(<MantineProvider><div>mp-child</div></MantineProvider>);
+    render(
+      <MantineProvider>
+        <div>mp-child</div>
+      </MantineProvider>,
+    );
     expect(screen.getByText('mp-child')).toBeInTheDocument();
   });
 
   it('AppProviders renders its children', () => {
-    render(<AppProviders><div>app-child</div></AppProviders>);
+    render(
+      <AppProviders>
+        <div>app-child</div>
+      </AppProviders>,
+    );
     expect(screen.getByText('app-child')).toBeInTheDocument();
   });
 

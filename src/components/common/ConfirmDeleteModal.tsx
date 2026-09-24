@@ -18,7 +18,14 @@ export default function ConfirmDeleteModal({
   message = 'Are you sure you want to delete this item?',
 }: ConfirmDeleteModalProps) {
   return (
-    <Modal opened={opened} onClose={onClose} centered size="sm" title={title} radius="md">
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      centered
+      size="sm"
+      title={title}
+      radius="md"
+    >
       <Stack>
         <Text>{message}</Text>
 

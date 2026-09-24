@@ -3,10 +3,16 @@ jest.mock('@/features/task/hooks/useTasks', () => ({
   useUpdateTask: () => ({ mutate: mockUpdate, isPending: false }),
 }));
 jest.mock('@/features/employee/hooks/useEmployees', () => ({
-  useEmployees: () => ({ data: [{ id: 'e1', fullName: 'Emp One' }], isLoading: false }),
+  useEmployees: () => ({
+    data: [{ id: 'e1', fullName: 'Emp One' }],
+    isLoading: false,
+  }),
 }));
 jest.mock('@/features/project', () => ({
-  useProjects: () => ({ data: [{ id: 'p1', name: 'Proj One' }], isLoading: false }),
+  useProjects: () => ({
+    data: [{ id: 'p1', name: 'Proj One' }],
+    isLoading: false,
+  }),
 }));
 
 import { renderWithProviders, screen, userEvent } from '@test-utils';
@@ -30,7 +36,12 @@ describe('EditTaskModal', () => {
   it('pre-fills fields and submits an update', async () => {
     const user = userEvent.setup();
     const onClose = jest.fn();
-    renderWithProviders(<EditTaskModal opened task={task} onClose={onClose} />, { withRouter: false });
+    renderWithProviders(
+      <EditTaskModal opened task={task} onClose={onClose} />,
+      {
+        withRouter: false,
+      },
+    );
     expect(screen.getByText('Edit Task')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Edit me')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Update' }));
@@ -41,7 +52,12 @@ describe('EditTaskModal', () => {
   });
 
   it('does nothing when task is null', () => {
-    renderWithProviders(<EditTaskModal opened task={null} onClose={jest.fn()} />, { withRouter: false });
+    renderWithProviders(
+      <EditTaskModal opened task={null} onClose={jest.fn()} />,
+      {
+        withRouter: false,
+      },
+    );
     expect(screen.getByText('Edit Task')).toBeInTheDocument();
   });
 });

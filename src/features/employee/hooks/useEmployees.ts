@@ -13,7 +13,10 @@ import {
   getEmployeesPage,
   updateEmployee,
 } from '../services/employee.service';
-import type { CreateEmployeePayload, UpdateEmployeePayload } from '../types/employee';
+import type {
+  CreateEmployeePayload,
+  UpdateEmployeePayload,
+} from '../types/employee';
 
 export const useEmployees = (options?: { enabled?: boolean }) =>
   useQuery({
@@ -59,8 +62,13 @@ export function useUpdateEmployee() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, payload }: { id: string; payload: UpdateEmployeePayload }) =>
-      updateEmployee(id, payload),
+    mutationFn: ({
+      id,
+      payload,
+    }: {
+      id: string;
+      payload: UpdateEmployeePayload;
+    }) => updateEmployee(id, payload),
 
     onSuccess: () => {
       void queryClient.invalidateQueries({

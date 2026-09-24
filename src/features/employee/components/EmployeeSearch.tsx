@@ -6,7 +6,10 @@ interface EmployeeSearchProps {
   onChange: (value: string) => void;
 }
 
-export default function EmployeeSearch({ value, onChange }: EmployeeSearchProps) {
+export default function EmployeeSearch({
+  value,
+  onChange,
+}: EmployeeSearchProps) {
   return (
     <TextInput
       placeholder="Search employee..."

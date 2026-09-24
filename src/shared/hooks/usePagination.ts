@@ -5,7 +5,10 @@ interface UsePaginationOptions {
   initialLimit?: number;
 }
 
-export function usePagination({ initialPage = 1, initialLimit = 10 }: UsePaginationOptions = {}) {
+export function usePagination({
+  initialPage = 1,
+  initialLimit = 10,
+}: UsePaginationOptions = {}) {
   const [page, setPage] = useState(initialPage);
   const [limit, setLimitState] = useState(initialLimit);
 

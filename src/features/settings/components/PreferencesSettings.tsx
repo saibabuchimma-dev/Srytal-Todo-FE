@@ -34,9 +34,13 @@ export default function PreferencesSettings() {
   const language = usePreferencesStore((state) => state.language);
   const setLanguage = usePreferencesStore((state) => state.setLanguage);
   const notifications = usePreferencesStore((state) => state.notifications);
-  const setNotificationPref = usePreferencesStore((state) => state.setNotificationPref);
+  const setNotificationPref = usePreferencesStore(
+    (state) => state.setNotificationPref,
+  );
 
-  const timezoneOptions = TIMEZONES.includes(timezone) ? TIMEZONES : [timezone, ...TIMEZONES];
+  const timezoneOptions = TIMEZONES.includes(timezone)
+    ? TIMEZONES
+    : [timezone, ...TIMEZONES];
 
   return (
     <Stack gap="lg">
@@ -53,7 +57,9 @@ export default function PreferencesSettings() {
 
             <SegmentedControl
               value={colorScheme}
-              onChange={(value) => setColorScheme(value as 'light' | 'dark' | 'auto')}
+              onChange={(value) =>
+                setColorScheme(value as 'light' | 'dark' | 'auto')
+              }
               data={[
                 { label: 'Light', value: 'light' },
                 { label: 'Dark', value: 'dark' },
@@ -97,17 +103,23 @@ export default function PreferencesSettings() {
           <Switch
             label="Task assignments"
             checked={notifications.taskAssigned}
-            onChange={(event) => setNotificationPref('taskAssigned', event.currentTarget.checked)}
+            onChange={(event) =>
+              setNotificationPref('taskAssigned', event.currentTarget.checked)
+            }
           />
           <Switch
             label="Status changes"
             checked={notifications.statusChanges}
-            onChange={(event) => setNotificationPref('statusChanges', event.currentTarget.checked)}
+            onChange={(event) =>
+              setNotificationPref('statusChanges', event.currentTarget.checked)
+            }
           />
           <Switch
             label="Comments"
             checked={notifications.comments}
-            onChange={(event) => setNotificationPref('comments', event.currentTarget.checked)}
+            onChange={(event) =>
+              setNotificationPref('comments', event.currentTarget.checked)
+            }
           />
         </Stack>
       </Card>

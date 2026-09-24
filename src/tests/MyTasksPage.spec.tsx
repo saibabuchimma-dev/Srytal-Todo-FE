@@ -7,8 +7,23 @@ import { renderWithProviders, screen } from '@test-utils';
 import MyTasksPage from '@/features/task/screens/MyTasksPage';
 
 const tasks = [
-  { id: 't1', title: 'Alpha', description: 'a', status: 'Completed', priority: 'High', dueDate: '2026-02-01', projectDetails: { id: 'p', name: 'Web' } },
-  { id: 't2', title: 'Beta', description: 'b', status: 'Pending', priority: 'Low', dueDate: '2026-02-02' },
+  {
+    id: 't1',
+    title: 'Alpha',
+    description: 'a',
+    status: 'Completed',
+    priority: 'High',
+    dueDate: '2026-02-01',
+    projectDetails: { id: 'p', name: 'Web' },
+  },
+  {
+    id: 't2',
+    title: 'Beta',
+    description: 'b',
+    status: 'Pending',
+    priority: 'Low',
+    dueDate: '2026-02-02',
+  },
 ];
 
 describe('MyTasksPage', () => {
@@ -37,6 +52,8 @@ describe('MyTasksPage', () => {
   it('renders the empty summary when there are no tasks', () => {
     mockUseMyTasks.mockReturnValue({ data: [], isLoading: false });
     renderWithProviders(<MyTasksPage />);
-    expect(screen.getAllByText('No tasks assigned to you yet.').length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText('No tasks assigned to you yet.').length,
+    ).toBeGreaterThan(0);
   });
 });

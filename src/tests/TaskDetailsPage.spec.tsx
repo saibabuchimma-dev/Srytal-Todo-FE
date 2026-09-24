@@ -1,22 +1,41 @@
 const mockUseTask = jest.fn();
 const mockMutate = jest.fn();
-jest.mock('@/features/task/hooks/useTasks', () => ({ useTask: () => mockUseTask() }));
+jest.mock('@/features/task/hooks/useTasks', () => ({
+  useTask: () => mockUseTask(),
+}));
 jest.mock('@/features/task/hooks/useUpdateTaskStatus', () => ({
   useUpdateTaskStatus: () => ({ mutate: mockMutate, isPending: false }),
 }));
-jest.mock('@/features/activity/components/ActivityTimeline', () => ({ __esModule: true, default: () => <div>activity</div> }));
-jest.mock('@/features/comment/components/CommentSection', () => ({ __esModule: true, default: () => <div>comments</div> }));
+jest.mock('@/features/activity/components/ActivityTimeline', () => ({
+  __esModule: true,
+  default: () => <div>activity</div>,
+}));
+jest.mock('@/features/comment/components/CommentSection', () => ({
+  __esModule: true,
+  default: () => <div>comments</div>,
+}));
 
 import { Routes, Route } from 'react-router-dom';
 import { renderWithProviders, screen } from '@test-utils';
 import TaskDetailsPage from '@/features/task/screens/TaskDetailsPage';
 
-const task = { id: 't1', title: 'Design homepage', description: 'Build hero', status: 'Pending', priority: 'High', dueDate: '2020-01-01', projectDetails: { id: 'p1', name: 'Website' } };
+const task = {
+  id: 't1',
+  title: 'Design homepage',
+  description: 'Build hero',
+  status: 'Pending',
+  priority: 'High',
+  dueDate: '2020-01-01',
+  projectDetails: { id: 'p1', name: 'Website' },
+};
 
 const renderAt = () =>
   renderWithProviders(
     <Routes>
-      <Route path="/admin/dashboard/tasks/:taskId" element={<TaskDetailsPage />} />
+      <Route
+        path="/admin/dashboard/tasks/:taskId"
+        element={<TaskDetailsPage />}
+      />
     </Routes>,
     { route: '/admin/dashboard/tasks/t1' },
   );

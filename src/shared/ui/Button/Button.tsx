@@ -1,6 +1,39 @@
-import { Button as MantineButton } from '@mantine/core';
-import type { ButtonProps } from '@mantine/core';
+import {
+  Button as MantineButton,
+  type ButtonProps as MantineButtonProps,
+} from '@mantine/core';
+import { forwardRef } from 'react';
 
-export default function Button(props: ButtonProps) {
-  return <MantineButton radius="md" size="md" fw={600} {...props} />;
+export interface ButtonProps extends MantineButtonProps {
+  gradientVariant?: boolean;
 }
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { children, loading, variant = 'filled', className, style, ...props },
+    ref,
+  ) => {
+    return (
+      <MantineButton
+        ref={ref}
+        radius="md"
+        size="sm"
+        fw={600}
+        variant={variant}
+        loading={loading}
+        className={className}
+        style={{
+          transition:
+            'transform 150ms ease-out, box-shadow 150ms ease-out, background-color 150ms ease-out',
+          ...style,
+        }}
+        {...props}
+      >
+        {children}
+      </MantineButton>
+    );
+  },
+);
+
+Button.displayName = 'Button';
+export default Button;

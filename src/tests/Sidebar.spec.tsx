@@ -13,7 +13,14 @@ import { useAuthStore } from '@/features/auth/store/auth.store';
 
 const setUser = (role: 'Admin' | 'Employee') =>
   useAuthStore.getState().login(
-    { id: 'u1', fullName: 'Sravani', name: 'Sravani', email: 's@x.com', role, mustChangePassword: false },
+    {
+      id: 'u1',
+      fullName: 'Sravani',
+      name: 'Sravani',
+      email: 's@x.com',
+      role,
+      mustChangePassword: false,
+    },
     't',
   );
 
@@ -26,9 +33,15 @@ describe('Sidebar', () => {
   it('renders the admin menu set', () => {
     setUser('Admin');
     renderWithProviders(<Sidebar />, { route: '/admin/dashboard' });
-    ['Dashboard', 'Projects', 'Employees', 'Tasks', 'Board', 'Reports', 'Settings'].forEach((label) =>
-      expect(screen.getByText(label)).toBeInTheDocument(),
-    );
+    [
+      'Dashboard',
+      'Projects',
+      'Employees',
+      'Tasks',
+      'Board',
+      'Reports',
+      'Settings',
+    ].forEach((label) => expect(screen.getByText(label)).toBeInTheDocument());
   });
 
   it('renders the employee menu set', () => {
@@ -43,7 +56,9 @@ describe('Sidebar', () => {
     setUser('Admin');
     const onNavigate = jest.fn();
     const user = userEvent.setup();
-    renderWithProviders(<Sidebar onNavigate={onNavigate} />, { route: '/admin/dashboard' });
+    renderWithProviders(<Sidebar onNavigate={onNavigate} />, {
+      route: '/admin/dashboard',
+    });
     await user.click(screen.getByText('Projects'));
     expect(mockNavigate).toHaveBeenCalledWith('/admin/dashboard/projects');
     expect(onNavigate).toHaveBeenCalled();

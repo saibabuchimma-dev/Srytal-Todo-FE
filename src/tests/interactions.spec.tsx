@@ -1,7 +1,10 @@
 const mockDeleteEmployee = jest.fn();
 const mockDeleteProject = jest.fn();
 jest.mock('@/features/employee/hooks/useEmployees', () => ({
-  usePaginatedEmployees: () => ({ data: { items: [employee], total: 1, totalPages: 1 }, isLoading: false }),
+  usePaginatedEmployees: () => ({
+    data: { items: [employee], total: 1, totalPages: 1 },
+    isLoading: false,
+  }),
   useDeleteEmployee: () => ({ mutate: mockDeleteEmployee, isPending: false }),
   useCreateEmployee: () => ({ mutate: jest.fn(), isPending: false }),
   useUpdateEmployee: () => ({ mutate: jest.fn(), isPending: false }),
@@ -10,14 +13,27 @@ const mockUseDetails = jest.fn();
 jest.mock('@/features/project/hooks/useProjects', () => ({
   useProjectDetails: () => mockUseDetails(),
   useEmployeeProjectTasks: () => ({ data: [] }),
-  usePaginatedProjects: () => ({ data: { items: [project], total: 1, totalPages: 1 }, isLoading: false }),
+  usePaginatedProjects: () => ({
+    data: { items: [project], total: 1, totalPages: 1 },
+    isLoading: false,
+  }),
   useDeleteProject: () => ({ mutate: mockDeleteProject, isPending: false }),
   useCreateProject: () => ({ mutate: jest.fn(), isPending: false }),
   useUpdateProject: () => ({ mutate: jest.fn(), isPending: false }),
 }));
-jest.mock('@/features/task/hooks/useTasks', () => ({ useDeleteTask: () => ({ mutate: jest.fn(), isPending: false }) }));
-jest.mock('@/features/project/components/ProjectModal', () => ({ __esModule: true, default: ({ opened }: { opened: boolean }) => (opened ? <div>project-modal</div> : null) }));
-jest.mock('@/features/task/components/CreateTaskModal', () => ({ __esModule: true, default: ({ opened }: { opened: boolean }) => (opened ? <div>task-modal</div> : null) }));
+jest.mock('@/features/task/hooks/useTasks', () => ({
+  useDeleteTask: () => ({ mutate: jest.fn(), isPending: false }),
+}));
+jest.mock('@/features/project/components/ProjectModal', () => ({
+  __esModule: true,
+  default: ({ opened }: { opened: boolean }) =>
+    opened ? <div>project-modal</div> : null,
+}));
+jest.mock('@/features/task/components/CreateTaskModal', () => ({
+  __esModule: true,
+  default: ({ opened }: { opened: boolean }) =>
+    opened ? <div>task-modal</div> : null,
+}));
 
 import { Routes, Route } from 'react-router-dom';
 import { renderWithProviders, screen, userEvent } from '@test-utils';
@@ -25,18 +41,67 @@ import { EmployeesPage } from '@/features/employee/screens/EmployeesPage';
 import ProjectDetailsPage from '@/features/project/screens/ProjectDetailsPage';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 
-const employee = { id: 'e1', fullName: 'Sravani K', email: 's@x.com', role: 'Employee', avatar: '', isActive: true, mustChangePassword: false, createdAt: '2026-01-01' };
-const project = { id: 'p1', name: 'Website Redesign', description: 'desc', status: 'In Progress', startDate: '2026-01-01', endDate: '2026-03-01', members: [] };
+const employee = {
+  id: 'e1',
+  fullName: 'Sravani K',
+  email: 's@x.com',
+  role: 'Employee',
+  avatar: '',
+  isActive: true,
+  mustChangePassword: false,
+  createdAt: '2026-01-01',
+};
+const project = {
+  id: 'p1',
+  name: 'Website Redesign',
+  description: 'desc',
+  status: 'In Progress',
+  startDate: '2026-01-01',
+  endDate: '2026-03-01',
+  members: [],
+};
 const details = {
   project,
   stats: { totalTasks: 2, completed: 1, pending: 1, inProgress: 0 },
-  employees: [{ employee: { _id: 'e1', fullName: 'Emma', email: 'e@x.com', role: 'Employee' }, taskCount: 1, tasks: [] }],
-  tasks: [{ _id: 't1', title: 'Alpha', description: 'd', status: 'Pending', priority: 'High', dueDate: '2026-02-01', createdAt: '', assignedTo: { _id: 'e1', fullName: 'Emma' } }],
+  employees: [
+    {
+      employee: {
+        _id: 'e1',
+        fullName: 'Emma',
+        email: 'e@x.com',
+        role: 'Employee',
+      },
+      taskCount: 1,
+      tasks: [],
+    },
+  ],
+  tasks: [
+    {
+      _id: 't1',
+      title: 'Alpha',
+      description: 'd',
+      status: 'Pending',
+      priority: 'High',
+      dueDate: '2026-02-01',
+      createdAt: '',
+      assignedTo: { _id: 'e1', fullName: 'Emma' },
+    },
+  ],
 };
 
 beforeEach(() => {
   jest.clearAllMocks();
-  useAuthStore.getState().login({ id: 'u', fullName: 'A', name: 'A', email: 'a@x.com', role: 'Admin', mustChangePassword: false }, 't');
+  useAuthStore.getState().login(
+    {
+      id: 'u',
+      fullName: 'A',
+      name: 'A',
+      email: 'a@x.com',
+      role: 'Admin',
+      mustChangePassword: false,
+    },
+    't',
+  );
 });
 
 describe('EmployeesPage delete flow', () => {
@@ -56,7 +121,10 @@ describe('ProjectDetailsPage interactions', () => {
   const renderAt = () =>
     renderWithProviders(
       <Routes>
-        <Route path="/admin/dashboard/projects/:projectId/details" element={<ProjectDetailsPage />} />
+        <Route
+          path="/admin/dashboard/projects/:projectId/details"
+          element={<ProjectDetailsPage />}
+        />
       </Routes>,
       { route: '/admin/dashboard/projects/p1/details' },
     );

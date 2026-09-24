@@ -32,8 +32,17 @@ describe('project hooks', () => {
     const p = renderHook(() => useProjects(), hookWrapper());
     await waitFor(() => expect(p.result.current.isSuccess).toBe(true));
 
-    mocked.getProjectsPage.mockResolvedValueOnce({ items: [], total: 0, page: 1, limit: 10, totalPages: 1 });
-    const pg = renderHook(() => usePaginatedProjects({ page: 1, limit: 10 }), hookWrapper());
+    mocked.getProjectsPage.mockResolvedValueOnce({
+      items: [],
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    });
+    const pg = renderHook(
+      () => usePaginatedProjects({ page: 1, limit: 10 }),
+      hookWrapper(),
+    );
     await waitFor(() => expect(pg.result.current.isSuccess).toBe(true));
 
     mocked.getProject.mockResolvedValueOnce({ id: 'p1' } as never);
@@ -53,9 +62,15 @@ describe('project hooks', () => {
     expect(dOff.result.current.fetchStatus).toBe('idle');
 
     mocked.getEmployeeProjectTasks.mockResolvedValueOnce([] as never);
-    const t = renderHook(() => useEmployeeProjectTasks('p1', 'u1'), hookWrapper());
+    const t = renderHook(
+      () => useEmployeeProjectTasks('p1', 'u1'),
+      hookWrapper(),
+    );
     await waitFor(() => expect(t.result.current.isSuccess).toBe(true));
-    const tOff = renderHook(() => useEmployeeProjectTasks('', ''), hookWrapper());
+    const tOff = renderHook(
+      () => useEmployeeProjectTasks('', ''),
+      hookWrapper(),
+    );
     expect(tOff.result.current.fetchStatus).toBe('idle');
   });
 
@@ -65,11 +80,26 @@ describe('project hooks', () => {
     mocked.deleteProject.mockResolvedValueOnce();
 
     const c = renderHook(() => useCreateProject(), hookWrapper());
-    await c.result.current.mutateAsync({ name: 'N', description: 'd', status: 'Planning', startDate: '', endDate: '' });
+    await c.result.current.mutateAsync({
+      name: 'N',
+      description: 'd',
+      status: 'Planning',
+      startDate: '',
+      endDate: '',
+    });
     expect(mocked.createProject).toHaveBeenCalled();
 
     const u = renderHook(() => useUpdateProject(), hookWrapper());
-    await u.result.current.mutateAsync({ projectId: 'p3', payload: { name: 'U', description: 'd', status: 'Planning', startDate: '', endDate: '' } });
+    await u.result.current.mutateAsync({
+      projectId: 'p3',
+      payload: {
+        name: 'U',
+        description: 'd',
+        status: 'Planning',
+        startDate: '',
+        endDate: '',
+      },
+    });
     expect(mocked.updateProject).toHaveBeenCalled();
 
     const del = renderHook(() => useDeleteProject(), hookWrapper());

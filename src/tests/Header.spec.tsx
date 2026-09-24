@@ -17,7 +17,14 @@ import { useAuthStore } from '@/features/auth/store/auth.store';
 
 const setUser = (role: 'Admin' | 'Employee') =>
   useAuthStore.getState().login(
-    { id: 'u1', fullName: 'Sravani', name: 'Sravani', email: 's@x.com', role, mustChangePassword: false },
+    {
+      id: 'u1',
+      fullName: 'Sravani',
+      name: 'Sravani',
+      email: 's@x.com',
+      role,
+      mustChangePassword: false,
+    },
     't',
   );
 
@@ -32,7 +39,9 @@ describe('Header', () => {
     renderWithProviders(<Header />, { route: '/admin/dashboard' });
     expect(screen.getByText('Srytal')).toBeInTheDocument();
     expect(screen.getByTestId('notif-menu')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /switch to/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /switch to/i }),
+    ).toBeInTheDocument();
   });
 
   it('derives the page title from the route', () => {
@@ -45,7 +54,12 @@ describe('Header', () => {
     setUser('Employee');
     const onNavToggle = jest.fn();
     const user = userEvent.setup();
-    renderWithProviders(<Header navOpened={false} onNavToggle={onNavToggle} />, { route: '/dashboard' });
+    renderWithProviders(
+      <Header navOpened={false} onNavToggle={onNavToggle} />,
+      {
+        route: '/dashboard',
+      },
+    );
     await user.click(screen.getByLabelText('Toggle navigation'));
     expect(onNavToggle).toHaveBeenCalled();
   });

@@ -3,7 +3,9 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
-jest.mock('@/features/auth/services/auth.service', () => ({ changePassword: jest.fn() }));
+jest.mock('@/features/auth/services/auth.service', () => ({
+  changePassword: jest.fn(),
+}));
 jest.mock('@/shared/utils/toast', () => ({
   toast: { success: jest.fn(), error: jest.fn() },
 }));
@@ -21,14 +23,25 @@ const submit = async (user: ReturnType<typeof userEvent.setup>) => {
   await user.type(screen.getByLabelText('Current Password'), 'old');
   await user.type(screen.getByLabelText('New Password'), 'newpass');
   await user.type(screen.getByLabelText('Confirm Password'), 'newpass');
-  await user.click(screen.getByRole('button', { name: /update password|change password|save|update/i }));
+  await user.click(
+    screen.getByRole('button', {
+      name: /update password|change password|save|update/i,
+    }),
+  );
 };
 
 describe('ChangePasswordScreen', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     useAuthStore.getState().login(
-      { id: 'u1', fullName: 'A', name: 'A', email: 'a@x.com', role: 'Admin', mustChangePassword: true },
+      {
+        id: 'u1',
+        fullName: 'A',
+        name: 'A',
+        email: 'a@x.com',
+        role: 'Admin',
+        mustChangePassword: true,
+      },
       't',
     );
   });
@@ -44,7 +57,9 @@ describe('ChangePasswordScreen', () => {
     expect(useAuthStore.getState().user?.mustChangePassword).toBe(false);
 
     jest.advanceTimersByTime(1100);
-    expect(mockNavigate).toHaveBeenCalledWith('/admin/dashboard', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith('/admin/dashboard', {
+      replace: true,
+    });
     jest.useRealTimers();
   });
 
@@ -54,7 +69,10 @@ describe('ChangePasswordScreen', () => {
     renderWithProviders(<ChangePasswordScreen />);
     await submit(user);
     await waitFor(() =>
-      expect(mToast.error).toHaveBeenCalledWith('Password Change Failed', 'Wrong current password'),
+      expect(mToast.error).toHaveBeenCalledWith(
+        'Password Change Failed',
+        'Wrong current password',
+      ),
     );
   });
 });

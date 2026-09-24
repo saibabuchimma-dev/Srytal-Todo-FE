@@ -14,12 +14,18 @@ interface ChartTooltipProps {
   colorByName?: Record<string, string>;
 }
 
-export default function ChartTooltip({ active, payload, label, colorByName }: ChartTooltipProps) {
+export default function ChartTooltip({
+  active,
+  payload,
+  label,
+  colorByName,
+}: ChartTooltipProps) {
   if (!active || !payload || payload.length === 0) {
     return null;
   }
 
-  const hasAxisLabel = label !== undefined && label !== null && String(label) !== '';
+  const hasAxisLabel =
+    label !== undefined && label !== null && String(label) !== '';
   const header = hasAxisLabel
     ? String(label)
     : String(payload[0]?.name ?? payload[0]?.payload?.name ?? '');
@@ -53,7 +59,10 @@ export default function ChartTooltip({ active, payload, label, colorByName }: Ch
         const isGeneric = rawName === 'value' || rawName === 'count';
         const showName = hasAxisLabel && !isGeneric;
         const color =
-          entry.color ?? entry.payload?.fill ?? colorByName?.[header] ?? CHART_BLUE;
+          entry.color ??
+          entry.payload?.fill ??
+          colorByName?.[header] ??
+          CHART_BLUE;
 
         return (
           <div
@@ -67,11 +76,21 @@ export default function ChartTooltip({ active, payload, label, colorByName }: Ch
             }}
           >
             <span
-              style={{ width: 8, height: 8, borderRadius: 2, background: color, display: 'inline-block' }}
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 2,
+                background: color,
+                display: 'inline-block',
+              }}
             />
             {showName && <span>{rawName}</span>}
             <span
-              style={{ marginLeft: 'auto', fontWeight: 600, color: 'var(--mantine-color-text)' }}
+              style={{
+                marginLeft: 'auto',
+                fontWeight: 600,
+                color: 'var(--mantine-color-text)',
+              }}
             >
               {entry.value}
             </span>

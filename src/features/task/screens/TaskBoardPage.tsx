@@ -16,10 +16,16 @@ export default function TaskBoardPage() {
   const adminTasks = useTasks({ enabled: isAdmin });
   const myTasks = useMyTasks({ enabled: !isAdmin });
 
-  const { data: tasks = [], isLoading, isError } = isAdmin ? adminTasks : myTasks;
+  const {
+    data: tasks = [],
+    isLoading,
+    isError,
+  } = isAdmin ? adminTasks : myTasks;
 
   const updateStatus = useUpdateTaskStatus();
-  const updatingTaskId = updateStatus.isPending ? (updateStatus.variables?.id ?? null) : null;
+  const updatingTaskId = updateStatus.isPending
+    ? (updateStatus.variables?.id ?? null)
+    : null;
 
   const handleStatusChange = (taskId: string, status: TaskStatus) => {
     updateStatus.mutate({ id: taskId, status });
@@ -30,7 +36,12 @@ export default function TaskBoardPage() {
   }
 
   if (isError) {
-    return <CenteredState variant="error" message="The task board could not be loaded." />;
+    return (
+      <CenteredState
+        variant="error"
+        message="The task board could not be loaded."
+      />
+    );
   }
 
   const stats = getTaskStats(tasks);
@@ -41,7 +52,9 @@ export default function TaskBoardPage() {
         <Group justify="space-between" align="flex-start">
           <div>
             <Title order={2}>{isAdmin ? 'Task Board' : 'My Board'}</Title>
-            <Text c="dimmed">Drag a task between columns to update its status.</Text>
+            <Text c="dimmed">
+              Drag a task between columns to update its status.
+            </Text>
           </div>
 
           <Group gap="lg" wrap="wrap" align="center">
@@ -71,7 +84,10 @@ export default function TaskBoardPage() {
 
             <div
               className="rounded-full p-3"
-              style={{ background: 'var(--app-accent-soft)', color: 'var(--app-accent-fg)' }}
+              style={{
+                background: 'var(--app-accent-soft)',
+                color: 'var(--app-accent-fg)',
+              }}
             >
               <IconLayoutKanban size={24} />
             </div>

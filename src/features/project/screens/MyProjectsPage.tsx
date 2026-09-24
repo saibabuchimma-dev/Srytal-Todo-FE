@@ -9,7 +9,12 @@ import {
   ThemeIcon,
   Title,
 } from '@mantine/core';
-import { IconCalendar, IconFolder, IconFolders, IconUsers } from '@tabler/icons-react';
+import {
+  IconCalendar,
+  IconFolder,
+  IconFolders,
+  IconUsers,
+} from '@tabler/icons-react';
 import CenteredState from '@/shared/ui/CenteredState/CenteredState';
 import Pagination from '@/shared/ui/Pagination/Pagination';
 import { usePagination } from '@/shared/hooks/usePagination';
@@ -38,7 +43,9 @@ export default function MyProjectsPage() {
   }
 
   if (isError) {
-    return <CenteredState variant="error" message="Failed to load your projects." />;
+    return (
+      <CenteredState variant="error" message="Failed to load your projects." />
+    );
   }
 
   return (
@@ -47,7 +54,10 @@ export default function MyProjectsPage() {
         <Group gap="sm" wrap="nowrap">
           <div
             className="rounded-xl p-3"
-            style={{ background: 'var(--app-accent-soft)', color: 'var(--app-accent-fg)' }}
+            style={{
+              background: 'var(--app-accent-soft)',
+              color: 'var(--app-accent-fg)',
+            }}
           >
             <IconFolders size={26} />
           </div>
@@ -92,19 +102,32 @@ export default function MyProjectsPage() {
                   </div>
                 </Group>
 
-                <Text size="sm" c="dimmed" lineClamp={2} mt="md" style={{ minHeight: 40 }}>
+                <Text
+                  size="sm"
+                  c="dimmed"
+                  lineClamp={2}
+                  mt="md"
+                  style={{ minHeight: 40 }}
+                >
                   {project.description}
                 </Text>
 
                 <Group gap="lg" mt="md" wrap="wrap">
                   <Group gap={6} wrap="nowrap">
-                    <IconCalendar size={15} style={{ color: 'var(--app-text-muted)' }} />
+                    <IconCalendar
+                      size={15}
+                      style={{ color: 'var(--app-text-muted)' }}
+                    />
                     <Text size="xs" c="dimmed">
-                      {formatDate(project.startDate)} – {formatDate(project.endDate)}
+                      {formatDate(project.startDate)} –{' '}
+                      {formatDate(project.endDate)}
                     </Text>
                   </Group>
                   <Group gap={6} wrap="nowrap">
-                    <IconUsers size={15} style={{ color: 'var(--app-text-muted)' }} />
+                    <IconUsers
+                      size={15}
+                      style={{ color: 'var(--app-text-muted)' }}
+                    />
                     <Text size="xs" c="dimmed">
                       {project.members?.length ?? 0} member
                       {(project.members?.length ?? 0) === 1 ? '' : 's'}

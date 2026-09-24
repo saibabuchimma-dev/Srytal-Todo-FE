@@ -27,7 +27,10 @@ export default function StatusPieChart({ data }: StatusPieChartProps) {
             strokeWidth={2}
           >
             {data.map((entry) => (
-              <Cell key={entry.name} fill={STATUS_COLORS[entry.name] ?? CHART_BLUE} />
+              <Cell
+                key={entry.name}
+                fill={STATUS_COLORS[entry.name] ?? CHART_BLUE}
+              />
             ))}
           </Pie>
 
@@ -51,7 +54,9 @@ export default function StatusPieChart({ data }: StatusPieChartProps) {
               {entry.name}
             </Text>
             <Text size="xs" fw={700}>
-              {total ? `${entry.value} (${Math.round((entry.value / total) * 100)}%)` : entry.value}
+              {total
+                ? `${entry.value} (${Math.round((entry.value / total) * 100)}%)`
+                : entry.value}
             </Text>
           </Group>
         ))}

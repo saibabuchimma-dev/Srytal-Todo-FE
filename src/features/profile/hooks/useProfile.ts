@@ -18,7 +18,11 @@ export const useUpdateProfile = () => {
   return useMutation({
     mutationFn: updateMyProfile,
     onSuccess: (profile) => {
-      updateUser({ fullName: profile.name, name: profile.name, avatar: profile.avatar });
+      updateUser({
+        fullName: profile.name,
+        name: profile.name,
+        avatar: profile.avatar,
+      });
       queryClient.invalidateQueries({ queryKey: ['profile'] });
       toast.success('Profile updated');
     },

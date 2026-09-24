@@ -6,17 +6,40 @@ jest.mock('@/features/task/hooks/useTasks', () => ({
   useMyTasks: () => mockUseMyTasks(),
 }));
 jest.mock('@/features/task/hooks/useUpdateTaskStatus', () => ({
-  useUpdateTaskStatus: () => ({ mutate: mockMutate, isPending: false, variables: undefined }),
+  useUpdateTaskStatus: () => ({
+    mutate: mockMutate,
+    isPending: false,
+    variables: undefined,
+  }),
 }));
 
 import { renderWithProviders, screen } from '@test-utils';
 import TaskBoardPage from '@/features/task/screens/TaskBoardPage';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 
-const tasks = [{ id: 't1', title: 'Card', description: 'd', status: 'Pending', priority: 'High', dueDate: '2026-02-01' }];
+const tasks = [
+  {
+    id: 't1',
+    title: 'Card',
+    description: 'd',
+    status: 'Pending',
+    priority: 'High',
+    dueDate: '2026-02-01',
+  },
+];
 
 const asAdmin = () =>
-  useAuthStore.getState().login({ id: 'u', fullName: 'A', name: 'A', email: 'a@x.com', role: 'Admin', mustChangePassword: false }, 't');
+  useAuthStore.getState().login(
+    {
+      id: 'u',
+      fullName: 'A',
+      name: 'A',
+      email: 'a@x.com',
+      role: 'Admin',
+      mustChangePassword: false,
+    },
+    't',
+  );
 
 describe('TaskBoardPage', () => {
   beforeEach(() => {
@@ -35,7 +58,9 @@ describe('TaskBoardPage', () => {
   it('shows error', () => {
     mockUseTasks.mockReturnValue({ data: [], isError: true });
     renderWithProviders(<TaskBoardPage />);
-    expect(screen.getByText('The task board could not be loaded.')).toBeInTheDocument();
+    expect(
+      screen.getByText('The task board could not be loaded.'),
+    ).toBeInTheDocument();
   });
 
   it('renders the board with stat legend', () => {

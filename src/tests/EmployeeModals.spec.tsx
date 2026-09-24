@@ -25,7 +25,9 @@ describe('CreateEmployeeModal', () => {
 
   it('renders and creates an employee', async () => {
     const user = userEvent.setup();
-    renderWithProviders(<CreateEmployeeModal opened onClose={jest.fn()} />, { withRouter: false });
+    renderWithProviders(<CreateEmployeeModal opened onClose={jest.fn()} />, {
+      withRouter: false,
+    });
     expect(screen.getByText('Create Employee')).toBeInTheDocument();
     await user.type(screen.getByLabelText('Full Name'), 'New Person');
     await user.type(screen.getByLabelText('Email'), 'new@x.com');
@@ -39,7 +41,12 @@ describe('EditEmployeeModal', () => {
 
   it('pre-fills and updates an employee', async () => {
     const user = userEvent.setup();
-    renderWithProviders(<EditEmployeeModal opened employee={employee} onClose={jest.fn()} />, { withRouter: false });
+    renderWithProviders(
+      <EditEmployeeModal opened employee={employee} onClose={jest.fn()} />,
+      {
+        withRouter: false,
+      },
+    );
     expect(screen.getByText('Edit Employee')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Sravani K')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Update' }));
@@ -47,7 +54,12 @@ describe('EditEmployeeModal', () => {
   });
 
   it('handles a null employee without crashing', () => {
-    renderWithProviders(<EditEmployeeModal opened employee={null} onClose={jest.fn()} />, { withRouter: false });
+    renderWithProviders(
+      <EditEmployeeModal opened employee={null} onClose={jest.fn()} />,
+      {
+        withRouter: false,
+      },
+    );
     expect(screen.getByText('Edit Employee')).toBeInTheDocument();
   });
 });

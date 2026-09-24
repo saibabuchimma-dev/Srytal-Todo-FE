@@ -24,18 +24,23 @@ interface EditEmployeeModalProps {
   onClose: () => void;
 }
 
-export default function EditEmployeeModal({ opened, employee, onClose }: EditEmployeeModalProps) {
+export default function EditEmployeeModal({
+  opened,
+  employee,
+  onClose,
+}: EditEmployeeModalProps) {
   const updateEmployeeMutation = useUpdateEmployee();
 
-  const { control, register, handleSubmit, reset } = useForm<EmployeeFormValues>({
-    resolver: zodResolver(employeeSchema),
-    defaultValues: {
-      fullName: '',
-      email: '',
-      role: 'Employee',
-      isActive: true,
-    },
-  });
+  const { control, register, handleSubmit, reset } =
+    useForm<EmployeeFormValues>({
+      resolver: zodResolver(employeeSchema),
+      defaultValues: {
+        fullName: '',
+        email: '',
+        role: 'Employee',
+        isActive: true,
+      },
+    });
 
   useEffect(() => {
     if (employee) {
@@ -78,9 +83,17 @@ export default function EditEmployeeModal({ opened, employee, onClose }: EditEmp
       submitLabel="Update"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <TextInput label="Full Name" placeholder="Enter full name" {...register('fullName')} />
+      <TextInput
+        label="Full Name"
+        placeholder="Enter full name"
+        {...register('fullName')}
+      />
 
-      <TextInput label="Email" placeholder="Enter email" {...register('email')} />
+      <TextInput
+        label="Email"
+        placeholder="Enter email"
+        {...register('email')}
+      />
 
       <Controller
         control={control}

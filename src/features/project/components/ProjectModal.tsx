@@ -35,16 +35,18 @@ export default function ProjectModal({
 }: ProjectModalProps) {
   const createProjectMutation = useCreateProject();
   const updateProjectMutation = useUpdateProject();
-  const { control, handleSubmit, register, reset } = useForm<ProjectFormValues>({
-    resolver: zodResolver(projectSchema),
-    defaultValues: {
-      name: '',
-      description: '',
-      status: 'Planning',
-      startDate: '',
-      endDate: '',
+  const { control, handleSubmit, register, reset } = useForm<ProjectFormValues>(
+    {
+      resolver: zodResolver(projectSchema),
+      defaultValues: {
+        name: '',
+        description: '',
+        status: 'Planning',
+        startDate: '',
+        endDate: '',
+      },
     },
-  });
+  );
 
   const close = () => {
     reset({
@@ -109,12 +111,19 @@ export default function ProjectModal({
       }
       submitLabel={mode === 'create' ? 'Create Project' : 'Update Project'}
       loading={
-        mode === 'create' ? createProjectMutation.isPending : updateProjectMutation.isPending
+        mode === 'create'
+          ? createProjectMutation.isPending
+          : updateProjectMutation.isPending
       }
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput label="Project Name" {...register('name')} />
-      <Textarea label="Description" minRows={3} autosize {...register('description')} />
+      <Textarea
+        label="Description"
+        minRows={3}
+        autosize
+        {...register('description')}
+      />
       <Controller
         control={control}
         name="status"

@@ -1,22 +1,39 @@
-import { Badge, Group, Paper, ScrollArea, Stack, Text } from '@mantine/core';
-
-import { TASK_STATUS_COLORS } from '../constants/task.constants';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Text, Badge, Group, Box } from '@mantine/core';
+import {
+  IconClock,
+  IconActivity,
+  IconChecklist,
+  IconPlus,
+} from '@tabler/icons-react';
 import type { Task, TaskStatus } from '../types/task';
 import KanbanCard from './KanbanCard';
 
 interface KanbanColumnProps {
   status: TaskStatus;
+  label: string;
+  color: string;
+  count: number;
   tasks: Task[];
   isOver: boolean;
   updatingTaskId: string | null;
   onDragStart: (task: Task) => void;
   onDragEnd: () => void;
-  onDragOver: (status: TaskStatus) => void;
+  onDragOver: (status: TaskStatus | null) => void;
   onDrop: (status: TaskStatus) => void;
 }
 
+const ICONS: Record<TaskStatus, typeof IconClock> = {
+  Pending: IconClock,
+  'In Progress': IconActivity,
+  Completed: IconChecklist,
+};
+
 export default function KanbanColumn({
   status,
+  label,
+  color,
+  count,
   tasks,
   isOver,
   updatingTaskId,
@@ -25,81 +42,167 @@ export default function KanbanColumn({
   onDragOver,
   onDrop,
 }: KanbanColumnProps) {
-  const color = TASK_STATUS_COLORS[status];
+  const Icon = ICONS[status];
 
   return (
-    <Paper
-      radius="lg"
-      p="sm"
-      onDragOver={(event) => {
-        event.preventDefault();
-        event.dataTransfer.dropEffect = 'move';
-        onDragOver(status);
+    <motion.div
+      layout
+      animate={{
+        backgroundColor: isOver ? 'var(--app-accent-soft)' : 'transparent',
       }}
-      onDrop={(event) => {
-        event.preventDefault();
-        onDrop(status);
-      }}
-      style={{
-        backgroundColor: isOver ? 'var(--app-accent-soft)' : 'var(--app-surface-2)',
-        border: `1px ${isOver ? 'dashed' : 'solid'} ${
-          isOver ? 'var(--app-primary)' : 'var(--app-border)'
-        }`,
-        transition: 'background-color 120ms ease, border-color 120ms ease',
-        minWidth: 260,
-        display: 'flex',
-        flexDirection: 'column',
-      }}
+      transition={{ duration: 200 }}
     >
-      <Group justify="space-between" mb="sm" px={4}>
-        <Group gap={8} wrap="nowrap">
-          <span
-            style={{
-              width: 9,
-              height: 9,
-              borderRadius: '50%',
-              background: `var(--mantine-color-${color}-6)`,
-              display: 'inline-block',
-            }}
-          />
-          <Text fw={700} size="sm">
-            {status}
-          </Text>
-        </Group>
-
-        <Badge color="gray" variant="light" radius="sm" size="sm">
-          {tasks.length}
-        </Badge>
-      </Group>
-
-      <ScrollArea.Autosize mah={560} type="hover" offsetScrollbars>
-        <Stack gap="xs" pr={4} mih={80}>
-          {tasks.length === 0 ? (
-            <div
+      <div
+        style={{
+          backgroundColor: isOver
+            ? 'var(--app-accent-soft)'
+            : 'var(--app-surface-2)',
+          borderRadius: 16,
+          border: `2px dashed ${isOver ? 'var(--app-primary)' : 'var(--app-border)'}`,
+          transition: 'all 200ms ease-out',
+          minHeight: 500,
+        }}
+        onDragOver={(e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          onDragOver(status);
+        }}
+        onDragLeave={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+            onDragOver(null);
+          }
+        }}
+        onDrop={(e) => {
+          e.preventDefault();
+          onDrop(status);
+        }}
+      >
+        <div
+          style={{
+            padding: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+          }}
+        >
+          <Group justify="space-between" align="center" mb="lg">
+            <Group gap="sm" align="center">
+              <motion.span
+                animate={{ rotate: isOver ? 15 : 0, scale: isOver ? 1.1 : 1 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                <Icon
+                  size={20}
+                  stroke={2}
+                  style={{ color: `var(--mantine-color-${color}-6)` }}
+                />
+              </motion.span>
+              <Text fw={700} size="lg" c="var(--app-text)">
+                {label}
+              </Text>
+            </Group>
+            <Badge
+              variant="light"
+              color={color}
+              size="sm"
               style={{
-                border: '1px dashed var(--app-border)',
-                borderRadius: 'var(--mantine-radius-md)',
-                padding: '28px 12px',
+                backgroundColor: `var(--mantine-color-${color}-6)`,
+                color: 'white',
+              }}
+            >
+              {count}
+            </Badge>
+          </Group>
+
+          <AnimatePresence mode="popLayout">
+            {tasks.map((task, index) => (
+              <motion.div
+                key={task.id}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, x: -20, scale: 0.95 }}
+                transition={{ duration: 0.2, delay: index * 0.04 }}
+              >
+                <KanbanCard
+                  task={task}
+                  isUpdating={updatingTaskId === task.id}
+                  onDragStart={onDragStart}
+                  onDragEnd={onDragEnd}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+
+          {tasks.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '24px',
                 textAlign: 'center',
               }}
             >
-              <Text size="xs" c="dimmed">
-                Drop tasks here
+              <div
+                className="rounded-full p-3"
+                style={{
+                  background: 'var(--app-accent-soft)',
+                  color: 'var(--app-accent-fg)',
+                }}
+              >
+                <IconPlus size={24} />
+              </div>
+              <Text size="sm" c="dimmed" mt="md" ta="center">
+                No {label.toLowerCase()} tasks
               </Text>
-            </div>
-          ) : (
-            tasks.map((task) => (
-              <KanbanCard
-                key={task.id}
-                task={task}
-                isUpdating={updatingTaskId === task.id}
-                onDragStart={onDragStart}
-                onDragEnd={onDragEnd}
-              />
-            ))
+            </motion.div>
           )}
-        </Stack>
-      </ScrollArea.Autosize>
-    </Paper>
+
+          <div
+            style={{
+              marginTop: 'auto',
+              paddingTop: '16px',
+              borderTop: '1px solid var(--app-border)',
+            }}
+          >
+            <Box
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '12px',
+                borderRadius: 12,
+                backgroundColor: 'var(--app-surface)',
+                border: '1px dashed var(--app-border)',
+                color: 'var(--app-text-muted)',
+                fontSize: 13,
+                fontWeight: 500,
+                cursor: 'pointer',
+                transition: 'all 150ms ease-out',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor =
+                  'var(--app-surface-hover)';
+                e.currentTarget.style.borderColor = 'var(--app-primary)';
+                e.currentTarget.style.color = 'var(--app-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--app-surface)';
+                e.currentTarget.style.borderColor = 'var(--app-border)';
+                e.currentTarget.style.color = 'var(--app-text-muted)';
+              }}
+            >
+              + Add task
+            </Box>
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 }

@@ -17,7 +17,10 @@ const normalizeTask = (item: TaskApiResponse): Task => ({
   status: item.status ?? 'Pending',
   priority: item.priority ?? 'Medium',
   dueDate: item.dueDate ?? '',
-  assignedTo: typeof item.assignedTo === 'string' ? item.assignedTo : (item.assignedTo?._id ?? ''),
+  assignedTo:
+    typeof item.assignedTo === 'string'
+      ? item.assignedTo
+      : (item.assignedTo?._id ?? ''),
   assignedEmployee:
     item.assignedTo && typeof item.assignedTo === 'object'
       ? {
@@ -26,7 +29,8 @@ const normalizeTask = (item: TaskApiResponse): Task => ({
         }
       : undefined,
 
-  project: typeof item.project === 'string' ? item.project : (item.project?._id ?? ''),
+  project:
+    typeof item.project === 'string' ? item.project : (item.project?._id ?? ''),
 
   projectDetails:
     item.project && typeof item.project === 'object'
@@ -40,7 +44,9 @@ const normalizeTask = (item: TaskApiResponse): Task => ({
   updatedAt: item.updatedAt,
 });
 
-const normalizeTaskList = (payload: TaskApiResponse[] | TaskListResponse): Task[] => {
+const normalizeTaskList = (
+  payload: TaskApiResponse[] | TaskListResponse,
+): Task[] => {
   const data = Array.isArray(payload) ? payload : (payload.data ?? []);
 
   return data.map(normalizeTask);
@@ -72,7 +78,10 @@ export const createTask = async (payload: CreateTaskPayload): Promise<Task> => {
   return normalizeTask(response.data.data);
 };
 
-export const updateTask = async (taskId: string, payload: UpdateTaskPayload): Promise<Task> => {
+export const updateTask = async (
+  taskId: string,
+  payload: UpdateTaskPayload,
+): Promise<Task> => {
   const response = await api.put<{
     success: boolean;
     data: TaskApiResponse;

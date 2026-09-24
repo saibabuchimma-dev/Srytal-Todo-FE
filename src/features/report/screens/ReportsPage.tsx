@@ -29,10 +29,13 @@ export default function ReportsPage() {
   }
 
   if (isError || !data) {
-    return <CenteredState variant="error" message="Analytics could not be loaded." />;
+    return (
+      <CenteredState variant="error" message="Analytics could not be loaded." />
+    );
   }
 
-  const { totals, statusDistribution, priorityDistribution, monthlyTasks } = data;
+  const { totals, statusDistribution, priorityDistribution, monthlyTasks } =
+    data;
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
@@ -45,7 +48,10 @@ export default function ReportsPage() {
 
           <div
             className="rounded-full p-3"
-            style={{ background: 'var(--app-accent-soft)', color: 'var(--app-accent-fg)' }}
+            style={{
+              background: 'var(--app-accent-soft)',
+              color: 'var(--app-accent-fg)',
+            }}
           >
             <IconChartBar size={24} />
           </div>
@@ -69,7 +75,10 @@ export default function ReportsPage() {
         </ChartCard>
       </SimpleGrid>
 
-      <ChartCard title="Monthly Tasks" subtitle="Tasks created over the last 6 months">
+      <ChartCard
+        title="Monthly Tasks"
+        subtitle="Tasks created over the last 6 months"
+      >
         <MonthlyTasksChart data={monthlyTasks} />
       </ChartCard>
     </div>

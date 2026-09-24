@@ -1,4 +1,10 @@
-import { Button, CloseButton, LoadingOverlay, Modal, Text } from '@mantine/core';
+import {
+  Button,
+  CloseButton,
+  LoadingOverlay,
+  Modal,
+  Text,
+} from '@mantine/core';
 import type { CSSProperties, FormEventHandler, ReactNode } from 'react';
 
 export interface AppModalProps {
@@ -103,7 +109,9 @@ export default function AppModal({
           zIndex={5}
           overlayProps={{ blur: 1, backgroundOpacity: 0.35 }}
         />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>{children}</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {children}
+        </div>
       </div>
 
       {!hideFooter && (

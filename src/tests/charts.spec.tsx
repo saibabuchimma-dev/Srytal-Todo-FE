@@ -1,6 +1,14 @@
-jest.mock('@/features/report/services/report.service', () => ({ getReportOverview: jest.fn() }));
+jest.mock('@/features/report/services/report.service', () => ({
+  getReportOverview: jest.fn(),
+}));
 
-import { renderWithProviders, screen, renderHook, waitFor, hookWrapper } from '@test-utils';
+import {
+  renderWithProviders,
+  screen,
+  renderHook,
+  waitFor,
+  hookWrapper,
+} from '@test-utils';
 import ChartCard from '@/features/report/components/ChartCard';
 import StatusPieChart from '@/features/report/components/StatusPieChart';
 import PriorityBarChart from '@/features/report/components/PriorityBarChart';
@@ -25,7 +33,12 @@ describe('ChartCard', () => {
 describe('report charts render without crashing', () => {
   it('StatusPieChart renders a legend', () => {
     renderWithProviders(
-      <StatusPieChart data={[{ name: 'Completed', value: 6 }, { name: 'Pending', value: 4 }]} />,
+      <StatusPieChart
+        data={[
+          { name: 'Completed', value: 6 },
+          { name: 'Pending', value: 4 },
+        ]}
+      />,
       { withRouter: false },
     );
     expect(screen.getByText('Completed')).toBeInTheDocument();
@@ -33,7 +46,12 @@ describe('report charts render without crashing', () => {
   });
 
   it('StatusPieChart handles an all-zero total', () => {
-    renderWithProviders(<StatusPieChart data={[{ name: 'Pending', value: 0 }]} />, { withRouter: false });
+    renderWithProviders(
+      <StatusPieChart data={[{ name: 'Pending', value: 0 }]} />,
+      {
+        withRouter: false,
+      },
+    );
     expect(screen.getByText('Pending')).toBeInTheDocument();
   });
 

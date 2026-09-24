@@ -26,6 +26,8 @@ describe('ROUTES', () => {
     expect(ROUTES.TASK_DETAILS('t1')).toBe('/dashboard/tasks/t1');
     expect(ROUTES.ADMIN_TASK_DETAILS('t1')).toBe('/admin/dashboard/tasks/t1');
     expect(ROUTES.PROJECT_DETAILS('p1')).toBe('/dashboard/projects/p1/details');
-    expect(ROUTES.ADMIN_PROJECT_DETAILS('p1')).toBe('/admin/dashboard/projects/p1/details');
+    expect(ROUTES.ADMIN_PROJECT_DETAILS('p1')).toBe(
+      '/admin/dashboard/projects/p1/details',
+    );
   });
 });

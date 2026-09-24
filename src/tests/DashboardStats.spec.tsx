@@ -1,7 +1,9 @@
 const mockUseEmployees = jest.fn();
 const mockUseTasks = jest.fn();
 const mockUseMyTasks = jest.fn();
-jest.mock('@/features/employee/hooks/useEmployees', () => ({ useEmployees: (...a: unknown[]) => mockUseEmployees(...a) }));
+jest.mock('@/features/employee/hooks/useEmployees', () => ({
+  useEmployees: (...a: unknown[]) => mockUseEmployees(...a),
+}));
 jest.mock('@/features/task/hooks/useTasks', () => ({
   useTasks: (...a: unknown[]) => mockUseTasks(...a),
   useMyTasks: (...a: unknown[]) => mockUseMyTasks(...a),
@@ -20,7 +22,12 @@ const tasks = [
 
 describe('StatsCard', () => {
   it('renders label, value and hint', () => {
-    renderWithProviders(<StatsCard label="Total" value={42} icon={<span />} hint="all good" />, { withRouter: false });
+    renderWithProviders(
+      <StatsCard label="Total" value={42} icon={<span />} hint="all good" />,
+      {
+        withRouter: false,
+      },
+    );
     expect(screen.getByText('Total')).toBeInTheDocument();
     expect(screen.getByText('42')).toBeInTheDocument();
     expect(screen.getByText('all good')).toBeInTheDocument();
@@ -30,15 +37,41 @@ describe('StatsCard', () => {
 describe('DashboardStats', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    mockUseEmployees.mockReturnValue({ data: [{ id: 'e1', isActive: true }, { id: 'e2', isActive: false }], isLoading: false });
+    mockUseEmployees.mockReturnValue({
+      data: [
+        { id: 'e1', isActive: true },
+        { id: 'e2', isActive: false },
+      ],
+      isLoading: false,
+    });
     mockUseTasks.mockReturnValue({ data: tasks, isLoading: false });
     mockUseMyTasks.mockReturnValue({ data: tasks, isLoading: false });
   });
 
   const asAdmin = () =>
-    useAuthStore.getState().login({ id: 'u', fullName: 'A', name: 'A', email: 'a@x.com', role: 'Admin', mustChangePassword: false }, 't');
+    useAuthStore.getState().login(
+      {
+        id: 'u',
+        fullName: 'A',
+        name: 'A',
+        email: 'a@x.com',
+        role: 'Admin',
+        mustChangePassword: false,
+      },
+      't',
+    );
   const asEmployee = () =>
-    useAuthStore.getState().login({ id: 'u', fullName: 'A', name: 'A', email: 'a@x.com', role: 'Employee', mustChangePassword: false }, 't');
+    useAuthStore.getState().login(
+      {
+        id: 'u',
+        fullName: 'A',
+        name: 'A',
+        email: 'a@x.com',
+        role: 'Employee',
+        mustChangePassword: false,
+      },
+      't',
+    );
 
   it('renders admin cards', () => {
     asAdmin();
@@ -58,7 +91,11 @@ describe('DashboardStats', () => {
   it('renders the loading skeleton', () => {
     asAdmin();
     mockUseTasks.mockReturnValue({ data: undefined, isLoading: true });
-    const { container } = renderWithProviders(<DashboardStats />, { withRouter: false });
-    expect(container.querySelectorAll('.mantine-Skeleton-root').length).toBeGreaterThan(0);
+    const { container } = renderWithProviders(<DashboardStats />, {
+      withRouter: false,
+    });
+    expect(
+      container.querySelectorAll('.mantine-Skeleton-root').length,
+    ).toBeGreaterThan(0);
   });
 });

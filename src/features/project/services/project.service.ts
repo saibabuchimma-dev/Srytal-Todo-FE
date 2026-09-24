@@ -22,19 +22,26 @@ const normalizeTask = (item: Record<string, unknown>): ProjectTask => ({
     item.assignedTo && typeof item.assignedTo === 'object'
       ? {
           _id: String((item.assignedTo as Record<string, unknown>)._id ?? ''),
-          fullName: String((item.assignedTo as Record<string, unknown>).fullName ?? ''),
+          fullName: String(
+            (item.assignedTo as Record<string, unknown>).fullName ?? '',
+          ),
           avatar:
-            typeof (item.assignedTo as Record<string, unknown>).avatar === 'string'
+            typeof (item.assignedTo as Record<string, unknown>).avatar ===
+            'string'
               ? ((item.assignedTo as Record<string, unknown>).avatar as string)
               : undefined,
         }
       : undefined,
 });
 
-const normalizeEmployeeTaskGroup = (item: Record<string, unknown>): EmployeeTaskGroup => ({
+const normalizeEmployeeTaskGroup = (
+  item: Record<string, unknown>,
+): EmployeeTaskGroup => ({
   employee: {
     _id: String((item.employee as Record<string, unknown>)?._id ?? ''),
-    fullName: String((item.employee as Record<string, unknown>)?.fullName ?? ''),
+    fullName: String(
+      (item.employee as Record<string, unknown>)?.fullName ?? '',
+    ),
     email: String((item.employee as Record<string, unknown>)?.email ?? ''),
     role: String((item.employee as Record<string, unknown>)?.role ?? ''),
     avatar:
@@ -73,21 +80,27 @@ const normalizeProject = (item: Record<string, unknown>): Project => ({
 
 const normalizeProjectList = (payload: unknown): Project[] => {
   if (Array.isArray(payload)) {
-    return payload.map((item) => normalizeProject(item as Record<string, unknown>));
+    return payload.map((item) =>
+      normalizeProject(item as Record<string, unknown>),
+    );
   }
 
   if (payload && typeof payload === 'object' && 'data' in payload) {
     const data = (payload as { data?: unknown }).data;
 
     if (Array.isArray(data)) {
-      return data.map((item) => normalizeProject(item as Record<string, unknown>));
+      return data.map((item) =>
+        normalizeProject(item as Record<string, unknown>),
+      );
     }
   }
 
   return [];
 };
 
-export const getProjects = async (params: ProjectQueryParams = {}): Promise<Project[]> => {
+export const getProjects = async (
+  params: ProjectQueryParams = {},
+): Promise<Project[]> => {
   const response = await api.get<unknown>('/projects', { params });
   return normalizeProjectList(response.data);
 };
@@ -106,12 +119,16 @@ export const getProjectsPage = async (params: {
   search?: string;
   status?: ProjectStatus;
 }): Promise<Paginated<Project>> => {
-  const response = await api.get<ProjectPageResponse>('/projects/search', { params });
+  const response = await api.get<ProjectPageResponse>('/projects/search', {
+    params,
+  });
   const data = response.data ?? {};
 
   return {
     items: Array.isArray(data.projects)
-      ? data.projects.map((item) => normalizeProject(item as Record<string, unknown>))
+      ? data.projects.map((item) =>
+          normalizeProject(item as Record<string, unknown>),
+        )
       : [],
     total: Number(data.total ?? 0),
     page: Number(data.page ?? params.page),
@@ -120,10 +137,14 @@ export const getProjectsPage = async (params: {
   };
 };
 
-export const createProject = async (payload: CreateProjectPayload): Promise<Project> => {
+export const createProject = async (
+  payload: CreateProjectPayload,
+): Promise<Project> => {
   const response = await api.post<unknown>('/projects', payload);
   const data =
-    response.data && typeof response.data === 'object' && 'data' in response.data
+    response.data &&
+    typeof response.data === 'object' &&
+    'data' in response.data
       ? (response.data as { data?: Record<string, unknown> }).data
       : response.data;
 
@@ -133,18 +154,24 @@ export const createProject = async (payload: CreateProjectPayload): Promise<Proj
 export const getProject = async (projectId: string): Promise<Project> => {
   const response = await api.get<unknown>(`/projects/${projectId}`);
   const data =
-    response.data && typeof response.data === 'object' && 'data' in response.data
+    response.data &&
+    typeof response.data === 'object' &&
+    'data' in response.data
       ? (response.data as { data?: Record<string, unknown> }).data
       : response.data;
 
   return normalizeProject((data ?? {}) as Record<string, unknown>);
 };
 
-export const getProjectDetails = async (projectId: string): Promise<ProjectDetailsResponse> => {
+export const getProjectDetails = async (
+  projectId: string,
+): Promise<ProjectDetailsResponse> => {
   const response = await api.get(`/projects/${projectId}/details`);
 
   const data =
-    response.data && typeof response.data === 'object' && 'data' in response.data
+    response.data &&
+    typeof response.data === 'object' &&
+    'data' in response.data
       ? (response.data as { data: Record<string, unknown> }).data
       : {};
 
@@ -177,7 +204,9 @@ export const updateProject = async (
   const response = await api.put(`/projects/${projectId}`, payload);
 
   const data =
-    response.data && typeof response.data === 'object' && 'data' in response.data
+    response.data &&
+    typeof response.data === 'object' &&
+    'data' in response.data
       ? (response.data as { data?: Record<string, unknown> }).data
       : response.data;
 
@@ -188,10 +217,14 @@ export const getEmployeeProjectTasks = async (
   projectId: string,
   employeeId: string,
 ): Promise<ProjectTask[]> => {
-  const response = await api.get(`/projects/${projectId}/employees/${employeeId}/tasks`);
+  const response = await api.get(
+    `/projects/${projectId}/employees/${employeeId}/tasks`,
+  );
 
   const data =
-    response.data && typeof response.data === 'object' && 'data' in response.data
+    response.data &&
+    typeof response.data === 'object' &&
+    'data' in response.data
       ? (response.data as { data: unknown[] }).data
       : [];
 
