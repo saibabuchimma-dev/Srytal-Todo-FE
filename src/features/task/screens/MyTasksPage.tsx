@@ -115,7 +115,7 @@ export default function MyTasksPage() {
               <Text c="dimmed" size="xs">
                 {counts.all === 0
                   ? 'No tasks assigned to you yet.'
-                  : `You have ${counts.all} assigned task${counts.all === 1 ? '' : 's'} (${counts.Completed} completed).`}
+                  : `${counts.all} tasks assigned (${counts.Completed} completed).`}
               </Text>
             </div>
           </Group>

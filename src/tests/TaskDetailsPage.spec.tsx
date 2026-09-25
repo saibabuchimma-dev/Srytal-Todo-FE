@@ -2,6 +2,7 @@ const mockUseTask = jest.fn();
 const mockMutate = jest.fn();
 jest.mock('@/features/task/hooks/useTasks', () => ({
   useTask: () => mockUseTask(),
+  useDeleteTask: () => ({ mutate: jest.fn(), isPending: false }),
 }));
 jest.mock('@/features/task/hooks/useUpdateTaskStatus', () => ({
   useUpdateTaskStatus: () => ({ mutate: mockMutate, isPending: false }),

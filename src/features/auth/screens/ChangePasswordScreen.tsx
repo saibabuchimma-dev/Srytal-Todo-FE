@@ -93,8 +93,8 @@ export default function ChangePasswordScreen() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack gap="md">
               <PasswordInput
-                label="Current Temporary Password"
-                placeholder="Enter your temporary password"
+                label="Current Password"
+                placeholder="Enter your current password"
                 radius="md"
                 size="sm"
                 leftSection={<HiOutlineLockClosed size={16} />}
@@ -111,7 +111,7 @@ export default function ChangePasswordScreen() {
                 {...register('newPassword', { required: true, minLength: 6 })}
               />
               <PasswordInput
-                label="Confirm New Password"
+                label="Confirm Password"
                 placeholder="Re-enter your new password"
                 radius="md"
                 size="sm"

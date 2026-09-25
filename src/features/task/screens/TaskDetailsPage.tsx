@@ -352,11 +352,13 @@ export default function TaskDetailsPage() {
         </Grid.Col>
       </Grid>
 
-      <EditTaskModal
-        opened={editOpened}
-        task={task}
-        onClose={() => setEditOpened(false)}
-      />
+      {editOpened && (
+        <EditTaskModal
+          opened={editOpened}
+          task={task}
+          onClose={() => setEditOpened(false)}
+        />
+      )}
 
       <ConfirmDeleteModal
         opened={deleteOpened}

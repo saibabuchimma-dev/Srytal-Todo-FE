@@ -84,7 +84,7 @@ export default function CenteredState({
             <Text c="dimmed" ta="center" size="sm">
               {message ??
                 (variant === 'error'
-                  ? 'Something went wrong. Please try again.'
+                  ? 'Something went wrong.'
                   : 'No data to show.')}
             </Text>
           </motion.div>

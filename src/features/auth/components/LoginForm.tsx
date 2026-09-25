@@ -117,7 +117,7 @@ export default function LoginForm({ portal }: LoginFormProps) {
 
           <Stack gap="sm">
             <TextInput
-              label="Work Email"
+              label="Email address"
               placeholder="name@company.com"
               radius="md"
               size="sm"
