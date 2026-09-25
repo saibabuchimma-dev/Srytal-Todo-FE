@@ -255,7 +255,11 @@ export default function ProjectsPage() {
 
   if (isLoading) {
     return (
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
+      <div
+        role="status"
+        aria-label="Loading"
+        className="mx-auto flex max-w-7xl flex-col gap-6"
+      >
         <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
           {Array.from({ length: 6 }).map((_, i) => (
             <CardSkeleton key={i} />
@@ -296,7 +300,7 @@ export default function ProjectsPage() {
             </div>
             <div>
               <Title order={2} fw={800} fz={22}>
-                Projects Management
+                {isAdmin ? 'Project Management' : 'My Projects'}
               </Title>
               <Text c="dimmed" size="xs">
                 Organize team members, assign tasks, and track high-level
@@ -314,7 +318,7 @@ export default function ProjectsPage() {
                 fontWeight: 600,
               }}
             >
-              New Project
+              Create Project
             </Button>
           )}
         </Group>

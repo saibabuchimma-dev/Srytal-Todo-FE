@@ -305,7 +305,7 @@ export default function DashboardScreen() {
             <Text c="dimmed" size="xs" mt={4}>
               {isAdmin
                 ? 'High-level task metrics and team performance overview.'
-                : 'Here is an overview of your assigned tasks and upcoming deadlines.'}
+                : 'Here is what needs your attention today.'}
             </Text>
           </div>
 
@@ -420,7 +420,7 @@ export default function DashboardScreen() {
           <Group justify="space-between" align="center" mb="lg">
             <div>
               <Title order={4} fw={700} fz={16}>
-                Task Completion
+                Task Overview
               </Title>
               <Text c="dimmed" size="xs">
                 Work progress across status buckets
@@ -440,7 +440,7 @@ export default function DashboardScreen() {
 
           <Group justify="center" my="md">
             <RingProgress
-              size={190}
+              size={180}
               thickness={16}
               roundCaps
               sections={statusRows.map((row) => ({
@@ -519,14 +519,14 @@ export default function DashboardScreen() {
               </Text>
             </div>
             <Badge variant="light" color="indigo" size="sm">
-              {upcomingTasks.length} Due Soon
+              {upcomingTasks.length} Upcoming
             </Badge>
           </Group>
 
           {upcomingTasks.length === 0 ? (
             <CenteredState
               variant="empty"
-              message="No upcoming deadlines. Everything is caught up!"
+              message="No upcoming deadlines. You are all caught up!"
               minHeight={200}
             />
           ) : (

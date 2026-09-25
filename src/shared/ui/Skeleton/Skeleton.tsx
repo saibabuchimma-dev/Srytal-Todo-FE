@@ -78,7 +78,12 @@ export function CardSkeleton() {
 
 export function TableSkeleton({ rows = 5, columns = 5 }) {
   return (
-    <div className="animate-in-stagger" style={{ animationDelay: '50ms' }}>
+    <div
+      role="status"
+      aria-label="Loading"
+      className="animate-in-stagger"
+      style={{ animationDelay: '50ms' }}
+    >
       <div
         style={{
           borderRadius: 12,
@@ -122,7 +127,12 @@ export function TableSkeleton({ rows = 5, columns = 5 }) {
 
 export function DashboardSkeleton() {
   return (
-    <div className="animate-in-stagger" style={{ animationDelay: '0ms' }}>
+    <div
+      role="status"
+      aria-label="Loading"
+      className="animate-in-stagger"
+      style={{ animationDelay: '0ms' }}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         <div
           style={{

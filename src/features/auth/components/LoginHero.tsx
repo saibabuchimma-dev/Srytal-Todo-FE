@@ -34,22 +34,37 @@ export default function LoginHero() {
       />
 
       <Box style={{ position: 'relative', zIndex: 1 }}>
-        <Badge
-          variant="filled"
-          color="indigo"
-          size="md"
-          radius="xl"
-          style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.15)',
-            backdropFilter: 'blur(10px)',
-            color: '#FFFFFF',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            textTransform: 'none',
-            fontWeight: 600,
-          }}
-        >
-          SRYTAL Workspace Cloud
-        </Badge>
+        <Group gap="xs" align="center">
+          <Badge
+            variant="filled"
+            color="indigo"
+            size="md"
+            radius="xl"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(10px)',
+              color: '#FFFFFF',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              textTransform: 'none',
+              fontWeight: 700,
+            }}
+          >
+            SRYTAL
+          </Badge>
+          <Badge
+            variant="outline"
+            color="gray"
+            size="md"
+            radius="xl"
+            style={{
+              color: 'rgba(255, 255, 255, 0.85)',
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              textTransform: 'none',
+            }}
+          >
+            Workspace Cloud
+          </Badge>
+        </Group>
       </Box>
 
       <Stack
@@ -74,6 +89,20 @@ export default function LoginHero() {
         </Text>
 
         <Group gap="xs" mt="sm" wrap="wrap">
+          <Badge
+            size="md"
+            radius="md"
+            leftSection={<IconChecklist size={14} />}
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.12)',
+              backdropFilter: 'blur(8px)',
+              color: '#FFFFFF',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              textTransform: 'none',
+            }}
+          >
+            Manage your team
+          </Badge>
           <Badge
             size="md"
             radius="md"

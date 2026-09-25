@@ -107,6 +107,18 @@ export default function Header({
           <Group gap={6} wrap="nowrap">
             <Text
               size="xs"
+              fw={700}
+              c="var(--app-text)"
+              style={{ letterSpacing: -0.2 }}
+            >
+              Srytal
+            </Text>
+            <IconChevronRight
+              size={12}
+              style={{ color: 'var(--app-text-muted)' }}
+            />
+            <Text
+              size="xs"
               fw={600}
               c="dimmed"
               tt="uppercase"
@@ -220,7 +232,7 @@ export default function Header({
                 onClick={handleLogout}
                 style={{ borderRadius: 8, fontSize: 13 }}
               >
-                Sign out
+                Logout
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>

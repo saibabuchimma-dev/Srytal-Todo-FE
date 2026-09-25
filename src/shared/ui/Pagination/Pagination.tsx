@@ -36,6 +36,9 @@ export function Pagination({
   const numPages =
     totalPages ?? Math.max(1, Math.ceil(total / Math.max(1, limit)));
 
+  const start = total === 0 ? 0 : (currentPage - 1) * limit + 1;
+  const end = Math.min(currentPage * limit, total);
+
   const handleChange = (p: number) => {
     if (onPageChange) onPageChange(p);
     if (onChange) onChange(p);
@@ -50,27 +53,39 @@ export function Pagination({
       className={className}
       style={style}
     >
-      {onLimitChange && (
-        <Group gap="xs" wrap="nowrap">
+      <Group gap="sm" wrap="nowrap">
+        {total > 0 && (
           <Text size="xs" c="dimmed">
-            Per page:
+            Showing {start}–{end} of {total}
           </Text>
-          <Select
-            size="xs"
-            w={76}
-            value={String(limit)}
-            onChange={(val) => onLimitChange(Number(val) || 10)}
-            data={['5', '10', '20', '50']}
-            disabled={loading}
-            styles={{
-              input: {
-                borderRadius: 8,
-                fontSize: 12,
-              },
-            }}
-          />
-        </Group>
-      )}
+        )}
+        {onLimitChange && (
+          <Group gap="xs" wrap="nowrap">
+            <Text size="xs" c="dimmed">
+              Per page:
+            </Text>
+            <Select
+              size="xs"
+              w={110}
+              value={String(limit)}
+              onChange={(val) => onLimitChange(Number(val) || 10)}
+              data={[
+                { value: '5', label: '5 / page' },
+                { value: '10', label: '10 / page' },
+                { value: '20', label: '20 / page' },
+                { value: '50', label: '50 / page' },
+              ]}
+              disabled={loading}
+              styles={{
+                input: {
+                  borderRadius: 8,
+                  fontSize: 12,
+                },
+              }}
+            />
+          </Group>
+        )}
+      </Group>
 
       <MantinePagination
         value={currentPage}

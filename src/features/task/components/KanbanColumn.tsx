@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Text, Badge, Group, Box } from '@mantine/core';
+import { Text, Badge, Group, Box, Paper } from '@mantine/core';
 import {
   IconClock,
   IconActivity,
@@ -11,9 +11,9 @@ import KanbanCard from './KanbanCard';
 
 interface KanbanColumnProps {
   status: TaskStatus;
-  label: string;
-  color: string;
-  count: number;
+  label?: string;
+  color?: string;
+  count?: number;
   tasks: Task[];
   isOver: boolean;
   updatingTaskId: string | null;
@@ -42,7 +42,16 @@ export default function KanbanColumn({
   onDragOver,
   onDrop,
 }: KanbanColumnProps) {
-  const Icon = ICONS[status];
+  const Icon = ICONS[status] || IconClock;
+  const displayLabel = label ?? status;
+  const displayCount = count ?? tasks.length;
+  const displayColor =
+    color ??
+    (status === 'Completed'
+      ? 'teal'
+      : status === 'In Progress'
+        ? 'blue'
+        : 'yellow');
 
   return (
     <motion.div
@@ -52,7 +61,8 @@ export default function KanbanColumn({
       }}
       transition={{ duration: 200 }}
     >
-      <div
+      <Paper
+        className="mantine-Paper-root"
         style={{
           backgroundColor: isOver
             ? 'var(--app-accent-soft)'
@@ -87,6 +97,9 @@ export default function KanbanColumn({
         >
           <Group justify="space-between" align="center" mb="lg">
             <Group gap="sm" align="center">
+              <Text fw={700} size="lg" c="var(--app-text)">
+                {displayLabel}
+              </Text>
               <motion.span
                 animate={{ rotate: isOver ? 15 : 0, scale: isOver ? 1.1 : 1 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -94,23 +107,20 @@ export default function KanbanColumn({
                 <Icon
                   size={20}
                   stroke={2}
-                  style={{ color: `var(--mantine-color-${color}-6)` }}
+                  style={{ color: `var(--mantine-color-${displayColor}-6)` }}
                 />
               </motion.span>
-              <Text fw={700} size="lg" c="var(--app-text)">
-                {label}
-              </Text>
             </Group>
             <Badge
               variant="light"
-              color={color}
+              color={displayColor}
               size="sm"
               style={{
-                backgroundColor: `var(--mantine-color-${color}-6)`,
+                backgroundColor: `var(--mantine-color-${displayColor}-6)`,
                 color: 'white',
               }}
             >
-              {count}
+              {displayCount}
             </Badge>
           </Group>
 
@@ -159,7 +169,7 @@ export default function KanbanColumn({
                 <IconPlus size={24} />
               </div>
               <Text size="sm" c="dimmed" mt="md" ta="center">
-                No {label.toLowerCase()} tasks
+                No {displayLabel.toLowerCase()} tasks
               </Text>
             </motion.div>
           )}
@@ -202,7 +212,7 @@ export default function KanbanColumn({
             </Box>
           </div>
         </div>
-      </div>
+      </Paper>
     </motion.div>
   );
 }

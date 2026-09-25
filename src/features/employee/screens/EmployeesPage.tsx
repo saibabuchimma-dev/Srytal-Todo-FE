@@ -95,9 +95,14 @@ export function EmployeesPage() {
               <IconUsers size={24} />
             </div>
             <div>
-              <Title order={2} fw={800} fz={22}>
-                Employee Directory
-              </Title>
+              <Group gap="xs" align="center">
+                <Title order={2} fw={800} fz={22}>
+                  Employee Directory
+                </Title>
+                <Text size="xs" c="dimmed">
+                  {total} {total === 1 ? 'employee' : 'employees'}
+                </Text>
+              </Group>
               <Text c="dimmed" size="xs">
                 Manage team members, roles, and workspace permissions.
               </Text>
@@ -112,7 +117,7 @@ export function EmployeesPage() {
               fontWeight: 600,
             }}
           >
-            Add Employee
+            Create Employee
           </Button>
         </Group>
       </Paper>
