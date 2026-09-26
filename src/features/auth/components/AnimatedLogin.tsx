@@ -35,9 +35,9 @@ export default function AnimatedLogin() {
           padding: 24px;
           overflow: hidden;
           position: relative;
-          background: linear-gradient(135deg, #020617 0%, #111827 45%, #1d4ed8 100%);
+          background: var(--app-hero-gradient);
           font-family: Inter, sans-serif;
-          color: #f8fafc;
+          color: var(--app-text-inverse);
         }
 
         .login-card {
@@ -87,7 +87,7 @@ export default function AnimatedLogin() {
         .orb-one {
           width: 260px;
           height: 260px;
-          background: #38bdf8;
+          background: var(--app-info);
           top: -70px;
           right: -80px;
         }
@@ -95,7 +95,7 @@ export default function AnimatedLogin() {
         .orb-two {
           width: 220px;
           height: 220px;
-          background: #818cf8;
+          background: var(--app-primary);
           bottom: -70px;
           left: -50px;
           animation-delay: -3s;
@@ -123,7 +123,7 @@ export default function AnimatedLogin() {
           letter-spacing: 0.35em;
           font-size: 0.8rem;
           font-weight: 700;
-          color: #93c5fd;
+          color: var(--app-info);
         }
 
         .intro-title {
@@ -171,7 +171,7 @@ export default function AnimatedLogin() {
           display: flex;
           flex-direction: column;
           gap: 8px;
-          color: #e2e8f0;
+          color: var(--app-text-secondary);
           font-size: 0.92rem;
         }
 
@@ -181,14 +181,14 @@ export default function AnimatedLogin() {
           border-radius: 12px;
           border: 1px solid rgba(255,255,255,0.15);
           background: rgba(15, 23, 42, 0.8);
-          color: #f8fafc;
+          color: var(--app-text-inverse);
           outline: none;
           transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .input:focus {
-          border-color: #60a5fa;
-          box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+          border-color: var(--app-primary);
+          box-shadow: 0 0 0 3px var(--app-primary-glow);
         }
 
         .btn {
@@ -197,7 +197,7 @@ export default function AnimatedLogin() {
           margin-top: 8px;
           border-radius: 12px;
           border: none;
-          background: linear-gradient(90deg, #6366f1, #22d3ee);
+          background: var(--app-brand-gradient);
           color: white;
           font-weight: 700;
           cursor: pointer;
@@ -233,7 +233,7 @@ export default function AnimatedLogin() {
         .pupil {
           width: 7px;
           height: 7px;
-          background: #0f172a;
+          background: var(--app-text);
           border-radius: 50%;
           position: absolute;
           top: 4px;
@@ -264,7 +264,7 @@ export default function AnimatedLogin() {
         .hand {
           width: 32px;
           height: 54px;
-          background: #fbbf24;
+          background: var(--app-warning);
           border-radius: 20px;
           transition: 0.3s ease;
         }
@@ -280,230 +280,25 @@ export default function AnimatedLogin() {
 
           .intro-panel {
             padding: 32px 24px 24px;
-            min-height: 320px;
+            min-height: 260px;
           }
 
           .form-panel {
             padding: 24px;
           }
         }
-          grid-template-columns: 1.05fr 0.95fr;
-          border-radius: 32px;
-          overflow: hidden;
-          border: 1px solid rgba(255,255,255,0.16);
-          box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
-          background: rgba(15, 23, 42, 0.82);
-          backdrop-filter: blur(24px);
-        }
 
-        .intro-panel {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          padding: 48px;
-          gap: 24px;
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 64, 175, 0.9));
-          overflow: hidden;
-        }
-
-        .orb {
-          position: absolute;
-          border-radius: 999px;
-          filter: blur(10px);
-          opacity: 0.45;
-        }
-
-        .orb-one {
-          width: 260px;
-          height: 260px;
-          background: #38bdf8;
-          top: -70px;
-          right: -80px;
-        }
-
-        .orb-two {
-          width: 220px;
-          height: 220px;
-          background: #818cf8;
-          bottom: -70px;
-          left: -50px;
-        }
-
-        .intro-copy {
-          position: relative;
-          z-index: 1;
-          max-width: 420px;
-        }
-
-        .eyebrow {
-          margin: 0 0 8px;
-          text-transform: uppercase;
-          letter-spacing: 0.35em;
-          font-size: 0.8rem;
-          font-weight: 700;
-          color: #93c5fd;
-        }
-
-        .intro-title {
-          margin: 0 0 10px;
-          font-size: clamp(1.8rem, 3vw, 2.6rem);
-          font-weight: 700;
-        }
-
-        .intro-text {
-          margin: 0;
-          font-size: 1rem;
-          line-height: 1.7;
-          color: rgba(248, 250, 252, 0.8);
-        }
-
-        .form-panel {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 40px;
-          background: rgba(2, 6, 23, 0.5);
-        }
-
-        .form-box {
-          width: 100%;
-          max-width: 380px;
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
-
-        .title {
-          font-size: 1.75rem;
-          font-weight: 700;
-          margin-bottom: 6px;
-        }
-
-        .subtitle {
-          font-size: 0.95rem;
-          color: rgba(226, 232, 240, 0.7);
-          margin-bottom: 16px;
-        }
-
-        .field {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          color: #e2e8f0;
-          font-size: 0.92rem;
-        }
-
-        .input {
-          width: 100%;
-          padding: 13px 14px;
-          border-radius: 12px;
-          border: 1px solid rgba(255,255,255,0.15);
-          background: rgba(15, 23, 42, 0.8);
-          color: #f8fafc;
-          outline: none;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .input:focus {
-          border-color: #60a5fa;
-          box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
-        }
-
-        .btn {
-          width: 100%;
-          padding: 13px 16px;
-          margin-top: 8px;
-          border-radius: 12px;
-          border: none;
-          background: linear-gradient(90deg, #6366f1, #22d3ee);
-          color: white;
-          font-weight: 700;
-          cursor: pointer;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          box-shadow: 0 12px 30px rgba(34, 211, 238, 0.2);
-        }
-
-        .btn:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 16px 35px rgba(34, 211, 238, 0.26);
-        }
-
-        .face {
-          width: 132px;
-          height: 132px;
-          margin-top: 8px;
-          position: relative;
-          z-index: 1;
-        }
-
-        .eye {
-          position: absolute;
-          width: 16px;
-          height: 16px;
-          background: white;
-          border-radius: 50%;
-          top: 48px;
-        }
-
-        .eye.left { left: 38px; }
-        .eye.right { right: 38px; }
-
-        .pupil {
-          width: 7px;
-          height: 7px;
-          background: #0f172a;
-          border-radius: 50%;
-          position: absolute;
-          top: 4px;
-          left: 4px;
-          transition: 0.1s ease-out;
-        }
-
-        .mouth {
-          width: 46px;
-          height: 22px;
-          border-bottom: 3px solid white;
-          border-radius: 0 0 42px 42px;
-          position: absolute;
-          bottom: 22px;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .hands {
-          position: absolute;
-          top: 42px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          gap: 42px;
-        }
-
-        .hand {
-          width: 32px;
-          height: 54px;
-          background: #fbbf24;
-          border-radius: 20px;
-          transition: 0.3s ease;
-        }
-
-        .cover .hand {
-          transform: translateY(-18px) rotate(20deg);
-        }
-
-        @media (max-width: 860px) {
+        @media (max-width: 600px) {
           .login-card {
-            grid-template-columns: 1fr;
+            border-radius: 20px;
           }
 
           .intro-panel {
-            padding: 32px 24px 24px;
-            min-height: 320px;
+            padding: 24px 16px;
           }
 
           .form-panel {
-            padding: 24px;
+            padding: 20px 16px;
           }
         }
       `}</style>

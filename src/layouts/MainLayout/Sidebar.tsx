@@ -22,6 +22,7 @@ import {
   IconUsers,
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
+  IconX,
 } from '@tabler/icons-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@mantine/hooks';
@@ -210,6 +211,7 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
             size="sm"
             onClick={toggleCollapsed}
             aria-label="Toggle sidebar"
+            visibleFrom="md"
           >
             {collapsed ? (
               <IconLayoutSidebarLeftExpand size={18} />
@@ -218,6 +220,17 @@ export default function Sidebar({ onNavigate }: SidebarProps = {}) {
             )}
           </ActionIcon>
         </Tooltip>
+
+        <ActionIcon
+          variant="subtle"
+          color="gray"
+          size="sm"
+          onClick={onNavigate}
+          aria-label="Close navigation"
+          hiddenFrom="md"
+        >
+          <IconX size={18} />
+        </ActionIcon>
       </Box>
 
       <ScrollArea style={{ flex: 1 }} p={collapsed ? 'xs' : 'sm'}>

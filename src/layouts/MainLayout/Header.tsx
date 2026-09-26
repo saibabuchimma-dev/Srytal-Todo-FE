@@ -94,7 +94,12 @@ export default function Header({
         zIndex: 100,
       }}
     >
-      <Group justify="space-between" h="100%" px="lg" wrap="nowrap">
+      <Group
+        justify="space-between"
+        h="100%"
+        px={{ base: 'sm', sm: 'lg' }}
+        wrap="nowrap"
+      >
         <Group gap="xs" wrap="nowrap">
           <Burger
             opened={navOpened}
@@ -113,19 +118,24 @@ export default function Header({
             >
               Srytal
             </Text>
-            <IconChevronRight
-              size={12}
-              style={{ color: 'var(--app-text-muted)' }}
-            />
-            <Text
-              size="xs"
-              fw={600}
-              c="dimmed"
-              tt="uppercase"
-              style={{ letterSpacing: 0.5 }}
+            <Box
+              visibleFrom="xs"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
             >
-              {section}
-            </Text>
+              <IconChevronRight
+                size={12}
+                style={{ color: 'var(--app-text-muted)' }}
+              />
+              <Text
+                size="xs"
+                fw={600}
+                c="dimmed"
+                tt="uppercase"
+                style={{ letterSpacing: 0.5 }}
+              >
+                {section}
+              </Text>
+            </Box>
             <IconChevronRight
               size={12}
               style={{ color: 'var(--app-text-muted)' }}

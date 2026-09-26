@@ -28,7 +28,7 @@ const headerStyle: CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   gap: 14,
-  padding: '20px 24px',
+  padding: 'clamp(14px, 3vw, 20px) clamp(16px, 4vw, 24px)',
   borderBottom: '1px solid var(--app-border)',
   background: 'var(--app-surface-2)',
 };
@@ -47,8 +47,8 @@ const iconBadgeStyle: CSSProperties = {
 
 const bodyStyle: CSSProperties = {
   position: 'relative',
-  padding: '22px 24px',
-  maxHeight: '62vh',
+  padding: 'clamp(14px, 3vw, 22px) clamp(16px, 4vw, 24px)',
+  maxHeight: 'calc(80vh - 120px)',
   overflowY: 'auto',
 };
 
@@ -56,7 +56,7 @@ const footerStyle: CSSProperties = {
   display: 'flex',
   justifyContent: 'flex-end',
   gap: 10,
-  padding: '16px 24px',
+  padding: 'clamp(12px, 2.5vw, 16px) clamp(16px, 4vw, 24px)',
   borderTop: '1px solid var(--app-border)',
   background: 'var(--app-surface-2)',
 };
@@ -158,6 +158,7 @@ export default function AppModal({
       styles={{
         content: {
           overflow: 'hidden',
+          maxWidth: 'calc(100vw - 32px)',
           boxShadow: '0 24px 60px -20px var(--app-shadow)',
         },
         body: { padding: 0 },

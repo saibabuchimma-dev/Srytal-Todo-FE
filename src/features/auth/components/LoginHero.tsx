@@ -11,9 +11,8 @@ export default function LoginHero() {
     <div
       className="relative flex h-full flex-col justify-between overflow-hidden rounded-[24px] p-10"
       style={{
-        background:
-          'linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4F46E5 100%)',
-        color: '#FFFFFF',
+        background: 'var(--app-hero-gradient)',
+        color: 'var(--app-brand-on)',
         minHeight: '100%',
       }}
     >
@@ -43,7 +42,7 @@ export default function LoginHero() {
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.15)',
               backdropFilter: 'blur(10px)',
-              color: '#FFFFFF',
+              color: 'var(--app-brand-on)',
               border: '1px solid rgba(255, 255, 255, 0.2)',
               textTransform: 'none',
               fontWeight: 700,
@@ -96,7 +95,7 @@ export default function LoginHero() {
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.12)',
               backdropFilter: 'blur(8px)',
-              color: '#FFFFFF',
+              color: 'var(--app-brand-on)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               textTransform: 'none',
             }}
@@ -110,7 +109,7 @@ export default function LoginHero() {
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.12)',
               backdropFilter: 'blur(8px)',
-              color: '#FFFFFF',
+              color: 'var(--app-brand-on)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               textTransform: 'none',
             }}
@@ -124,7 +123,7 @@ export default function LoginHero() {
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.12)',
               backdropFilter: 'blur(8px)',
-              color: '#FFFFFF',
+              color: 'var(--app-brand-on)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               textTransform: 'none',
             }}
@@ -138,7 +137,7 @@ export default function LoginHero() {
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.12)',
               backdropFilter: 'blur(8px)',
-              color: '#FFFFFF',
+              color: 'var(--app-brand-on)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               textTransform: 'none',
             }}

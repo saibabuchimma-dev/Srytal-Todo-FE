@@ -271,7 +271,7 @@ export default function DashboardScreen() {
     <div className="mx-auto flex max-w-7xl flex-col gap-6 animate-in">
       <Paper
         radius="lg"
-        p="xl"
+        p={{ base: 'md', sm: 'xl' }}
         style={{
           backgroundColor: 'var(--app-surface)',
           border: '1px solid var(--app-border)',
@@ -333,8 +333,8 @@ export default function DashboardScreen() {
                   leftSection={<IconLayoutKanban size={16} />}
                   onClick={() => navigate(ROUTES.ADMIN_BOARD)}
                   style={{
-                    background:
-                      'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+                    background: 'var(--app-brand-gradient)',
+                    color: 'var(--app-brand-on)',
                     border: 'none',
                     fontWeight: 600,
                   }}
@@ -357,8 +357,8 @@ export default function DashboardScreen() {
                   leftSection={<IconLayoutKanban size={16} />}
                   onClick={() => navigate(ROUTES.BOARD)}
                   style={{
-                    background:
-                      'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+                    background: 'var(--app-brand-gradient)',
+                    color: 'var(--app-brand-on)',
                     border: 'none',
                     fontWeight: 600,
                   }}
@@ -376,7 +376,7 @@ export default function DashboardScreen() {
           label="Total Tasks"
           value={stats.total}
           icon={IconChecklist}
-          color="#4F46E5"
+          color="var(--app-primary)"
           accentBg="var(--app-primary-light)"
           onClick={() => navigate(isAdmin ? ROUTES.ADMIN_TASKS : ROUTES.TASKS)}
         />
@@ -384,7 +384,7 @@ export default function DashboardScreen() {
           label="Completed"
           value={stats.completed}
           icon={IconChecklist}
-          color="#10B981"
+          color="var(--app-success)"
           accentBg="var(--app-success-light)"
           trendLabel={`${completion}% done`}
           onClick={() => navigate(isAdmin ? ROUTES.ADMIN_TASKS : ROUTES.TASKS)}
@@ -393,7 +393,7 @@ export default function DashboardScreen() {
           label="In Progress"
           value={stats.inProgress}
           icon={IconActivity}
-          color="#0EA5E9"
+          color="var(--app-info)"
           accentBg="var(--app-info-light)"
           onClick={() => navigate(isAdmin ? ROUTES.ADMIN_TASKS : ROUTES.TASKS)}
         />
@@ -401,7 +401,7 @@ export default function DashboardScreen() {
           label="Pending"
           value={stats.pending}
           icon={IconClock}
-          color="#F59E0B"
+          color="var(--app-warning)"
           accentBg="var(--app-warning-light)"
           onClick={() => navigate(isAdmin ? ROUTES.ADMIN_TASKS : ROUTES.TASKS)}
         />

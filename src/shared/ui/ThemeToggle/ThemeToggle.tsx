@@ -37,7 +37,7 @@ export default function ThemeToggle({
       <motion.div
         layout
         initial={false}
-        animate={{ rotate: isDark ? 180 : 0, scale: [1, 1.1, 1] }}
+        animate={{ rotate: isDark ? 180 : 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       >
         {isDark ? <IconSun size={20} /> : <IconMoon size={20} />}

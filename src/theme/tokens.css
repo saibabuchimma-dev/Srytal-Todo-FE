@@ -65,11 +65,16 @@
   --app-glass-border: rgba(226, 232, 240, 0.8);
   --app-brand-gradient: linear-gradient(
     135deg,
-    #4f46e5 0%,
-    #7c3aed 50%,
-    #ec4899 100%
+    var(--app-primary) 0%,
+    var(--app-accent) 100%
   );
   --app-brand-on: #ffffff;
+  --app-hero-gradient: linear-gradient(
+    135deg,
+    #1e1b4b 0%,
+    #312e81 50%,
+    var(--app-primary) 100%
+  );
   --app-scrollbar-thumb: #cbd5e1;
   --app-scrollbar-thumb-hover: #94a3b8;
 
@@ -153,11 +158,16 @@
   --app-glass-border: rgba(255, 255, 255, 0.08);
   --app-brand-gradient: linear-gradient(
     135deg,
-    #6366f1 0%,
-    #8b5cf6 50%,
-    #ec4899 100%
+    var(--app-primary) 0%,
+    var(--app-accent) 100%
   );
   --app-brand-on: #ffffff;
+  --app-hero-gradient: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #1e1b4b 50%,
+    var(--app-primary) 100%
+  );
   --app-scrollbar-thumb: #3f3f46;
   --app-scrollbar-thumb-hover: #52525b;
 

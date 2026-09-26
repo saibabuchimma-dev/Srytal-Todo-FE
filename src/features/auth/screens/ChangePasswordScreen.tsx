@@ -128,8 +128,8 @@ export default function ChangePasswordScreen() {
                 h={44}
                 loading={isSubmitting}
                 style={{
-                  background:
-                    'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+                  background: 'var(--app-brand-gradient)',
+                  color: 'var(--app-brand-on)',
                   fontWeight: 600,
                   fontSize: 14,
                 }}

@@ -36,84 +36,90 @@ export default function ProjectTasksTable({
         </Text>
       </Group>
 
-      <Table striped highlightOnHover withTableBorder>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Task</Table.Th>
-            <Table.Th>Assigned To</Table.Th>
-            <Table.Th>Status</Table.Th>
-            <Table.Th>Priority</Table.Th>
-            <Table.Th>Due Date</Table.Th>
-            <Table.Th style={{ width: 120 }}>Actions</Table.Th>{' '}
-          </Table.Tr>
-        </Table.Thead>
-
-        <Table.Tbody>
-          {tasks.length === 0 ? (
+      <Table.ScrollContainer minWidth={600}>
+        <Table striped highlightOnHover withTableBorder>
+          <Table.Thead>
             <Table.Tr>
-              <Table.Td colSpan={6}>
-                <Text ta="center" c="dimmed">
-                  No tasks found.
-                </Text>
-              </Table.Td>
+              <Table.Th>Task</Table.Th>
+              <Table.Th>Assigned To</Table.Th>
+              <Table.Th>Status</Table.Th>
+              <Table.Th>Priority</Table.Th>
+              <Table.Th>Due Date</Table.Th>
+              <Table.Th style={{ width: 120 }}>Actions</Table.Th>
             </Table.Tr>
-          ) : (
-            tasks.map((task) => (
-              <Table.Tr key={task._id}>
-                <Table.Td>
-                  <Text fw={600}>{task.title}</Text>
+          </Table.Thead>
 
-                  <Text size="xs" c="dimmed" lineClamp={1}>
-                    {task.description}
+          <Table.Tbody>
+            {tasks.length === 0 ? (
+              <Table.Tr>
+                <Table.Td colSpan={6}>
+                  <Text ta="center" c="dimmed">
+                    No tasks found.
                   </Text>
                 </Table.Td>
-
-                <Table.Td>{task.assignedTo?.fullName ?? '-'}</Table.Td>
-
-                <Table.Td>
-                  <Badge color={statusColor[task.status]}>{task.status}</Badge>
-                </Table.Td>
-
-                <Table.Td>
-                  <Badge color={priorityColor[task.priority]}>
-                    {task.priority}
-                  </Badge>
-                </Table.Td>
-
-                <Table.Td>{dayjs(task.dueDate).format('DD MMM YYYY')}</Table.Td>
-
-                <Table.Td>
-                  <Group gap={5}>
-                    <ActionIcon
-                      variant="light"
-                      color="blue"
-                      onClick={() => onView(task)}
-                    >
-                      <IconEye size={16} />
-                    </ActionIcon>
-
-                    <ActionIcon
-                      variant="light"
-                      color="yellow"
-                      onClick={() => onEdit(task)}
-                    >
-                      <IconEdit size={16} />
-                    </ActionIcon>
-
-                    <ActionIcon
-                      variant="light"
-                      color="red"
-                      onClick={() => onDelete(task)}
-                    >
-                      <IconTrash size={16} />
-                    </ActionIcon>
-                  </Group>
-                </Table.Td>
               </Table.Tr>
-            ))
-          )}
-        </Table.Tbody>
-      </Table>
+            ) : (
+              tasks.map((task) => (
+                <Table.Tr key={task._id}>
+                  <Table.Td>
+                    <Text fw={600}>{task.title}</Text>
+
+                    <Text size="xs" c="dimmed" lineClamp={1}>
+                      {task.description}
+                    </Text>
+                  </Table.Td>
+
+                  <Table.Td>{task.assignedTo?.fullName ?? '-'}</Table.Td>
+
+                  <Table.Td>
+                    <Badge color={statusColor[task.status]}>
+                      {task.status}
+                    </Badge>
+                  </Table.Td>
+
+                  <Table.Td>
+                    <Badge color={priorityColor[task.priority]}>
+                      {task.priority}
+                    </Badge>
+                  </Table.Td>
+
+                  <Table.Td>
+                    {dayjs(task.dueDate).format('DD MMM YYYY')}
+                  </Table.Td>
+
+                  <Table.Td>
+                    <Group gap={5}>
+                      <ActionIcon
+                        variant="light"
+                        color="blue"
+                        onClick={() => onView(task)}
+                      >
+                        <IconEye size={16} />
+                      </ActionIcon>
+
+                      <ActionIcon
+                        variant="light"
+                        color="yellow"
+                        onClick={() => onEdit(task)}
+                      >
+                        <IconEdit size={16} />
+                      </ActionIcon>
+
+                      <ActionIcon
+                        variant="light"
+                        color="red"
+                        onClick={() => onDelete(task)}
+                      >
+                        <IconTrash size={16} />
+                      </ActionIcon>
+                    </Group>
+                  </Table.Td>
+                </Table.Tr>
+              ))
+            )}
+          </Table.Tbody>
+        </Table>
+      </Table.ScrollContainer>
     </Paper>
   );
 }

@@ -40,7 +40,7 @@ export default function ReportsPage() {
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
       <Paper withBorder radius="lg" p="lg">
-        <Group justify="space-between" align="flex-start">
+        <Group justify="space-between" align="flex-start" wrap="wrap" gap="md">
           <div>
             <Title order={2}>Reports &amp; Analytics</Title>
             <Text c="dimmed">Task and workforce insights at a glance.</Text>
@@ -58,7 +58,7 @@ export default function ReportsPage() {
         </Group>
       </Paper>
 
-      <SimpleGrid cols={{ base: 2, md: 4 }}>
+      <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }} spacing="md">
         <StatTile label="Total Tasks" value={totals.totalTasks} />
         <StatTile label="Completed" value={totals.completed} />
         <StatTile label="Completion Rate" value={`${totals.completionRate}%`} />

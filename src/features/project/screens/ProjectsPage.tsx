@@ -313,8 +313,10 @@ export default function ProjectsPage() {
             <Button
               leftSection={<IconPlus size={16} />}
               onClick={() => setCreateOpened(true)}
+              w={{ base: '100%', sm: 'auto' }}
               style={{
-                background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+                background: 'var(--app-brand-gradient)',
+                color: 'var(--app-brand-on)',
                 fontWeight: 600,
               }}
             >

@@ -55,7 +55,7 @@ export default function MainLayout() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              style={{ padding: '1.5rem' }}
+              style={{ padding: 'clamp(0.75rem, 2.5vw, 1.5rem)' }}
             >
               <Outlet />
             </motion.div>

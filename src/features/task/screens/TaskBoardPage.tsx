@@ -49,7 +49,7 @@ export default function TaskBoardPage() {
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6">
       <Paper withBorder radius="lg" p="lg">
-        <Group justify="space-between" align="flex-start">
+        <Group justify="space-between" align="flex-start" wrap="wrap" gap="md">
           <div>
             <Title order={2}>{isAdmin ? 'Task Board' : 'My Board'}</Title>
             <Text c="dimmed">
