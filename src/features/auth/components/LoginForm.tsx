@@ -163,11 +163,11 @@ export default function LoginForm({ portal }: LoginFormProps) {
             styles={{
               root: {
                 border: 'none',
-                background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
-                color: '#FFFFFF',
+                background: 'var(--app-brand-gradient)',
+                color: 'var(--app-brand-on)',
                 fontWeight: 600,
                 fontSize: 14,
-                boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)',
+                boxShadow: '0 4px 12px var(--app-primary-glow)',
                 transition: 'transform 150ms ease, box-shadow 150ms ease',
               },
             }}

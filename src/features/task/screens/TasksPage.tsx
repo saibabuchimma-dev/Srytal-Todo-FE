@@ -242,6 +242,7 @@ function TaskTable({
         withTableBorder
         styles={{
           table: {
+            minWidth: 680,
             borderColor: 'var(--app-border)',
             backgroundColor: 'var(--app-surface)',
           },
@@ -408,8 +409,10 @@ export default function TasksPage() {
           <Button
             leftSection={<IconPlus size={16} />}
             onClick={() => setCreateOpened(true)}
+            w={{ base: '100%', sm: 'auto' }}
             style={{
-              background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+              background: 'var(--app-brand-gradient)',
+              color: 'var(--app-brand-on)',
               fontWeight: 600,
             }}
           >

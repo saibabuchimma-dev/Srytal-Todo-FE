@@ -53,7 +53,7 @@ export function Pagination({
       className={className}
       style={style}
     >
-      <Group gap="sm" wrap="nowrap">
+      <Group gap="sm" wrap="wrap">
         {total > 0 && (
           <Text size="xs" c="dimmed">
             Showing {start}–{end} of {total}
