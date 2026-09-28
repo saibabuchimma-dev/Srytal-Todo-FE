@@ -1,163 +1,183 @@
-# SRYTAL — Task Management (Frontend)
+# Srytal Todo Frontend
 
-A modern, role-based task and project management web app built with **React 19**, **TypeScript**, and **Mantine**. SRYTAL lets administrators manage employees, projects, and tasks, while employees track their own work through a clean dashboard, Kanban board, and task views. It talks to the SRYTAL backend API over REST.
+This repository contains the frontend for the Srytal task management application. It is a React + TypeScript app built with Vite and designed around two user roles: employee and admin.
 
-> This is the **frontend** repository. The REST API lives in the `Srytal-Todo-BE` repository and must be running for the app to work.
+The UI is organized by feature, uses lazy-loaded routes, and relies on a persisted auth store so users remain logged in between page refreshes.
 
----
+## Overview
 
-## ✨ Features
+- Role-based access control for employee and admin portals
+- Dashboard and management screens for tasks, projects, and employees
+- Protected routes based on authenticated user and required role
+- Responsive shell with header and sidebar layout
+- API-driven data layer using React Query and Axios
+- Theme support via Mantine and custom styling tokens
 
-- **Role-based portals** — separate Admin and Employee experiences with protected routes.
-- **Dashboard** — KPIs, task-completion ring, and upcoming work at a glance.
-- **Tasks** — create, assign, filter, paginate, and view task detail pages.
-- **Kanban board** — drag-and-drop tasks between Pending / In Progress / Completed with optimistic updates.
-- **Projects** — manage projects, members, timelines, and per-project task breakdowns.
-- **Employees** — admin CRUD for team members with per-employee stats.
-- **Comments & attachments** — Markdown comments and file attachments on tasks.
-- **Notifications** — in-app bell for assignments, status changes, and comments.
-- **Reports & analytics** — status, priority, and monthly-trend charts (Recharts).
-- **Settings** — profile (with avatar upload), security (password change), and preferences.
-- **Light / dark theme** — centralized design tokens; theme toggle on the dashboard and login screen.
-- **Mobile responsive** — collapsible sidebar and adaptive layouts.
+## Tech stack
 
----
+- React 19
+- TypeScript
+- Vite
+- React Router DOM
+- TanStack Query
+- Mantine UI
+- Zustand
+- Axios
+- Framer Motion
+- Recharts
+- React Hook Form + Zod
+- Jest + Testing Library
 
-## 🧰 Tech Stack
+## Prerequisites
 
-| Area          | Technology                                               |
-| ------------- | -------------------------------------------------------- |
-| Framework     | React 19, Vite 8                                         |
-| Language      | TypeScript (strict)                                      |
-| UI            | Mantine 9, Tailwind CSS 4, Tabler / React Icons          |
-| Data fetching | TanStack Query v5, Axios                                 |
-| State         | Zustand (with persistence)                               |
-| Routing       | React Router 7 (lazy-loaded routes)                      |
-| Forms         | React Hook Form + Zod                                    |
-| Charts        | Recharts                                                 |
-| Misc          | framer-motion, sonner (toasts), date-fns, react-markdown |
-| Testing       | Jest + React Testing Library                             |
+- Node.js 20+
+- npm
+- A running backend API for authentication and data operations
 
----
-
-## 📋 Prerequisites
-
-- **Node.js 20+** and **npm**
-- A running instance of the **SRYTAL backend** (default: `http://localhost:5000`)
-
----
-
-## 🚀 Getting Started
+## Getting started
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Create your .env file (a .env already ships with sensible defaults; see below)
-
-# 3. Start the dev server (http://localhost:5173)
 npm run dev
 ```
 
-### Environment variables
+By default, the app is served on:
 
-Create a `.env` file in the project root:
+- http://localhost:5173
+
+## Environment variables
+
+Create a `.env` file in the project root if your backend URL is not using the default app configuration:
 
 ```env
-# Base URL of the SRYTAL backend API
 VITE_API_BASE_URL=http://localhost:5000/api
-
-# App metadata
-VITE_APP_NAME=SRYTAL
-VITE_APP_VERSION=1.0.0
 ```
 
-| Variable            | Description                      | Default                     |
-| ------------------- | -------------------------------- | --------------------------- |
-| `VITE_API_BASE_URL` | Base URL of the backend REST API | `http://localhost:5000/api` |
-| `VITE_APP_NAME`     | Application name shown in the UI | `SRYTAL`                    |
-| `VITE_APP_VERSION`  | Displayed app version            | `1.0.0`                     |
+If the backend is running elsewhere, update this value accordingly before starting the frontend.
 
----
-
-## 📜 Scripts
-
-| Script                  | Description                                            |
-| ----------------------- | ------------------------------------------------------ |
-| `npm run dev`           | Start the Vite dev server                              |
-| `npm run build`         | Type-check and build for production                    |
-| `npm run preview`       | Preview the production build locally                   |
-| `npm run lint`          | Run ESLint                                             |
-| `npm run format`        | Format the codebase with Prettier                      |
-| `npm run format:check`  | Check formatting without writing                       |
-| `npm test`              | Run the Jest unit test suite                           |
-| `npm run test:watch`    | Run tests in watch mode                                |
-| `npm run test:coverage` | Run tests and generate a coverage report               |
-| `npm run server`        | Serve the mock API (json-server) for local prototyping |
-
----
-
-## 🧪 Testing
-
-Unit tests are written with **Jest** and **React Testing Library**, and live in [`src/tests/`](src/tests). The suite covers utilities, stores, hooks, services, shared UI, feature components, and screens.
+## Available scripts
 
 ```bash
-npm test              # run all tests
-npm run test:coverage # run with a coverage report (see /coverage)
+npm run dev
+npm run build
+npm run typecheck
+npm run lint
+npm run lint:fix
+npm run format
+npm run format:check
+npm test
+npm run test:watch
+npm run test:coverage
+npm run server
 ```
 
-Test tooling (config at the repo root):
+### Script descriptions
 
-- `jest.config.cjs` — Jest configuration (jsdom, module mappers, coverage).
-- `babel.jest.cjs` — Babel preset used only by Jest.
-- `jest/` — setup file, jsdom polyfills, asset/CSS/icon mocks, and a shared `renderWithProviders` helper.
+- `npm run dev` — start the Vite development server
+- `npm run build` — run type checking and create a production build
+- `npm run typecheck` — run TypeScript checks only
+- `npm run lint` — run ESLint
+- `npm run format` — format the codebase with Prettier
+- `npm test` — run the Jest suite
+- `npm run server` — start the local mock JSON server
 
-Import specs against the shared render helper via the `@test-utils` alias:
+## App architecture
 
-```ts
-import { renderWithProviders, screen, userEvent } from '@test-utils';
-```
+### Routing
 
----
+The application uses React Router and lazy loading for page modules. Key routing files are:
 
-## 📁 Project Structure
+- [src/app/App.tsx](src/app/App.tsx)
+- [src/app/router/index.tsx](src/app/router/index.tsx)
+- [src/app/router/ProtectedRoute.tsx](src/app/router/ProtectedRoute.tsx)
+- [src/shared/config/routes.ts](src/shared/config/routes.ts)
 
-```
+The router includes:
+
+- public login routes for employee and admin
+- employee-protected dashboard routes
+- admin-protected dashboard routes
+- redirect logic for unauthenticated users and password resets
+
+### Auth
+
+Authentication state is stored with Zustand and persisted locally:
+
+- [src/features/auth/store/auth.store.ts](src/features/auth/store/auth.store.ts)
+
+It stores:
+
+- current user
+- access token
+- refresh token
+- methods for login, logout, session updates, and user updates
+
+### Providers
+
+Global application providers are configured in:
+
+- [src/app/providers/AppProviders.tsx](src/app/providers/AppProviders.tsx)
+
+This includes:
+
+- React Query client
+- Mantine provider
+- toast notifications
+
+### Layout
+
+The UI uses a main application shell with a header and sidebar:
+
+- [src/layouts/MainLayout/MainLayout.tsx](src/layouts/MainLayout/MainLayout.tsx)
+- [src/layouts/MainLayout/Header.tsx](src/layouts/MainLayout/Header.tsx)
+- [src/layouts/MainLayout/Sidebar.tsx](src/layouts/MainLayout/Sidebar.tsx)
+
+## Feature structure
+
+The project is organized by feature under the `src/features` directory:
+
+```text
 src/
-├── app/                # App composition: providers, router, route guards
-│   ├── providers/      # QueryClient, Mantine, toaster
-│   └── router/         # Route table + lazy-loaded screens
-├── assets/             # Images and logos
-├── components/         # Cross-cutting shared components
-├── features/           # Feature modules (self-contained)
-│   ├── auth/           # Login, change-password, auth store
-│   ├── dashboard/      # Dashboard screen + stat cards
-│   ├── employee/       # Employee CRUD, table, details
-│   ├── task/           # Tasks, board, cards, modals
-│   ├── project/        # Projects, details, tasks table
-│   ├── comment/        # Markdown comments
-│   ├── attachment/     # Task attachments
-│   ├── notification/   # Notification bell + menu
-│   ├── report/         # Analytics charts
-│   ├── profile/        # Profile redirect
-│   └── settings/       # Profile, security, preferences
-├── layouts/            # App shell (header, sidebar)
-├── shared/             # Reusable UI, hooks, services, stores, config, utils
-├── theme/              # Design tokens (light/dark) + Mantine theme
-├── styles/             # Global styles and loader
-└── tests/              # Jest specs
+├── app/
+│   ├── providers/
+│   └── router/
+├── assets/
+├── components/
+├── features/
+│   ├── auth/
+│   ├── dashboard/
+│   ├── employee/
+│   ├── task/
+│   ├── project/
+│   ├── report/
+│   ├── notification/
+│   ├── profile/
+│   └── settings/
+├── layouts/
+├── shared/
+├── styles/
+├── theme/
+├── tests/
+└── main.tsx
 ```
 
----
+Main feature areas include:
 
-## 🔌 Connecting to the Backend
+- auth: login and password change flow
+- dashboard: overview and analytics summary screens
+- employee: employee management and details
+- task: task list, board, details, and task actions
+- project: project list and details
+- report: reporting and charts
+- settings and profile: account configuration screens
 
-The app expects the backend at `VITE_API_BASE_URL` (default `http://localhost:5000/api`). Start the backend first, then run `npm run dev`.
+## Notes
 
-Auth uses **access + refresh tokens**. The Axios interceptor attaches `Authorization: Bearer <access-token>` (from the persisted auth store) to every request. When a request returns `401`, it silently refreshes via `POST /auth/refresh`, retries the original request once, and falls back to signing the user out if the refresh fails. Logout best-effort-posts the refresh token to `POST /auth/logout` before clearing local state. API errors are surfaced as toasts.
+- The app uses lazy-loaded screens via `React.lazy()` to keep route loading modular.
+- Role checks happen at the router level through `ProtectedRoute`.
+- Users who must change their password are redirected to the password-change screen before accessing protected pages.
+- The project includes a sizeable Jest suite under [src/tests](src/tests) covering UI, hooks, services, and screens.
 
----
+## License
 
-## 📄 License
-
-This project is provided as-is for the SRYTAL task-management system.
+This project is provided as-is for the Srytal task management frontend.
