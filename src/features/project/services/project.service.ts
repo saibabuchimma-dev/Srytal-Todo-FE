@@ -69,10 +69,29 @@ const normalizeProject = (item: Record<string, unknown>): Project => ({
     ? item.members.map((member) => {
         if (member && typeof member === 'object') {
           const m = member as Record<string, unknown>;
-          return String(m._id ?? '');
+          return String(m._id ?? m.id ?? '');
         }
         return String(member);
       })
+    : [],
+  memberDetails: Array.isArray(item.members)
+    ? item.members
+        .filter(
+          (m) =>
+            m &&
+            typeof m === 'object' &&
+            ('fullName' in m || '_id' in m || 'email' in m),
+        )
+        .map((m) => {
+          const obj = m as Record<string, unknown>;
+          return {
+            _id: String(obj._id ?? obj.id ?? ''),
+            fullName: String(obj.fullName ?? ''),
+            email: String(obj.email ?? ''),
+            role: String(obj.role ?? ''),
+            avatar: typeof obj.avatar === 'string' ? obj.avatar : undefined,
+          };
+        })
     : [],
   createdAt: typeof item.createdAt === 'string' ? item.createdAt : undefined,
   updatedAt: typeof item.updatedAt === 'string' ? item.updatedAt : undefined,
@@ -241,4 +260,22 @@ export const getMyProjects = async (): Promise<Project[]> => {
   const response = await api.get('/projects/my-projects');
 
   return normalizeProjectList(response.data);
+};
+
+export const assignProjectMembers = async (
+  projectId: string,
+  employeeIds: string[],
+): Promise<Project> => {
+  const response = await api.patch(`/projects/${projectId}/members`, {
+    employeeIds,
+  });
+
+  const data =
+    response.data &&
+    typeof response.data === 'object' &&
+    'data' in response.data
+      ? (response.data as { data?: Record<string, unknown> }).data
+      : response.data;
+
+  return normalizeProject((data ?? {}) as Record<string, unknown>);
 };

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDebouncedValue } from '@mantine/hooks';
 import {
   ActionIcon,
+  Avatar,
   Badge,
   Button,
   Card,
@@ -152,7 +153,7 @@ function ProjectCard({
           {project.description || 'No description provided.'}
         </Text>
 
-        <Group gap="md" mt="md" wrap="wrap">
+        <Group justify="space-between" mt="md" wrap="wrap">
           <Group gap={4} wrap="nowrap">
             <IconCalendar
               size={13}
@@ -162,12 +163,37 @@ function ProjectCard({
               {formatDate(project.startDate)} – {formatDate(project.endDate)}
             </Text>
           </Group>
-          <Group gap={4} wrap="nowrap">
-            <IconUsers size={13} style={{ color: 'var(--app-text-muted)' }} />
-            <Text size="xs" c="dimmed">
-              {totalMembers} member{totalMembers === 1 ? '' : 's'}
-            </Text>
-          </Group>
+
+          {project.memberDetails && project.memberDetails.length > 0 ? (
+            <Tooltip.Group openDelay={300} closeDelay={100}>
+              <Avatar.Group spacing="xs">
+                {project.memberDetails.slice(0, 3).map((member) => (
+                  <Tooltip key={member._id} label={member.fullName} withArrow>
+                    <Avatar
+                      src={member.avatar || undefined}
+                      radius="xl"
+                      size={24}
+                      color="indigo"
+                    >
+                      {member.fullName.charAt(0).toUpperCase()}
+                    </Avatar>
+                  </Tooltip>
+                ))}
+                {project.memberDetails.length > 3 && (
+                  <Avatar radius="xl" size={24} fz={10}>
+                    +{project.memberDetails.length - 3}
+                  </Avatar>
+                )}
+              </Avatar.Group>
+            </Tooltip.Group>
+          ) : (
+            <Group gap={4} wrap="nowrap">
+              <IconUsers size={13} style={{ color: 'var(--app-text-muted)' }} />
+              <Text size="xs" c="dimmed">
+                {totalMembers} member{totalMembers === 1 ? '' : 's'}
+              </Text>
+            </Group>
+          )}
         </Group>
       </div>
 

@@ -4,6 +4,12 @@ jest.mock('@/features/project/hooks/useProjects', () => ({
   useCreateProject: () => ({ mutate: mockCreate, isPending: false }),
   useUpdateProject: () => ({ mutate: mockUpdate, isPending: false }),
 }));
+jest.mock('@/features/employee/hooks/useEmployees', () => ({
+  useEmployees: () => ({
+    data: [{ id: 'e1', fullName: 'Emp One', email: 'emp@example.com' }],
+    isLoading: false,
+  }),
+}));
 
 import { renderWithProviders, screen, userEvent } from '@test-utils';
 import ProjectModal from '@/features/project/components/ProjectModal';

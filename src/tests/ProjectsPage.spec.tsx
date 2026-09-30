@@ -10,6 +10,12 @@ jest.mock('@/features/project/hooks/useProjects', () => ({
   useCreateProject: () => ({ mutate: jest.fn(), isPending: false }),
   useUpdateProject: () => ({ mutate: jest.fn(), isPending: false }),
 }));
+jest.mock('@/features/employee/hooks/useEmployees', () => ({
+  useEmployees: () => ({
+    data: [{ id: 'e1', fullName: 'Employee 1', email: 'emp1@test.com' }],
+    isLoading: false,
+  }),
+}));
 
 import { renderWithProviders, screen, userEvent } from '@test-utils';
 import ProjectsPage from '@/features/project/screens/ProjectsPage';

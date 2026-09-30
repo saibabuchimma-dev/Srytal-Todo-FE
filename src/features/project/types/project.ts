@@ -9,6 +9,7 @@ export interface Project {
   startDate: string;
   endDate: string;
   members?: string[];
+  memberDetails?: ProjectEmployee[];
   createdAt?: string;
   updatedAt?: string;
 }

@@ -32,8 +32,13 @@ interface Props {
 
 export default function EditTaskModal({ opened, task, onClose }: Props) {
   const updateTask = useUpdateTask();
-  const { data: employees = [], isLoading: employeesLoading } = useEmployees();
-  const { data: projects = [], isLoading: projectsLoading } = useProjects();
+  const { data: employees = [], isLoading: employeesLoading } = useEmployees({
+    enabled: opened,
+  });
+  const { data: projects = [], isLoading: projectsLoading } = useProjects(
+    {},
+    { enabled: opened },
+  );
 
   const { control, register, reset, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(schema),

@@ -42,6 +42,7 @@ import ConfirmDeleteModal from '@/components/common/ConfirmDeleteModal';
 import BackButton from '@/shared/ui/BackButton/BackButton';
 import CenteredState from '@/shared/ui/CenteredState/CenteredState';
 import { formatDate } from '@/shared/utils/date';
+import { useAuthStore } from '@/features/auth/store/auth.store';
 
 const statusColors: Record<string, string> = {
   Planning: 'gray',
@@ -63,6 +64,8 @@ const priorityColors: Record<string, string> = {
 
 export default function ProjectDetailsPage() {
   const { projectId = '' } = useParams();
+  const user = useAuthStore((state) => state.user);
+  const isAdmin = user?.role === 'Admin';
   const [taskOpened, setTaskOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState('');
@@ -174,21 +177,23 @@ export default function ProjectDetailsPage() {
             </div>
           </Group>
 
-          <Group>
-            <Button
-              variant="default"
-              leftSection={<IconPencil size={16} />}
-              onClick={() => setEditOpened(true)}
-            >
-              Edit Project
-            </Button>
-            <Button
-              leftSection={<IconPlus size={16} />}
-              onClick={() => setTaskOpened(true)}
-            >
-              Add Task
-            </Button>
-          </Group>
+          {isAdmin && (
+            <Group>
+              <Button
+                variant="default"
+                leftSection={<IconPencil size={16} />}
+                onClick={() => setEditOpened(true)}
+              >
+                Edit Project
+              </Button>
+              <Button
+                leftSection={<IconPlus size={16} />}
+                onClick={() => setTaskOpened(true)}
+              >
+                Add Task
+              </Button>
+            </Group>
+          )}
         </Group>
 
         <Divider my="lg" />
@@ -234,14 +239,16 @@ export default function ProjectDetailsPage() {
       <Card withBorder radius="lg" p="lg">
         <Group justify="space-between" mb="md">
           <Title order={4}>Tasks</Title>
-          <Button
-            size="xs"
-            variant="light"
-            leftSection={<IconPlus size={14} />}
-            onClick={() => setTaskOpened(true)}
-          >
-            Add Task
-          </Button>
+          {isAdmin && (
+            <Button
+              size="xs"
+              variant="light"
+              leftSection={<IconPlus size={14} />}
+              onClick={() => setTaskOpened(true)}
+            >
+              Add Task
+            </Button>
+          )}
         </Group>
 
         {tasks.length === 0 ? (
@@ -253,6 +260,7 @@ export default function ProjectDetailsPage() {
         ) : (
           <ProjectTasksTable
             tasks={tasks}
+            isAdmin={isAdmin}
             onView={(task) => {
               setSelectedTask(task);
               setViewOpened(true);
@@ -418,44 +426,73 @@ export default function ProjectDetailsPage() {
         </Grid.Col>
       </Grid>
 
-      <ProjectModal
-        opened={editOpened}
-        onClose={() => setEditOpened(false)}
-        mode="edit"
-        project={project}
-      />
+      {isAdmin && (
+        <>
+          <ProjectModal
+            opened={editOpened}
+            onClose={() => setEditOpened(false)}
+            mode="edit"
+            project={project}
+          />
 
-      <TaskModal
-        opened={taskOpened}
-        onClose={() => setTaskOpened(false)}
-        projectId={projectId}
-        onSuccess={() => {
-          refetch();
-          if (selectedEmployeeId) {
-            refetchEmployeeTasks();
-          }
-          setTaskOpened(false);
-        }}
-      />
+          <TaskModal
+            opened={taskOpened}
+            onClose={() => setTaskOpened(false)}
+            projectId={projectId}
+            onSuccess={() => {
+              refetch();
+              if (selectedEmployeeId) {
+                refetchEmployeeTasks();
+              }
+              setTaskOpened(false);
+            }}
+          />
 
-      <TaskModal
-        opened={editTaskOpened}
-        onClose={() => {
-          setEditTaskOpened(false);
-          setEditingTask(null);
-        }}
-        mode="edit"
-        task={editingTask ?? undefined}
-        projectId={projectId}
-        onSuccess={() => {
-          refetch();
-          if (selectedEmployeeId) {
-            refetchEmployeeTasks();
-          }
-          setEditTaskOpened(false);
-          setEditingTask(null);
-        }}
-      />
+          <TaskModal
+            opened={editTaskOpened}
+            onClose={() => {
+              setEditTaskOpened(false);
+              setEditingTask(null);
+            }}
+            mode="edit"
+            task={editingTask ?? undefined}
+            projectId={projectId}
+            onSuccess={() => {
+              refetch();
+              if (selectedEmployeeId) {
+                refetchEmployeeTasks();
+              }
+              setEditTaskOpened(false);
+              setEditingTask(null);
+            }}
+          />
+
+          <ConfirmDeleteModal
+            opened={deleteOpened}
+            onClose={() => {
+              setDeleteOpened(false);
+              setDeletingTask(null);
+            }}
+            loading={deleteTaskMutation.isPending}
+            title="Delete Task"
+            message={`Are you sure you want to delete "${deletingTask?.title ?? ''}"?`}
+            onConfirm={() => {
+              if (!deletingTask) return;
+
+              deleteTaskMutation.mutate(deletingTask.id, {
+                onSuccess: () => {
+                  setDeleteOpened(false);
+                  setDeletingTask(null);
+                  refetch();
+                  if (selectedEmployeeId) {
+                    refetchEmployeeTasks();
+                  }
+                },
+              });
+            }}
+          />
+        </>
+      )}
 
       <TaskDetailsModal
         opened={viewOpened}
@@ -464,31 +501,6 @@ export default function ProjectDetailsPage() {
           setSelectedTask(null);
         }}
         task={selectedTask}
-      />
-
-      <ConfirmDeleteModal
-        opened={deleteOpened}
-        onClose={() => {
-          setDeleteOpened(false);
-          setDeletingTask(null);
-        }}
-        loading={deleteTaskMutation.isPending}
-        title="Delete Task"
-        message={`Are you sure you want to delete "${deletingTask?.title ?? ''}"?`}
-        onConfirm={() => {
-          if (!deletingTask) return;
-
-          deleteTaskMutation.mutate(deletingTask.id, {
-            onSuccess: () => {
-              setDeleteOpened(false);
-              setDeletingTask(null);
-              refetch();
-              if (selectedEmployeeId) {
-                refetchEmployeeTasks();
-              }
-            },
-          });
-        }}
       />
     </div>
   );

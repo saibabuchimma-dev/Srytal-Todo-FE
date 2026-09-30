@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Badge,
   Card,
   Group,
@@ -8,6 +9,7 @@ import {
   Text,
   ThemeIcon,
   Title,
+  Tooltip,
 } from '@mantine/core';
 import {
   IconCalendar,
@@ -15,6 +17,8 @@ import {
   IconFolders,
   IconUsers,
 } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/shared/config/routes';
 import CenteredState from '@/shared/ui/CenteredState/CenteredState';
 import Pagination from '@/shared/ui/Pagination/Pagination';
 import { usePagination } from '@/shared/hooks/usePagination';
@@ -28,6 +32,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default function MyProjectsPage() {
+  const navigate = useNavigate();
   const { page, setPage, limit, setLimit } = usePagination({ initialLimit: 9 });
   const { data: projects = [], isLoading, isError } = useMyProjects();
 
@@ -82,7 +87,14 @@ export default function MyProjectsPage() {
         <>
           <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
             {pageProjects.map((project) => (
-              <Card key={project.id} withBorder radius="lg" p="lg">
+              <Card
+                key={project.id}
+                withBorder
+                radius="lg"
+                p="lg"
+                className="card-lift cursor-pointer"
+                onClick={() => navigate(ROUTES.PROJECT_DETAILS(project.id))}
+              >
                 <Group gap="sm" wrap="nowrap" style={{ minWidth: 0 }}>
                   <ThemeIcon variant="light" radius="md" size={42}>
                     <IconFolder size={22} />
@@ -112,7 +124,7 @@ export default function MyProjectsPage() {
                   {project.description}
                 </Text>
 
-                <Group gap="lg" mt="md" wrap="wrap">
+                <Group justify="space-between" mt="md" wrap="wrap">
                   <Group gap={6} wrap="nowrap">
                     <IconCalendar
                       size={15}
@@ -123,15 +135,47 @@ export default function MyProjectsPage() {
                       {formatDate(project.endDate)}
                     </Text>
                   </Group>
-                  <Group gap={6} wrap="nowrap">
-                    <IconUsers
-                      size={15}
-                      style={{ color: 'var(--app-text-muted)' }}
-                    />
-                    <Text size="xs" c="dimmed">
-                      {project.members?.length ?? 0} member
-                      {(project.members?.length ?? 0) === 1 ? '' : 's'}
-                    </Text>
+
+                  <Group gap={8} wrap="nowrap">
+                    {project.memberDetails &&
+                      project.memberDetails.length > 0 && (
+                        <Tooltip.Group openDelay={300} closeDelay={100}>
+                          <Avatar.Group spacing="xs">
+                            {project.memberDetails.slice(0, 3).map((member) => (
+                              <Tooltip
+                                key={member._id}
+                                label={member.fullName}
+                                withArrow
+                              >
+                                <Avatar
+                                  src={member.avatar || undefined}
+                                  radius="xl"
+                                  size={22}
+                                  color="indigo"
+                                >
+                                  {member.fullName.charAt(0).toUpperCase()}
+                                </Avatar>
+                              </Tooltip>
+                            ))}
+                            {project.memberDetails.length > 3 && (
+                              <Avatar radius="xl" size={22} fz={10}>
+                                +{project.memberDetails.length - 3}
+                              </Avatar>
+                            )}
+                          </Avatar.Group>
+                        </Tooltip.Group>
+                      )}
+
+                    <Group gap={4} wrap="nowrap">
+                      <IconUsers
+                        size={15}
+                        style={{ color: 'var(--app-text-muted)' }}
+                      />
+                      <Text size="xs" c="dimmed">
+                        {project.members?.length ?? 0} member
+                        {(project.members?.length ?? 0) === 1 ? '' : 's'}
+                      </Text>
+                    </Group>
                   </Group>
                 </Group>
               </Card>
