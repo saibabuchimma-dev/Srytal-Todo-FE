@@ -1,10 +1,11 @@
-import { Select, TextInput, Textarea } from '@mantine/core';
+import { MultiSelect, Select, TextInput, Textarea } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IconFolderPlus } from '@tabler/icons-react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useCreateProject, useUpdateProject } from '../hooks/useProjects';
+import { useEmployees } from '@/features/employee/hooks/useEmployees';
 import type { Project } from '../types/project';
 import { useEffect } from 'react';
 import FormModal from '@/components/common/FormModal';
@@ -16,6 +17,7 @@ const projectSchema = z.object({
   status: z.enum(['Planning', 'In Progress', 'Completed']),
   startDate: z.string().min(1, 'Start date is required'),
   endDate: z.string().min(1, 'End date is required'),
+  members: z.array(z.string()).optional(),
 });
 
 type ProjectFormValues = z.infer<typeof projectSchema>;
@@ -35,6 +37,9 @@ export default function ProjectModal({
 }: ProjectModalProps) {
   const createProjectMutation = useCreateProject();
   const updateProjectMutation = useUpdateProject();
+  const { data: employees = [], isLoading: employeesLoading } = useEmployees({
+    enabled: opened,
+  });
   const { control, handleSubmit, register, reset } = useForm<ProjectFormValues>(
     {
       resolver: zodResolver(projectSchema),
@@ -44,6 +49,7 @@ export default function ProjectModal({
         status: 'Planning',
         startDate: '',
         endDate: '',
+        members: [],
       },
     },
   );
@@ -55,6 +61,7 @@ export default function ProjectModal({
       status: 'Planning',
       startDate: '',
       endDate: '',
+      members: [],
     });
     onClose();
   };
@@ -80,12 +87,23 @@ export default function ProjectModal({
   useEffect(() => {
     if (!opened) return;
     if (mode === 'edit' && project) {
+      const memberIds = Array.isArray(project.members)
+        ? project.members.map((m) =>
+            typeof m === 'object' && m
+              ? ((m as { _id?: string; id?: string })._id ??
+                (m as { _id?: string; id?: string }).id ??
+                '')
+              : String(m),
+          )
+        : [];
+
       reset({
         name: project.name,
         description: project.description,
         status: project.status,
         startDate: project.startDate,
         endDate: project.endDate,
+        members: memberIds,
       });
     } else {
       reset({
@@ -94,6 +112,7 @@ export default function ProjectModal({
         status: 'Planning',
         startDate: '',
         endDate: '',
+        members: [],
       });
     }
   }, [opened, mode, project, reset]);
@@ -123,6 +142,27 @@ export default function ProjectModal({
         minRows={3}
         autosize
         {...register('description')}
+      />
+      <Controller
+        control={control}
+        name="members"
+        render={({ field }) => (
+          <MultiSelect
+            label="Assign Team Members"
+            placeholder="Select employees to assign to this project"
+            searchable
+            clearable
+            disabled={employeesLoading}
+            data={employees.map((emp) => ({
+              value: emp.id,
+              label: emp.email
+                ? `${emp.fullName} (${emp.email})`
+                : emp.fullName,
+            }))}
+            value={field.value ?? []}
+            onChange={(values) => field.onChange(values)}
+          />
+        )}
       />
       <Controller
         control={control}

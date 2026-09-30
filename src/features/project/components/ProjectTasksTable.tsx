@@ -5,6 +5,7 @@ import type { ProjectTask } from '../types/project';
 
 interface Props {
   tasks: ProjectTask[];
+  isAdmin?: boolean;
   onView(task: ProjectTask): void;
   onEdit(task: ProjectTask): void;
   onDelete(task: ProjectTask): void;
@@ -24,6 +25,7 @@ const priorityColor = {
 
 export default function ProjectTasksTable({
   tasks,
+  isAdmin = true,
   onView,
   onEdit,
   onDelete,
@@ -97,21 +99,25 @@ export default function ProjectTasksTable({
                         <IconEye size={16} />
                       </ActionIcon>
 
-                      <ActionIcon
-                        variant="light"
-                        color="yellow"
-                        onClick={() => onEdit(task)}
-                      >
-                        <IconEdit size={16} />
-                      </ActionIcon>
+                      {isAdmin && (
+                        <>
+                          <ActionIcon
+                            variant="light"
+                            color="yellow"
+                            onClick={() => onEdit(task)}
+                          >
+                            <IconEdit size={16} />
+                          </ActionIcon>
 
-                      <ActionIcon
-                        variant="light"
-                        color="red"
-                        onClick={() => onDelete(task)}
-                      >
-                        <IconTrash size={16} />
-                      </ActionIcon>
+                          <ActionIcon
+                            variant="light"
+                            color="red"
+                            onClick={() => onDelete(task)}
+                          >
+                            <IconTrash size={16} />
+                          </ActionIcon>
+                        </>
+                      )}
                     </Group>
                   </Table.Td>
                 </Table.Tr>

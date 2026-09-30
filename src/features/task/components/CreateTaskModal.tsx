@@ -43,8 +43,13 @@ export default function CreateTaskModal({
 }: Props) {
   const createTask = useCreateTask();
   const updateTask = useUpdateTask();
-  const { data: employees = [], isLoading: employeesLoading } = useEmployees();
-  const { data: projects = [], isLoading: projectsLoading } = useProjects();
+  const { data: employees = [], isLoading: employeesLoading } = useEmployees({
+    enabled: opened,
+  });
+  const { data: projects = [], isLoading: projectsLoading } = useProjects(
+    {},
+    { enabled: opened },
+  );
 
   const {
     register,

@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/config';
 import {
+  assignProjectMembers,
   createProject,
   deleteProject,
   getEmployeeProjectTasks,
@@ -22,10 +23,14 @@ import type {
   ProjectStatus,
 } from '../types/project';
 
-export const useProjects = (params: ProjectQueryParams = {}) =>
+export const useProjects = (
+  params: ProjectQueryParams = {},
+  options?: { enabled?: boolean },
+) =>
   useQuery({
     queryKey: [...QUERY_KEYS.PROJECTS, params],
     queryFn: () => getProjects(params),
+    enabled: options?.enabled ?? true,
   });
 
 export const usePaginatedProjects = (params: {
@@ -113,3 +118,22 @@ export const useMyProjects = (options?: { enabled?: boolean }) =>
     queryFn: getMyProjects,
     enabled: options?.enabled ?? true,
   });
+
+export const useAssignProjectMembers = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      projectId,
+      employeeIds,
+    }: {
+      projectId: string;
+      employeeIds: string[];
+    }) => assignProjectMembers(projectId, employeeIds),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.PROJECTS,
+      });
+    },
+  });
+};
