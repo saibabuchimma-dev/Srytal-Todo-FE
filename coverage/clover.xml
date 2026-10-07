@@ -1,0 +1,2545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1791362278509" clover="3.2.0">
+  <project timestamp="1791362278509" name="All files">
+    <metrics statements="1741" coveredstatements="1430" conditionals="1606" coveredconditionals="1207" methods="688" coveredmethods="512" elements="4035" coveredelements="3149" complexity="0" loc="1741" ncloc="1741" packages="85" files="181" classes="181"/>
+    <package name="app">
+      <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="App.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\App.tsx">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
+      <file name="main.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\main.tsx">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="app.providers">
+      <metrics statements="5" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+      <file name="AppProviders.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\providers\AppProviders.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+      </file>
+      <file name="MantineProvider.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\providers\MantineProvider.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="15" count="2" type="stmt"/>
+      </file>
+      <file name="NotificationsProvider.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\providers\NotificationsProvider.tsx">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="9" count="0" type="stmt"/>
+      </file>
+      <file name="ReactQueryProvider.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\providers\ReactQueryProvider.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ThemeProvider.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\providers\ThemeProvider.tsx">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="app.router">
+      <metrics statements="43" coveredstatements="27" conditionals="16" coveredconditionals="14" methods="20" coveredmethods="3"/>
+      <file name="ProtectedRoute.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\router\ProtectedRoute.tsx">
+        <metrics statements="9" coveredstatements="9" conditionals="16" coveredconditionals="14" methods="2" coveredmethods="2"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="12" type="stmt"/>
+        <line num="18" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="30" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="39" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+      </file>
+      <file name="index.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\router\index.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+      </file>
+      <file name="lazyScreens.ts" path="C:\codeBase\Srytal-Todo-FE\src\app\router\lazyScreens.ts">
+        <metrics statements="30" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="17" coveredmethods="0"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+      </file>
+      <file name="private.routes.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\router\private.routes.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="public-routes.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\router\public-routes.tsx">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+      </file>
+      <file name="public.routes.tsx" path="C:\codeBase\Srytal-Todo-FE\src\app\router\public.routes.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="components.common">
+      <metrics statements="2" coveredstatements="2" conditionals="7" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <file name="ConfirmDeleteModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\components\common\ConfirmDeleteModal.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="20" count="10" type="stmt"/>
+      </file>
+      <file name="FormModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\components\common\FormModal.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="32" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.activity.components">
+      <metrics statements="6" coveredstatements="6" conditionals="11" coveredconditionals="9" methods="2" coveredmethods="2"/>
+      <file name="ActivityTimeline.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\activity\components\ActivityTimeline.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="11" coveredconditionals="9" methods="2" coveredmethods="2"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.activity.hooks">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="useActivities.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\activity\hooks\useActivities.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.activity.services">
+      <metrics statements="4" coveredstatements="4" conditionals="13" coveredconditionals="12" methods="2" coveredmethods="2"/>
+      <file name="activity.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\activity\services\activity.service.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="13" coveredconditionals="12" methods="2" coveredmethods="2"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="27" count="2" type="cond" truecount="2" falsecount="0"/>
+      </file>
+    </package>
+    <package name="features.activity.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="activity.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\activity\types\activity.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.attachment.components">
+      <metrics statements="22" coveredstatements="18" conditionals="25" coveredconditionals="15" methods="8" coveredmethods="6"/>
+      <file name="AttachmentItem.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\attachment\components\AttachmentItem.tsx">
+        <metrics statements="14" coveredstatements="12" conditionals="14" coveredconditionals="9" methods="4" coveredmethods="3"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="47" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+      </file>
+      <file name="AttachmentSection.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\attachment\components\AttachmentSection.tsx">
+        <metrics statements="8" coveredstatements="6" conditionals="11" coveredconditionals="6" methods="4" coveredmethods="3"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.attachment.hooks">
+      <metrics statements="19" coveredstatements="18" conditionals="2" coveredconditionals="2" methods="12" coveredmethods="11"/>
+      <file name="useAttachments.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\attachment\hooks\useAttachments.ts">
+        <metrics statements="19" coveredstatements="18" conditionals="2" coveredconditionals="2" methods="12" coveredmethods="11"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="17" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="4" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.attachment.services">
+      <metrics statements="11" coveredstatements="11" conditionals="21" coveredconditionals="20" methods="4" coveredmethods="4"/>
+      <file name="attachment.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\attachment\services\attachment.service.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="21" coveredconditionals="20" methods="4" coveredmethods="4"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="32" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.attachment.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="attachment.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\attachment\types\attachment.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.auth.components">
+      <metrics statements="34" coveredstatements="30" conditionals="20" coveredconditionals="18" methods="12" coveredmethods="8"/>
+      <file name="AnimatedLogin.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\auth\components\AnimatedLogin.tsx">
+        <metrics statements="14" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="4"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="357" count="0" type="stmt"/>
+        <line num="367" count="0" type="stmt"/>
+        <line num="368" count="0" type="stmt"/>
+        <line num="370" count="0" type="stmt"/>
+      </file>
+      <file name="LoginForm.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\auth\components\LoginForm.tsx">
+        <metrics statements="19" coveredstatements="19" conditionals="18" coveredconditionals="17" methods="3" coveredmethods="3"/>
+        <line num="33" count="20" type="stmt"/>
+        <line num="39" count="20" type="stmt"/>
+        <line num="40" count="63" type="stmt"/>
+        <line num="41" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="20" type="stmt"/>
+        <line num="44" count="5" type="stmt"/>
+        <line num="45" count="5" type="stmt"/>
+        <line num="47" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="57" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="63" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="68" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="76" count="20" type="stmt"/>
+      </file>
+      <file name="LoginHero.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\auth\components\LoginHero.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.auth.screens">
+      <metrics statements="15" coveredstatements="14" conditionals="5" coveredconditionals="2" methods="6" coveredmethods="5"/>
+      <file name="ChangePasswordScreen.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\auth\screens\ChangePasswordScreen.tsx">
+        <metrics statements="14" coveredstatements="14" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="5"/>
+        <line num="26" count="9" type="stmt"/>
+        <line num="27" count="28" type="stmt"/>
+        <line num="28" count="28" type="stmt"/>
+        <line num="33" count="9" type="stmt"/>
+        <line num="35" count="9" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="57" count="9" type="stmt"/>
+      </file>
+      <file name="LoginScreen.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\auth\screens\LoginScreen.tsx">
+        <metrics statements="1" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="12" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.auth.services">
+      <metrics statements="18" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="4"/>
+      <file name="auth.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\auth\services\auth.service.ts">
+        <metrics statements="18" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="4"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.auth.store">
+      <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="13" methods="7" coveredmethods="7"/>
+      <file name="auth.store.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\auth\store\auth.store.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="13" methods="7" coveredmethods="7"/>
+        <line num="17" count="25" type="stmt"/>
+        <line num="19" count="25" type="stmt"/>
+        <line num="25" count="98" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="49" count="47" type="stmt"/>
+        <line num="56" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.auth.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="auth.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\auth\types\auth.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.comment.components">
+      <metrics statements="107" coveredstatements="89" conditionals="67" coveredconditionals="43" methods="28" coveredmethods="23"/>
+      <file name="CommentInput.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\comment\components\CommentInput.tsx">
+        <metrics statements="9" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="2"/>
+        <line num="12" count="14" type="stmt"/>
+        <line num="13" count="14" type="stmt"/>
+        <line num="15" count="14" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="14" type="stmt"/>
+      </file>
+      <file name="CommentItem.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\comment\components\CommentItem.tsx">
+        <metrics statements="20" coveredstatements="15" conditionals="21" coveredconditionals="18" methods="7" coveredmethods="5"/>
+        <line num="27" count="60" type="stmt"/>
+        <line num="28" count="20" type="stmt"/>
+        <line num="29" count="20" type="stmt"/>
+        <line num="31" count="20" type="stmt"/>
+        <line num="32" count="20" type="stmt"/>
+        <line num="34" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="20" type="stmt"/>
+        <line num="36" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="38" count="20" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="20" type="stmt"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="128" count="1" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+      </file>
+      <file name="CommentSection.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\comment\components\CommentSection.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="9" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="12" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+      </file>
+      <file name="MarkdownContent.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\comment\components\MarkdownContent.tsx">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="33" count="35" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+      </file>
+      <file name="MarkdownEditor.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\comment\components\MarkdownEditor.tsx">
+        <metrics statements="71" coveredstatements="62" conditionals="35" coveredconditionals="18" methods="14" coveredmethods="13"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="60" count="42" type="stmt"/>
+        <line num="61" count="42" type="stmt"/>
+        <line num="62" count="42" type="stmt"/>
+        <line num="64" count="42" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="66" count="2" type="stmt"/>
+        <line num="67" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
+        <line num="74" count="42" type="cond" truecount="1" falsecount="0"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="89" count="42" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="91" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="105" count="42" type="stmt"/>
+        <line num="106" count="2" type="cond" truecount="2" falsecount="6"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="126" count="42" type="stmt"/>
+        <line num="127" count="2" type="stmt"/>
+        <line num="128" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="130" count="2" type="stmt"/>
+        <line num="131" count="2" type="stmt"/>
+        <line num="133" count="2" type="stmt"/>
+        <line num="134" count="2" type="stmt"/>
+        <line num="135" count="2" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="137" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="138" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="139" count="1" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="143" count="1" type="stmt"/>
+        <line num="145" count="2" type="stmt"/>
+        <line num="149" count="42" type="stmt"/>
+        <line num="164" count="336" type="stmt"/>
+        <line num="169" count="2" type="stmt"/>
+        <line num="184" count="26" type="stmt"/>
+        <line num="191" count="1" type="stmt"/>
+        <line num="192" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="193" count="1" type="stmt"/>
+        <line num="194" count="1" type="stmt"/>
+        <line num="198" count="1" type="stmt"/>
+        <line num="199" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="200" count="1" type="stmt"/>
+        <line num="201" count="1" type="stmt"/>
+        <line num="231" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="232" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.comment.hooks">
+      <metrics statements="25" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="16" coveredmethods="15"/>
+      <file name="useComments.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\comment\hooks\useComments.ts">
+        <metrics statements="25" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="16" coveredmethods="15"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="31" count="4" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="4" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.comment.services">
+      <metrics statements="12" coveredstatements="12" conditionals="15" coveredconditionals="14" methods="5" coveredmethods="5"/>
+      <file name="comment.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\comment\services\comment.service.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="15" coveredconditionals="14" methods="5" coveredmethods="5"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="30" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.comment.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="comment.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\comment\types\comment.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.dashboard.components">
+      <metrics statements="19" coveredstatements="19" conditionals="23" coveredconditionals="20" methods="5" coveredmethods="5"/>
+      <file name="DashboardStats.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\dashboard\components\DashboardStats.tsx">
+        <metrics statements="18" coveredstatements="18" conditionals="20" coveredconditionals="17" methods="4" coveredmethods="4"/>
+        <line num="17" count="9" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="24" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="34" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
+        <line num="44" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+      </file>
+      <file name="StatsCard.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\dashboard\components\StatsCard.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="20" count="73" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.dashboard.screens">
+      <metrics statements="44" coveredstatements="33" conditionals="62" coveredconditionals="38" methods="22" coveredmethods="11"/>
+      <file name="DashboardScreen.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\dashboard\screens\DashboardScreen.tsx">
+        <metrics statements="44" coveredstatements="33" conditionals="62" coveredconditionals="38" methods="22" coveredmethods="11"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="71" count="12" type="stmt"/>
+        <line num="141" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="142" count="2" type="stmt"/>
+        <line num="146" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="150" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="151" count="2" type="stmt"/>
+        <line num="152" count="2" type="stmt"/>
+        <line num="153" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="155" count="2" type="stmt"/>
+        <line num="218" count="4" type="stmt"/>
+        <line num="219" count="12" type="stmt"/>
+        <line num="220" count="4" type="stmt"/>
+        <line num="222" count="4" type="stmt"/>
+        <line num="223" count="4" type="stmt"/>
+        <line num="225" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="228" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="232" count="4" type="stmt"/>
+        <line num="233" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="236" count="4" type="stmt"/>
+        <line num="237" count="27" type="cond" truecount="1" falsecount="1"/>
+        <line num="239" count="4" type="stmt"/>
+        <line num="255" count="4" type="stmt"/>
+        <line num="256" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="257" count="0" type="stmt"/>
+        <line num="260" count="4" type="stmt"/>
+        <line num="266" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="267" count="1" type="stmt"/>
+        <line num="270" count="3" type="stmt"/>
+        <line num="319" count="1" type="stmt"/>
+        <line num="327" count="0" type="stmt"/>
+        <line num="334" count="0" type="stmt"/>
+        <line num="351" count="0" type="stmt"/>
+        <line num="358" count="0" type="stmt"/>
+        <line num="381" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="390" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="398" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="406" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="446" count="9" type="stmt"/>
+        <line num="466" count="9" type="stmt"/>
+        <line num="535" count="2" type="stmt"/>
+        <line num="539" count="0" type="stmt"/>
+        <line num="555" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+    </package>
+    <package name="features.employee.components">
+      <metrics statements="51" coveredstatements="47" conditionals="24" coveredconditionals="20" methods="25" coveredmethods="23"/>
+      <file name="CreateEmployeeModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\components\CreateEmployeeModal.tsx">
+        <metrics statements="10" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="27" count="10" type="stmt"/>
+        <line num="29" count="10" type="stmt"/>
+        <line num="39" count="10" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="44" count="10" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="50" count="10" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+      </file>
+      <file name="EditEmployeeModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\components\EditEmployeeModal.tsx">
+        <metrics statements="14" coveredstatements="12" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="4"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="32" count="13" type="stmt"/>
+        <line num="35" count="13" type="stmt"/>
+        <line num="45" count="13" type="stmt"/>
+        <line num="46" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="56" count="13" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="61" count="13" type="stmt"/>
+        <line num="62" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="75" count="13" type="stmt"/>
+        <line num="102" count="2" type="stmt"/>
+      </file>
+      <file name="EmployeeCard.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\components\EmployeeCard.tsx">
+        <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="5"/>
+        <line num="29" count="5" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="33" count="5" type="stmt"/>
+        <line num="35" count="5" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+      </file>
+      <file name="EmployeeHeader.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\components\EmployeeHeader.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+      </file>
+      <file name="EmployeeList.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\components\EmployeeList.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+      </file>
+      <file name="EmployeeSearch.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\components\EmployeeSearch.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
+      <file name="EmployeeTable.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\components\EmployeeTable.tsx">
+        <metrics statements="7" coveredstatements="7" conditionals="10" coveredconditionals="7" methods="6" coveredmethods="6"/>
+        <line num="28" count="5" type="stmt"/>
+        <line num="30" count="5" type="stmt"/>
+        <line num="73" count="5" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="132" count="4" type="stmt"/>
+        <line num="150" count="1" type="stmt"/>
+        <line num="157" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.employee.hooks">
+      <metrics statements="19" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="14" coveredmethods="14"/>
+      <file name="useEmployees.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\hooks\useEmployees.ts">
+        <metrics statements="19" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="14" coveredmethods="14"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.employee.screens">
+      <metrics statements="56" coveredstatements="42" conditionals="50" coveredconditionals="42" methods="17" coveredmethods="10"/>
+      <file name="EmployeeDetailsPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\screens\EmployeeDetailsPage.tsx">
+        <metrics statements="19" coveredstatements="18" conditionals="21" coveredconditionals="16" methods="6" coveredmethods="6"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="24" count="10" type="stmt"/>
+        <line num="27" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="29" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="31" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="47" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="55" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+      </file>
+      <file name="EmployeesPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\screens\EmployeesPage.tsx">
+        <metrics statements="37" coveredstatements="24" conditionals="29" coveredconditionals="26" methods="11" coveredmethods="4"/>
+        <line num="29" count="7" type="stmt"/>
+        <line num="30" count="7" type="stmt"/>
+        <line num="31" count="7" type="stmt"/>
+        <line num="35" count="7" type="stmt"/>
+        <line num="36" count="7" type="stmt"/>
+        <line num="37" count="7" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="42" count="7" type="stmt"/>
+        <line num="48" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="49" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="50" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="7" type="cond" truecount="4" falsecount="1"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="56" count="7" type="stmt"/>
+        <line num="58" count="7" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="63" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="67" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="73" count="5" type="stmt"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="174" count="1" type="stmt"/>
+        <line num="175" count="1" type="stmt"/>
+        <line num="193" count="0" type="stmt"/>
+        <line num="200" count="0" type="stmt"/>
+        <line num="201" count="0" type="stmt"/>
+        <line num="213" count="0" type="stmt"/>
+        <line num="214" count="0" type="stmt"/>
+        <line num="217" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="219" count="1" type="stmt"/>
+        <line num="221" count="0" type="stmt"/>
+        <line num="222" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.employee.services">
+      <metrics statements="31" coveredstatements="31" conditionals="54" coveredconditionals="47" methods="11" coveredmethods="11"/>
+      <file name="employee.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\services\employee.service.ts">
+        <metrics statements="31" coveredstatements="31" conditionals="54" coveredconditionals="47" methods="11" coveredmethods="11"/>
+        <line num="9" count="7" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="66" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="2" type="stmt"/>
+        <line num="85" count="2" type="cond" truecount="5" falsecount="0"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="100" count="1" type="cond" truecount="4" falsecount="1"/>
+        <line num="106" count="1" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="113" count="1" type="stmt"/>
+        <line num="116" count="1" type="cond" truecount="4" falsecount="1"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+      </file>
+      <file name="task.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\services\task.service.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.employee.store">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="employee.store.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\store\employee.store.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.employee.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="employee.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\types\employee.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="task.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\employee\types\task.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.notification.components">
+      <metrics statements="24" coveredstatements="24" conditionals="25" coveredconditionals="19" methods="9" coveredmethods="9"/>
+      <file name="NotificationMenu.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\notification\components\NotificationMenu.tsx">
+        <metrics statements="24" coveredstatements="24" conditionals="25" coveredconditionals="19" methods="9" coveredmethods="9"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="54" count="4" type="stmt"/>
+        <line num="55" count="12" type="stmt"/>
+        <line num="56" count="12" type="stmt"/>
+        <line num="58" count="4" type="cond" truecount="0" falsecount="1"/>
+        <line num="59" count="4" type="stmt"/>
+        <line num="60" count="4" type="stmt"/>
+        <line num="62" count="4" type="stmt"/>
+        <line num="63" count="6" type="stmt"/>
+        <line num="66" count="4" type="stmt"/>
+        <line num="67" count="5" type="stmt"/>
+        <line num="70" count="4" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="75" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="77" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="84" count="4" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="148" count="5" type="stmt"/>
+        <line num="149" count="5" type="stmt"/>
+        <line num="151" count="5" type="stmt"/>
+        <line num="154" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.notification.hooks">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
+      <file name="useNotifications.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\notification\hooks\useNotifications.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.notification.services">
+      <metrics statements="11" coveredstatements="11" conditionals="17" coveredconditionals="15" methods="5" coveredmethods="5"/>
+      <file name="notification.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\notification\services\notification.service.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="17" coveredconditionals="15" methods="5" coveredmethods="5"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="33" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.notification.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="notification.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\notification\types\notification.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.profile.hooks">
+      <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="5"/>
+      <file name="useProfile.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\profile\hooks\useProfile.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="5"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="13" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="30" count="1" type="cond" truecount="1" falsecount="1"/>
+      </file>
+    </package>
+    <package name="features.profile.screens">
+      <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <file name="ProfilePage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\profile\screens\ProfilePage.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="11" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.profile.services">
+      <metrics statements="12" coveredstatements="12" conditionals="24" coveredconditionals="21" methods="4" coveredmethods="4"/>
+      <file name="profile.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\profile\services\profile.service.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="24" coveredconditionals="21" methods="4" coveredmethods="4"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.profile.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="profile.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\profile\types\profile.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.project">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\project\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.project.components">
+      <metrics statements="37" coveredstatements="31" conditionals="48" coveredconditionals="30" methods="19" coveredmethods="14"/>
+      <file name="ProjectModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\project\components\ProjectModal.tsx">
+        <metrics statements="30" coveredstatements="24" conditionals="41" coveredconditionals="24" methods="14" coveredmethods="9"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="39" count="7" type="stmt"/>
+        <line num="40" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="43" count="7" type="stmt"/>
+        <line num="57" count="7" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="69" count="7" type="stmt"/>
+        <line num="70" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="87" count="7" type="stmt"/>
+        <line num="88" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="89" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="90" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="92" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="109" count="2" type="stmt"/>
+        <line num="120" count="7" type="stmt"/>
+        <line num="150" count="4" type="stmt"/>
+        <line num="156" count="4" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="171" count="4" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="183" count="4" type="stmt"/>
+        <line num="188" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="196" count="4" type="stmt"/>
+        <line num="201" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+      <file name="ProjectTasksTable.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\project\components\ProjectTasksTable.tsx">
+        <metrics statements="7" coveredstatements="7" conditionals="7" coveredconditionals="6" methods="5" coveredmethods="5"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="33" count="16" type="stmt"/>
+        <line num="65" count="25" type="stmt"/>
+        <line num="97" count="2" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.project.hooks">
+      <metrics statements="37" coveredstatements="33" conditionals="7" coveredconditionals="7" methods="23" coveredmethods="20"/>
+      <file name="useProjects.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\project\hooks\useProjects.ts">
+        <metrics statements="37" coveredstatements="33" conditionals="7" coveredconditionals="7" methods="23" coveredmethods="20"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="106" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.project.screens">
+      <metrics statements="143" coveredstatements="82" conditionals="143" coveredconditionals="82" methods="48" coveredmethods="15"/>
+      <file name="MyProjectsPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\project\screens\MyProjectsPage.tsx">
+        <metrics statements="17" coveredstatements="14" conditionals="26" coveredconditionals="14" methods="4" coveredmethods="2"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="37" count="4" type="cond" truecount="0" falsecount="1"/>
+        <line num="39" count="4" type="stmt"/>
+        <line num="40" count="4" type="stmt"/>
+        <line num="41" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="46" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="50" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="145" count="0" type="stmt"/>
+      </file>
+      <file name="ProjectDetailsPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\project\screens\ProjectDetailsPage.tsx">
+        <metrics statements="65" coveredstatements="33" conditionals="62" coveredconditionals="28" methods="22" coveredmethods="6"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="66" count="17" type="cond" truecount="0" falsecount="1"/>
+        <line num="67" count="51" type="stmt"/>
+        <line num="68" count="17" type="stmt"/>
+        <line num="69" count="17" type="stmt"/>
+        <line num="70" count="17" type="stmt"/>
+        <line num="71" count="17" type="stmt"/>
+        <line num="72" count="17" type="stmt"/>
+        <line num="73" count="17" type="stmt"/>
+        <line num="74" count="17" type="stmt"/>
+        <line num="75" count="17" type="stmt"/>
+        <line num="76" count="17" type="stmt"/>
+        <line num="78" count="17" type="stmt"/>
+        <line num="79" count="17" type="stmt"/>
+        <line num="80" count="17" type="stmt"/>
+        <line num="81" count="17" type="stmt"/>
+        <line num="83" count="17" type="stmt"/>
+        <line num="108" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="112" count="16" type="cond" truecount="4" falsecount="0"/>
+        <line num="113" count="1" type="stmt"/>
+        <line num="121" count="15" type="stmt"/>
+        <line num="122" count="15" type="cond" truecount="1" falsecount="1"/>
+        <line num="125" count="15" type="stmt"/>
+        <line num="126" count="26" type="stmt"/>
+        <line num="129" count="15" type="stmt"/>
+        <line num="185" count="1" type="stmt"/>
+        <line num="191" count="0" type="stmt"/>
+        <line num="247" count="0" type="stmt"/>
+        <line num="265" count="1" type="stmt"/>
+        <line num="266" count="1" type="stmt"/>
+        <line num="269" count="0" type="stmt"/>
+        <line num="270" count="0" type="stmt"/>
+        <line num="273" count="0" type="stmt"/>
+        <line num="274" count="0" type="stmt"/>
+        <line num="294" count="26" type="stmt"/>
+        <line num="295" count="26" type="stmt"/>
+        <line num="310" count="0" type="stmt"/>
+        <line num="365" count="0" type="stmt"/>
+        <line num="433" count="0" type="stmt"/>
+        <line num="440" count="0" type="stmt"/>
+        <line num="443" count="0" type="stmt"/>
+        <line num="444" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="445" count="0" type="stmt"/>
+        <line num="447" count="0" type="stmt"/>
+        <line num="454" count="0" type="stmt"/>
+        <line num="455" count="0" type="stmt"/>
+        <line num="461" count="0" type="stmt"/>
+        <line num="462" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="463" count="0" type="stmt"/>
+        <line num="465" count="0" type="stmt"/>
+        <line num="466" count="0" type="stmt"/>
+        <line num="473" count="0" type="stmt"/>
+        <line num="474" count="0" type="stmt"/>
+        <line num="480" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="482" count="0" type="stmt"/>
+        <line num="484" count="0" type="stmt"/>
+        <line num="485" count="0" type="stmt"/>
+        <line num="486" count="0" type="stmt"/>
+        <line num="487" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="488" count="0" type="stmt"/>
+        <line num="500" count="0" type="stmt"/>
+        <line num="501" count="0" type="stmt"/>
+      </file>
+      <file name="ProjectsPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\project\screens\ProjectsPage.tsx">
+        <metrics statements="61" coveredstatements="35" conditionals="55" coveredconditionals="40" methods="22" coveredmethods="7"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="67" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="71" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="73" count="8" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="171" count="8" type="stmt"/>
+        <line num="214" count="10" type="stmt"/>
+        <line num="215" count="30" type="stmt"/>
+        <line num="216" count="10" type="stmt"/>
+        <line num="218" count="10" type="stmt"/>
+        <line num="219" count="10" type="stmt"/>
+        <line num="220" count="10" type="stmt"/>
+        <line num="221" count="10" type="stmt"/>
+        <line num="225" count="10" type="stmt"/>
+        <line num="226" count="10" type="stmt"/>
+        <line num="227" count="10" type="stmt"/>
+        <line num="228" count="10" type="stmt"/>
+        <line num="230" count="10" type="stmt"/>
+        <line num="238" count="10" type="stmt"/>
+        <line num="240" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="241" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="242" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="244" count="10" type="cond" truecount="4" falsecount="1"/>
+        <line num="245" count="0" type="stmt"/>
+        <line num="248" count="10" type="stmt"/>
+        <line num="249" count="0" type="stmt"/>
+        <line num="250" count="0" type="stmt"/>
+        <line num="253" count="10" type="stmt"/>
+        <line num="254" count="0" type="stmt"/>
+        <line num="255" count="0" type="stmt"/>
+        <line num="258" count="10" type="stmt"/>
+        <line num="259" count="0" type="stmt"/>
+        <line num="260" count="0" type="stmt"/>
+        <line num="263" count="10" type="stmt"/>
+        <line num="264" count="0" type="stmt"/>
+        <line num="271" count="10" type="stmt"/>
+        <line num="272" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="274" count="0" type="stmt"/>
+        <line num="276" count="0" type="stmt"/>
+        <line num="277" count="0" type="stmt"/>
+        <line num="282" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="283" count="1" type="stmt"/>
+        <line num="291" count="6" type="stmt"/>
+        <line num="298" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="299" count="1" type="stmt"/>
+        <line num="304" count="8" type="stmt"/>
+        <line num="341" count="1" type="stmt"/>
+        <line num="373" count="0" type="stmt"/>
+        <line num="389" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="390" count="0" type="stmt"/>
+        <line num="406" count="8" type="stmt"/>
+        <line num="430" count="0" type="stmt"/>
+        <line num="436" count="0" type="stmt"/>
+        <line num="437" count="0" type="stmt"/>
+        <line num="443" count="0" type="stmt"/>
+        <line num="444" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.project.services">
+      <metrics statements="62" coveredstatements="55" conditionals="154" coveredconditionals="108" methods="24" coveredmethods="22"/>
+      <file name="project.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\project\services\project.service.ts">
+        <metrics statements="62" coveredstatements="55" conditionals="154" coveredconditionals="108" methods="24" coveredmethods="22"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="60" count="9" type="stmt"/>
+        <line num="70" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="81" count="1" type="cond" truecount="2" falsecount="3"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="101" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="102" count="2" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
+        <line num="107" count="3" type="cond" truecount="5" falsecount="0"/>
+        <line num="108" count="2" type="stmt"/>
+        <line num="110" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
+        <line num="117" count="2" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="123" count="4" type="stmt"/>
+        <line num="124" count="4" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="141" count="2" type="stmt"/>
+        <line num="144" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="146" count="2" type="stmt"/>
+        <line num="149" count="1" type="stmt"/>
+        <line num="159" count="1" type="stmt"/>
+        <line num="162" count="1" type="stmt"/>
+        <line num="164" count="1" type="cond" truecount="4" falsecount="1"/>
+        <line num="170" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="173" count="1" type="stmt"/>
+        <line num="174" count="1" type="stmt"/>
+        <line num="176" count="1" type="cond" truecount="4" falsecount="1"/>
+        <line num="182" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="185" count="1" type="stmt"/>
+        <line num="188" count="2" type="stmt"/>
+        <line num="191" count="2" type="cond" truecount="5" falsecount="0"/>
+        <line num="197" count="2" type="stmt"/>
+        <line num="209" count="1" type="stmt"/>
+        <line num="214" count="1" type="stmt"/>
+        <line num="219" count="1" type="stmt"/>
+        <line num="223" count="1" type="stmt"/>
+        <line num="226" count="1" type="cond" truecount="4" falsecount="1"/>
+        <line num="232" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="235" count="1" type="stmt"/>
+        <line num="239" count="2" type="stmt"/>
+        <line num="244" count="2" type="cond" truecount="5" falsecount="0"/>
+        <line num="250" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="251" count="1" type="stmt"/>
+        <line num="255" count="1" type="stmt"/>
+        <line num="256" count="1" type="stmt"/>
+        <line num="259" count="1" type="stmt"/>
+        <line num="260" count="1" type="stmt"/>
+        <line num="262" count="1" type="stmt"/>
+        <line num="265" count="1" type="stmt"/>
+        <line num="269" count="0" type="stmt"/>
+        <line num="274" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="280" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+    </package>
+    <package name="features.project.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="project.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\project\types\project.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.report.components">
+      <metrics statements="18" coveredstatements="18" conditionals="38" coveredconditionals="30" methods="10" coveredmethods="10"/>
+      <file name="ChartCard.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\report\components\ChartCard.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="15" count="4" type="stmt"/>
+      </file>
+      <file name="ChartTooltip.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\report\components\ChartTooltip.tsx">
+        <metrics statements="10" coveredstatements="10" conditionals="28" coveredconditionals="23" methods="2" coveredmethods="2"/>
+        <line num="23" count="5" type="cond" truecount="5" falsecount="0"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="28" count="3" type="cond" truecount="3" falsecount="0"/>
+        <line num="29" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="58" count="3" type="cond" truecount="1" falsecount="2"/>
+        <line num="59" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="62" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="67" count="3" type="stmt"/>
+      </file>
+      <file name="MonthlyTasksChart.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\report\components\MonthlyTasksChart.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
+      <file name="PriorityBarChart.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\report\components\PriorityBarChart.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+      </file>
+      <file name="StatusPieChart.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\report\components\StatusPieChart.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="4"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.report.constants">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="chart.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\report\constants\chart.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.report.hooks">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="useReport.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\report\hooks\useReport.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.report.screens">
+      <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+      <file name="ReportsPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\report\screens\ReportsPage.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="27" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.report.services">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="report.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\report\services\report.service.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.report.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="report.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\report\types\report.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.settings.components">
+      <metrics statements="97" coveredstatements="61" conditionals="57" coveredconditionals="37" methods="32" coveredmethods="17"/>
+      <file name="PreferencesSettings.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\settings\components\PreferencesSettings.tsx">
+        <metrics statements="17" coveredstatements="13" conditionals="6" coveredconditionals="2" methods="13" coveredmethods="9"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="23" type="stmt"/>
+        <line num="33" count="23" type="stmt"/>
+        <line num="34" count="23" type="stmt"/>
+        <line num="35" count="23" type="stmt"/>
+        <line num="36" count="23" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="38" count="23" type="stmt"/>
+        <line num="41" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="8" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="90" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
+      </file>
+      <file name="ProfileSettings.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\settings\components\ProfileSettings.tsx">
+        <metrics statements="64" coveredstatements="32" conditionals="45" coveredconditionals="30" methods="16" coveredmethods="5"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="61" count="21" type="stmt"/>
+        <line num="62" count="21" type="stmt"/>
+        <line num="64" count="21" type="stmt"/>
+        <line num="65" count="21" type="stmt"/>
+        <line num="66" count="21" type="stmt"/>
+        <line num="67" count="21" type="stmt"/>
+        <line num="68" count="21" type="stmt"/>
+        <line num="70" count="21" type="cond" truecount="4" falsecount="0"/>
+        <line num="71" count="5" type="stmt"/>
+        <line num="72" count="5" type="stmt"/>
+        <line num="73" count="5" type="stmt"/>
+        <line num="76" count="21" type="cond" truecount="4" falsecount="0"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="87" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="89" count="20" type="stmt"/>
+        <line num="91" count="20" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="94" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="96" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="100" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="116" count="20" type="stmt"/>
+        <line num="117" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="123" count="20" type="stmt"/>
+        <line num="130" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="143" count="0" type="stmt"/>
+        <line num="144" count="0" type="stmt"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="192" count="9" type="stmt"/>
+        <line num="243" count="0" type="stmt"/>
+        <line num="261" count="0" type="stmt"/>
+        <line num="262" count="0" type="stmt"/>
+      </file>
+      <file name="SecuritySettings.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\settings\components\SecuritySettings.tsx">
+        <metrics statements="16" coveredstatements="16" conditionals="6" coveredconditionals="5" methods="3" coveredmethods="3"/>
+        <line num="15" count="49" type="stmt"/>
+        <line num="21" count="16" type="stmt"/>
+        <line num="23" count="16" type="stmt"/>
+        <line num="24" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="46" count="16" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.settings.screens">
+      <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="7" coveredmethods="7"/>
+      <file name="SettingsPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\settings\screens\SettingsPage.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="7" coveredmethods="7"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="55" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="3" type="stmt"/>
+        <line num="78" count="9" type="stmt"/>
+        <line num="79" count="9" type="stmt"/>
+        <line num="81" count="9" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.task.components">
+      <metrics statements="141" coveredstatements="115" conditionals="152" coveredconditionals="117" methods="59" coveredmethods="45"/>
+      <file name="CreateTaskModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\CreateTaskModal.tsx">
+        <metrics statements="36" coveredstatements="27" conditionals="29" coveredconditionals="19" methods="16" coveredmethods="10"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+        <line num="46" count="8" type="cond" truecount="0" falsecount="1"/>
+        <line num="49" count="8" type="cond" truecount="0" falsecount="1"/>
+        <line num="60" count="8" type="stmt"/>
+        <line num="73" count="8" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="78" count="8" type="stmt"/>
+        <line num="79" count="2" type="stmt"/>
+        <line num="81" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="106" count="8" type="stmt"/>
+        <line num="107" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="109" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="110" count="1" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="123" count="2" type="stmt"/>
+        <line num="134" count="8" type="stmt"/>
+        <line num="169" count="5" type="stmt"/>
+        <line num="175" count="5" type="stmt"/>
+        <line num="180" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="189" count="5" type="stmt"/>
+        <line num="196" count="5" type="stmt"/>
+        <line num="201" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="210" count="5" type="stmt"/>
+        <line num="224" count="5" type="stmt"/>
+        <line num="238" count="5" type="stmt"/>
+        <line num="244" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+      <file name="EditTaskModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\EditTaskModal.tsx">
+        <metrics statements="25" coveredstatements="20" conditionals="16" coveredconditionals="5" methods="14" coveredmethods="10"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="cond" truecount="0" falsecount="1"/>
+        <line num="38" count="4" type="cond" truecount="0" falsecount="1"/>
+        <line num="43" count="4" type="stmt"/>
+        <line num="57" count="4" type="stmt"/>
+        <line num="58" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="76" count="4" type="stmt"/>
+        <line num="77" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="92" count="4" type="stmt"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="122" count="2" type="stmt"/>
+        <line num="127" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="136" count="2" type="stmt"/>
+        <line num="142" count="2" type="stmt"/>
+        <line num="147" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="156" count="2" type="stmt"/>
+        <line num="169" count="2" type="stmt"/>
+        <line num="182" count="2" type="stmt"/>
+        <line num="187" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+      <file name="KanbanBoard.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\KanbanBoard.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="KanbanBoard.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\KanbanBoard.tsx">
+        <metrics statements="21" coveredstatements="17" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="6"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="35" count="5" type="stmt"/>
+        <line num="36" count="5" type="stmt"/>
+        <line num="38" count="5" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="6" type="stmt"/>
+        <line num="42" count="6" type="stmt"/>
+        <line num="43" count="6" type="stmt"/>
+        <line num="54" count="5" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="60" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="69" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="101" count="5" type="stmt"/>
+        <line num="126" count="15" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+      </file>
+      <file name="KanbanCard.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\KanbanCard.tsx">
+        <metrics statements="13" coveredstatements="13" conditionals="28" coveredconditionals="27" methods="4" coveredmethods="4"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="26" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="28" count="8" type="cond" truecount="4" falsecount="0"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="41" count="8" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="46" count="8" type="stmt"/>
+      </file>
+      <file name="KanbanColumn.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\KanbanColumn.tsx">
+        <metrics statements="20" coveredstatements="12" conditionals="26" coveredconditionals="22" methods="7" coveredmethods="4"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="45" count="17" type="cond" truecount="1" falsecount="1"/>
+        <line num="46" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="49" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="56" count="17" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="78" count="2" type="stmt"/>
+        <line num="81" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="86" count="2" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
+        <line num="129" count="6" type="stmt"/>
+        <line num="200" count="0" type="stmt"/>
+        <line num="202" count="0" type="stmt"/>
+        <line num="203" count="0" type="stmt"/>
+        <line num="206" count="0" type="stmt"/>
+        <line num="207" count="0" type="stmt"/>
+        <line num="208" count="0" type="stmt"/>
+      </file>
+      <file name="TaskCard.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\TaskCard.tsx">
+        <metrics statements="18" coveredstatements="18" conditionals="32" coveredconditionals="29" methods="6" coveredmethods="6"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="39" count="4" type="stmt"/>
+        <line num="51" count="8" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="54" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="55" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="8" type="stmt"/>
+        <line num="58" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="8" type="cond" truecount="4" falsecount="0"/>
+        <line num="65" count="8" type="stmt"/>
+        <line num="67" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="73" count="8" type="stmt"/>
+        <line num="160" count="2" type="stmt"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="171" count="1" type="stmt"/>
+        <line num="181" count="1" type="stmt"/>
+        <line num="182" count="1" type="stmt"/>
+      </file>
+      <file name="TaskDetailsModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\TaskDetailsModal.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="12" coveredconditionals="8" methods="1" coveredmethods="1"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="27" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="2" type="stmt"/>
+      </file>
+      <file name="TaskList.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\TaskList.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+      </file>
+      <file name="TaskSearch.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\components\TaskSearch.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.task.constants">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="task.constants.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\constants\task.constants.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.task.hooks">
+      <metrics statements="45" coveredstatements="21" conditionals="12" coveredconditionals="6" methods="22" coveredmethods="8"/>
+      <file name="useTasks.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\hooks\useTasks.ts">
+        <metrics statements="24" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="14" coveredmethods="0"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="73" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+      </file>
+      <file name="useUpdateTaskStatus.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\hooks\useUpdateTaskStatus.ts">
+        <metrics statements="21" coveredstatements="21" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="31" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="34" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="57" count="3" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.task.screens">
+      <metrics statements="160" coveredstatements="119" conditionals="163" coveredconditionals="122" methods="50" coveredmethods="25"/>
+      <file name="MyTasksPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\screens\MyTasksPage.tsx">
+        <metrics statements="34" coveredstatements="27" conditionals="25" coveredconditionals="20" methods="11" coveredmethods="7"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="30" count="4" type="cond" truecount="0" falsecount="1"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="43" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="4" type="stmt"/>
+        <line num="48" count="4" type="stmt"/>
+        <line num="49" count="4" type="stmt"/>
+        <line num="50" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="4" type="stmt"/>
+        <line num="61" count="4" type="stmt"/>
+        <line num="62" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
+        <line num="67" count="4" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="77" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="81" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
+      </file>
+      <file name="TaskBoardPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\screens\TaskBoardPage.tsx">
+        <metrics statements="16" coveredstatements="15" conditionals="13" coveredconditionals="7" methods="4" coveredmethods="3"/>
+        <line num="13" count="9" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="23" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="34" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+      </file>
+      <file name="TaskDetailsPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\screens\TaskDetailsPage.tsx">
+        <metrics statements="36" coveredstatements="31" conditionals="68" coveredconditionals="50" methods="11" coveredmethods="7"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="56" count="96" type="stmt"/>
+        <line num="67" count="19" type="stmt"/>
+        <line num="68" count="19" type="stmt"/>
+        <line num="69" count="19" type="stmt"/>
+        <line num="70" count="19" type="stmt"/>
+        <line num="71" count="19" type="stmt"/>
+        <line num="73" count="19" type="cond" truecount="1" falsecount="1"/>
+        <line num="74" count="19" type="stmt"/>
+        <line num="75" count="19" type="stmt"/>
+        <line num="77" count="19" type="stmt"/>
+        <line num="78" count="19" type="stmt"/>
+        <line num="80" count="19" type="cond" truecount="1" falsecount="1"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="86" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="90" count="18" type="cond" truecount="4" falsecount="0"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="96" count="16" type="cond" truecount="1" falsecount="1"/>
+        <line num="100" count="16" type="cond" truecount="1" falsecount="1"/>
+        <line num="101" count="16" type="stmt"/>
+        <line num="103" count="16" type="cond" truecount="1" falsecount="1"/>
+        <line num="105" count="16" type="cond" truecount="4" falsecount="0"/>
+        <line num="110" count="16" type="stmt"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="113" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="116" count="1" type="stmt"/>
+        <line num="119" count="16" type="stmt"/>
+        <line num="123" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="231" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="232" count="1" type="stmt"/>
+        <line num="334" count="1" type="stmt"/>
+        <line num="343" count="2" type="stmt"/>
+        <line num="359" count="0" type="stmt"/>
+        <line num="365" count="0" type="stmt"/>
+      </file>
+      <file name="TasksPage.tsx" path="C:\codeBase\Srytal-Todo-FE\src\features\task\screens\TasksPage.tsx">
+        <metrics statements="74" coveredstatements="46" conditionals="57" coveredconditionals="45" methods="24" coveredmethods="8"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="70" count="13" type="cond" truecount="4" falsecount="0"/>
+        <line num="71" count="12" type="stmt"/>
+        <line num="75" count="13" type="cond" truecount="1" falsecount="1"/>
+        <line num="79" count="13" type="cond" truecount="1" falsecount="1"/>
+        <line num="80" count="13" type="stmt"/>
+        <line num="81" count="13" type="stmt"/>
+        <line num="83" count="13" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="165" count="0" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="184" count="0" type="stmt"/>
+        <line num="185" count="0" type="stmt"/>
+        <line num="195" count="0" type="stmt"/>
+        <line num="196" count="0" type="stmt"/>
+        <line num="222" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="223" count="1" type="stmt"/>
+        <line num="226" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="227" count="1" type="stmt"/>
+        <line num="236" count="12" type="stmt"/>
+        <line num="280" count="13" type="stmt"/>
+        <line num="295" count="16" type="stmt"/>
+        <line num="296" count="16" type="stmt"/>
+        <line num="297" count="16" type="stmt"/>
+        <line num="298" count="16" type="stmt"/>
+        <line num="299" count="16" type="stmt"/>
+        <line num="300" count="16" type="stmt"/>
+        <line num="303" count="16" type="stmt"/>
+        <line num="307" count="16" type="stmt"/>
+        <line num="308" count="16" type="stmt"/>
+        <line num="309" count="16" type="stmt"/>
+        <line num="310" count="16" type="stmt"/>
+        <line num="312" count="16" type="stmt"/>
+        <line num="326" count="16" type="cond" truecount="2" falsecount="0"/>
+        <line num="327" count="16" type="cond" truecount="2" falsecount="0"/>
+        <line num="328" count="16" type="cond" truecount="2" falsecount="0"/>
+        <line num="330" count="16" type="cond" truecount="4" falsecount="1"/>
+        <line num="331" count="0" type="stmt"/>
+        <line num="334" count="16" type="stmt"/>
+        <line num="336" count="16" type="stmt"/>
+        <line num="337" count="5" type="stmt"/>
+        <line num="338" count="5" type="stmt"/>
+        <line num="341" count="16" type="stmt"/>
+        <line num="342" count="0" type="stmt"/>
+        <line num="343" count="0" type="stmt"/>
+        <line num="346" count="16" type="stmt"/>
+        <line num="347" count="0" type="stmt"/>
+        <line num="348" count="0" type="stmt"/>
+        <line num="351" count="16" type="stmt"/>
+        <line num="352" count="0" type="stmt"/>
+        <line num="355" count="16" type="stmt"/>
+        <line num="356" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="358" count="0" type="stmt"/>
+        <line num="360" count="0" type="stmt"/>
+        <line num="361" count="0" type="stmt"/>
+        <line num="366" count="16" type="cond" truecount="2" falsecount="0"/>
+        <line num="367" count="1" type="stmt"/>
+        <line num="370" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="371" count="1" type="stmt"/>
+        <line num="376" count="14" type="stmt"/>
+        <line num="411" count="1" type="stmt"/>
+        <line num="442" count="5" type="stmt"/>
+        <line num="459" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="460" count="0" type="stmt"/>
+        <line num="478" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="479" count="0" type="stmt"/>
+        <line num="495" count="0" type="stmt"/>
+        <line num="521" count="0" type="stmt"/>
+        <line num="527" count="0" type="stmt"/>
+        <line num="528" count="0" type="stmt"/>
+        <line num="534" count="0" type="stmt"/>
+        <line num="535" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.task.services">
+      <metrics statements="28" coveredstatements="28" conditionals="45" coveredconditionals="42" methods="10" coveredmethods="10"/>
+      <file name="task.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\services\task.service.ts">
+        <metrics statements="25" coveredstatements="25" conditionals="45" coveredconditionals="42" methods="9" coveredmethods="9"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="50" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="112" count="2" type="stmt"/>
+        <line num="113" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="115" count="2" type="stmt"/>
+        <line num="124" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+      </file>
+      <file name="taskStatus.service.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\services\taskStatus.service.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.task.store">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="task.store.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\store\task.store.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.task.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="task.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\types\task.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="features.task.utils">
+      <metrics statements="20" coveredstatements="20" conditionals="13" coveredconditionals="13" methods="8" coveredmethods="8"/>
+      <file name="task.utils.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\utils\task.utils.ts">
+        <metrics statements="20" coveredstatements="20" conditionals="13" coveredconditionals="13" methods="8" coveredmethods="8"/>
+        <line num="10" count="13" type="stmt"/>
+        <line num="11" count="16" type="stmt"/>
+        <line num="12" count="16" type="stmt"/>
+        <line num="13" count="16" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="34" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="24" type="cond" truecount="3" falsecount="0"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="43" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="50" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="3" type="stmt"/>
+        <line num="56" count="4" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+        <line num="68" count="3" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.task.validation">
+      <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="task.schema.ts" path="C:\codeBase\Srytal-Todo-FE\src\features\task\validation\task.schema.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="layouts.AuthLayout">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="AuthLayout.tsx" path="C:\codeBase\Srytal-Todo-FE\src\layouts\AuthLayout\AuthLayout.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\layouts\AuthLayout\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="layouts.DashboardLayout">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="DashboardLayout.tsx" path="C:\codeBase\Srytal-Todo-FE\src\layouts\DashboardLayout\DashboardLayout.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\layouts\DashboardLayout\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="layouts.MainLayout">
+      <metrics statements="73" coveredstatements="59" conditionals="98" coveredconditionals="72" methods="16" coveredmethods="12"/>
+      <file name="Header.tsx" path="C:\codeBase\Srytal-Todo-FE\src\layouts\MainLayout\Header.tsx">
+        <metrics statements="37" coveredstatements="28" conditionals="34" coveredconditionals="22" methods="7" coveredmethods="5"/>
+        <line num="35" count="5" type="stmt"/>
+        <line num="37" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="40" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="43" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="4" type="stmt"/>
+        <line num="59" count="16" type="stmt"/>
+        <line num="60" count="16" type="stmt"/>
+        <line num="61" count="5" type="stmt"/>
+        <line num="62" count="5" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+        <line num="65" count="5" type="stmt"/>
+        <line num="66" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="67" count="5" type="stmt"/>
+        <line num="68" count="5" type="cond" truecount="1" falsecount="2"/>
+        <line num="69" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="70" count="5" type="stmt"/>
+        <line num="72" count="5" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="78" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="81" count="5" type="stmt"/>
+        <line num="224" count="0" type="stmt"/>
+        <line num="231" count="0" type="stmt"/>
+      </file>
+      <file name="MainLayout.tsx" path="C:\codeBase\Srytal-Todo-FE\src\layouts\MainLayout\MainLayout.tsx">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+      </file>
+      <file name="Sidebar.tsx" path="C:\codeBase\Srytal-Todo-FE\src\layouts\MainLayout\Sidebar.tsx">
+        <metrics statements="33" coveredstatements="31" conditionals="64" coveredconditionals="50" methods="8" coveredmethods="7"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="117" count="2" type="stmt"/>
+        <line num="123" count="4" type="stmt"/>
+        <line num="124" count="4" type="stmt"/>
+        <line num="125" count="4" type="stmt"/>
+        <line num="127" count="4" type="stmt"/>
+        <line num="128" count="2" type="stmt"/>
+        <line num="129" count="2" type="stmt"/>
+        <line num="132" count="12" type="stmt"/>
+        <line num="133" count="4" type="stmt"/>
+        <line num="134" count="4" type="stmt"/>
+        <line num="135" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="137" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="138" count="4" type="stmt"/>
+        <line num="140" count="4" type="stmt"/>
+        <line num="141" count="24" type="stmt"/>
+        <line num="142" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="143" count="4" type="stmt"/>
+        <line num="145" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="148" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="150" count="4" type="cond" truecount="1" falsecount="2"/>
+        <line num="151" count="4" type="stmt"/>
+        <line num="153" count="4" type="stmt"/>
+        <line num="183" count="0" type="stmt"/>
+        <line num="253" count="24" type="stmt"/>
+        <line num="254" count="24" type="stmt"/>
+        <line num="257" count="24" type="stmt"/>
+        <line num="275" count="1" type="stmt"/>
+        <line num="308" count="24" type="cond" truecount="1" falsecount="1"/>
+        <line num="309" count="0" type="stmt"/>
+        <line num="321" count="24" type="stmt"/>
+        <line num="334" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\layouts\MainLayout\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.config">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <file name="env.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\config\env.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\config\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="queryKeys.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\config\queryKeys.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+      </file>
+      <file name="routes.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\config\routes.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <line num="1" count="16" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="shared.constants">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="api.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\constants\api.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="storage.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\constants\storage.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="shared.hooks">
+      <metrics statements="9" coveredstatements="9" conditionals="3" coveredconditionals="3" methods="5" coveredmethods="5"/>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\hooks\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="useChangePassword.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\hooks\useChangePassword.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+      </file>
+      <file name="useDebounce.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\hooks\useDebounce.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="usePagination.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\hooks\usePagination.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="12" count="48" type="stmt"/>
+        <line num="13" count="48" type="stmt"/>
+        <line num="15" count="48" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="20" count="48" type="stmt"/>
+        <line num="22" count="48" type="stmt"/>
+      </file>
+      <file name="useTheme.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\hooks\useTheme.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.services">
+      <metrics statements="29" coveredstatements="29" conditionals="20" coveredconditionals="17" methods="4" coveredmethods="4"/>
+      <file name="api.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\services\api.ts">
+        <metrics statements="29" coveredstatements="29" conditionals="20" coveredconditionals="17" methods="4" coveredmethods="4"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="34" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="8" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="54" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="61" count="3" type="stmt"/>
+        <line num="63" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="64" count="2" type="stmt"/>
+        <line num="66" count="2" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="72" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="86" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="87" count="7" type="stmt"/>
+        <line num="90" count="8" type="stmt"/>
+      </file>
+      <file name="auth.api.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\services\auth.api.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="axios.interceptor.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\services\axios.interceptor.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="axios.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\services\axios.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="employee.api.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\services\employee.api.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="task.api.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\services\task.api.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.store">
+      <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="6"/>
+      <file name="auth.store.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\store\auth.store.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="employee.store.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\store\employee.store.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\store\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="preferences.store.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\store\preferences.store.ts">
+        <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="6"/>
+        <line num="19" count="25" type="stmt"/>
+        <line num="20" count="25" type="stmt"/>
+        <line num="21" count="25" type="cond" truecount="1" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="25" type="stmt"/>
+        <line num="29" count="25" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+      </file>
+      <file name="task.store.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\store\task.store.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="theme.store.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\store\theme.store.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="pagination.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\types\pagination.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.Avatar">
+      <metrics statements="3" coveredstatements="3" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+      <file name="Avatar.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Avatar\Avatar.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Avatar\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.BackButton">
+      <metrics statements="8" coveredstatements="7" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <file name="BackButton.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\BackButton\BackButton.tsx">
+        <metrics statements="8" coveredstatements="7" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="16" count="35" type="stmt"/>
+        <line num="18" count="35" type="stmt"/>
+        <line num="19" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="28" count="35" type="stmt"/>
+      </file>
+    </package>
+    <package name="shared.ui.Badge">
+      <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="Badge.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Badge\Badge.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Badge\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.Button">
+      <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="Button.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Button\Button.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Button\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.Card">
+      <metrics statements="3" coveredstatements="3" conditionals="12" coveredconditionals="8" methods="1" coveredmethods="1"/>
+      <file name="Card.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Card\Card.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="12" coveredconditionals="8" methods="1" coveredmethods="1"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Card\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.CenteredState">
+      <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="20" methods="1" coveredmethods="1"/>
+      <file name="CenteredState.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\CenteredState\CenteredState.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="20" methods="1" coveredmethods="1"/>
+        <line num="32" count="47" type="cond" truecount="2" falsecount="0"/>
+        <line num="40" count="47" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\CenteredState\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.Input">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="Input.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Input\Input.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Input\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.Modal">
+      <metrics statements="9" coveredstatements="9" conditionals="20" coveredconditionals="20" methods="2" coveredmethods="2"/>
+      <file name="AppModal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Modal\AppModal.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="17" coveredconditionals="17" methods="1" coveredmethods="1"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
+        <line num="48" count="8" type="stmt"/>
+        <line num="55" count="8" type="stmt"/>
+        <line num="80" count="50" type="stmt"/>
+        <line num="147" count="50" type="stmt"/>
+      </file>
+      <file name="Modal.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Modal\Modal.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="25" count="9" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Modal\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.Pagination">
+      <metrics statements="9" coveredstatements="8" conditionals="19" coveredconditionals="12" methods="3" coveredmethods="2"/>
+      <file name="Pagination.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Pagination\Pagination.tsx">
+        <metrics statements="9" coveredstatements="8" conditionals="19" coveredconditionals="12" methods="3" coveredmethods="2"/>
+        <line num="35" count="35" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="35" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="35" type="cond" truecount="2" falsecount="0"/>
+        <line num="40" count="35" type="stmt"/>
+        <line num="42" count="35" type="stmt"/>
+        <line num="43" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="44" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="47" count="35" type="stmt"/>
+        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Pagination\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.Skeleton">
+      <metrics statements="13" coveredstatements="9" conditionals="5" coveredconditionals="2" methods="11" coveredmethods="7"/>
+      <file name="Skeleton.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Skeleton\Skeleton.tsx">
+        <metrics statements="13" coveredstatements="9" conditionals="5" coveredconditionals="2" methods="11" coveredmethods="7"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="80" count="2" type="stmt"/>
+        <line num="97" count="11" type="stmt"/>
+        <line num="109" count="55" type="stmt"/>
+        <line num="129" count="1" type="stmt"/>
+        <line num="145" count="4" type="stmt"/>
+        <line num="160" count="2" type="stmt"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="187" count="0" type="stmt"/>
+        <line num="224" count="0" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Skeleton\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui.Surface">
+      <metrics statements="1" coveredstatements="1" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
+      <file name="Surface.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\Surface\Surface.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <line num="21" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="shared.ui.ThemeToggle">
+      <metrics statements="4" coveredstatements="4" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
+      <file name="ThemeToggle.tsx" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\ThemeToggle\ThemeToggle.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
+        <line num="14" count="11" type="stmt"/>
+        <line num="15" count="11" type="stmt"/>
+        <line num="17" count="11" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\ui\ThemeToggle\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.utils">
+      <metrics statements="34" coveredstatements="33" conditionals="14" coveredconditionals="13" methods="10" coveredmethods="10"/>
+      <file name="date.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\utils\date.ts">
+        <metrics statements="29" coveredstatements="28" conditionals="14" coveredconditionals="13" methods="6" coveredmethods="6"/>
+        <line num="5" count="23" type="stmt"/>
+        <line num="6" count="234" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="10" count="224" type="stmt"/>
+        <line num="11" count="224" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="23" type="stmt"/>
+        <line num="15" count="177" type="stmt"/>
+        <line num="16" count="177" type="cond" truecount="1" falsecount="1"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="23" type="stmt"/>
+        <line num="23" count="29" type="stmt"/>
+        <line num="24" count="29" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="23" type="stmt"/>
+        <line num="28" count="61" type="stmt"/>
+        <line num="29" count="61" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="33" count="60" type="stmt"/>
+        <line num="34" count="60" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="48" count="23" type="stmt"/>
+        <line num="49" count="118" type="stmt"/>
+        <line num="50" count="118" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="54" count="117" type="stmt"/>
+        <line num="55" count="117" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="66" count="23" type="stmt"/>
+        <line num="67" count="26" type="stmt"/>
+        <line num="68" count="26" type="cond" truecount="2" falsecount="0"/>
+      </file>
+      <file name="toast.ts" path="C:\codeBase\Srytal-Todo-FE\src\shared\utils\toast.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="styles">
+      <metrics statements="31" coveredstatements="31" conditionals="5" coveredconditionals="5" methods="29" coveredmethods="29"/>
+      <file name="loader.tsx" path="C:\codeBase\Srytal-Todo-FE\src\styles\loader.tsx">
+        <metrics statements="31" coveredstatements="31" conditionals="5" coveredconditionals="5" methods="29" coveredmethods="29"/>
+        <line num="9" count="17" type="stmt"/>
+        <line num="14" count="13" type="stmt"/>
+        <line num="27" count="17" type="stmt"/>
+        <line num="29" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="13" type="stmt"/>
+        <line num="40" count="13" type="stmt"/>
+        <line num="52" count="13" type="stmt"/>
+        <line num="53" count="13" type="stmt"/>
+        <line num="54" count="13" type="stmt"/>
+        <line num="68" count="13" type="stmt"/>
+        <line num="70" count="13" type="stmt"/>
+        <line num="71" count="13" type="stmt"/>
+        <line num="75" count="13" type="stmt"/>
+        <line num="77" count="13" type="stmt"/>
+        <line num="78" count="13" type="stmt"/>
+        <line num="82" count="13" type="stmt"/>
+        <line num="84" count="13" type="stmt"/>
+        <line num="86" count="13" type="stmt"/>
+        <line num="91" count="13" type="stmt"/>
+        <line num="92" count="13" type="stmt"/>
+        <line num="98" count="13" type="stmt"/>
+        <line num="100" count="13" type="stmt"/>
+        <line num="101" count="13" type="stmt"/>
+        <line num="106" count="13" type="stmt"/>
+        <line num="108" count="13" type="stmt"/>
+        <line num="109" count="13" type="stmt"/>
+        <line num="113" count="13" type="stmt"/>
+        <line num="115" count="13" type="stmt"/>
+        <line num="116" count="13" type="stmt"/>
+        <line num="121" count="13" type="stmt"/>
+        <line num="122" count="13" type="stmt"/>
+      </file>
+    </package>
+    <package name="theme">
+      <metrics statements="28" coveredstatements="28" conditionals="10" coveredconditionals="5" methods="0" coveredmethods="0"/>
+      <file name="breakpoints.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\breakpoints.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+      </file>
+      <file name="colors.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\colors.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="163" count="2" type="stmt"/>
+        <line num="193" count="2" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="radius.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\radius.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="shadows.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\shadows.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+      </file>
+      <file name="spacing.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\spacing.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+      </file>
+      <file name="theme.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\theme.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="10" coveredconditionals="5" methods="0" coveredmethods="0"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+      <file name="tokens.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\tokens.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+      </file>
+      <file name="transitions.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\transitions.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+      </file>
+      <file name="typography.ts" path="C:\codeBase\Srytal-Todo-FE\src\theme\typography.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
